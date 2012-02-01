@@ -1168,8 +1168,9 @@ I'd rather fix the real problem than keep patching it up."
   (add-hook 'erc-text-matched-hook 'my-erc-hook))
 
 ;;; Big font in a big window
-(enlarge-font 5)
 (maximize-frame)
+(while (> (window-width) 112)
+  (enlarge-font 1))
 
 ;;; For now
 (cd (concat tabula-dir "/swp4/t4/hwarchABAX2/tdh/Utils/"))
