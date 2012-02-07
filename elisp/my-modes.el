@@ -268,7 +268,7 @@
   (local-set-key "\C-c'" 'surround-ticks)
   (local-set-key [?\C-'] 'surround-ticks)
   (local-set-key "\C-c@" 'surround-atsign)
-  (local-set-key "\C-ch" 'hoogle-lookup)
+  ;; (local-set-key "\C-ch" 'haskell-hoogle) ;; was hoogle-lookup
   (local-set-key "\C-c\C-r" 'inferior-haskell-reload-file)
   (local-set-key [f10] 'haskell-load-in-src)
   (local-set-key [f11] 'cabal-do)
@@ -602,7 +602,7 @@ consisting of repeated '-'. For an <h2>."
   (local-set-key [?\C-=] 'markdown-add-header-equals)
   (local-set-key [?\C--] 'markdown-add-header-hyphen)
   (local-set-key [?\C-$] 'surround-dollars)
-  (local-set-key "\C-cH" 'hoogle-lookup)
+  ;; (local-set-key "\C-cH" 'haskell-hoogle)
   (setq indent-line-function 'indent-relative)
   (setq tab-always-indent t)
   (setq require-final-newline nil)
