@@ -60,6 +60,24 @@
 ;;             "")
 ;;           (jao-basename)  " where\n\n"))
 
+(defvar jao-copyright-holder "<holder>")
+(defvar jao-maintainer "<email address>")
+(defvar jao-license "<license>") ;; "none" means no license line
+
+(defun haskell-skel-tabula ()
+  "Set up Haskell auto-insert for Tabula work."
+  (interactive)
+  (setq jao-copyright-holder "Tabula, Inc.")
+  (setq jao-maintainer "conal@tabula.com")
+  (setq jao-license "none"))
+
+(defun haskell-skel-personal ()
+  "Set up Haskell auto-insert for personal work."
+  (interactive)
+  (setq jao-copyright-holder "Conal Elliott")
+  (setq jao-maintainer "conal@conal.net")
+  (setq jao-license "BSD3"))
+
 ;;; Skeletons
 (define-skeleton jao-skel-haskell-file
   "Haskell hs file header"
@@ -74,10 +92,11 @@
   "----------------------------------------------------------------------\n"
   "-- |\n"
   "-- Module      :  " (jao-haskell-module) \n
-  "-- Copyright   :  (c) Conal Elliott" (format-time-string " %Y\n")
-  "-- License     :  BSD3\n"
+  "-- Copyright   :  (c) " (format-time-string "%Y ") jao-copyright-holder "\n"
+  (when (not (string-equal jao-license "none"))
+    (concat "-- License     :  " jao-license "\n"))
   "-- \n"
-  "-- Maintainer  :  conal@conal.net\n"
+  "-- Maintainer  :  " jao-maintainer "\n"
   "-- Stability   :  experimental\n"
   "-- \n"
   "-- " str \n
