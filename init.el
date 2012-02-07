@@ -362,7 +362,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 (global-set-key "\C-cg" 'goto-line)
 (global-set-key "\C-c\C-t" 'transpose-paragraphs)
 
-;; (global-set-key "\C-c\C-c" 'comment-region)
+(global-set-key "\C-c\C-c" 'comment-region)
 
 ;;; For help on notating key sequences, see
 ;;; http://xahlee.org/emacs/keyboard_shortcuts.html
