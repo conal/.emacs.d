@@ -280,7 +280,6 @@
   (local-set-key "\C-cs" 'haskell-insert-section-header)
   ;; ghc-mod
   (ghc-init)
-  ;; (flymake-mode) ;; Breaks in mmm-mode. Investigate
   (local-unset-key "\M-t")
   (local-set-key "\C-c\M-t" 'ghc-insert-template)       ; better key?
   (local-unset-key "\C-c\C-c")

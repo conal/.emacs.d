@@ -1169,7 +1169,7 @@ I'd rather fix the real problem than keep patching it up."
 
 ;;; Big font in a big window
 (maximize-frame)
-(while (> (window-width) 130)
+(while (> (window-width) 180)
   (enlarge-font 1))
 
 ;;; For now
