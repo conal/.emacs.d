@@ -944,6 +944,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
  '(erc-whowas-on-nosuchnick t)
  '(eval-expression-print-length 200)
  '(eval-expression-print-level 12)
+ '(flymake-no-changes-timeout 0.5)
  '(haskell-indent-offset 2)
  '(inferior-haskell-wait-and-jump t)
  '(ispell-program-name "aspell")
@@ -1169,7 +1170,7 @@ I'd rather fix the real problem than keep patching it up."
 
 ;;; Big font in a big window
 (maximize-frame)
-(while (> (window-width) 180)
+(while (> (frame-width) 180)
   (enlarge-font 1))
 
 ;;; For now
