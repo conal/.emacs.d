@@ -107,38 +107,6 @@
   )
 
 
-
-;; ;;; Skeletons
-;; (define-skeleton jao-skel-haskell-file
-;;   "Haskell hs file header"
-;;   "Brief description: "
-;;   ?\n
-;;   "-- " (file-name-nondirectory (buffer-file-name)) ": " str
-;;   \n \n
-;;   (jao-copyright-line "-- ")
-;;   \n
-;;   (jao-read-copyright-file "-- ")
-;;   "-- Created: " (format-time-string "%a %b %d, %Y %H:%M") \n
-;;   ;; "-- $" "Id$"
-;;   \n \n \n
-;;   (jao-read-haskell-module)
-;;   > _ \n \n \n
-;;   > "-- " (file-name-nondirectory (buffer-file-name)) " ends here"
-;;   > \n \n)
-
-;; (define-skeleton jao-skel-lit-haskell-file
-;;   "Haskell lhs file header"
-;;   "Brief description: "
-;;   (file-name-nondirectory (buffer-file-name)) " -- " str
-;;   \n \n
-;;   (jao-copyright-line "" "")
-;;   \n
-;;   (jao-read-copyright-file "" "")
-;;   "$" "Id$"
-;;   \n \n \n
-;;   "> " (jao-read-haskell-module)
-;;   _ \n \n \n)
-
 ;; (define-skeleton jao-skel-lit-haskell-file
 ;;   "Haskell lhs file header"
 ;;   "Brief description: "
@@ -188,24 +156,21 @@
   "Haskell markdown+lhs file header. gitit-friendly."
   "Brief description: "
   '(jao-read-haskell-module)
-  ;; (longlines-mode 0) ; prevents loss of \n
-
   "---\n"
   "title: " str "\n"
   "tags: \n"
   "url: http://conal.net/blog/posts/" (blog-fix-title str)"/\n"
   "...\n\n"
-
   " <!--[ \n\n"
   "< {-# LANGUAGE #-}\n\n"
   "> {-# OPTIONS_GHC -Wall #-}\n\n"
   "< {-# OPTIONS_GHC -fno-warn-unused-imports #-} -- TEMP\n\n"
   "|\n"
   "Module      :  " (jao-haskell-module) "\n"
-  (format-time-string
-   "Copyright   :  (c) Conal Elliott %Y\n")
-  "License     :  BSD3\n"
-  "Maintainer  :  conal@conal.net\n"
+  "Copyright   :  (c) " (format-time-string "%Y ") jao-copyright-holder "\n"
+  (when (not (string-equal jao-license "none"))
+    (concat "-- License     :  " jao-license "\n"))
+  "Maintainer  :  " jao-maintainer "\n"
   "Stability   :  experimental\n\n"
   str "\n\n"
   "> module " (jao-haskell-module) " where\n\n"
