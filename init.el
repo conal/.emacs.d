@@ -1170,12 +1170,14 @@ I'd rather fix the real problem than keep patching it up."
 
 ;;; Big font in a big window
 (maximize-frame)
-(while (> (frame-width) 180)
+(while (> (frame-width) 150)
   (enlarge-font 1))
 
 ;;; For now
-(cd (concat tabula-dir "/swp4/t4/hwarchABAX2/tdh/Utils/"))
+(cd (concat tabula-dir "/swp4/prarch/hwarchABAX2/tdh/Utils/"))
 (shell)
+
+;; /swp4/t4/hwarchABAX2/tdh/Utils/
 
 (setq debug-on-error nil)
 
