@@ -1174,7 +1174,7 @@ I'd rather fix the real problem than keep patching it up."
   (enlarge-font 1))
 
 ;;; For now
-(cd (concat tabula-dir "/swp4/prarch/hwarchABAX2/tdh/Utils/"))
+(cd (concat tabula-dir "/swp4/prarch/arch/ABAX2/tdh/Utils/"))
 (shell)
 
 ;; /swp4/t4/hwarchABAX2/tdh/Utils/
