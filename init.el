@@ -525,7 +525,7 @@ doesn't error out when the process is not running."
 (global-set-key [f7] 'save-make-go)
 (global-set-key [f8] 'save-make-go)
 
-(setq abbrev-file-name (expand-file-name "~/.abbrev_defs"))
+(setq abbrev-file-name (expand-file-name "~/.emacs.d/abbrev_defs"))
 (read-abbrev-file abbrev-file-name)
 
 (put 'eval-expression 'disabled nil)
