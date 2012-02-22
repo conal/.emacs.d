@@ -384,5 +384,8 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
 
 (global-set-key [C-tab]   'indent-four-forward)
 (global-set-key [backtab] 'indent-four-backward)
+(global-set-key [S-tab]   'indent-four-backward)
+
+;;; On my Mac shift-tab gives [S-tab], but on Linux it gives [backtab]
 
 (provide 'my-text)
