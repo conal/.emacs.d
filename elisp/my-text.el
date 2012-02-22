@@ -396,15 +396,15 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
     (let ((deactivate-mark nil))
       (indent-rigidly start end n))))
 
-(defun indent-four-forward ()
-  "Indent the line or region (if mark active) by four."
-  (interactive)
-  (indent-region-or-line-by 4))
+(defun indent-four-forward (&optional n)
+  "Indent the line or region (if mark active) by four or prefix argument."
+  (interactive "P")
+  (indent-region-or-line-by (or n 4)))
 
-(defun indent-four-backward ()
-  "Indent the line or region (if mark active) by four."
-  (interactive)
-  (indent-region-or-line-by -4))
+(defun indent-four-backward (&optional n)
+  "De-indent the line or region (if mark active) by four or prefix argument."
+  (interactive "P")
+  (indent-region-or-line-by (- (or n 4))))
 
 (global-set-key [C-tab]   'indent-four-forward)
 (global-set-key [backtab] 'indent-four-backward)
