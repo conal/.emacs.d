@@ -215,7 +215,7 @@ right after next closing delimiter (see variable my-up-list-regexp)"
 (global-set-key "\C-c}" 'my-up-list)
 
 (defun my-newline-and-indent ()
-  "My alternative to newline-and-indent. expand-abbrev; newline; indent-for-tab-command. Handy for "
+  "My alternative to newline-and-indent. expand-abbrev; newline; indent-for-tab-command."
   (interactive)
   (perhaps-expand-abbrev)
   ;; (newline-and-indent)
@@ -421,12 +421,11 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
 (defun add-starred-item ()
   "Add a numbered or bulletted item.  Repeats the most recent item marker."
   (interactive)
-  (expand-abbrev) ; in case we've just typed an abbrev
+  (perhaps-expand-abbrev) ; in case we've just typed an abbrev
   ;; Copy initial sequence of asterisks or pound signs and final spaces.
   ;; Allow initial spaces for reuse in markdown-mode
   (save-excursion (re-search-backward "^ *\\(\\*\\) *"))
   (insert "\n" (match-string 0))
   )
-
 
 (provide 'my-text)
