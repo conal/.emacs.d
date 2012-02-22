@@ -367,4 +367,22 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
 ;;; Handy everywhere
 (global-set-key [?\C-,] 'markdown-mmmify-lines)
 
+(defun indent-line-by (n)
+  (save-excursion
+    (beginning-of-line)
+    (let ((bol (point)))
+      (end-of-line)
+      (indent-rigidly bol (point) n))))
+
+(defun indent-four-forward ()
+  (interactive)
+  (indent-line-by 4))
+
+(defun indent-four-backward ()
+  (interactive)
+  (indent-line-by -4))
+
+(global-set-key [C-tab]   'indent-four-forward)
+(global-set-key [backtab] 'indent-four-backward)
+
 (provide 'my-text)
