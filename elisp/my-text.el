@@ -418,6 +418,12 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
 
 ;; TODO: Have add-starred-item match the indentation of the previous starred item.
 
+(defun line-starts-with-regep (regexp)
+  "Does the current line start with the given REGEXP?"
+  (save-excursion
+    (beginning-of-line)
+    (looking-at regexp)))
+
 (defun add-starred-item ()
   "Add a numbered or bulletted item.  Repeats the most recent item marker."
   (interactive)
@@ -425,7 +431,11 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
   ;; Copy initial sequence of asterisks or pound signs and final spaces.
   ;; Allow initial spaces for reuse in markdown-mode
   (save-excursion (re-search-backward "^ *\\(\\*\\) *"))
-  (insert "\n" (match-string 0))
+  (insert "\n"
+          ;; Four more spaces if immediatly after colon.
+          ;; TODO: match number of spaces
+          (if (eq (preceding-char) ?:) "    " "")
+          (match-string 0))
   )
 
 (provide 'my-text)
