@@ -363,29 +363,70 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
   ;; in the area of the block.
   (when whole-buffer (mmm-parse-buffer))
   (save-excursion (mmm-parse-block 32)))  ; save-excursion needed in cocoa emacs
-
+]
 ;;; Handy everywhere
 (global-set-key [?\C-,] 'markdown-mmmify-lines)
 
-(defun indent-line-by (n)
+(defun current-line-as-region ()
   (save-excursion
     (beginning-of-line)
     (let ((bol (point)))
       (end-of-line)
-      (indent-rigidly bol (point) n))))
+      (list bol (point)))))
+
+(defun current-region ()
+  (list (region-beginning) (region-end)))
+
+(defun current-region-or-line ()
+  (if (and mark-active transient-mark-mode)
+      (current-region)
+    (current-line-as-region)))
+
+;; (defun indent-line-by (n)
+;;   (save-excursion
+;;     (beginning-of-line)
+;;     (let ((bol (point)))
+;;       (end-of-line)
+;;       (indent-rigidly bol (point) n))))
+
+(defun indent-region-or-line-by (n)
+  "Indent the line or region (if mark active) by the given amount."
+  (interactive "p")
+  (destructuring-bind (start end) (current-region-or-line)
+    (let ((deactivate-mark nil))
+      (indent-rigidly start end n))))
 
 (defun indent-four-forward ()
+  "Indent the line or region (if mark active) by four."
   (interactive)
-  (indent-line-by 4))
+  (indent-region-or-line-by 4))
 
 (defun indent-four-backward ()
+  "Indent the line or region (if mark active) by four."
   (interactive)
-  (indent-line-by -4))
+  (indent-region-or-line-by -4))
 
 (global-set-key [C-tab]   'indent-four-forward)
 (global-set-key [backtab] 'indent-four-backward)
 (global-set-key [S-tab]   'indent-four-backward)
 
 ;;; On my Mac shift-tab gives [S-tab], but on Linux it gives [backtab]
+
+;; (defun add-starred-item ()
+;;   (interactive)
+;;   (insert "\n*   "))
+
+;; TODO: Have add-starred-item match the indentation of the previous starred item.
+
+(defun add-starred-item ()
+  "Add a numbered or bulletted item.  Repeats the most recent item marker."
+  (interactive)
+  (expand-abbrev) ; in case we've just typed an abbrev
+  ;; Copy initial sequence of asterisks or pound signs and final spaces.
+  ;; Allow initial spaces for reuse in markdown-mode
+  (save-excursion (re-search-backward "^ *\\(\\*\\) *"))
+  (insert "\n" (match-string 0))
+  )
+
 
 (provide 'my-text)
