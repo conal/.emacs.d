@@ -262,6 +262,7 @@
   ;; case.
   (when buffer-file-name
     (flymake-mode 1))
+  (local-set-key "\C-cf" 'flymake-mode) ;; toggle
   ;; http://sites.google.com/site/haskell/notes/ghci610emacsmadness
   ;; '(haskell-program-name "/home/conal/bin/ghci-no-tty")
   ;; (setq process-connection-type nil)
