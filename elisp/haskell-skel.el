@@ -78,6 +78,8 @@
   (setq jao-maintainer "conal@conal.net")
   (setq jao-license "BSD3"))
 
+(haskell-skel-tabula) ;; for now
+
 ;;; Skeletons
 (define-skeleton jao-skel-haskell-file
   "Haskell hs file header"
