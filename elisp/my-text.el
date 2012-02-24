@@ -354,10 +354,8 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
 ;;; Took out one space, because some folks won't put in two!!
 (setq sentence-end "[.?!][]\"')}]*\\($\\|\t\\| \\)[ \t\n]*")
 
-
-
 (defun markdown-mmmify-lines (&optional whole-buffer)
-  "mmm-ify 20 lines above & below the point, or the whole buffer if argument given"
+  "mmm-ify 32 lines above & below the point, or the whole buffer if argument given"
   (interactive "P")
   ;; I was doing *either* buffer or block, but oddly, buffer leaves junk behind,
   ;; in the area of the block.
