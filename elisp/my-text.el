@@ -425,15 +425,24 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
 (defun add-starred-item ()
   "Add a numbered or bulletted item.  Repeats the most recent item marker."
   (interactive)
-  (perhaps-expand-abbrev) ; in case we've just typed an abbrev
+  (perhaps-expand-abbrev)             ; in case we've just typed an abbrev
   ;; Copy initial sequence of asterisks or pound signs and final spaces.
   ;; Allow initial spaces for reuse in markdown-mode
-  (save-excursion (re-search-backward "^ *\\(\\*\\) *"))
-  (insert "\n"
-          ;; Four more spaces if immediatly after colon.
-          ;; TODO: match number of spaces
-          (if (eq (preceding-char) ?:) "    " "")
-          (match-string 0))
-  )
+  (let ((on-bulleted-line (save-excursion 
+                            (beginning-of-line)
+                            (looking-at "[ *]"))))
+    (if (and on-bulleted-line
+             (save-excursion (re-search-backward "^ *\\(\\*\\) *" nil t)))
+        (insert "\n"
+                ;; Four more spaces if immediatly after colon.
+                ;; TODO: match number of spaces
+                (if (eq (preceding-char) ?:) "    " "")
+                (match-string 0))
+      ;; If we're on a plain line or no bullet found, start at outermost
+      ;; bullet level.
+      (unless (save-excursion (beginning-of-line) (looking-at "$"))
+        (newline))
+      (insert "\n*   "))
+    ))
 
 (provide 'my-text)
