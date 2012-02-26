@@ -426,7 +426,7 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
   "Does the beginning of the current line match the given REGEXP?"
   (save-excursion 
     (beginning-of-line)
-    (looking-at "[ *]")))
+    (looking-at regexp)))
 
 (defun add-starred-item ()
   "Add a numbered or bulletted item.  Repeats the most recent item marker."
