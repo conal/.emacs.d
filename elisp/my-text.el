@@ -422,15 +422,19 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
     (beginning-of-line)
     (looking-at regexp)))
 
+(defun bol-looking-at (regexp)
+  "Does the beginning of the current line match the given REGEXP?"
+  (save-excursion 
+    (beginning-of-line)
+    (looking-at "[ *]")))
+
 (defun add-starred-item ()
   "Add a numbered or bulletted item.  Repeats the most recent item marker."
   (interactive)
   (perhaps-expand-abbrev)             ; in case we've just typed an abbrev
   ;; Copy initial sequence of asterisks or pound signs and final spaces.
   ;; Allow initial spaces for reuse in markdown-mode
-  (let ((on-bulleted-line (save-excursion 
-                            (beginning-of-line)
-                            (looking-at "[ *]"))))
+  (let ((on-bulleted-line (bol-looking-at "[ *]")))
     (if (and on-bulleted-line
              (save-excursion (re-search-backward "^ *\\(\\*\\) *" nil t)))
         (insert "\n"
@@ -440,7 +444,7 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
                 (match-string 0))
       ;; If we're on a plain line or no bullet found, start at outermost
       ;; bullet level.
-      (unless (save-excursion (beginning-of-line) (looking-at "$"))
+      (unless (bol-looking-at "$")
         (newline))
       (insert "\n*   "))
     ))
