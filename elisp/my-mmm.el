@@ -84,15 +84,15 @@
 ;;     :back-offset (beginning-of-line -1)
 ;;     ;; :include-back nil
 ;;     )
-   (markdown-code-block
-    :submode text-mode
-    :front "^\n    [^\*#]"  ; not nested-list
-    :front-offset 1
-    :include-front t
-    :back "^[^ ]"
-    :back-offset (beginning-of-line -1)
-    ;; :include-back nil
-    )
+;;    (markdown-code-block
+;;     :submode text-mode
+;;     :front "^\n    [^\*#]"  ; not nested-list
+;;     :front-offset 1
+;;     :include-front t
+;;     :back "^[^ ]"
+;;     :back-offset (beginning-of-line -1)
+;;     ;; :include-back nil
+;;     )
 ;;    (markdown-haskell-inline-double
 ;;     :submode haskell-mode
 ;;     :front "\\(^\\|\\s \\|[(/\"-]\\)``"

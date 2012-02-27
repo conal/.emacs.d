@@ -956,7 +956,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
  '(markdown-command "pandoc --toc --smart --standalone --to html")
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
- '(mmm-mode-ext-classes-alist (quote ((twee-mode nil twee) (markdown-mode nil markdown) (text-mode nil literate-haskell-lhs2TeX) (latex-mode nil literate-haskell-lhs2TeX))) nil (mmm-mode))
+ '(mmm-mode-ext-classes-alist (quote ((twee-mode nil twee) (markdown-mode nil markdown) (latex-mode nil literate-haskell-lhs2TeX))) nil (mmm-mode))
  '(mmm-submode-decoration-level 2)
  '(p4-follow-symlinks t)
  '(p4-user-email "conal@tabula.com")
