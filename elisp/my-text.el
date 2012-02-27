@@ -361,7 +361,7 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
   ;; in the area of the block.
   (when whole-buffer (mmm-parse-buffer))
   (save-excursion (mmm-parse-block 32)))  ; save-excursion needed in cocoa emacs
-]
+
 ;;; Handy everywhere
 (global-set-key [?\C-,] 'markdown-mmmify-lines)
 
