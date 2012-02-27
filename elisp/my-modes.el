@@ -494,14 +494,15 @@ start of comment.  TODO: handle {- ... -} comments."
 (defun md-add-lhs (arg)
   "Add a literate Haskell block as \"> \""
   (interactive "P")
-  (twee-no-longlines
-   (end-of-line)
-   (insert "\n\n> ")
-   (unless (looking-at "\n\n")
-     (insert "\n\n")
-     (backward-char 2))
-   (markdown-mmmify-lines)
-   ))
+  (end-of-line)
+  (unless (looking-at "^")
+    (newline))
+  (insert "\n> ")
+  (unless (looking-at "\n\n")
+    (insert "\n\n")
+    (backward-char 2))
+  (markdown-mmmify-lines)
+  )
 
 ;; (setq markdown-mode-hook
 ;;       '(lambda ()
