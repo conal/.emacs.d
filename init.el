@@ -1117,8 +1117,8 @@ I'd rather fix the real problem than keep patching it up."
   (global-set-key (vector (list 'control mouse-wheel-up-event))
                   'zoom-out))
 
-;; (global-set-key [M-up]   'zoom-in)
-;; (global-set-key [M-down] 'zoom-out))
+(global-set-key [M-up]   'zoom-in)
+(global-set-key [M-down] 'zoom-out))
 
 ;; TODO: unify zoom bindings
 
