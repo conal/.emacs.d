@@ -947,7 +947,6 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
  '(flymake-no-changes-timeout 0.5)
  '(haskell-indent-offset 2)
  '(inferior-haskell-wait-and-jump t)
- '(ispell-extra-args (quote ("-d" "/Library/Application Support/cocoAspell/aspell6-en-6.0-0/en.multi")))
  '(ispell-program-name "aspell")
  '(ispell-silently-savep t)
  '(longlines-show-hard-newlines nil)
