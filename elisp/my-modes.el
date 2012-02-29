@@ -234,7 +234,7 @@
   ;; font-lock-doc-face is lighter than I like
   ;; (setq haskell-literate-comment-face 'font-lock-comment-face)
   (my-common-mode-stuff)
-  (auto-fill-mode 1)
+  ;; (auto-fill-mode 1)  ; don't
   (setq comment-column 40)
   ;; Don't do the following, since I'm usually in mmm/markdown now.
   ;; (if haskell-literate (shared-tex-lhs-init))  ;; in my-tex.el
