@@ -260,8 +260,13 @@
   ;; In mmm-mode, buffer-file-name is not set when haskell-mode is kicked
   ;; off, causing problems for flymake-mode. I don't want it on in that
   ;; case.
-  (when buffer-file-name
-    (flymake-mode 1))
+  ;; Sadly, I'm leaving off by default, as compilation is too slow for
+  ;; moderately large (multi-module) projects. I think flymake is
+  ;; recompiling everything from scratch. Is there a way to recompile
+  ;; incrementally? Maybe using -fobject-code, -odir & -hidir.
+  ;; TODO: Investigate.
+  ;; (when buffer-file-name
+  ;;   (flymake-mode 1))
   (local-set-key "\C-cf" 'flymake-mode) ;; toggle
   ;; http://sites.google.com/site/haskell/notes/ghci610emacsmadness
   ;; '(haskell-program-name "/home/conal/bin/ghci-no-tty")
