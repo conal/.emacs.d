@@ -253,7 +253,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 (defun quotes ()
   "Open quotes file, and paste a quotation."
   (interactive)
-  (find-file (expand-file-name "~/Misc/quotes-tw.tw"))
+  (find-file (expand-file-name "~/quotes/quotes.md"))
   (goto-char (point-max))
   ;; Clear final newlines for uniform separation
   (looking-back "\n+" nil t)
@@ -609,8 +609,11 @@ logs, putting in a Last Modified in a new file, etc."
 (global-set-key "\C-c%" 'query-replace-regexp)
 
 ;; instead of other-window-any-screen
-(global-set-key "\M-o" 'other-window)
+(global-set-key "\M-o" 'my-other-window-or-frame)
 
+(defun my-other-window-or-frame ()
+  (interactive)
+  (other-window-or-frame 1))
 
 (global-set-key [home] 'beginning-of-line)
 (global-set-key [end] 'end-of-line)
@@ -1170,7 +1173,7 @@ I'd rather fix the real problem than keep patching it up."
   (enlarge-font 1))
 
 ;;; For now
-(cd (concat tabula-dir "/swp4/prarch/arch/ABAX2/tdh/Utils/"))
+(cd (concat tabula-dir "/swp4/pr-common/arch/ABAX2/tdh/Utils/"))
 (shell)
 
 ;; /swp4/t4/hwarchABAX2/tdh/Utils/
