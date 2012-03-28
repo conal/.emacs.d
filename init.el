@@ -1124,6 +1124,8 @@ I'd rather fix the real problem than keep patching it up."
 
 ;; TODO: unify zoom bindings
 
+(global-set-key "\C-cR" 'rot13-region)
+
 ;; Get rid of `mouse-set-font' or `mouse-appearance-menu':
 ;; (global-set-key [S-down-mouse-1] nil)
 
