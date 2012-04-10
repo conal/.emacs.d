@@ -16,7 +16,8 @@
         "~/.emacs.d/elisp/erc-5.2-extras"
         ;;; "~/gnu/site-lisp"
         ;; "~/gnu/haskell-mode-2.8.0"
-        "~/darcs-repos/haskellmode-emacs/"
+        ;; "~/darcs-repos/haskellmode-emacs/"
+        "~/git-repos/haskell-mode"
         "~/git-repos/ghc-mod/elisp"
         "~/git-repos/git-emacs"
         "~/git-repos/mmm-mode"
@@ -1175,7 +1176,7 @@ I'd rather fix the real problem than keep patching it up."
   (enlarge-font 1))
 
 ;;; For now
-(cd (concat tabula-dir "/swp4/pr-common/arch/ABAX2/tdh/Utils/"))
+(cd (concat tabula-dir "/swp4/pr-common/arch/ABAX2/tdh/"))
 (shell)
 
 ;; /swp4/t4/hwarchABAX2/tdh/Utils/
