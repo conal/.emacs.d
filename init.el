@@ -1170,16 +1170,31 @@ I'd rather fix the real problem than keep patching it up."
 (when (eq system-type 'darwin)
   (add-hook 'erc-text-matched-hook 'my-erc-hook))
 
-;;; Big font in a big window
-(maximize-frame)
-(while (> (frame-width) 150)
-  (enlarge-font 1))
+(defun big ()
+  "Big font in a big window"
+  (interactive)
+  (maximize-frame)
+  (while (> (frame-width) 150)
+    (enlarge-font 1)))
+
+(big)
 
 ;;; For now
 (cd (concat tabula-dir "/swp4/pr-common/arch/ABAX2/tdh/"))
 (shell)
 
 ;; /swp4/t4/hwarchABAX2/tdh/Utils/
+
+(defun no-p4 ()
+  (interactive)
+  (setq find-file-hook (remove 'p4-find-file-hook find-file-hook)))
+
+(defun yes-p4 ()
+  (interactive)
+  (push 'p4-find-file-hook find-file-hook))
+
+;; 2012-05-16: the p4 process is getting stuck when I'm disconnected. I don't know what's changed.
+(no-p4)
 
 (setq debug-on-error nil)
 
