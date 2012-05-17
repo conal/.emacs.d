@@ -17,7 +17,7 @@
   (interactive)
   (abbrev-mode 1)                       ; Use abbreviations
   ;; (auto-fill-mode 1)                    ; Do auto-fill
-  (setq fill-column 74)
+  (setq fill-column 78)
   (setq comment-column 56)
   (setq indent-tabs-mode nil)	        ; No tabs on indent
   (column-number-mode 1)
@@ -236,6 +236,7 @@
   (my-common-mode-stuff)
   ;; (auto-fill-mode 1)  ; don't
   (setq comment-column 40)
+  (setq fill-column 80)
   ;; Don't do the following, since I'm usually in mmm/markdown now.
   ;; (if haskell-literate (shared-tex-lhs-init))  ;; in my-tex.el
   ;; 
@@ -441,7 +442,7 @@ start of comment.  TODO: handle {- ... -} comments."
   (interactive)
   (abbrev-mode 1)                       ; Use abbreviations
   (auto-fill-mode 1)                    ; Do auto-fill
-  (setq fill-column 74))
+  (setq fill-column 78))
 
 (add-hook 'makefile-mode-hook 'my-makefile-mode-hook)
 
@@ -451,7 +452,7 @@ start of comment.  TODO: handle {- ... -} comments."
   (modify-syntax-entry ?\_ "w")
   (abbrev-mode 1)                       ; Use abbreviations
   (auto-fill-mode 1)                    ; Do auto-fill
-  (setq fill-column 74))
+  (setq fill-column 78))
   
 (add-hook 'java-mode-hook 'my-java-mode-hook)
 
