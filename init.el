@@ -1180,7 +1180,7 @@ I'd rather fix the real problem than keep patching it up."
 (big)
 
 ;;; For now
-(cd (concat tabula-dir "/swp4/pr-common/arch/ABAX2/tdh/"))
+(cd (concat tabula-dir "/swp4/prarch/arch/ABAX2/tdh/"))
 (shell)
 
 ;; /swp4/t4/hwarchABAX2/tdh/Utils/
