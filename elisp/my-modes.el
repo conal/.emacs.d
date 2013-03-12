@@ -62,6 +62,7 @@
   ;; (modify-syntax-entry ?\' ".")  ; punctuation
   (modify-syntax-entry ?\| ".")     ; punctuation
   (modify-syntax-entry ?\" "\"")    ; string char 
+  (modify-syntax-entry ?\$ "\.")    ; string char
   (ispell-minor-mode)
   ;; (longlines-mode t)                ; Always on?  Experiment.
   ;; Avoid a problem with imenu and sub-modes:
@@ -225,6 +226,7 @@
   ;; (turn-on-haskell-font-lock)
   ;; (turn-on-haskell-decl-scan)
   ;; From the haskell-mode README
+  (setq ghc-jump-key "\C-cJ") ;; was "\C-c\C-j"
   (turn-on-haskell-doc-mode)
   ;; (turn-on-haskell-indentation)
   (turn-on-haskell-indent)
