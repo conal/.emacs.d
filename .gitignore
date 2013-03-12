@@ -15,3 +15,5 @@ TAGS
 .#*.page
 
 *.elc
+no-longlines
+abbrev_defs
