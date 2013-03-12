@@ -418,6 +418,8 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "\224" "\"")
   (save-replace "\226" "---")
   (save-replace "\227" "--")
+  (save-replace "—" "---")
+  (save-replace "–" "-")
   (save-replace "" "--")
   (save-replace "" "\"")
   (save-replace "" "\"")
@@ -452,7 +454,10 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "’" "'")
   (save-replace "’" "'")
   (save-replace "ﬁ" "fi")
+  (save-replace "􏰛" "fi")
   (save-replace "ﬀ" "ff")
+  (save-replace "􏰡" "π")
+  (save-replace " " " ")
   )
 
 (defun fix-pdf ()
@@ -680,7 +685,7 @@ logs, putting in a Last Modified in a new file, etc."
   (interactive "sLabel for patch to record: ")
   (darcs-run-command
    (concat "darcs record --all --skip-long-comment"
-           " --patch-name=\"" label "\"")))
+           " --name=\"" label "\"")))
 
 (defun darcs-add (filename)
   "Add the current buffer's file to the repo"
@@ -974,7 +979,8 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
 
 (when (eq system-type 'darwin)
   (custom-set-variables
-   '(ispell-extra-args (quote ("-d" "/Library/Application Support/cocoAspell/aspell6-en-6.0-0/en.multi")))))
+   '(ispell-extra-args (quote ("-d" "/Library/Application Support/cocoAspell/aspell6-en-6.0-0/en.multi"
+                               "--repl=/Users/conal/.aspell.en.prepl")))))
 
 ;;; See http://www.emacswiki.org/emacs/EmacsClient#toc21
 ;;; 
@@ -1085,7 +1091,19 @@ Spotlight binding from command-space to option-space."
   (interactive)
   (blogify-region (point-min) (point-max)))
 
-
+(defun blogify-foo ()
+  (interactive)
+  (blogify-buffer)
+  (save-window-excursion
+    (switch-to-buffer "*Shell Command Output*")
+    (beginning-of-buffer)
+    (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
+    ;; Next one causes line centering. How?
+    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.0.1/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
+    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.0.1/data/static/css/hk-pyg.css\" type=\"text/css\" media=\"screen\" />\n")
+    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journal/wiki/wikidata/static/css/custom.css\" type=\"text/css\" media=\"screen\" />\n")
+    (write-region (point-min) (point-max) "~/tmp/foo.html")))
+    
 ;;; I keep running afoul of an oddity/bug in longlines-mode.
 ;;; Some of my long lines get hard breaks on saving.
 ;;; Here's a temporary hack to help me cope while I'm investigating.
@@ -1179,9 +1197,9 @@ I'd rather fix the real problem than keep patching it up."
 
 (big)
 
-;;; For now
-(cd (concat tabula-dir "/swp4/prarch/arch/ABAX2/tdh/"))
-(shell)
+;; ;;; For now
+;; (cd (concat tabula-dir "/swp4/prarch/arch/ABAX2/tdh/"))
+;; (shell)
 
 ;; /swp4/t4/hwarchABAX2/tdh/Utils/
 
