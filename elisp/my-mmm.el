@@ -113,13 +113,13 @@
    (literate-haskell-lhs2TeX-nobird
     :classes (literate-haskell-lhs2TeX-code
               literate-haskell-lhs2TeX-verb
-              literate-haskell-lhs2TeX-inline
+              ;; literate-haskell-lhs2TeX-inline
               )
     )
    (literate-haskell-lhs2TeX
     :classes (literate-haskell-lhs2TeX-nobird
               literate-haskell-lhs2TeX-bird-code
-              literate-haskell-lhs2TeX-bird-spec
+              ;; literate-haskell-lhs2TeX-bird-spec
               )
     )
    (literate-haskell-lhs2TeX-code
