@@ -189,21 +189,23 @@
        (insert (format-time-string "---\ntitle: Notes for week of %B %e\n...\n\n" sunday))
        (insert " <!-- References -->\n\n <!-- -->\n"))
      ;; Insert entry header if not already present
-     (goto-char (point-min))
-     (if (search-forward entry-header nil t)
+     (let ((was-point (point)))
+       (goto-char (point-min))
+       (if (search-forward entry-header nil t)
+           ;; (goto-char was-point) ;;  (1- (point-max))
+           (goto-char (if (= was-point (point-min)) (point-max) was-point))
          (goto-char (point-max))
-       (goto-char (point-max))
-       (unless (bolp) (insert "\n"))   ; start on blank line
-       ;; Clear final newlines for uniform separation
-       (looking-back "\n+" nil t)
-       (delete-region (match-beginning 0) (match-end 0))
-       (newline 4)                     ; start on fresh line
-       (previous-line)
-       (insert entry-header "\n")
-;;        (insert "## Hours\n\nxx hours: \n\n## ")
-;;        (previous-line 2) (end-of-line)
-       (markdown-mode)                 ; cleans up lhs mode spill-over
-       )
+         (unless (bolp) (insert "\n"))                  ; start on blank line
+         ;; Clear final newlines for uniform separation
+         (looking-back "\n+" nil t)
+         (delete-region (match-beginning 0) (match-end 0))
+         (newline 4)                                    ; start on fresh line
+         (previous-line)
+         (insert entry-header "\n")
+         ;;        (insert "## Hours\n\nxx hours: \n\n## ")
+         ;;        (previous-line 2) (end-of-line)
+         (markdown-mode)                       ; cleans up lhs mode spill-over
+         ))
      ))
   ;; For convenience, rename the buffer. If there's already a different
   ;; journal file, rename it first.
@@ -731,6 +733,7 @@ logs, putting in a Last Modified in a new file, etc."
   `(lambda () (interactive) (scroll-up ,n)))
 
 (global-set-key [?\C-\;] (scroll-cmd 1))
+(global-set-key [?\C-\s-\;] (scroll-cmd 1)) ;; handy since \C-\; is flyspell-auto-correct-previous-word
 (global-set-key [?\C-:]  (scroll-cmd -1))
 
 
@@ -954,8 +957,12 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
  '(eval-expression-print-length 200)
  '(eval-expression-print-level 12)
  '(flymake-no-changes-timeout 0.5)
+ '(git-branch-buffer-closes-after-action nil)
+ '(git-working-dir-change-behaviour (quote git-refresh-all-saved))
+ '(haskell-hoogle-command nil)
  '(haskell-indent-offset 2)
  '(inferior-haskell-wait-and-jump t)
+ '(ispell-extra-args (quote ("--repl=/Users/conal/.aspell.en.prepl")))
  '(ispell-program-name "aspell")
  '(ispell-silently-savep t)
  '(longlines-show-hard-newlines nil)
@@ -973,13 +980,14 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
  '(ps-font-size (quote (8 . 10)))
  '(scroll-conservatively 1000)
  '(sentence-end-double-space nil)
+ '(tags-case-fold-search nil)
  '(tex-shell-file-name "bash")
  '(user-mail-address "conal@conal.net")
  '(vc-make-backup-files t))
 
 (when (eq system-type 'darwin)
   (custom-set-variables
-   '(ispell-extra-args (quote ("-d" "/Library/Application Support/cocoAspell/aspell6-en-6.0-0/en.multi"
+   '(ispell-extra-args (quote (;; "-d" "/Library/Application Support/cocoAspell/aspell6-en-6.0-0/en.multi"
                                "--repl=/Users/conal/.aspell.en.prepl")))))
 
 ;;; See http://www.emacswiki.org/emacs/EmacsClient#toc21
@@ -1099,10 +1107,10 @@ Spotlight binding from command-space to option-space."
     (beginning-of-buffer)
     (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
     ;; Next one causes line centering. How?
-    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.0.1/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
-    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.0.1/data/static/css/hk-pyg.css\" type=\"text/css\" media=\"screen\" />\n")
-    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journal/wiki/wikidata/static/css/custom.css\" type=\"text/css\" media=\"screen\" />\n")
-    (write-region (point-min) (point-max) "~/tmp/foo.html")))
+    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.3.1/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
+    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.3.1/data/static/css/hk-pyg.css\" type=\"text/css\" media=\"screen\" />\n")
+    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Tabula/Journal/wikidata/static/css/custom.css\" type=\"text/css\" media=\"screen\" />\n")
+    (write-region (point-min) (point-max) "foo.html")))
     
 ;;; I keep running afoul of an oddity/bug in longlines-mode.
 ;;; Some of my long lines get hard breaks on saving.
@@ -1213,6 +1221,15 @@ I'd rather fix the real problem than keep patching it up."
 
 ;; 2012-05-16: the p4 process is getting stuck when I'm disconnected. I don't know what's changed.
 (no-p4)
+
+(require 'linum) ; linum-mode
+
+(journal)
+
+(defun amazon-track-rename (&optional arg)
+  "Keyboard macro."
+  (interactive "p")
+  (kmacro-exec-ring-item (quote ("\355mv \"\" \242\202\213 " 0 "%d")) arg))
 
 (setq debug-on-error nil)
 
