@@ -68,7 +68,7 @@
   "Set up Haskell auto-insert for Tabula work."
   (interactive)
   (setq jao-copyright-holder "Tabula, Inc.")
-  (setq jao-maintainer "conal@tabula.com")
+  (setq jao-maintainer "conal@conal.net") ;; "conal@tabula.com"
   (setq jao-license "none"))
 
 (defun haskell-skel-personal ()
@@ -97,7 +97,7 @@
   "-- Copyright   :  (c) " (format-time-string "%Y ") jao-copyright-holder "\n"
   (when (not (string-equal jao-license "none"))
     (concat "-- License     :  " jao-license "\n"))
-  "-- \n"
+  "--\n"
   "-- Maintainer  :  " jao-maintainer "\n"
   "-- Stability   :  experimental\n"
   "-- \n"
