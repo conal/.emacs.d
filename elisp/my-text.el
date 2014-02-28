@@ -359,8 +359,13 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
   (interactive "P")
   ;; I was doing *either* buffer or block, but oddly, buffer leaves junk behind,
   ;; in the area of the block.
-  (when whole-buffer (mmm-parse-buffer))
-  (save-excursion (mmm-parse-block 32)))  ; save-excursion needed in cocoa emacs
+;;   (when whole-buffer (mmm-parse-buffer))
+;;   (save-excursion (mmm-parse-block 32))  ; save-excursion needed in cocoa emacs
+  (if whole-buffer
+      ;; Still not right. Sometimes I want LaTeX mode.
+      (markdown-mode)
+    (save-excursion (mmm-parse-block 32)))  ; save-excursion needed in cocoa emacs
+  )
 
 ;;; Handy everywhere
 (global-set-key [?\C-,] 'markdown-mmmify-lines)
