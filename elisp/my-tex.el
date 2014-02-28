@@ -132,6 +132,12 @@ prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
   (interactive "p")
   (surround-sexp n "\\emph{" "}"))
 
+(defun tex-math-sexp (n)
+  "Wrap \"$$\" around the previous N sexps, defaulting to 1, where N is the
+prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
+  (interactive "p")
+  (surround-sexp n "$" "$"))
+
 (defun tex-tt ()
   "Insert \"{\\tt }\""
   (interactive)
@@ -310,6 +316,7 @@ being punctuation"
   (local-set-key "\C-ce" 'tex-emph)
   (local-set-key "\C-c*" 'tex-emph-sexp)
   (local-set-key [?\C-*] 'tex-emph-sexp)
+  (local-set-key [?\C-$] 'tex-math-sexp)
   (local-set-key "\C-ct" 'tex-texttt)
   (local-set-key "\C-ch" 'tex-hs)
   (local-set-key "\C-c\C-v" 'tex-verb)
