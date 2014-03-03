@@ -829,7 +829,7 @@ logs, putting in a Last Modified in a new file, etc."
   (pushnew 'irc-filter-post-insert http-filter-post-insert-hook)
   ;; (set-language-environment 'utf-8)
   (http-get url)
-  (text-mode)  ;; http-get changes the mode do fundamental
+  (text-mode)  ;; http-get changes the mode to fundamental
   ;; (view-mode 1) oops -- too soon.
   ;; oops.  too soon.
   ;; (decode-coding-region (point-min) (point-max) 'utf-8)
