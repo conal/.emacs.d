@@ -85,7 +85,7 @@
   (setq indent-tabs-mode nil)
   ;; (c-toggle-auto-newline t)
   ;; (local-unset-key [C-c C-a])  ; wrong key syntax?
-  (local-unset-key "\C-c \C-a")   ; drop c-toggle-auto-newline for align-regexp
+  (local-unset-key "\C-c\C-a")   ; drop c-toggle-auto-newline for align-regexp
   ;; (message "my-c-mode-common-hook")
   (modify-syntax-entry ?\' "w")  ; for abbrevs
   ;; Override "/* ... */"
@@ -281,6 +281,8 @@
   (local-set-key "\C-c\C-r" 'inferior-haskell-reload-file)
   (local-set-key [f10] 'haskell-load-in-src)
   (local-set-key [f11] 'cabal-do)
+  ;; new (2014-05-30). Overrides delete-horizontal-space
+  (local-set-key [M-return] 'cabal-do)
   (local-set-key [?\C-|] 'add-spec)
   ;; (local-set-key [?\C-\\] 'add-spec)  ;; restore if i want toggle-input-method back
   ;; haskell-mode binds \C-c\C-g, but I like it to stay undefined
@@ -296,6 +298,25 @@
   (local-set-key [C-tab] 'ghc-complete) ; normally meta-tab
   (local-set-key "\M-i" 'ghc-import-module)
   )
+
+;;; Override. To do: push back to master repo
+(define-derived-mode literate-haskell-mode haskell-mode "LitHaskell"
+  "As `haskell-mode' but for literate scripts."
+  (setq haskell-literate
+        (save-excursion
+          (goto-char (point-min))
+          (cond
+           ((re-search-forward "^\\\\\\(begin\\|end\\){code}$" nil t) 'tex)
+           ((re-search-forward "^>" nil t) 'bird)  ; conal: or "^\\(    \\)*[><] "
+           (t haskell-literate-default))))
+  (if (eq haskell-literate 'bird)
+      ;; fill-comment-paragraph isn't much use there, and even gets confused
+      ;; by the syntax-table text-properties we add to mark the first char
+      ;; of each line as a comment-starter.
+      (set (make-local-variable 'fill-paragraph-handle-comment) nil))
+  (set (make-local-variable 'mode-line-process)
+       '("/" (:eval (symbol-name haskell-literate)))))
+
 
 ;; For ghc-mod http://www.mew.org/~kazu/proj/ghc-mod/en/
 (autoload 'ghc-init "ghc" nil t)
@@ -364,7 +385,7 @@ With a prefix arg, kill the process first, to get a fresh start."
   "Use strings START and END to bracket N words.  Starts at N-th most
 recent s-expression, which is convenient for use inside a word or at the
 end of it."
-  (expand-abbrev)
+  ;; (expand-abbrev)
   (backward-sexp n)
   (insert start)
   (forward-sexp n)
@@ -405,7 +426,6 @@ it."
   (interactive "p")
   (surround-punct "//" "//" arg))
 
-
 (defun haskell-fill-paragraph (arg)
   "If we're in a comment, keep the comment prefixes and fill the rest.  BUG: combines with line above
 start of comment.  TODO: handle {- ... -} comments."
@@ -416,6 +436,14 @@ start of comment.  TODO: handle {- ... -} comments."
          (fill-prefix
           (if at-comment (buffer-substring (car mdata) (cadr mdata)) fill-prefix)))
     (fill-paragraph arg)))
+
+(defun haskell-drop-module-prefixes ()
+  (interactive)
+  (let ((start (region-beginning))
+        (end (region-end)))
+    (query-replace-regexp
+     "'?\\([A-Z][a-zA-Z]*\\.\\)+\\| \\[\\(Occ\\|OS\\|LclId\\)[^]]+\\]"
+     "" nil start end)))
 
 ;;; Skeleton support for autoinsert when making a new Haskell file.  TODO:
 ;;; simplify.
@@ -433,6 +461,7 @@ start of comment.  TODO: handle {- ... -} comments."
 
 (defun my-html-mode-hook ()
   (my-common-mode-stuff)
+  (local-unset-key "\C-c\C-j")  ; drop html-line for save-junk
   (setq comment-start "<!--"
 	comment-end " -->"
 	comment-start-skip "--[ \t]*"
@@ -455,8 +484,14 @@ start of comment.  TODO: handle {- ... -} comments."
   (abbrev-mode 1)                       ; Use abbreviations
   (auto-fill-mode 1)                    ; Do auto-fill
   (setq fill-column 78))
-  
+
 (add-hook 'java-mode-hook 'my-java-mode-hook)
+
+(defun my-javascript-mode-hook ()
+  (interactive)
+  (setq c-electric-flag nil))
+
+(add-hook 'javascript-mode-hook 'my-javascript-mode-hook)
 
 ;; (require 'cabal-mode)
 ;;
@@ -519,8 +554,8 @@ start of comment.  TODO: handle {- ... -} comments."
 (defun markdown-inline-code (arg)
   "Surround previous ARG sexps with markdown backquotes."
   (interactive "p")
-  (surround-punct "`" "`" arg)
   (expand-abbrev)
+  (surround-punct "`" "`" arg)
   ;; (insert " ")
   (when mmm-mode (mmm-parse-block 2)))
 
@@ -629,6 +664,8 @@ consisting of repeated '-'. For an <h2>."
   ;; For literate haskell programs
   (local-set-key "\C-c\C-l" 'inferior-haskell-load-file)
   (local-set-key "\C-c\C-r" 'inferior-haskell-reload-file)
+  (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
+  (modify-syntax-entry ?\* "$")  ; self-matching, for emphasis/italics
 )
 
 ;;; Swiped & modified from twee-add-item.
