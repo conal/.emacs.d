@@ -260,29 +260,37 @@ prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
 
 (defun underscore-sexp (n)
   "Insert a pair of underscores around previous N sexp's, where N is the
-prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
+prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
   (interactive "p")
   (surround-sexp n ?\_))
 
 (defun quotify-sexp (n)
   "Insert a pair of back-ticks around previous N sexp's, where N is the
-prefix arg.  But if N is negative, instead quotify the (-N)th previous
+prefix arg.  But if N is negative, instead surround-sexp the (-N)th previous
 sexp.  Useful for markdown."
   (interactive "p")
   (surround-sexp n ?\"))
 
 (defun backtickify-sexp (n)
   "Insert a pair of back-ticks around previous N sexp's, where N is the
-prefix arg.  But if N is negative, instead quotify the (-N)th previous
+prefix arg.  But if N is negative, instead surround the (-N)th previous
 sexp.  Useful for markdown."
   (interactive "p")
   (surround-sexp n ?\`))
 
 (defun pipify-sexp (n)
   "Insert a pair of |'s around previous N sexp's, where N is the
-prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
+prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
   (interactive "p")
   (surround-sexp n ?\|)
+  (mmm-parse-block 1)
+  )
+
+(defun parenthesize-sexp (n)
+  "Insert a pair of parentheses around previous N sexp's, where N is the
+prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
+  (interactive "p")
+  (surround-sexp n ?\(  ?\))
   (mmm-parse-block 1)
   )
 
@@ -294,7 +302,7 @@ prefix arg.  But if N is negative, instead quotify the (-N)th previous sexp."
 (global-set-key "\C-c\`" 'backtickify-sexp)
 (global-set-key "\C-c\|" 'pipify-sexp)
 (global-set-key [?\C-|]  'pipify-sexp)
-
+(global-set-key [?\C-\(] 'parenthesize-sexp)
 
 (defun insert-angles ()
   "Insert a pair of angle brackets and place point between them."
