@@ -249,6 +249,7 @@
   ;; ?\' gets made a "quote" character, but I more often use it as a name
   ;; constituent.
   (modify-syntax-entry ?\' "w")
+  ;; (modify-syntax-entry ?\$ "w")  -- for Core
   ;; (local-set-key "\C-c<" 'LaTeX-mode)
   (local-set-key "\C-c<" 'markdown-invert-birdtracks)
   ;; Fix funny commenting behavior
@@ -380,7 +381,6 @@ With a prefix arg, kill the process first, to get a fresh start."
         (set-buffer buff-was)
         (inferior-haskell-load-file nil)))))
 
-
 (defun surround-punct (start end n)
   "Use strings START and END to bracket N words.  Starts at N-th most
 recent s-expression, which is convenient for use inside a word or at the
@@ -447,7 +447,8 @@ start of comment.  TODO: handle {- ... -} comments."
 
 ;;; Skeleton support for autoinsert when making a new Haskell file.  TODO:
 ;;; simplify.
-(require 'haskell-skel)
+(require 'haskell-skel)  ;; finding something else. ???
+
 (setq jao-copyright-file "~/Misc/copyright.txt")
 (setq jao-company-name "Conal Elliott")
 
@@ -665,7 +666,8 @@ consisting of repeated '-'. For an <h2>."
   (local-set-key "\C-c\C-l" 'inferior-haskell-load-file)
   (local-set-key "\C-c\C-r" 'inferior-haskell-reload-file)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
-  (modify-syntax-entry ?\* "$")  ; self-matching, for emphasis/italics
+  ;; Restore the following when I get `...` to switch modes.
+  ;; (modify-syntax-entry ?\* "$")  ; self-matching, for emphasis/italics
 )
 
 ;;; Swiped & modified from twee-add-item.
