@@ -332,6 +332,7 @@ being punctuation"
   (local-unset-key "\C-c\C-c")  ;; was tex-compile
   ;; tex-bibtex-file doesn't find the parent doc.
   (local-unset-key "\C-c\C-I")
+  (auto-fill-mode 0)
   )
 
 
