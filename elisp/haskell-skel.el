@@ -64,11 +64,18 @@
 (defvar jao-maintainer "<email address>")
 (defvar jao-license "<license>") ;; "none" means no license line
 
-(defun haskell-skel-tabula ()
-  "Set up Haskell auto-insert for Tabula work."
+;; (defun haskell-skel-tabula ()
+;;   "Set up Haskell auto-insert for Tabula work."
+;;   (interactive)
+;;   (setq jao-copyright-holder "Tabula, Inc.")
+;;   (setq jao-maintainer "conal@conal.net") ;; "conal@tabula.com"
+;;   (setq jao-license "none"))
+
+(defun haskell-skel-awake ()
+  "Set up Haskell auto-insert for Awake work."
   (interactive)
-  (setq jao-copyright-holder "Tabula, Inc.")
-  (setq jao-maintainer "conal@conal.net") ;; "conal@tabula.com"
+  (setq jao-copyright-holder "Awake Networks.")
+  (setq jao-maintainer "conal@awakenetworks.com")
   (setq jao-license "none"))
 
 (defun haskell-skel-personal ()
@@ -78,7 +85,9 @@
   (setq jao-maintainer "conal@conal.net")
   (setq jao-license "BSD3"))
 
-(haskell-skel-tabula) ;; for now
+(haskell-skel-personal)
+;; (haskell-skel-tabula)
+;; (haskell-skel-awake)
 
 ;;; Skeletons
 (define-skeleton jao-skel-haskell-file
