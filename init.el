@@ -14,6 +14,7 @@
         "~/.emacs.d/elisp"
         "~/.emacs.d/elisp/erc-5.2"
         "~/.emacs.d/elisp/erc-5.2-extras"
+        "~/.emacs.d/elisp/org-8.2.10/lisp"
         ;;; "~/gnu/site-lisp"
         ;; "~/gnu/haskell-mode-2.8.0"
         ;; "~/darcs-repos/haskellmode-emacs/"
@@ -160,12 +161,17 @@
   (interactive)
   (a-journal (concat tabula-dir "/Journal")))
 
+(defun awake-journal ()
+  "gitit (wiki) page for Awake journal. See `journal'."
+  (interactive)
+  (a-journal (concat "~/Awake/Journal")))
+
 ;; (defun personal-journal ()
 ;;   "gitit (wiki) page for personal journal. See `journal'."
 ;;   (interactive)
 ;;   (a-journal "~/Journal/wiki"))
 
-(defalias 'journal 'tabula-journal)  
+(defalias 'journal 'awake-journal)  
 
 (defun a-journal (dir)
   "gitit (wiki) journal page.  A directory for each year, and a page for each week, named for the date of the Sunday of that week."
@@ -186,7 +192,7 @@
        ;; Header info.  The space before html comments avoid confusion with literate Haskell.
        ;; Using %e causes the day # to be blank-padded instead of zero-padded.
        ;; Or use %-e or %-d for no padding.
-       (insert (format-time-string "---\ntitle: Notes for week of %B %e\n...\n\n" sunday))
+       (insert (format-time-string "---\ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
        (insert " <!-- References -->\n\n <!-- -->\n"))
      ;; Insert entry header if not already present
      (let ((was-point (point)))
@@ -314,11 +320,12 @@ Stash the result to the kill ring for pasting into a disqus comment box."
               ;;("\\.bib$"           . bibtex-mode)
               ;;("Makefile"          . makefile-mode)
                 ("\\.bmp$"           . hexl-mode)
+                ("\\.hss$"           . haskell-mode) ; HERMIT script files
 ;;                 ("\\.hs$"            . haskell-mode)
 ;;                 ("\\.hsc$"           . haskell-mode)
 ;;                 ("\\.hi$"            . haskell-mode)
              ;; ("\\.lhs$"           . literate-haskell-mode)
-                ("\\.lhs$"           . markdown-mode) ;; with mmm. happens in skel
+                ("\\.lhs$"           . markdown-mode) ; with mmm. happens in skel
              ;; ("\\.lhs$"           . twee-mode)
              ;; ("\\.lhs$"           . latex-mode)              ; rely on mmm-mode
 ;;                 ("\\.ly$"            . literate-haskell-mode)
@@ -332,9 +339,8 @@ Stash the result to the kill ring for pasting into a disqus comment box."
                 ("\\.txt$"           . indented-text-mode)
                 ("\\.md$"            . markdown-mode)
                 ("\\.markdown$"      . markdown-mode)
-                ;; omit markdown until paragraph fill works
-;;                 ("\\.md\\(ml\\)?$"   . markdown-mode)
-;;                 ("README\\|CHANGES\\|TODO$"   . markdown-mode)
+                ("\\.pcap$"          . hexl-mode)
+                ("\\.pcapng$"        . hexl-mode)
                 )
               auto-mode-alist))
 
@@ -538,10 +544,6 @@ doesn't error out when the process is not running."
 
 (put 'eval-expression 'disabled nil)
 
-
-
-
-
 ;;; Load a partial-completion mechanism, which makes minibuffer completion
 ;;; search multiple words instead of just prefixes; for example, the command
 ;;; `M-x byte-compile-and-load-file RET' can be abbreviated as `M-x b-c-a RET'
@@ -556,6 +558,13 @@ doesn't error out when the process is not running."
 ;; I like case-folding completion
 (setq completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
+
+;; A Mac OS system file
+(add-to-list 'completion-ignored-extensions ".DS_Store")
+(add-to-list 'completion-ignored-extensions "._.DS_Store")
+
+(push ".DS_Store" PC-ignored-extensions)
+(push "._.DS_Store" PC-ignored-extensions)
 
 (defun zap-matching ()
   "Zap away the current opening delimiter and its matching closer."
@@ -858,6 +867,10 @@ logs, putting in a Last Modified in a new file, etc."
 ;;   ;; (elim-re "_[a-z0-9]+\\>")
 ;;   (haskell-mode))
 
+(defun core-clean ()
+  "Clean up ghc core output."
+  (interactive)
+  (replace-regexp "[A-Z][A-za-z]+\\." "" t (region-beginning) (region-end)))
 
 ;; (defun irc-clean-log ()
 ;;   "Clean up an IRC log, removing join & leave messages etc"
@@ -973,8 +986,8 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
  '(mmm-mode-ext-classes-alist (quote ((twee-mode nil twee) (markdown-mode nil markdown) (latex-mode nil literate-haskell-lhs2TeX))) nil (mmm-mode))
  '(mmm-submode-decoration-level 2)
- '(p4-follow-symlinks t)
- '(p4-user-email "conal@tabula.com")
+;;  '(p4-follow-symlinks t)
+;;  '(p4-user-email "conal@tabula.com")
  '(parens-require-spaces nil)
  '(partial-completion-mode t nil (complete))
  '(ps-font-size (quote (8 . 10)))
@@ -1056,9 +1069,12 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
 ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/git")
 ;;; already there
 ;;; (add-to-list 'vc-handled-backends 'GIT)
-(autoload 'git-status "git-status" "Entry point into git-status mode." t)
+
+;; (autoload 'git-status "git-status" "Entry point into git-status mode." t)
+(require 'git-status)  ; always
 (autoload 'git-blame-mode "git-blame"
   "Minor mode for incremental blame for Git." t)
+
 
 ;keybindindings for git
 (global-set-key [(meta super s)] 'git-status)
@@ -1082,8 +1098,6 @@ Spotlight binding from command-space to option-space."
 (when (eq system-type 'darwin)
   (swap-option-command))
 
-(push ".DS_Store" PC-ignored-extensions)
-
 (defun blogify-region (from to)
   "Run blogify on the contents of the region bounded by FROM and TO and save the result in the inter-program copy buffer."
   (interactive "r")
@@ -1102,16 +1116,28 @@ Spotlight binding from command-space to option-space."
 (defun blogify-foo ()
   (interactive)
   (blogify-buffer)
-  (save-window-excursion
-    (switch-to-buffer "*Shell Command Output*")
-    (beginning-of-buffer)
-    (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
-    ;; Next one causes line centering. How?
-    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.3.1/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
-    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.3.1/data/static/css/hk-pyg.css\" type=\"text/css\" media=\"screen\" />\n")
-    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Tabula/Journal/wikidata/static/css/custom.css\" type=\"text/css\" media=\"screen\" />\n")
-    (write-region (point-min) (point-max) "foo.html")))
-    
+  (let ((title (save-excursion
+                 (beginning-of-buffer)
+                 (if (search-forward "\ntitle: " nil t)
+                     (buffer-substring (match-end 0) (progn (end-of-line) (point)))
+                   "No title"))))
+    (save-window-excursion
+      (switch-to-buffer "*Shell Command Output*")
+      (beginning-of-buffer)
+      (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
+      ;; Next one causes line centering. How?
+      ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.5/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
+      (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Tabula/Journal/wikidata/static/css/blogify-screen.css\" type=\"text/css\"/>\n")
+      (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.5/data/static/css/hk-pyg.css\" type=\"text/css\"/>\n")
+      (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Tabula/Journal/wikidata/static/css/custom.css\" type=\"text/css\"/>\n")
+      ;; Crazy hack. I've been unable to get consistent top padding between gitit and blogify-foo.
+      (insert "<style>blockquote { padding-top: 0em; }</style>")
+      (insert "<title>" title "</title>\n")
+      (insert "<body style=\"font-size:85%\">\n")
+      (end-of-buffer)
+      (insert "\n</body>\n")
+      (write-region (point-min) (point-max) "foo.html"))))
+
 ;;; I keep running afoul of an oddity/bug in longlines-mode.
 ;;; Some of my long lines get hard breaks on saving.
 ;;; Here's a temporary hack to help me cope while I'm investigating.
@@ -1160,11 +1186,11 @@ I'd rather fix the real problem than keep patching it up."
 (when (eq system-type 'gnu/linux)
   (global-set-key [?\s- ] 'just-one-space))
 
-;;; Perforce
-(require 'p4)
-;;; I have DIFF=vimdiff, which leads p4-submit to hang when
-;;; p4-check-empty-diff is true.
-(setenv "DIFF" "diff")
+;; ;;; Perforce
+;; (require 'p4)
+;; ;;; I have DIFF=vimdiff, which leads p4-submit to hang when
+;; ;;; p4-check-empty-diff is true.
+;; (setenv "DIFF" "diff")
 
 ;;; Notification and erc
 ;;; See http://www.emacswiki.org/emacs/ErcGrowl
@@ -1211,16 +1237,16 @@ I'd rather fix the real problem than keep patching it up."
 
 ;; /swp4/t4/hwarchABAX2/tdh/Utils/
 
-(defun no-p4 ()
-  (interactive)
-  (setq find-file-hook (remove 'p4-find-file-hook find-file-hook)))
+;; (defun no-p4 ()
+;;   (interactive)
+;;   (setq find-file-hook (remove 'p4-find-file-hook find-file-hook)))
 
-(defun yes-p4 ()
-  (interactive)
-  (push 'p4-find-file-hook find-file-hook))
+;; (defun yes-p4 ()
+;;   (interactive)
+;;   (push 'p4-find-file-hook find-file-hook))
 
-;; 2012-05-16: the p4 process is getting stuck when I'm disconnected. I don't know what's changed.
-(no-p4)
+;; ;; 2012-05-16: the p4 process is getting stuck when I'm disconnected. I don't know what's changed.
+;; (no-p4)
 
 (require 'linum) ; linum-mode
 
@@ -1232,5 +1258,39 @@ I'd rather fix the real problem than keep patching it up."
   (kmacro-exec-ring-item (quote ("\355mv \"\" \242\202\213 " 0 "%d")) arg))
 
 (setq debug-on-error nil)
+
+(let ((tags-add-tables t))
+  (mapc #'visit-tags-table
+        '(
+          ;; find-tags favors later entries in this list
+          "~/git-repos/ghc-2016-04-05/compiler/TAGS"
+          "~/Haskell/circat/src/TAGS"
+          "~/Haskell/shaped-types/src/TAGS"
+          "~/Haskell/reification-rules/src/TAGS"
+          )))
+
+;;           "~/git-repos/kure/TAGS"
+;;           "~/git-repos/ku-latest/hermit/src/TAGS"
+;;           "~/Haskell/hermit-extras/src/TAGS"
+
+;;           "~/Haskell/monomorph/src/TAGS"
+;;           "~/Haskell/lambda-ccc/src/TAGS"
+
+;;; I keep hitting this on accidentally (ns-print-buffer), when
+;;; I've been interacting with terminal programs.
+(global-unset-key [?\s-p])
+
+(global-set-key "\C-cv" 'view-mode)
+
+;; (require 'package)
+;; (add-to-list
+;;   'package-archives
+;;   '("melpa" . "http://melpa.org/packages/") t)
+;; (package-initialize)
+;; (package-refresh-contents)
+
+;; ;; Install Intero
+;; (package-install 'intero)
+;; (add-hook 'haskell-mode-hook 'intero-mode)
 
 ;;; End of customizations
