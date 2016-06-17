@@ -58,7 +58,9 @@
               ;; markdown-delimited-code-block
               ;; markdown-code-block ; gets confused with text in lists
               literate-haskell-lhs2TeX-bird-code  ; experimental
-              literate-haskell-lhs2TeX-code
+
+              ;; literate-haskell-lhs2TeX-code   -- treats all code as comments
+
               ;; markdown-haskell-inline-double
               ;; haskell coloring spills into outer context
               ;; markdown-haskell-inline
