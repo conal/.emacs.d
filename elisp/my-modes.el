@@ -3,7 +3,7 @@
 (require 'my-text)
 (require 'my-tex)
 (require 'twee)
-(require 'hs-lint)
+;; (require 'hs-lint)
 (require 'find-file)  ;; for cc-other-file-alist
 (require 'mmm-mode)
 
