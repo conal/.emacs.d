@@ -295,8 +295,9 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (yank)
   )
 
-(require 'javascript-mode)
-(require 'css-mode)
+;; (require 'javascript-mode)
+;; (require 'css-mode)
+
 ;; (require 'hoogle)
 
 ;;; My own stuff
