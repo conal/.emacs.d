@@ -299,7 +299,7 @@ prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
 (global-set-key "\C-c_" 'underscore-sexp)
 (global-set-key "\C-c\"" 'quotify-sexp)
 (global-set-key [?\C-\"] 'quotify-sexp) ; "
-(global-set-key "\C-c\`" 'backtickify-sexp)
+;; (global-set-key "\C-c\`" 'backtickify-sexp)
 (global-set-key "\C-c\|" 'pipify-sexp)
 (global-set-key [?\C-|]  'pipify-sexp)
 (global-set-key [?\C-\(] 'parenthesize-sexp)

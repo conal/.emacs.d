@@ -191,13 +191,12 @@
 ;;; My commands for starting up Hugs on various programs.
 ;;; Superceded by haskell-hugs.el
 ;;; (load "haskell")
+;; (require 'haskell-mode)
 
 ;; (autoload 'haskell-mode "haskell-mode"
 ;;    "Major mode for editing Haskell scripts." t)
 ;; (autoload 'literate-haskell-mode "haskell-mode"
 ;;    "Major mode for editing literate Haskell scripts." t)
-
-(add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
 
 ;; (setq haskell-hugs-program-name
 ;;       "c:/Program Files/Hugs98/hugs.exe"
@@ -221,7 +220,30 @@
   (forward-line -2)
   (end-of-line))
 
+(add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
+
 (defun my-haskell-mode-hook ()
+  ;; (local-set-key (kbd "C-c C-c") 'haskell-compile)  
+  (company-mode)
+  (set (make-local-variable 'company-backends)
+       (append '((company-capf company-dabbrev-code))
+               company-backends))
+  ;; ?\' gets made a "quote" character, but I more often use it as a name
+  ;; constituent.
+  (modify-syntax-entry ?\' "w")
+  (define-abbrev-table 'haskell-mode-abbrev-table ())
+  (setq local-abbrev-table haskell-mode-abbrev-table)
+  (abbrev-mode 1)                       ; Use abbreviations
+  )
+
+(add-hook 'interactive-haskell-mode-hook 'my-interactive-haskell-mode-hook)
+
+(defun my-interactive-haskell-mode-hook ()
+  ;; (local-set-key (kbd "M-.") 'haskell-mode-goto-loc)
+  (local-set-key (kbd "C-c C-t") 'haskell-mode-show-type-at)
+  )
+
+(defun my-old-haskell-mode-hook ()
   ;; (longlines-mode)
   ;; (turn-on-haskell-font-lock)
   ;; (turn-on-haskell-decl-scan)
@@ -511,18 +533,6 @@ start of comment.  TODO: handle {- ... -} comments."
   (abbrev-mode 1)
   (set (make-local-variable 'comment-start) "--"))
 
-;; TODO: try other markdown modes
-
-(define-derived-mode markdown-mode text-mode "Markdown"
-  "Major mode for editing Markdown files."
-;;   (longlines-mode t)
-;;   ;; (mmm-mode t)  ;; necessary??
-;;   (local-set-key [?\C-'] 'markdown-inline-code)
-;;   ;; (local-set-key [?\C-_] 'markdown-emphasize)
-;;   (local-set-key "\C-cc" 'markdown-insert-code-block)
-;;   (local-set-key "\C-ci" 'twee-add-item)
-  )
-
 (defun md-add-blockquote (arg)
   "Add a blockquote, either as a simple \" >\" (if ARG present) or as html (if not)"
   (interactive "P")
@@ -630,7 +640,7 @@ consisting of repeated '-'. For an <h2>."
   (markdown-add-header "-")
 )
 
-(defun my-markdown-mode-hook ()
+(defun my-old-markdown-mode-hook ()
   (setq paragraph-start "\\(\\+  \\)\\|$")
   ;; (longlines-mode t)
   (visual-line-mode t)
@@ -674,6 +684,33 @@ consisting of repeated '-'. For an <h2>."
 ;;; TODO: refactor/generalize 
 
 ;; (defun markdown-add-item () ... )
+
+;; TODO: try other markdown modes
+
+;; (define-derived-mode markdown-mode text-mode "Markdown"
+;;   "Major mode for editing Markdown files."
+;; ;;   (longlines-mode t)
+;; ;;   ;; (mmm-mode t)  ;; necessary??
+;; ;;   (local-set-key [?\C-'] 'markdown-inline-code)
+;; ;;   ;; (local-set-key [?\C-_] 'markdown-emphasize)
+;; ;;   (local-set-key "\C-cc" 'markdown-insert-code-block)
+;; ;;   (local-set-key "\C-ci" 'twee-add-item)
+;;   )
+
+(defun my-markdown-mode-hook ()
+  (visual-line-mode t)
+  (auto-fill-mode 0)
+  (local-set-key [?\C-'] 'markdown-inline-code)
+  (local-set-key "\C-ci" 'add-starred-item)
+  (local-set-key "\C-cq" 'md-add-blockquote)
+  (local-set-key [?\C-$] 'surround-dollars)
+  (setq markdown-enable-math t)
+  (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
+  (local-unset-key "\C-c\C-j")
+  (setq indent-line-function 'indent-relative)
+  (setq tab-always-indent t)
+  ;; (setq require-final-newline nil)
+)
 
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
 
@@ -819,7 +856,7 @@ beginning of line."
   (setq indent-tabs-mode nil)
   (abbrev-mode t))
 
-(add-hook 'haskell-cabal-mode-hook 'my-haskell-cabal-mode-hook)
+;; (add-hook 'haskell-cabal-mode-hook 'my-haskell-cabal-mode-hook)
 
 (defun my-bibtex-mode-hook ()
   (setq indent-tabs-mode nil)

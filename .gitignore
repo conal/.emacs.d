@@ -17,3 +17,5 @@ TAGS
 *.elc
 no-longlines
 abbrev_defs
+
+elpa/

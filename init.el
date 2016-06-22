@@ -1,6 +1,14 @@
+
 ;;; -*- Emacs-Lisp -*-
 
 (setq debug-on-error t)
+
+(require 'package)
+(add-to-list
+  'package-archives
+  '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+(package-refresh-contents)
 
 ;;; Common Lisp conveniences
 (load-library "cl")
@@ -12,14 +20,11 @@
 (setq my-extra-load-path
       '(;;;"~/gnu"
         "~/.emacs.d/elisp"
-        "~/.emacs.d/elisp/erc-5.2"
-        "~/.emacs.d/elisp/erc-5.2-extras"
-        "~/.emacs.d/elisp/org-8.2.10/lisp"
-        ;;; "~/gnu/site-lisp"
-        ;; "~/gnu/haskell-mode-2.8.0"
-        ;; "~/darcs-repos/haskellmode-emacs/"
-        "~/git-repos/haskell-mode"
-        "~/git-repos/ghc-mod/elisp"
+;;         "~/.emacs.d/elisp/erc-5.2"
+;;         "~/.emacs.d/elisp/erc-5.2-extras"
+;;         "~/.emacs.d/elisp/org-8.2.10/lisp"
+;;         "~/git-repos/haskell-mode"
+;;         "~/git-repos/ghc-mod/elisp"
         "~/git-repos/git-emacs"
         "~/git-repos/mmm-mode"
         ;; "~/gnu/ispell4"
@@ -31,6 +36,25 @@
 
 (setq inhibit-startup-message t)
 
+(defun swap-option-command ()
+  "Swap option & command keys.  I also changed the binding of
+screen-shots in the OS from command-# and command-$ to
+command-option-3 and command-option-4, with control added for the
+clipboard versions.  In other words, I replaced shift with
+option, so as to avoid a clash with.  I also changed the
+Spotlight binding from command-space to option-space."
+  (interactive)
+  (let ((option-was mac-option-modifier))
+    (setq mac-option-modifier mac-command-modifier)
+    (setq mac-command-modifier option-was)))
+
+;;; default
+;; (setq mac-option-modifier 'meta)
+;; (setq mac-command-modifier 'super)
+
+(when (eq system-type 'darwin)
+  (swap-option-command))
+
 (defconst tabula-dir
   (expand-file-name
    (if (eq system-type 'gnu/linux) "~" "~/Tabula"))
@@ -38,9 +62,8 @@
 
 
 (put 'narrow-to-region 'disabled nil)
-(put 'indent-region 'disabled t)
 (put 'minibuffer-complete-and-exit 'disabled nil)
-(put 'indent-region 'disabled nil)
+;; (put 'indent-region 'disabled nil)
 
 
 ; Backups.
@@ -248,7 +271,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-window-excursion
     (shell-command-on-region start end "pandoc --smart --no-wrap")
     (switch-to-buffer "*Shell Command Output*")
-    (flet ((rr (from to) 
+    (cl-flet ((rr (from to) 
                (replace-regexp from to nil (point-min) (point-max))))
       (rr "</p><p>" "</p><br><p>")
       (rr "<blockquote>\n<p>" "<blockquote>")
@@ -272,30 +295,23 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (yank)
   )
 
-(defun downloads ()
-  "Open downloads file and prepare to add a new item."
-  (interactive)
-  (find-file (expand-file-name "~/Journal/download.md"))
-  (goto-char (point-min))
-  (search-forward "\nOne-time:\n\n" nil t)
-  (open-line 1)
-  (insert "* ")
-  ;; (yank)
-  )
-
 (require 'javascript-mode)
 (require 'css-mode)
 ;; (require 'hoogle)
 
 ;;; My own stuff
 
-(load "~/darcs-repos/haskellmode-emacs/haskell-site-file")
+;; (load "~/darcs-repos/haskellmode-emacs/haskell-site-file")
 
 (load "my-abbrev")
 (load "my-text")
 (load "my-tex")
 (load "my-modes")
 (load "my-mmm")
+
+(require 'haskell-interactive-mode)
+(require 'haskell-process)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
 
 ;;(load "my-shell")
@@ -550,21 +566,23 @@ doesn't error out when the process is not running."
 ;;; because there are no other commands whose first three words begin with
 ;;; the letters `b', `c', and `a' respectively.
 
-;;(load-library "complete")
-(partial-completion-mode t)
-;;(setq partial-completion-mode nil)
-;;(setq PC-meta-flag t)        ; meta not necessary
+;;; partial-completion mode is obsolete in emacs 24.
+
+;; ;;(load-library "complete")
+;; (partial-completion-mode t)
+;; ;;(setq partial-completion-mode nil)
+;; ;;(setq PC-meta-flag t)        ; meta not necessary
 
 ;; I like case-folding completion
 (setq completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
 
+;; (push ".DS_Store" PC-ignored-extensions)
+;; (push "._.DS_Store" PC-ignored-extensions)
+
 ;; A Mac OS system file
 (add-to-list 'completion-ignored-extensions ".DS_Store")
 (add-to-list 'completion-ignored-extensions "._.DS_Store")
-
-(push ".DS_Store" PC-ignored-extensions)
-(push "._.DS_Store" PC-ignored-extensions)
 
 (defun zap-matching ()
   "Zap away the current opening delimiter and its matching closer."
@@ -941,10 +959,10 @@ logs, putting in a Last Modified in a new file, etc."
 ;;         48))
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(PC-meta-flag nil)
  '(auto-save-interval 30)
  '(backup-by-copying t)
@@ -953,15 +971,31 @@ logs, putting in a Last Modified in a new file, etc."
  '(column-number-mode t)
  '(comment-style (quote plain))
  '(dabbrev-case-fold-search nil)
- '(default-frame-alist-qqq (quote ((height . 37) (width . 126) (font . "-outline-Courier
-New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (menu-bar-lines . 1))))
+ '(default-frame-alist-qqq
+    (quote
+     ((height . 37)
+      (width . 126)
+      (font . "-outline-Courier
+New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
+      (tool-bar-lines . 0)
+      (menu-bar-lines . 1))))
  '(default-input-method "TeX")
  '(display-buffer-reuse-frames t)
- '(erc-autojoin-channels-alist (quote (("freenode.net" "#haskell-blah" "#haskell-iphone" "#haskell-ops" "#haskell-in-depth" "#ghc" "#haskell") (".*\\.freenode\\.net" "#haskell" "#ghc" "#haskell-in-depth" "#haskell-ops" "#haskell-blah" "#haskell-iphone"))))
+ '(erc-autojoin-channels-alist
+   (quote
+    (("freenode.net" "#haskell-blah" "#haskell-iphone" "#haskell-ops" "#haskell-in-depth" "#ghc" "#haskell")
+     (".*\\.freenode\\.net" "#haskell" "#ghc" "#haskell-in-depth" "#haskell-ops" "#haskell-blah" "#haskell-iphone"))))
  '(erc-away-nickname nil)
  '(erc-fill-column 100)
  '(erc-fill-mode nil)
- '(erc-mode-hook (quote (erc-munge-invisibility-spec pcomplete-erc-setup erc-button-add-keys (lambda nil (setq imenu-create-index-function (quote erc-create-imenu-index))) (lambda nil (abbrev-mode 1)))))
+ '(erc-mode-hook
+   (quote
+    (erc-munge-invisibility-spec pcomplete-erc-setup erc-button-add-keys
+                                 (lambda nil
+                                   (setq imenu-create-index-function
+                                         (quote erc-create-imenu-index)))
+                                 (lambda nil
+                                   (abbrev-mode 1)))))
  '(erc-nick "conal")
  '(erc-nick-uniquifier "+")
  '(erc-prompt-for-password t)
@@ -970,10 +1004,13 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
  '(eval-expression-print-length 200)
  '(eval-expression-print-level 12)
  '(flymake-no-changes-timeout 0.5)
+ '(fringe-mode (quote (1 . 1)) nil (fringe))
  '(git-branch-buffer-closes-after-action nil)
  '(git-working-dir-change-behaviour (quote git-refresh-all-saved))
  '(haskell-hoogle-command nil)
  '(haskell-indent-offset 2)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-tags-on-save t)
  '(inferior-haskell-wait-and-jump t)
  '(ispell-extra-args (quote ("--repl=/Users/conal/.aspell.en.prepl")))
  '(ispell-program-name "aspell")
@@ -984,17 +1021,19 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
  '(markdown-command "pandoc --toc --smart --standalone --to html")
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
- '(mmm-mode-ext-classes-alist (quote ((twee-mode nil twee) (markdown-mode nil markdown) (latex-mode nil literate-haskell-lhs2TeX))) nil (mmm-mode))
+ '(mmm-mode-ext-classes-alist
+   (quote
+    ((twee-mode nil twee)
+     (markdown-mode nil markdown)
+     (latex-mode nil literate-haskell-lhs2TeX))) nil (mmm-mode))
  '(mmm-submode-decoration-level 2)
-;;  '(p4-follow-symlinks t)
-;;  '(p4-user-email "conal@tabula.com")
  '(parens-require-spaces nil)
- '(partial-completion-mode t nil (complete))
  '(ps-font-size (quote (8 . 10)))
  '(scroll-conservatively 1000)
  '(sentence-end-double-space nil)
  '(tags-case-fold-search nil)
  '(tex-shell-file-name "bash")
+ '(tool-bar-mode nil)
  '(user-mail-address "conal@conal.net")
  '(vc-make-backup-files t))
 
@@ -1012,10 +1051,10 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
 (put 'upcase-region   'disabled nil)
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "tomato4"))))
  '(mmm-default-submode-face ((t (:background "lemon chiffon")))))
 
@@ -1078,25 +1117,6 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1") (tool-bar-lines . 0) (m
 
 ;keybindindings for git
 (global-set-key [(meta super s)] 'git-status)
-
-(defun swap-option-command ()
-  "Swap option & command keys.  I also changed the binding of
-screen-shots in the OS from command-# and command-$ to
-command-option-3 and command-option-4, with control added for the
-clipboard versions.  In other words, I replaced shift with
-option, so as to avoid a clash with.  I also changed the
-Spotlight binding from command-space to option-space."
-  (interactive)
-  (let ((option-was mac-option-modifier))
-    (setq mac-option-modifier mac-command-modifier)
-    (setq mac-command-modifier option-was)))
-
-;;; default
-;; (setq mac-option-modifier 'meta)
-;; (setq mac-command-modifier 'super)
-
-(when (eq system-type 'darwin)
-  (swap-option-command))
 
 (defun blogify-region (from to)
   "Run blogify on the contents of the region bounded by FROM and TO and save the result in the inter-program copy buffer."
@@ -1172,8 +1192,8 @@ I'd rather fix the real problem than keep patching it up."
   (global-set-key (vector (list 'control mouse-wheel-up-event))
                   'zoom-out))
 
-(global-set-key [M-up]   'zoom-in)
-(global-set-key [M-down] 'zoom-out)
+(global-set-key [s-up]   'zoom-in)
+(global-set-key [s-down] 'zoom-out)
 
 ;; TODO: unify zoom bindings
 
@@ -1200,7 +1220,7 @@ I'd rather fix the real problem than keep patching it up."
 (defun growl (title message)
   "Shows a message through the growl notification system using
  `growlnotify-command` as the program."
-  (flet ((encfn (s) (encode-coding-string s (keyboard-coding-system))) )
+  (cl-flet ((encfn (s) (encode-coding-string s (keyboard-coding-system))) )
     (let* ((process (start-process "growlnotify" nil
                                    growlnotify-command
                                    (encfn title)
@@ -1226,8 +1246,10 @@ I'd rather fix the real problem than keep patching it up."
   "Big font in a big window"
   (interactive)
   (maximize-frame)
-  (while (> (frame-width) 150)
-    (enlarge-font 1)))
+  (while (> (frame-width) 120)
+    (enlarge-font 1)
+    (maximize-frame)
+    ))
 
 (big)
 
@@ -1250,7 +1272,7 @@ I'd rather fix the real problem than keep patching it up."
 
 (require 'linum) ; linum-mode
 
-(journal)
+;; (journal)
 
 (defun amazon-track-rename (&optional arg)
   "Keyboard macro."
@@ -1259,20 +1281,19 @@ I'd rather fix the real problem than keep patching it up."
 
 (setq debug-on-error nil)
 
-(let ((tags-add-tables t))
-  (mapc #'visit-tags-table
-        '(
-          ;; find-tags favors later entries in this list
-          "~/git-repos/ghc-2016-04-05/compiler/TAGS"
-          "~/Haskell/circat/src/TAGS"
-          "~/Haskell/shaped-types/src/TAGS"
-          "~/Haskell/reification-rules/src/TAGS"
-          )))
+;; (let ((tags-add-tables t))
+;;   (mapc #'visit-tags-table
+;;         '(
+;;           ;; find-tags favors later entries in this list
+;;           "~/git-repos/ghc-2016-04-05/compiler/TAGS"
+;;           "~/Haskell/circat/src/TAGS"
+;;           "~/Haskell/shaped-types/src/TAGS"
+;;           "~/Haskell/reification-rules/src/TAGS"
+;;           )))
 
 ;;           "~/git-repos/kure/TAGS"
 ;;           "~/git-repos/ku-latest/hermit/src/TAGS"
 ;;           "~/Haskell/hermit-extras/src/TAGS"
-
 ;;           "~/Haskell/monomorph/src/TAGS"
 ;;           "~/Haskell/lambda-ccc/src/TAGS"
 
@@ -1281,13 +1302,6 @@ I'd rather fix the real problem than keep patching it up."
 (global-unset-key [?\s-p])
 
 (global-set-key "\C-cv" 'view-mode)
-
-;; (require 'package)
-;; (add-to-list
-;;   'package-archives
-;;   '("melpa" . "http://melpa.org/packages/") t)
-;; (package-initialize)
-;; (package-refresh-contents)
 
 ;; ;; Install Intero
 ;; (package-install 'intero)
