@@ -1252,7 +1252,13 @@ I'd rather fix the real problem than keep patching it up."
     (maximize-frame)
     ))
 
-(big)
+;;; Problematic in Mac El Capitan with a second monitor?
+;;; maximize-frame makes a frame as wide as the second monitor.
+;; (big)
+
+;; ;;; http://emacs.stackexchange.com/questions/2999/how-to-maximize-my-emacs-frame-on-start-up
+;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 
 ;; ;;; For now
 ;; (cd (concat tabula-dir "/swp4/prarch/arch/ABAX2/tdh/"))
@@ -1307,5 +1313,9 @@ I'd rather fix the real problem than keep patching it up."
 ;; ;; Install Intero
 ;; (package-install 'intero)
 ;; (add-hook 'haskell-mode-hook 'intero-mode)
+
+;;; Since Mac OS 10.11 (El Capitan), I don't know how to get interactive app
+;;; launching to read my environment variables.
+(pushnew "/usr/local/bin" exec-path)
 
 ;;; End of customizations
