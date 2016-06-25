@@ -7,6 +7,11 @@
 (require 'find-file)  ;; for cc-other-file-alist
 (require 'mmm-mode)
 
+(package-install 'markdown-mode)
+(package-install 'haskell-mode)
+
+(package-install 'intero)
+(add-hook 'haskell-mode-hook 'intero-mode)
 
 ;; Was "^[^#$%>\n]*[#$%>] *", but the # shows up in infinite number
 ;; display from C.
@@ -467,19 +472,21 @@ start of comment.  TODO: handle {- ... -} comments."
      "'?\\([A-Z][a-zA-Z]*\\.\\)+\\| \\[\\(Occ\\|OS\\|LclId\\)[^]]+\\]"
      "" nil start end)))
 
-;;; Skeleton support for autoinsert when making a new Haskell file.  TODO:
-;;; simplify.
-(require 'haskell-skel)  ;; finding something else. ???
+;; ;;; Skeleton support for autoinsert when making a new Haskell file.  TODO:
+;; ;;; simplify.
+;; (require 'haskell-skel)  ;; finding something else. ???
 
-(setq jao-copyright-file "~/Misc/copyright.txt")
-(setq jao-company-name "Conal Elliott")
+;; (setq jao-copyright-file "~/Misc/copyright.txt")
+;; (setq jao-company-name "Conal Elliott")
 
-;;; I have key bindings to switch between literate haskell mode and tex
-;;; mode.  when that happens, I lose the darcs-find-file-hook, which turns
-;;; on darcs-mode if we're in a darcs directory.  I'd really rather have
-;;; one mode that shows LaTeX and literate Haskell nicely.
-(add-hook 'haskell-mode-hook 'darcs-find-file-hook)
-(add-hook 'tex-mode-hook     'darcs-find-file-hook)
+(add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
+
+;; ;;; I have key bindings to switch between literate haskell mode and tex
+;; ;;; mode.  when that happens, I lose the darcs-find-file-hook, which turns
+;; ;;; on darcs-mode if we're in a darcs directory.  I'd really rather have
+;; ;;; one mode that shows LaTeX and literate Haskell nicely.
+;; (add-hook 'haskell-mode-hook 'darcs-find-file-hook)
+;; (add-hook 'tex-mode-hook     'darcs-find-file-hook)
 
 
 (defun my-html-mode-hook ()
