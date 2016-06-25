@@ -1,4 +1,3 @@
-
 ;;; -*- Emacs-Lisp -*-
 
 (setq debug-on-error t)
@@ -9,6 +8,9 @@
   '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 (package-refresh-contents)
+
+(package-install 'company)
+(package-install 'zoom-frm)
 
 ;;; Common Lisp conveniences
 (load-library "cl")
@@ -1310,12 +1312,18 @@ I'd rather fix the real problem than keep patching it up."
 
 (global-set-key "\C-cv" 'view-mode)
 
-;; ;; Install Intero
-;; (package-install 'intero)
-;; (add-hook 'haskell-mode-hook 'intero-mode)
+(setq my-extra-path
+      '("/usr/local/bin" "~/bin" "~/.cabal/bin"))
 
 ;;; Since Mac OS 10.11 (El Capitan), I don't know how to get interactive app
 ;;; launching to read my environment variables.
-(pushnew "/usr/local/bin" exec-path)
+(dolist (str my-extra-path)
+  (pushnew (expand-file-name str) exec-path :test #'string-equal)
+  (setenv "PATH" (concat str ":" (getenv "PATH"))))
+
+;; (pushnew "/usr/local/bin" exec-path)
+;; (pushnew (expand-file-name "~/bin") exec-path :test #'string-equal)
+
+
 
 ;;; End of customizations
