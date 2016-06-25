@@ -1,7 +1,11 @@
-;;-*-coding: emacs-mule;-*-
+;;-*-coding: utf-8;-*-
 (define-abbrev-table 'Buffer-menu-mode-abbrev-table '())
 
 (define-abbrev-table 'Custom-mode-abbrev-table '())
+
+(define-abbrev-table 'Info-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'Man-mode-abbrev-table '())
 
 (define-abbrev-table 'antlr-mode-abbrev-table '())
 
@@ -9,9 +13,7 @@
 
 (define-abbrev-table 'asm-mode-abbrev-table '())
 
-(define-abbrev-table 'awk-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'awk-mode-abbrev-table '())
 
 (define-abbrev-table 'bibtex-mode-abbrev-table '())
 
@@ -56,6 +58,8 @@
 
 (define-abbrev-table 'css-mode-abbrev-table '())
 
+(define-abbrev-table 'debugger-mode-abbrev-table '())
+
 (define-abbrev-table 'delphi-mode-abbrev-table '())
 
 (define-abbrev-table 'diff-mode-abbrev-table '())
@@ -64,9 +68,15 @@
 
 (define-abbrev-table 'doctex-mode-abbrev-table '())
 
+(define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
+
+(define-abbrev-table 'emacs-lisp-byte-code-mode-abbrev-table '())
+
 (define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
 
 (define-abbrev-table 'erc-chanlist-mode-abbrev-table '())
+
+(define-abbrev-table 'erc-list-menu-mode-abbrev-table '())
 
 (define-abbrev-table 'erc-mode-abbrev-table '())
 
@@ -77,6 +87,8 @@
 (define-abbrev-table 'ftp-mode-abbrev-table '())
 
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
+
+(define-abbrev-table 'gfm-mode-abbrev-table '())
 
 (define-abbrev-table 'ghc-core-mode-abbrev-table '())
 
@@ -142,7 +154,7 @@
     ("agt" "argument" nil 1001)
     ("agts" "arguments" nil 668)
     ("ahve" "have" nil 35)
-    ("ala" "Å‡ la" nil 1)
+    ("ala" "√† la" nil 1)
     ("alc" "algebraic" nil 37)
     ("alcy" "algebraically" nil 1)
     ("alhpa" "alpha" nil 2)
@@ -262,7 +274,7 @@
     ("bjns" "bijections" nil 1)
     ("bjv" "bijective" nil 4)
     ("blog'obvious" "http://conal.net/blog/posts/fostering-creativity-by-relinquishing-the-obvious/" nil 3)
-    ("bot'" "ë°Õ" nil 73)
+    ("bot'" "‚ä•" nil 73)
     ("btm" "bottom" nil 1)
     ("btms" "bottoms" nil 1)
     ("bv" "behave" nil 1)
@@ -322,7 +334,7 @@
     ("cdnl" "conditional" nil 23)
     ("cdnls" "conditionals" nil 38)
     ("cdns" "conditions" nil 84)
-    ("cdots'" "úÙ˙œ" nil 4)
+    ("cdots'" "‚ãØ" nil 4)
     ("cdt" "coordinate" nil 41)
     ("cdtd" "coordinated" nil 5)
     ("cdtg" "coordinating" nil 2)
@@ -334,7 +346,7 @@
     ("cgn" "conjugation" nil 11)
     ("cgt" "conjugate" nil 1)
     ("ch'r" "Church-Rosser" nil 32)
-    ("circ'" "úÙ¯∏" nil 6)
+    ("circ'" "‚àò" nil 6)
     ("cjn" "conjunction" nil 73)
     ("cjns" "conjunctions" nil 12)
     ("cjr" "conjecture" nil 18)
@@ -480,7 +492,7 @@
     ("da'd" "data-driven" nil 18)
     ("data member" "display method" nil 0)
     ("dbd" "distributed" nil 19)
-    ("dbn" "distribution" nil 35)
+    ("dbn" "distribution" nil 36)
     ("dbns" "distributions" nil 1)
     ("dbt" "distribute" nil 29)
     ("dbtd" "distributed" nil 8)
@@ -590,7 +602,7 @@
     ("dv'" "dv" nil 17)
     ("dvbl" "derivable" nil 1)
     ("dvd" "derived" nil 111)
-    ("dvg" "deriving" nil 178)
+    ("dvg" "deriving" nil 179)
     ("dvn" "derivation" nil 318)
     ("dvnl" "derivational" nil 7)
     ("dvns" "derivations" nil 68)
@@ -625,7 +637,7 @@
     ("eg" "e.g.," nil 920)
     ("elmn" "elimination" nil 4)
     ("emt" "element" nil 207)
-    ("emts" "elements" nil 212)
+    ("emts" "elements" nil 213)
     ("eplg" "extrapolating" nil 0)
     ("epln" "extrapolation" nil 11)
     ("eplt" "extrapolate" nil 1)
@@ -637,7 +649,7 @@
     ("eqns" "equations" nil 81)
     ("eqty" "equality" nil 62)
     ("eqtys" "equalities" nil 0)
-    ("equiv'" "ë°‘" nil 17)
+    ("equiv'" "‚â°" nil 17)
     ("eqvt" "equivalent" nil 129)
     ("eqvts" "equivalents" nil 0)
     ("eqvty" "equivalently" nil 7)
@@ -647,7 +659,7 @@
     ("evtl" "environmental" nil 1)
     ("evts" "environments" nil 69)
     ("excersize" "exercise" nil 2)
-    ("exists'" "í¢–" nil 1)
+    ("exists'" "‚àÉ" nil 1)
     ("f'a" "functional animation" nil 6)
     ("f'b" "frame buffer" nil 2)
     ("f'c" "first-class" nil 9)
@@ -699,7 +711,7 @@
     ("flrd" "flexible-rigid" nil 153)
     ("fls" "follows" nil 71)
     ("fltp" "flexible-type" nil 2)
-    ("fm" "from" nil 5841)
+    ("fm" "from" nil 5843)
     ("fma" "formula" nil 92)
     ("fmas" "formulas" nil 75)
     ("fml" "formal" nil 132)
@@ -712,14 +724,14 @@
     ("fmts" "formulates" nil 6)
     ("fmy" "family" nil 147)
     ("fmys" "families" nil 39)
-    ("fn" "function" nil 3586)
+    ("fn" "function" nil 3592)
     ("fnl" "functional" nil 980)
     ("fnls" "functionals" nil 16)
     ("fnly" "functionally" nil 36)
     ("fns" "functions" nil 1956)
     ("fnty" "functionality" nil 120)
     ("fo" "of" nil 383)
-    ("forall'" "í¢œ" nil 8)
+    ("forall'" "‚àÄ" nil 8)
     ("fqt" "frequent" nil 13)
     ("fqty" "frequently" nil 17)
     ("fqy" "frequency" nil 26)
@@ -759,7 +771,7 @@
     ("g'u'is" "graphical user interfaces" nil 1)
     ("gd" "ground" nil 6)
     ("gl" "general" nil 1010)
-    ("glb'" "úÙ˘”" nil 4)
+    ("glb'" "‚äì" nil 4)
     ("glty" "generality" nil 53)
     ("gltys" "generalities" nil 0)
     ("gly" "generally" nil 243)
@@ -920,11 +932,11 @@
     ("ijv" "injective" nil 12)
     ("ijvy" "injectivity" nil 11)
     ("imc" "isomorphic" nil 71)
-    ("imc'" "ó¢Ì" nil 9)
+    ("imc'" "‚âÖ" nil 9)
     ("imcy" "isomorphically" nil 6)
     ("imm" "isomorphism" nil 69)
     ("imms" "isomorphisms" nil 46)
-    ("implies'" "úÚß˘" nil 2)
+    ("implies'" "‚üπ" nil 2)
     ("incst" "inconsistent" nil 1)
     ("intn" "interaction" nil 173)
     ("intns" "interactions" nil 14)
@@ -1085,7 +1097,7 @@
     ("l'x" "linear transformation" nil 9)
     ("l'xs" "linear transformations" nil 8)
     ("ladn" "land" nil 2)
-    ("lambda'" "ÜÎ" nil 5)
+    ("lambda'" "Œª" nil 5)
     ("lbenf" "long beta-eta normal form" nil 2)
     ("lbepnf" "long beta-eta product normal form" nil 3)
     ("lc" "logic" nil 239)
@@ -1095,7 +1107,7 @@
     ("lcns" "locations" nil 72)
     ("lcs" "logics" nil 44)
     ("lcy" "logically" nil 2)
-    ("leqi'" "úÙ˘—" nil 13)
+    ("leqi'" "‚äë" nil 13)
     ("lg" "language" nil 1586)
     ("lga" "algebra" nil 68)
     ("lgas" "algebras" nil 2)
@@ -1103,7 +1115,7 @@
     ("lgcy" "algebraically" nil 2)
     ("lgs" "languages" nil 367)
     ("liek" "like" nil 9)
-    ("llambda'" "ÜÀ" nil 3)
+    ("llambda'" "Œõ" nil 3)
     ("lpg" "Lambda-Prolog" nil 131)
     ("lppg" "Lambda'pi-Prolog" nil 3)
     ("lr'l" "lower level" nil 8)
@@ -1113,7 +1125,7 @@
     ("ltv" "alternative" nil 396)
     ("ltvs" "alternatives" nil 155)
     ("ltvy" "alternatively" nil 192)
-    ("lub'" "úÙ˘‘" nil 24)
+    ("lub'" "‚äî" nil 24)
     ("m'c" "modeling coordinate" nil 2)
     ("m'c's'p" "minimal complete set of pre-unifiers" nil 9)
     ("m'c's'ps" "minimal complete sets of pre-unifiers" nil 8)
@@ -1208,9 +1220,9 @@
     ("n's" "non-strict" nil 8)
     ("n'x" "natural transformation" nil 3)
     ("n'xs" "natural transformations" nil 0)
-    ("naive'" "naÅÔve" nil 12)
-    ("naively'" "naÅÔvely" nil 4)
-    ("naivite" "naÅÔvitÅÈ" nil 1)
+    ("naive'" "na√Øve" nil 12)
+    ("naively'" "na√Øvely" nil 4)
+    ("naivite" "na√Øvit√©" nil 1)
     ("nbd" "neighborhood" nil 2)
     ("nbds" "neighborhoods" nil 0)
     ("ncly" "necessarily" nil 75)
@@ -1231,9 +1243,9 @@
     ("nintv" "non-interactive" nil 4)
     ("nitv" "non-interactive" nil 20)
     ("nkow" "know" nil 3)
-    ("nleqi'" "úÙ˙¬" nil 1)
+    ("nleqi'" "‚ã¢" nil 1)
     ("nmtc" "nonmonotonic" nil 2)
-    ("noteq'" "ë°Ÿ" nil 3)
+    ("noteq'" "‚â†" nil 3)
     ("ntl" "natural" nil 218)
     ("ntls" "naturalness" nil 9)
     ("ntly" "naturally" nil 97)
@@ -1319,7 +1331,7 @@
     ("ozby" "optimizability" nil 3)
     ("ozd" "optimized" nil 110)
     ("ozg" "optimizing" nil 45)
-    ("ozn" "optimization" nil 342)
+    ("ozn" "optimization" nil 343)
     ("ozns" "optimizations" nil 108)
     ("ozr" "optimizer" nil 1)
     ("ozs" "optimizes" nil 4)
@@ -1359,7 +1371,7 @@
     ("pagms" "pre-algorithms" nil 12)
     ("pari" "pair" nil 9)
     ("pbl" "possible" nil 758)
-    ("pbm" "problem" nil 1375)
+    ("pbm" "problem" nil 1376)
     ("pbmc" "problematic" nil 56)
     ("pbms" "problems" nil 290)
     ("pbty" "possibility" nil 190)
@@ -1427,11 +1439,12 @@
     ("ppn" "proposition" nil 112)
     ("ppns" "propositions" nil 20)
     ("pptys" "properties" nil 4)
-    ("pr" "pair" nil 126)
-    ("prbty" "probability" nil 1)
-    ("prby" "probably" nil 1170)
+    ("pr" "pair" nil 127)
+    ("prby" "probably" nil 1173)
     ("prpr" "pair-pair" nil 2)
     ("prs" "pairs" nil 92)
+    ("prty" "probability" nil 8)
+    ("prtys" #("probabilities" 0 13 (fontified t font-lock-multiline t)) nil 0)
     ("psn" "position" nil 249)
     ("psnl" "positional" nil 3)
     ("psns" "positions" nil 29)
@@ -1532,7 +1545,7 @@
     ("r'v" "reactive value" nil 24)
     ("r'vs" "reactive values" nil 56)
     ("r'w" "roughly well-typed" nil 2)
-    ("rarrow'" "ë°˙" nil 13)
+    ("rarrow'" "‚Üí" nil 13)
     ("rbly" "arbitrarily" nil 28)
     ("rbml" "RBML" nil 85)
     ("rby" "arbitrary" nil 186)
@@ -1705,7 +1718,7 @@
     ("sgrs" "signatures" nil 69)
     ("siad" "said" nil 12)
     ("sicne" "since" nil 33)
-    ("simeq'" "ó¢Ï" nil 1)
+    ("simeq'" "‚âÉ" nil 1)
     ("simlify" "simplify" nil 1)
     ("sjt" "subject" nil 30)
     ("sjtd" "subjected" nil 3)
@@ -1821,7 +1834,7 @@
     ("tcy" "technology" nil 92)
     ("tcys" "technologies" nil 5)
     ("td" "third" nil 106)
-    ("teh" "the" nil 577)
+    ("teh" "the" nil 578)
     ("tfr" "therefore" nil 140)
     ("theri" "their" nil 3)
     ("thm" "theorem" nil 66)
@@ -1832,7 +1845,7 @@
     ("thys" "theories" nil 18)
     ("tiem" "time" nil 61)
     ("tiems" "times" nil 8)
-    ("times'" "Å◊" nil 11)
+    ("times'" "√ó" nil 11)
     ("tm" "term" nil 1174)
     ("tm'i" "term inference" nil 25)
     ("tmgy" "terminology" nil 12)
@@ -1845,8 +1858,8 @@
     ("tmv" "term-variable" nil 1)
     ("tnq" "technique" nil 177)
     ("tnqs" "techniques" nil 138)
-    ("top'" "úÙ˘‰" nil 1)
-    ("tp" "type" nil 5093)
+    ("top'" "‚ä§" nil 1)
+    ("tp" "type" nil 5098)
     ("tpbl" "typable" nil 1)
     ("tpd" "typed" nil 322)
     ("tpg" "typing" nil 296)
@@ -1961,9 +1974,9 @@
     ("w'w" "with which" nil 3)
     ("waht" "what" nil 20)
     ("wasnt" "wasn't" nil 3)
-    ("wch" "which" nil 4357)
+    ("wch" "which" nil 4358)
     ("wdfd" "well-defined" nil 20)
-    ("wh" "with" nil 11322)
+    ("wh" "with" nil 11323)
     ("whehter" "whether" nil 4)
     ("whn" "within" nil 5)
     ("wiht" "with" nil 2)
@@ -2055,10 +2068,22 @@
 
 (define-abbrev-table 'haskell-cabal-mode-abbrev-table '())
 
+(define-abbrev-table 'haskell-compilation-mode-abbrev-table '())
+
+(define-abbrev-table 'haskell-debug-mode-abbrev-table '())
+
+(define-abbrev-table 'haskell-error-mode-abbrev-table '())
+
+(define-abbrev-table 'haskell-interactive-mode-abbrev-table '())
+
 (define-abbrev-table 'haskell-mode-abbrev-table
   '(
     ("fo" "fo" nil 5)
    ))
+
+(define-abbrev-table 'haskell-presentation-mode-abbrev-table '())
+
+(define-abbrev-table 'help-mode-abbrev-table '())
 
 (define-abbrev-table 'hs-lint-mode-abbrev-table '())
 
@@ -2134,6 +2159,8 @@
 
 (define-abbrev-table 'message-mode-abbrev-table '())
 
+(define-abbrev-table 'messages-buffer-mode-abbrev-table '())
+
 (define-abbrev-table 'network-connection-mode-abbrev-table '())
 
 (define-abbrev-table 'nslookup-mode-abbrev-table '())
@@ -2144,11 +2171,15 @@
     ("while" "while" c-electric-continued-statement 1)
    ))
 
+(define-abbrev-table 'occur-edit-mode-abbrev-table '())
+
 (define-abbrev-table 'occur-mode-abbrev-table '())
 
 (define-abbrev-table 'org-mode-abbrev-table '())
 
 (define-abbrev-table 'outline-mode-abbrev-table '())
+
+(define-abbrev-table 'package-menu-mode-abbrev-table '())
 
 (define-abbrev-table 'perl-mode-abbrev-table '())
 
@@ -2159,6 +2190,10 @@
    ))
 
 (define-abbrev-table 'plain-tex-mode-abbrev-table '())
+
+(define-abbrev-table 'process-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'prog-mode-abbrev-table '())
 
 (define-abbrev-table 'ps-mode-abbrev-table '())
 
@@ -2179,6 +2214,10 @@
 (define-abbrev-table 'smbclient-mode-abbrev-table '())
 
 (define-abbrev-table 'special-mode-abbrev-table '())
+
+(define-abbrev-table 'speedbar-mode-abbrev-table '())
+
+(define-abbrev-table 'tabulated-list-mode-abbrev-table '())
 
 (define-abbrev-table 'tex-mode-abbrev-table
   '(
@@ -2228,9 +2267,13 @@
 
 (define-abbrev-table 'text-mode-abbrev-table '())
 
+(define-abbrev-table 'url-cookie-mode-abbrev-table '())
+
 (define-abbrev-table 'vc-annotate-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-dired-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
 
