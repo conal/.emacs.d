@@ -7,7 +7,8 @@
   'package-archives
   '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
-(package-refresh-contents)
+
+;;; (package-refresh-contents)  ; Do occasionally
 
 (package-install 'company)
 (package-install 'zoom-frm)
@@ -1031,6 +1032,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
      (latex-mode nil literate-haskell-lhs2TeX))) nil (mmm-mode))
  '(mmm-submode-decoration-level 2)
  '(parens-require-spaces nil)
+ '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
  '(scroll-conservatively 1000)
  '(sentence-end-double-space nil)
@@ -1310,7 +1312,7 @@ I'd rather fix the real problem than keep patching it up."
 ;;; I've been interacting with terminal programs.
 (global-unset-key [?\s-p])
 
-(global-set-key "\C-cv" 'view-mode)
+;; (global-set-key "\C-cv" 'view-mode)
 
 (setq my-extra-path
       '("/usr/local/bin" "~/bin" "~/.cabal/bin"))
@@ -1323,7 +1325,6 @@ I'd rather fix the real problem than keep patching it up."
 
 ;; (pushnew "/usr/local/bin" exec-path)
 ;; (pushnew (expand-file-name "~/bin") exec-path :test #'string-equal)
-
 
 
 ;;; End of customizations
