@@ -10,8 +10,23 @@
 (package-install 'markdown-mode)
 (package-install 'haskell-mode)
 
-(package-install 'intero)
-(add-hook 'haskell-mode-hook 'intero-mode)
+;; (package-install 'intero)
+;; (add-hook 'haskell-mode-hook 'intero-mode)
+
+(add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
+(add-hook 'haskell-mode-hook 'flyspell-prog-mode)
+
+(eval-after-load "which-func"
+  '(add-to-list 'which-func-modes 'haskell-mode))
+;; (speedbar-add-supported-extension ".hs")
+
+(eval-after-load "haskell-mode"
+    '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+(eval-after-load "haskell-mode"
+    '(define-key haskell-mode-map (kbd "M-[") 'align))
+
+(eval-after-load "haskell-cabal"
+    '(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile))
 
 ;; Was "^[^#$%>\n]*[#$%>] *", but the # shows up in infinite number
 ;; display from C.
@@ -344,6 +359,27 @@
       (set (make-local-variable 'fill-paragraph-handle-comment) nil))
   (set (make-local-variable 'mode-line-process)
        '("/" (:eval (symbol-name haskell-literate)))))
+
+;;; http://haskell.github.io/haskell-mode/manual/latest/Aligning-code.html#Aligning-code
+
+(require 'align)
+
+(add-to-list 'align-rules-list
+             '(haskell-types
+               (regexp . "\\(\\s-+\\)\\(::\\|∷\\)\\s-+")
+               (modes quote (haskell-mode literate-haskell-mode))))
+(add-to-list 'align-rules-list
+             '(haskell-assignment
+               (regexp . "\\(\\s-+\\)=\\s-+")
+               (modes quote (haskell-mode literate-haskell-mode))))
+(add-to-list 'align-rules-list
+             '(haskell-arrows
+               (regexp . "\\(\\s-+\\)\\(->\\|→\\)\\s-+")
+               (modes quote (haskell-mode literate-haskell-mode))))
+(add-to-list 'align-rules-list
+             '(haskell-left-arrows
+               (regexp . "\\(\\s-+\\)\\(<-\\|←\\)\\s-+")
+               (modes quote (haskell-mode literate-haskell-mode))))
 
 
 ;; For ghc-mod http://www.mew.org/~kazu/proj/ghc-mod/en/
@@ -686,6 +722,36 @@ consisting of repeated '-'. For an <h2>."
   ;; Restore the following when I get `...` to switch modes.
   ;; (modify-syntax-entry ?\* "$")  ; self-matching, for emphasis/italics
 )
+
+
+;;; Use w3m to browse haddock docs
+;;; http://haskell.github.io/haskell-mode/manual/latest/Browsing-Haddocks.html#Browsing-Haddocks
+
+(package-install 'w3m)
+
+(setq w3m-mode-map (make-sparse-keymap))
+
+(define-key w3m-mode-map (kbd "RET") 'w3m-view-this-url)
+(define-key w3m-mode-map (kbd "q") 'bury-buffer)
+(define-key w3m-mode-map (kbd "<mouse-1>") 'w3m-maybe-url)
+(define-key w3m-mode-map [f5] 'w3m-reload-this-page)
+(define-key w3m-mode-map (kbd "C-c C-d") 'haskell-w3m-open-haddock)
+(define-key w3m-mode-map (kbd "M-<left>") 'w3m-view-previous-page)
+(define-key w3m-mode-map (kbd "M-<right>") 'w3m-view-next-page)
+(define-key w3m-mode-map (kbd "M-.") 'w3m-haddock-find-tag)
+
+(defun w3m-maybe-url ()
+  (interactive)
+  (if (or (equal '(w3m-anchor) (get-text-property (point) 'face))
+          (equal '(w3m-arrived-anchor) (get-text-property (point) 'face)))
+      (w3m-view-this-url)))
+
+(require 'w3m-haddock)
+(add-hook 'w3m-display-hook 'w3m-haddock-display)
+
+;;; Use from haskell-mode
+(define-key haskell-mode-map (kbd "C-c C-d") 'haskell-w3m-open-haddock)
+
 
 ;;; Swiped & modified from twee-add-item.
 ;;; TODO: refactor/generalize 
