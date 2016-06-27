@@ -954,8 +954,10 @@ logs, putting in a Last Modified in a new file, etc."
 (global-set-key "\C-\M-y" 'pasteboard-insert-markdown)
 
 
-;; Look for a more pleasant sound.
-(setq visible-bell t)
+;;; On Emacs 24.5.1 (and possibly a few earlier versions) on Mac, the following setting leads to some display glitching.
+
+;; ;; Look for a more pleasant sound.
+;; (setq visible-bell t)
 
 ;; (setq preferred-frame-height
 ;;       (if (string-equal (getenv "USERDOMAIN") "COMPY")
@@ -1023,6 +1025,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(longlines-wrap-follows-window-size t)
  '(mac-pass-command-to-system nil)
  '(markdown-command "pandoc --toc --smart --standalone --to html")
+ '(markdown-indent-on-enter nil)
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
  '(mmm-mode-ext-classes-alist
