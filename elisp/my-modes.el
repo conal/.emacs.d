@@ -82,7 +82,7 @@
   (modify-syntax-entry ?\" "\"")    ; string char 
   (modify-syntax-entry ?\$ "\.")    ; string char
   ;; (ispell-minor-mode)
-  (flyspell-mode-on)
+  (flyspell-mode 1)
   ;; (longlines-mode t)                ; Always on?  Experiment.
   ;; Avoid a problem with imenu and sub-modes:
   (setq imenu-create-index-function '(lambda ()))
