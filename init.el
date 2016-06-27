@@ -1058,6 +1058,9 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region   'disabled nil)
 
+;; Keep dictionary with .emacs file, checked into git.
+(setq ispell-personal-dictionary (expand-file-name "~/.emacs.d/.aspell.en.pws"))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
