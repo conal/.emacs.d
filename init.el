@@ -1018,7 +1018,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-tags-on-save t)
  '(inferior-haskell-wait-and-jump t)
- '(ispell-extra-args (quote ("--repl=/Users/conal/.aspell.en.prepl")))
+ ;; '(ispell-extra-args (quote ("--repl=/Users/conal/.aspell.en.prepl")))
  '(ispell-program-name "aspell")
  '(ispell-silently-savep t)
  '(longlines-show-hard-newlines nil)
@@ -1045,10 +1045,10 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(user-mail-address "conal@conal.net")
  '(vc-make-backup-files t))
 
-(when (eq system-type 'darwin)
-  (custom-set-variables
-   '(ispell-extra-args (quote (;; "-d" "/Library/Application Support/cocoAspell/aspell6-en-6.0-0/en.multi"
-                               "--repl=/Users/conal/.aspell.en.prepl")))))
+;; (when (eq system-type 'darwin)
+;;   (custom-set-variables
+;;    '(ispell-extra-args (quote (;; "-d" "/Library/Application Support/cocoAspell/aspell6-en-6.0-0/en.multi"
+;;                                "--repl=/Users/conal/.aspell.en.prepl")))))
 
 ;;; See http://www.emacswiki.org/emacs/EmacsClient#toc21
 ;;; 
