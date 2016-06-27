@@ -81,7 +81,8 @@
   (modify-syntax-entry ?\| ".")     ; punctuation
   (modify-syntax-entry ?\" "\"")    ; string char 
   (modify-syntax-entry ?\$ "\.")    ; string char
-  (ispell-minor-mode)
+  ;; (ispell-minor-mode)
+  (flyspell-mode-on)
   ;; (longlines-mode t)                ; Always on?  Experiment.
   ;; Avoid a problem with imenu and sub-modes:
   (setq imenu-create-index-function '(lambda ()))
@@ -785,6 +786,7 @@ consisting of repeated '-'. For an <h2>."
 (defun my-markdown-mode-hook ()
   (visual-line-mode t)
   (auto-fill-mode 0)
+  (flyspell-mode 1)
   (local-set-key [?\C-'] 'markdown-inline-code)
   (local-set-key "\C-ci" 'add-starred-item)
   (local-set-key "\C-cq" 'md-add-blockquote)
