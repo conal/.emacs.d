@@ -954,10 +954,14 @@ logs, putting in a Last Modified in a new file, etc."
 (global-set-key "\C-\M-y" 'pasteboard-insert-markdown)
 
 
-;;; On Emacs 24.5.1 (and possibly a few earlier versions) on Mac, the following setting leads to some display glitching.
+;;; On Emacs 24.5.1 (and possibly a few earlier versions) on Mac, the
+;;; following setting leads to some display glitching. See
+;;; http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/
 
 ;; ;; Look for a more pleasant sound.
 ;; (setq visible-bell t)
+(setq visible-bell nil) ;; The default
+(setq ring-bell-function 'ignore)
 
 ;; (setq preferred-frame-height
 ;;       (if (string-equal (getenv "USERDOMAIN") "COMPY")
