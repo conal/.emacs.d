@@ -10,11 +10,9 @@
 (package-install 'markdown-mode)
 (package-install 'haskell-mode)
 
-;; (package-install 'intero)
-;; (add-hook 'haskell-mode-hook 'intero-mode)
-
 (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
 (add-hook 'haskell-mode-hook 'flyspell-prog-mode)
+(add-hook 'haskell-mode-hook 'company-mode)
 
 (eval-after-load "which-func"
   '(add-to-list 'which-func-modes 'haskell-mode))
@@ -244,7 +242,6 @@
 
 (defun my-haskell-mode-hook ()
   ;; (local-set-key (kbd "C-c C-c") 'haskell-compile)  
-  (company-mode)
   (set (make-local-variable 'company-backends)
        (append '((company-capf company-dabbrev-code))
                company-backends))
@@ -751,6 +748,21 @@ consisting of repeated '-'. For an <h2>."
 
 ;;; Use from haskell-mode
 (define-key haskell-mode-map (kbd "C-c C-d") 'haskell-w3m-open-haddock)
+
+;; Like haskell-cabal-find-file
+(defun haskell-stack-find-file ()
+  (let* ((stack (concat (file-name-directory (haskell-cabal-find-file))
+                        "stack.yaml")))
+    (and stack (file-exists-p stack) stack)))
+
+(defun intero-mode-if-stack ()
+  (if (haskell-stack-find-file) (intero-mode)))
+
+(package-install 'intero)
+
+;; (add-hook 'haskell-mode-hook 'intero-mode)
+
+(add-hook 'haskell-mode-hook 'intero-mode-if-stack)
 
 
 ;;; Swiped & modified from twee-add-item.
