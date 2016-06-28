@@ -1,4 +1,4 @@
-personal_ws-1.1 en 121 
+personal_ws-1.1 en 122 
 memoize
 API
 deterministically
@@ -8,6 +8,7 @@ hylomorphism
 defunctionalize
 logarithmically
 scrutinee
+Ashwin
 Yoneda
 traversable
 FieldTrip
@@ -16,8 +17,8 @@ optimizations
 ByteString
 nondeterministically
 lossy
-trie
 axiomatized
+trie
 monad
 TDH
 coproduct
@@ -74,8 +75,8 @@ additivity
 engrained
 inlining
 foldable
-redexes
 Kolmogorov
+redexes
 linux
 ux
 parametrized
@@ -115,8 +116,8 @@ genericity
 homomorphism
 refactored
 refactoring
-iPhone
 iphone
+iPhone
 reifying
 pre
 monadic
