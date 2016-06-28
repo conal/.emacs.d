@@ -197,7 +197,12 @@ Spotlight binding from command-space to option-space."
 ;;   (interactive)
 ;;   (a-journal "~/Journal/wiki"))
 
-(defalias 'journal 'awake-journal)  
+(defun current-journal ()
+  "gitit (wiki) page for my current journal. See `journal'."
+  (interactive)
+  (a-journal (concat "~/Journals/Current")))
+
+(defalias 'journal 'current-journal)
 
 (defun a-journal (dir)
   "gitit (wiki) journal page.  A directory for each year, and a page for each week, named for the date of the Sunday of that week."
@@ -1105,9 +1110,11 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 
 (defun toggle-fullscreen ()
   (interactive)
-  (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen)
-                                           nil
-                                           'fullboth)))
+  (set-frame-parameter nil 'fullscreen
+                       (if (is-fullscreen) nil 'fullboth)))
+
+(defun is-fullscreen ()
+  (frame-parameter nil 'fullscreen))
 
 (global-set-key [(meta return)] 'toggle-fullscreen)
 (global-set-key [(control meta return)] 'toggle-fullscreen)
