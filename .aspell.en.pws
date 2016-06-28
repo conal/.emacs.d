@@ -1,4 +1,4 @@
-personal_ws-1.1 en 122 
+personal_ws-1.1 en 123 
 memoize
 API
 deterministically
@@ -114,10 +114,11 @@ sequenceA
 CCC
 genericity
 homomorphism
+journaling
 refactored
 refactoring
-iphone
 iPhone
+iphone
 reifying
 pre
 monadic
