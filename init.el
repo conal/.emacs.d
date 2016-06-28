@@ -957,11 +957,17 @@ logs, putting in a Last Modified in a new file, etc."
 ;;; On Emacs 24.5.1 (and possibly a few earlier versions) on Mac, the
 ;;; following setting leads to some display glitching. See
 ;;; http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/
+;;; http://emacs.stackexchange.com/questions/20100/what-is-this-square-in-the-middle-of-the-emacs-gui
 
 ;; ;; Look for a more pleasant sound.
 ;; (setq visible-bell t)
 (setq visible-bell nil) ;; The default
-(setq ring-bell-function 'ignore)
+;; (setq ring-bell-function 'ignore)
+
+(setq ring-bell-function
+      (lambda ()
+        (invert-face 'mode-line)
+        (run-with-timer 0.1 nil 'invert-face 'mode-line)))
 
 ;; (setq preferred-frame-height
 ;;       (if (string-equal (getenv "USERDOMAIN") "COMPY")
@@ -1022,14 +1028,13 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-tags-on-save t)
  '(inferior-haskell-wait-and-jump t)
- ;; '(ispell-extra-args (quote ("--repl=/Users/conal/.aspell.en.prepl")))
  '(ispell-program-name "aspell")
  '(ispell-silently-savep t)
  '(longlines-show-hard-newlines nil)
  '(longlines-wrap-follows-window-size t)
  '(mac-pass-command-to-system nil)
  '(markdown-command "pandoc --toc --smart --standalone --to html")
- '(markdown-indent-on-enter nil)
+ '(markdown-indent-on-enter t)
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
  '(mmm-mode-ext-classes-alist
@@ -1105,6 +1110,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
                                            'fullboth)))
 
 (global-set-key [(meta return)] 'toggle-fullscreen)
+(global-set-key [(control meta return)] 'toggle-fullscreen)
 
 
 ;;; Turn off some especially dangerous mac-style bindings for Cocoa Emacs
