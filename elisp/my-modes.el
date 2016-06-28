@@ -810,6 +810,7 @@ consisting of repeated '-'. For an <h2>."
   (setq indent-line-function 'indent-relative)
   (setq tab-always-indent t)
   ;; (setq require-final-newline nil)
+  (setq page-delimiter "^# ")
 )
 
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
