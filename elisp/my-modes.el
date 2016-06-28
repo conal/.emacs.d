@@ -1,5 +1,9 @@
 ;;;; Misc mode settings.
 
+(package-install 'markdown-mode)
+(package-install 'haskell-mode)
+(package-install 'company)
+
 (require 'my-text)
 (require 'my-tex)
 (require 'twee)
@@ -7,10 +11,10 @@
 (require 'find-file)  ;; for cc-other-file-alist
 (require 'mmm-mode)
 
-(package-install 'markdown-mode)
-(package-install 'haskell-mode)
+(require 'company)
 
 (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
+(add-hook 'haskell-mode-hook 'flycheck-mode)
 (add-hook 'haskell-mode-hook 'flyspell-prog-mode)
 (add-hook 'haskell-mode-hook 'company-mode)
 
@@ -25,6 +29,14 @@
 
 (eval-after-load "haskell-cabal"
     '(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile))
+
+;;; C-; is easy to trigger accidentally without noticing
+(eval-after-load "flyspell"
+    '(define-key flyspell-mode-map (kbd "C-;") nil))
+(eval-after-load "flyspell"
+    '(define-key flyspell-mode-map (kbd "C-s-;") 
+       'flyspell-auto-correct-previous-word))
+
 
 ;; Was "^[^#$%>\n]*[#$%>] *", but the # shows up in infinite number
 ;; display from C.
@@ -80,7 +92,7 @@
   ;; (modify-syntax-entry ?\' ".")  ; punctuation
   (modify-syntax-entry ?\| ".")     ; punctuation
   (modify-syntax-entry ?\" "\"")    ; string char 
-  (modify-syntax-entry ?\$ "\.")    ; string char
+  ;; (modify-syntax-entry ?\$ "\.")    ; string char
   ;; (ispell-minor-mode)
   (flyspell-mode 1)
   ;; (longlines-mode t)                ; Always on?  Experiment.
@@ -763,7 +775,7 @@ consisting of repeated '-'. For an <h2>."
 
 ;; (add-hook 'haskell-mode-hook 'intero-mode)
 
-(add-hook 'haskell-mode-hook 'intero-mode-if-stack)
+;; (add-hook 'haskell-mode-hook 'intero-mode-if-stack)
 
 
 ;;; Swiped & modified from twee-add-item.
@@ -791,6 +803,7 @@ consisting of repeated '-'. For an <h2>."
   (local-set-key "\C-ci" 'add-starred-item)
   (local-set-key "\C-cq" 'md-add-blockquote)
   (local-set-key [?\C-$] 'surround-dollars)
+  (local-set-key (kbd "M-q") 'dont-fill-paragraph)
   (setq markdown-enable-math t)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
   (local-unset-key "\C-c\C-j")
@@ -800,6 +813,17 @@ consisting of repeated '-'. For an <h2>."
 )
 
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
+
+(defun dont-fill-paragraph ()
+  "Conal has a \\M-q (`fill-paragraph') habit from many years without
+visual-line-mode.  Maybe you do also.  Here's a wake-up call.  The usual reasons
+apply for wanting to leave behind unconscious and unproductive behaviors."
+  (interactive)
+  (if visual-line-mode
+      (progn
+        (beep)
+        (message "I'm guessing you don't really want to use `fill-paragraph' in visual-line-mode."))
+    (fill-paragraph nil)))
 
 ;;; for gitit
 (push '("\\.page$" . markdown-mode) auto-mode-alist)
