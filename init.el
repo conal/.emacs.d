@@ -318,11 +318,6 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 (load "my-modes")
 (load "my-mmm")
 
-(require 'haskell-interactive-mode)
-(require 'haskell-process)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-
-
 ;;(load "my-shell")
 
 (global-set-key "\C-c\C-a" 'align-regexp)
@@ -1058,11 +1053,6 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(tool-bar-mode nil)
  '(user-mail-address "conal@conal.net")
  '(vc-make-backup-files t))
-
-;; (when (eq system-type 'darwin)
-;;   (custom-set-variables
-;;    '(ispell-extra-args (quote (;; "-d" "/Library/Application Support/cocoAspell/aspell6-en-6.0-0/en.multi"
-;;                                "--repl=/Users/conal/.aspell.en.prepl")))))
 
 ;;; See http://www.emacswiki.org/emacs/EmacsClient#toc21
 ;;; 
