@@ -13,10 +13,18 @@
 
 (require 'company)
 
-(add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
-(add-hook 'haskell-mode-hook 'flycheck-mode)
-(add-hook 'haskell-mode-hook 'flyspell-prog-mode)
-(add-hook 'haskell-mode-hook 'company-mode)
+(require 'haskell-interactive-mode)
+(require 'haskell-process)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+
+;;; Enhance haskell & literate haskell modes
+(dolist (hook '(haskell-mode-hook literate-haskell-mode-hook))
+  (dolist (extra '(interactive-haskell-mode
+                   haskell-decl-scan-mode
+                   flycheck-mode
+                   flyspell-prog-mode
+                   company-mode))
+    (add-hook hook extra)))
 
 (eval-after-load "which-func"
   '(add-to-list 'which-func-modes 'haskell-mode))
