@@ -1165,6 +1165,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
       (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
       ;; Next one causes line centering. How?
       ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.5/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
+      (insert "<script src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
       (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/blogify-screen.css\" type=\"text/css\"/>\n")
       (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" type=\"text/css\"/>\n")
       (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/hk-pyg.css\" type=\"text/css\"/>\n")
