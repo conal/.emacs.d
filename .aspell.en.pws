@@ -1,4 +1,4 @@
-personal_ws-1.1 en 125 
+personal_ws-1.1 en 131 
 memoize
 API
 deterministically
@@ -16,6 +16,7 @@ instantiation
 optimizations
 ByteString
 nondeterministically
+reinstall
 lossy
 axiomatized
 trie
@@ -28,10 +29,12 @@ monoid
 monomorphic
 memoization
 manzanita
+RSA
 Hm
 inline
 quaternary
 Bool
+Tabula
 radix
 reification
 squirrelly
@@ -45,6 +48,7 @@ desugared
 reconnection
 quantizes
 encodable
+repo
 ifThenElse
 coproducts
 Ubuntu
@@ -73,6 +77,7 @@ indices
 msd
 plugin
 additivity
+PDF
 engrained
 inlining
 foldable
@@ -114,6 +119,7 @@ bitwise
 morphisms
 sequenceA
 CCC
+gitit
 genericity
 homomorphism
 journaling
