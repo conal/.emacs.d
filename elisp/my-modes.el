@@ -37,13 +37,19 @@
 
 (eval-after-load "haskell-cabal"
     '(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile))
-
 ;;; C-; is easy to trigger accidentally without noticing
 (eval-after-load "flyspell"
     '(define-key flyspell-mode-map (kbd "C-;") nil))
 (eval-after-load "flyspell"
     '(define-key flyspell-mode-map (kbd "C-s-;") 
        'flyspell-auto-correct-previous-word))
+
+;; ;;; C-; is easy to trigger accidentally without noticing
+;; (eval-after-load "flyspell"
+;;   '(progn (define-key flyspell-mode-map (kbd "C-,") nil)
+;;           (define-key flyspell-mode-map (kbd "C-;") nil)
+;;           (define-key flyspell-mode-map (kbd "C-s-;") 
+;;             'flyspell-auto-correct-previous-word)))
 
 
 ;; Was "^[^#$%>\n]*[#$%>] *", but the # shows up in infinite number
@@ -811,6 +817,8 @@ consisting of repeated '-'. For an <h2>."
   (local-set-key "\C-ci" 'add-starred-item)
   (local-set-key "\C-cq" 'md-add-blockquote)
   (local-set-key [?\C-$] 'surround-dollars)
+  ;; Next one conflicts with flyspell-goto-next-error
+  ;; (local-set-key [?\C-,] 'markdown-mmmify-lines)
   (local-set-key (kbd "M-q") 'dont-fill-paragraph)
   (setq markdown-enable-math t)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
@@ -819,6 +827,7 @@ consisting of repeated '-'. For an <h2>."
   (setq tab-always-indent t)
   ;; (setq require-final-newline nil)
   (setq page-delimiter "^# ")
+  (local-set-key "\C-c\C-v" 'blogify-view-foo)
 )
 
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)

@@ -1151,6 +1151,12 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
   (interactive)
   (blogify-region (point-min) (point-max)))
 
+(defun blogify-view-foo ()
+  "'blogify-buffer' and browser-view the resulting foo.html."
+  (interactive)
+  (blogify-foo)
+  (browse-url "foo.html"))
+
 (defun blogify-foo ()
   (interactive)
   (blogify-buffer)
