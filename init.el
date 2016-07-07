@@ -1141,11 +1141,29 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
   (save-window-excursion
     (shell-command-on-region from to "blogify")
     (switch-to-buffer "*Shell Command Output*")
+    (beginning-of-buffer)
     ;; Pandoc inserts annotations elements when generating MathML from LaTeX.
     ;; When I copying from the browser and paste into an email message, the annotations become visible.
     ;; To fix, we can remove the annotation or make it invisible with "display:none" CSS.
-    ;; (replace-regexp "<annotation .*?</annotation>" "" nil (point-min) (point-max))
-    (replace-regexp "<annotation " "<annotation style=\"display:none\" " nil (point-min) (point-max))
+    (if t
+        (while (re-search-forward "<annotation " nil t)
+          (replace-match "<annotation style=\"display:none\" " nil nil))
+      ;; Alternatively,
+      (while (re-search-forward "<annotation .*?</annotation>" nil t)
+        (replace-match "" nil nil)))
+    (beginning-of-buffer)
+    (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
+    ;; Next one causes line centering. How?
+    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.5/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
+    (insert "<script src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
+    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/blogify-screen.css\" type=\"text/css\"/>\n")
+    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" type=\"text/css\"/>\n")
+    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/hk-pyg.css\" type=\"text/css\"/>\n")
+    ;; Crazy hack. I've been unable to get consistent top padding between gitit and blogify-foo.
+    (insert "<style>blockquote { padding-top: 0em; }</style>\n")
+    (insert "<body style=\"font-size:85%\">\n")
+    (end-of-buffer)
+    (insert "\n</body>\n")
     (kill-ring-save (point-min) (point-max))
     ;; (x-select-text (buffer-string))
     ))
@@ -1172,20 +1190,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
     (save-window-excursion
       (switch-to-buffer "*Shell Command Output*")
       (beginning-of-buffer)
-      (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
-      ;; Next one causes line centering. How?
-      ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.5/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
-      (insert "<script src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
-      (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/blogify-screen.css\" type=\"text/css\"/>\n")
-      (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" type=\"text/css\"/>\n")
-      (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/hk-pyg.css\" type=\"text/css\"/>\n")
-      ;; Crazy hack. I've been unable to get consistent top padding between gitit and blogify-foo.
-      (insert "<style>blockquote { padding-top: 0em; }</style>\n")
       (insert "<title>" title "</title>\n")
-      ;; Tweak body font size here:
-      (insert "<body style=\"font-size:85%\">\n")
-      (end-of-buffer)
-      (insert "\n</body>\n")
       (write-region (point-min) (point-max) "foo.html"))))
 
 ;;; I keep running afoul of an oddity/bug in longlines-mode.
