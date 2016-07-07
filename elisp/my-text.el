@@ -376,7 +376,7 @@ prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
   )
 
 ;;; Handy everywhere
-(global-set-key [?\C-,] 'markdown-mmmify-lines)
+(global-set-key [?\M-\C-,] 'markdown-mmmify-lines)
 
 (defun current-line-as-region ()
   (save-excursion
