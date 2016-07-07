@@ -278,6 +278,7 @@
   (define-abbrev-table 'haskell-mode-abbrev-table ())
   (setq local-abbrev-table haskell-mode-abbrev-table)
   (abbrev-mode 1)                       ; Use abbreviations
+  (local-set-key "\C-cs" 'haskell-insert-section-header)
   )
 
 (add-hook 'interactive-haskell-mode-hook 'my-interactive-haskell-mode-hook)
@@ -814,11 +815,13 @@ consisting of repeated '-'. For an <h2>."
   (auto-fill-mode 0)
   (flyspell-mode 1)
   (local-set-key [?\C-'] 'markdown-inline-code)
-  (local-set-key "\C-ci" 'add-starred-item)
+  ;; Use M-RET (markdown-insert-list-item):
+  ;; (local-set-key "\C-ci" 'add-starred-item)
   (local-set-key "\C-cq" 'md-add-blockquote)
   (local-set-key [?\C-$] 'surround-dollars)
   ;; Next one conflicts with flyspell-goto-next-error
   ;; (local-set-key [?\C-,] 'markdown-mmmify-lines)
+  ;; (local-set-key [?\M-\C-,] 'markdown-mmmify-lines)  -- global
   (local-set-key (kbd "M-q") 'dont-fill-paragraph)
   (setq markdown-enable-math t)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
@@ -827,6 +830,7 @@ consisting of repeated '-'. For an <h2>."
   (setq tab-always-indent t)
   ;; (setq require-final-newline nil)
   (setq page-delimiter "^# ")
+  (local-set-key "\C-cv" 'blogify-foo)
   (local-set-key "\C-c\C-v" 'blogify-view-foo)
 )
 
