@@ -218,6 +218,7 @@ Spotlight binding from command-space to option-space."
        ;; Using %e causes the day # to be blank-padded instead of zero-padded.
        ;; Or use %-e or %-d for no padding.
        (insert (format-time-string "---\ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
+       (insert "<style>.privateZ { display: none; }</style> <!-- remove Z to elide private content -->\n")
        (insert " <!-- References -->\n\n <!-- -->\n"))
      ;; Insert entry header if not already present
      (let ((was-point (point)))
@@ -1019,6 +1020,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(git-working-dir-change-behaviour (quote git-refresh-all-saved))
  '(haskell-hoogle-command nil)
  '(haskell-indent-offset 2)
+ '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-suggest-hoogle-imports t)
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-tags-on-save t)
@@ -1030,7 +1032,8 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(mac-pass-command-to-system nil)
  '(markdown-command "pandoc --toc --smart --standalone --to html")
  '(markdown-indent-on-enter t)
- '(markdown-unordered-list-item-prefix "\n*   ")
+ '(markdown-unordered-list-item-prefix "
+*   ")
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
  '(mmm-mode-ext-classes-alist
@@ -1172,7 +1175,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
       (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" type=\"text/css\"/>\n")
       (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/hk-pyg.css\" type=\"text/css\"/>\n")
       ;; Crazy hack. I've been unable to get consistent top padding between gitit and blogify-foo.
-      (insert "<style>blockquote { padding-top: 0em; }</style>")
+      (insert "<style>blockquote { padding-top: 0em; }</style>\n")
       (insert "<title>" title "</title>\n")
       ;; Tweak body font size here:
       (insert "<body style=\"font-size:85%\">\n")
@@ -1343,5 +1346,8 @@ I'd rather fix the real problem than keep patching it up."
 ;; (pushnew "/usr/local/bin" exec-path)
 ;; (pushnew (expand-file-name "~/bin") exec-path :test #'string-equal)
 
+(defun git-push ()
+  (interactive)
+  (git-cmd "push"))
 
 ;;; End of customizations
