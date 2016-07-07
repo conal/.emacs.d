@@ -11,6 +11,7 @@
 ;;; (package-refresh-contents)  ; Do occasionally
 
 (package-install 'company)
+(package-install 'mmm-mode)
 (package-install 'zoom-frm)
 
 ;;; Common Lisp conveniences
@@ -29,7 +30,7 @@
 ;;         "~/git-repos/haskell-mode"
 ;;         "~/git-repos/ghc-mod/elisp"
         "~/git-repos/git-emacs"
-        "~/git-repos/mmm-mode"
+;;         "~/git-repos/mmm-mode"
         ;; "~/gnu/ispell4"
         ))
 
@@ -1025,6 +1026,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(git-working-dir-change-behaviour (quote git-refresh-all-saved))
  '(haskell-hoogle-command nil)
  '(haskell-indent-offset 2)
+ '(haskell-process-suggest-hoogle-imports t)
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-tags-on-save t)
  '(inferior-haskell-wait-and-jump t)
@@ -1035,6 +1037,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(mac-pass-command-to-system nil)
  '(markdown-command "pandoc --toc --smart --standalone --to html")
  '(markdown-indent-on-enter t)
+ '(markdown-unordered-list-item-prefix "\n*   ")
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
  '(mmm-mode-ext-classes-alist
@@ -1178,6 +1181,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
       ;; Crazy hack. I've been unable to get consistent top padding between gitit and blogify-foo.
       (insert "<style>blockquote { padding-top: 0em; }</style>")
       (insert "<title>" title "</title>\n")
+      ;; Tweak body font size here:
       (insert "<body style=\"font-size:85%\">\n")
       (end-of-buffer)
       (insert "\n</body>\n")
