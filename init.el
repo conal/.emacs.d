@@ -1141,6 +1141,11 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
   (save-window-excursion
     (shell-command-on-region from to "blogify")
     (switch-to-buffer "*Shell Command Output*")
+    ;; Pandoc inserts annotations elements when generating MathML from LaTeX.
+    ;; When I copying from the browser and paste into an email message, the annotations become visible.
+    ;; To fix, we can remove the annotation or make it invisible with "display:none" CSS.
+    ;; (replace-regexp "<annotation .*?</annotation>" "" nil (point-min) (point-max))
+    (replace-regexp "<annotation " "<annotation style=\"display:none\" " nil (point-min) (point-max))
     (kill-ring-save (point-min) (point-max))
     ;; (x-select-text (buffer-string))
     ))
