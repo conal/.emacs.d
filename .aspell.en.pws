@@ -1,6 +1,7 @@
-personal_ws-1.1 en 131 
+personal_ws-1.1 en 149 
 memoize
 API
+uncurried
 deterministically
 functor
 combinator
@@ -9,6 +10,7 @@ defunctionalize
 logarithmically
 scrutinee
 Ashwin
+SecureConnect
 Yoneda
 traversable
 FieldTrip
@@ -27,12 +29,15 @@ homomorphisms
 quicksort
 monoid
 monomorphic
+HipChat
 memoization
+webmail
 manzanita
 RSA
 Hm
 inline
 quaternary
+fmap
 Bool
 Tabula
 radix
@@ -40,9 +45,11 @@ reification
 squirrelly
 quantization
 blockquote
+applicatives
 morphically
 monads
 applicative
+MyAccess
 retransmission
 desugared
 reconnection
@@ -50,6 +57,7 @@ quantizes
 encodable
 repo
 ifThenElse
+newtype
 coproducts
 Ubuntu
 haskell
@@ -65,12 +73,14 @@ modularity
 Banas
 reifies
 ghc
+nondeterminacy
 composability
 representable
 sustainably
 fromInteger
 netlist
 quicksort's
+Kleisli
 parametrizing
 executability
 indices
@@ -91,14 +101,19 @@ Paritosh
 accessor
 compositional
 sequentiality
+WriterT
 spacetime
+Ralf
+Hinze
 FRP
 functors
 combinators
 finiteness
+VPN
 forall
 isomorphism
 mux
+foldMap
 defunctionalizes
 redex
 reconfigurable
@@ -106,12 +121,14 @@ equational
 implementers
 conal
 programmability
+toList
 darwin
 combinational
 reschedulable
 Elliotts
 Anygma
 desugar
+substMap
 morphism
 injectivity
 defunctionalization
@@ -125,8 +142,9 @@ homomorphism
 journaling
 refactored
 refactoring
-iPhone
 iphone
+iPhone
+Croydon
 reifying
 pre
 monadic
