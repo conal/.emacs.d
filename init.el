@@ -24,14 +24,7 @@
 (setq my-extra-load-path
       '(;;;"~/gnu"
         "~/.emacs.d/elisp"
-;;         "~/.emacs.d/elisp/erc-5.2"
-;;         "~/.emacs.d/elisp/erc-5.2-extras"
-;;         "~/.emacs.d/elisp/org-8.2.10/lisp"
-;;         "~/git-repos/haskell-mode"
-;;         "~/git-repos/ghc-mod/elisp"
         "~/git-repos/git-emacs"
-;;         "~/git-repos/mmm-mode"
-        ;; "~/gnu/ispell4"
         ))
 
 (setq load-path
