@@ -1345,12 +1345,13 @@ I'd rather fix the real problem than keep patching it up."
 ;; (global-set-key "\C-cv" 'view-mode)
 
 (setq my-extra-path
-      '("/usr/local/bin" "~/bin" "~/.cabal/bin"))
+      (mapcar #'expand-file-name
+              '("/usr/local/bin" "~/bin" "~/.cabal/bin")))
 
 ;;; Since Mac OS 10.11 (El Capitan), I don't know how to get interactive app
 ;;; launching to read my environment variables.
 (dolist (str my-extra-path)
-  (pushnew (expand-file-name str) exec-path :test #'string-equal)
+  (pushnew str exec-path :test #'string-equal)
   (setenv "PATH" (concat str ":" (getenv "PATH"))))
 
 ;; (pushnew "/usr/local/bin" exec-path)
