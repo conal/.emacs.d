@@ -214,11 +214,17 @@ Spotlight binding from command-space to option-space."
     (find-file file-name)
     (twee-no-longlines
      (when (= (buffer-size) 0)
-       ;; Header info.  The space before html comments avoid confusion with literate Haskell.
-       ;; Using %e causes the day # to be blank-padded instead of zero-padded.
+       ;; Header info. The space before html comments avoid confusion with
+       ;; literate Haskell. Using %e causes the day # to be blank-padded
+       ;; instead of zero-padded.
        ;; Or use %-e or %-d for no padding.
-       (insert (format-time-string "---\ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
-       (insert "<style>.privateZ { display: none; }</style> <!-- remove Z to elide private content -->\n")
+       ;; 2016-07-08: added a blank line before "---" to avoid some sort of
+       ;; mmm bug when there is another line ending in three dashes. Another
+       ;; fix is to add a blank to the end
+       (insert (format-time-string "\n---\ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
+       ;; See Journal 2016-07-07. Seems a bad idea, since the non-displayed
+       ;; content is likely to get carried along when pasting HTML.
+       (insert " <!-- <style>.private { display: none; }</style> -->")
        (insert " <!-- References -->\n\n <!-- -->\n"))
      ;; Insert entry header if not already present
      (let ((was-point (point)))
@@ -1161,7 +1167,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
     (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/hk-pyg.css\" type=\"text/css\"/>\n")
     ;; Crazy hack. I've been unable to get consistent top padding between gitit and blogify-foo.
     (insert "<style>blockquote { padding-top: 0em; }</style>\n")
-    (insert "<body style=\"font-size:85%\">\n")
+    (insert "<body>\n") ;  style=\"font-size:85%\"
     (end-of-buffer)
     (insert "\n</body>\n")
     (kill-ring-save (point-min) (point-max))
