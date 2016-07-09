@@ -744,9 +744,9 @@ logs, putting in a Last Modified in a new file, etc."
 ;; (require 'smooth-scrolling)
 
 
-(require 'erc)
-(require 'erc-sound)
-(erc-sound-enable)                                      ; try it out
+;; (require 'erc)
+;; (require 'erc-sound)
+;; (erc-sound-enable)                                      ; try it out
 
 ;; (require 'status)
 ;; (require 'erc-status)
@@ -1237,6 +1237,10 @@ I'd rather fix the real problem than keep patching it up."
 (global-set-key [s-down] 'zoom-out)
 
 ;; TODO: unify zoom bindings
+
+;; Start with larger fonts
+(let ((frame-zoom-font-difference 10)) (zoom-frm-in))
+
 
 (global-set-key "\C-cR" 'rot13-region)
 
