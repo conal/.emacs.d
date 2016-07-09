@@ -1,4 +1,4 @@
-personal_ws-1.1 en 153 
+personal_ws-1.1 en 158 
 memoize
 API
 uncurried
@@ -6,13 +6,15 @@ deterministically
 functor
 combinator
 hylomorphism
+monotonicity
 defunctionalize
 logarithmically
+MDPs
 scrutinee
 SecureConnect
 Ashwin
-Yoneda
 iOS
+Yoneda
 traversable
 FieldTrip
 instantiation
@@ -25,6 +27,7 @@ axiomatized
 trie
 monad
 TDH
+TCM
 coproduct
 homomorphisms
 quicksort
@@ -43,6 +46,7 @@ Bool
 Tabula
 radix
 reification
+MDP
 squirrelly
 quantization
 blockquote
@@ -75,8 +79,8 @@ Banas
 reifies
 ghc
 nondeterminacy
-composability
 customizations
+composability
 representable
 sustainably
 fromInteger
@@ -96,6 +100,7 @@ foldable
 Kolmogorov
 redexes
 linux
+ArrowChoice
 ux
 parametrized
 exponentials
@@ -146,8 +151,8 @@ homomorphism
 journaling
 refactored
 refactoring
-iPhone
 iphone
+iPhone
 Croydon
 reifying
 pre
