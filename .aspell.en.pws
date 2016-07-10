@@ -1,12 +1,12 @@
-personal_ws-1.1 en 158 
+personal_ws-1.1 en 163 
 memoize
 API
 uncurried
 deterministically
 functor
 combinator
-hylomorphism
 monotonicity
+hylomorphism
 defunctionalize
 logarithmically
 MDPs
@@ -69,6 +69,7 @@ haskell
 reify
 Lodi
 liftA
+homomorphically
 slashdot
 denotational
 coercions
@@ -89,6 +90,7 @@ quicksort's
 Kleisli
 parametrizing
 executability
+commutativity
 indices
 msd
 plugin
@@ -125,6 +127,7 @@ foldMap
 defunctionalizes
 redex
 reconfigurable
+homomorphic
 equational
 implementers
 conal
@@ -142,6 +145,7 @@ injectivity
 defunctionalization
 bitwise
 morphisms
+ZipList
 sequenceA
 CCC
 gitit
@@ -151,8 +155,9 @@ homomorphism
 journaling
 refactored
 refactoring
-iphone
 iPhone
+iphone
+nondeterminism
 Croydon
 reifying
 pre
