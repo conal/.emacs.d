@@ -218,13 +218,14 @@ Spotlight binding from command-space to option-space."
        ;; literate Haskell. Using %e causes the day # to be blank-padded
        ;; instead of zero-padded.
        ;; Or use %-e or %-d for no padding.
-       ;; 2016-07-08: added a blank line before "---" to avoid some sort of
-       ;; mmm bug when there is another line ending in three dashes. Another
-       ;; fix is to add a blank to the end
-       (insert (format-time-string "\n---\ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
+       ;; 2016-07-08: added a space after "---" to avoid some sort of mmm bug
+       ;; when there is another line ending in three dashes. Another fix is to
+       ;; add a blank line before, but doing so seems to break Pandoc's
+       ;; recognition of the page context.
+       (insert (format-time-string "--- \ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
        ;; See Journal 2016-07-07. Seems a bad idea, since the non-displayed
        ;; content is likely to get carried along when pasting HTML.
-       (insert " <!-- <style>.private { display: none; }</style> -->")
+       ;; (insert " <!-- <style>.private { display: none; }</style> -->")
        (insert " <!-- References -->\n\n <!-- -->\n"))
      ;; Insert entry header if not already present
      (let ((was-point (point)))
