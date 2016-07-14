@@ -10,73 +10,75 @@
 ;;; Be sure to customize mmm-mode-ext-classes-alist if you add a class
 
 (mmm-add-classes
- '((twee
-    :classes (twee-javascript
-              twee-html
-              twee-css
-              literate-haskell-lhs2TeX-nobird
-              haskellwiki-code
-              haskellwiki-code-inline
-              )
-    )
-   (twee-javascript
-    :submode javascript-mode
-    :front "\n//{{{$"
-    :include-front t
-    :back "^//}}}\n"
-    :include-back t
-    :insert ((?j insert-javascript-region
-                 nil
-                 @ "//{{{\n" @ _ @ "\n//}}}" @ "\n"
-                 ;;'(mmm-parse-buffer)
-             ))
-    )
-   (twee-html
-    :submode html-mode
-    :front "\n<!--{{{-->$"
-    :include-front t
-    :back "^<!--}}}-->\n"
-    :include-back t
-    :insert ((?h insert-html-region
-                 nil
-                 @ "<!--{{{-->\n" @ _ @ "\n<!--}}}-->}}}" @ "\n"
-             ))
-    )
-   (twee-css
-    :submode css-mode
-    :front "\n/\\*{{{\\*/$"
-    :include-front t
-    :back "^/\\*}}}\\*/\n"
-    :include-back t
-    :insert ((?c insert-css-region
-                 nil
-                 @ "/*{{{*/\n" @ _ @ "\n/*}}}*/" @ "\n"
-             ))
-    )
+ '(
+
+;;    (twee
+;;     :classes (twee-javascript
+;;               twee-html
+;;               twee-css
+;;               literate-haskell-lhs2TeX-nobird
+;;               haskellwiki-code
+;;               haskellwiki-code-inline
+;;               )
+;;     )
+;;    (twee-javascript
+;;     :submode javascript-mode
+;;     :front "\n//{{{$"
+;;     :include-front t
+;;     :back "^//}}}\n"
+;;     :include-back t
+;;     :insert ((?j insert-javascript-region
+;;                  nil
+;;                  @ "//{{{\n" @ _ @ "\n//}}}" @ "\n"
+;;                  ;;'(mmm-parse-buffer)
+;;              ))
+;;     )
+;;    (twee-html
+;;     :submode html-mode
+;;     :front "\n<!--{{{-->$"
+;;     :include-front t
+;;     :back "^<!--}}}-->\n"
+;;     :include-back t
+;;     :insert ((?h insert-html-region
+;;                  nil
+;;                  @ "<!--{{{-->\n" @ _ @ "\n<!--}}}-->}}}" @ "\n"
+;;              ))
+;;     )
+;;    (twee-css
+;;     :submode css-mode
+;;     :front "\n/\\*{{{\\*/$"
+;;     :include-front t
+;;     :back "^/\\*}}}\\*/\n"
+;;     :include-back t
+;;     :insert ((?c insert-css-region
+;;                  nil
+;;                  @ "/*{{{*/\n" @ _ @ "\n/*}}}*/" @ "\n"
+;;              ))
+;;     )
+
    (markdown
     :classes (;; match blocks before inlines, for infix ops like "f `fmap` q"
               ;; markdown-delimited-code-block
               ;; markdown-code-block ; gets confused with text in lists
               literate-haskell-lhs2TeX-bird-code  ; experimental
-
               ;; literate-haskell-lhs2TeX-code   -- treats all code as comments
-
               ;; markdown-haskell-inline-double
               ;; haskell coloring spills into outer context
               ;; markdown-haskell-inline
               )
     )
-   ;; Currently unused.
-   ;; I want to replace by something smarter that grabs the language submode
-   ;; from the {.LANG} following the twiddles.
-   (markdown-delimited-code-block
-    :submode haskell-mode
-    :front "^~~~+.*\n"
-    :include-front nil
-    :back "^~~~+"
-    :back-offset (beginning-of-line -1)
-    ;; :include-back nil
-    )
+
+;;    ;; Currently unused.
+;;    ;; I want to replace by something smarter that grabs the language submode
+;;    ;; from the {.LANG} following the twiddles.
+;;    (markdown-delimited-code-block
+;;     :submode haskell-mode
+;;     :front "^~~~+.*\n"
+;;     :include-front nil
+;;     :back "^~~~+"
+;;     :back-offset (beginning-of-line -1)
+;;     ;; :include-back nil
+;;     )
 
 ;;    (markdown-haskell-block
 ;;     :submode haskell-mode
