@@ -2,7 +2,6 @@
 
 (package-install 'markdown-mode)
 (package-install 'haskell-mode)
-(package-install 'company)
 
 (require 'my-text)
 (require 'my-tex)
@@ -13,6 +12,10 @@
 
 (require 'company)
 
+(global-company-mode) ;; everywhere!
+;; Enable dabbrev everywhere company-mode is on.
+(add-to-list 'company-backends 'company-dabbrev)
+
 (require 'haskell-interactive-mode)
 (require 'haskell-process)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
@@ -22,8 +25,7 @@
   (dolist (extra '(interactive-haskell-mode
                    haskell-decl-scan-mode
                    flycheck-mode
-                   flyspell-prog-mode
-                   company-mode))
+                   flyspell-prog-mode))
     (add-hook hook extra)))
 
 (eval-after-load "which-func"
@@ -266,9 +268,6 @@
   (end-of-line))
 
 (add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
-
-;; Enable dabbrev everywhere company-mode is on.
-(add-to-list 'company-backends 'company-dabbrev)
 
 (defun my-haskell-mode-hook ()
   ;; (local-set-key (kbd "C-c C-c") 'haskell-compile)  
@@ -711,6 +710,13 @@ consisting of repeated '-'. For an <h2>."
   (markdown-add-header "-")
 )
 
+(defun my-markdown-insert-list-item (&optional arg)
+  "Like 'markdown-insert-list-item', but automatically increase indentation if we're looking at a colon"
+  (interactive "p")
+  (message "arg: %s" arg)
+  (markdown-insert-list-item
+   (if (= (char-before) ?:) 16 arg)))
+
 (defun my-old-markdown-mode-hook ()
   (setq paragraph-start "\\(\\+  \\)\\|$")
   ;; (longlines-mode t)
@@ -729,6 +735,8 @@ consisting of repeated '-'. For an <h2>."
   (local-set-key [?\C-=] 'markdown-add-header-equals)
   (local-set-key [?\C--] 'markdown-add-header-hyphen)
   (local-set-key [?\C-$] 'surround-dollars)
+  (local-set-key [?\C-$] 'surround-dollars)
+  (local-set-key [M-return] 'my-markdown-insert-list-item)
   ;; (local-set-key "\C-cH" 'haskell-hoogle)
   (setq indent-line-function 'indent-relative)
   (setq tab-always-indent t)
@@ -816,7 +824,7 @@ consisting of repeated '-'. For an <h2>."
 (defun my-markdown-mode-hook ()
   (visual-line-mode t)
   (auto-fill-mode 0)
-  (flyspell-mode 1)
+  (flyspell-mode-on)
   (local-set-key [?\C-'] 'markdown-inline-code)
   ;; Use M-RET (markdown-insert-list-item):
   ;; (local-set-key "\C-ci" 'add-starred-item)
