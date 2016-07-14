@@ -6,7 +6,7 @@
 
 (require 'my-text)
 (require 'my-tex)
-(require 'twee)
+;; (require 'twee)
 ;; (require 'hs-lint)
 (require 'find-file)  ;; for cc-other-file-alist
 (require 'mmm-mode)
@@ -266,6 +266,9 @@
   (end-of-line))
 
 (add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
+
+;; Enable dabbrev everywhere company-mode is on.
+(add-to-list 'company-backends 'company-dabbrev)
 
 (defun my-haskell-mode-hook ()
   ;; (local-set-key (kbd "C-c C-c") 'haskell-compile)  
@@ -824,7 +827,6 @@ consisting of repeated '-'. For an <h2>."
   ;; (local-set-key [?\M-\C-,] 'markdown-mmmify-lines)  -- global
   (local-set-key (kbd "M-q") 'dont-fill-paragraph)
   (setq markdown-enable-math t)
-  (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
   (local-unset-key "\C-c\C-j")
   (setq indent-line-function 'indent-relative)
   (setq tab-always-indent t)
@@ -832,6 +834,8 @@ consisting of repeated '-'. For an <h2>."
   (setq page-delimiter "^# ")
   (local-set-key "\C-cv" 'blogify-foo)
   (local-set-key "\C-c\C-v" 'blogify-view-foo)
+  (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
+  (modify-syntax-entry ?\\ "w")  ; for LaTex
 )
 
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
@@ -867,28 +871,28 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
 ;; (setq mmm-global-mode nil) ; default = 'maybe
 
 
-(add-hook 'twee-mode-hook 'my-twee-mode-hook)
-;; (add-hook 'longlines-mode-hook 'twee-dont-fill-paragraph-hook)
+;; (add-hook 'twee-mode-hook 'my-twee-mode-hook)
+;; ;; (add-hook 'longlines-mode-hook 'twee-dont-fill-paragraph-hook)
 
-(defun my-twee-mode-hook ()
-  (turn-on-font-lock)
-  (modify-syntax-entry ?\' "w")  ; for my abbrevs
-  (ispell-minor-mode 1)
-  (abbrev-mode 1)
-  (setq indent-tabs-mode nil)
-  (local-set-key "\C-cc" 'twee-add-code-env)
-  (local-set-key "\C-c>" 'twee-add-quote-env)
-  (local-set-key "\C-cs" 'add-spec-env)
-  (local-set-key "\C-c@" 'add-code)
-  (local-set-key [?\C-'] 'add-code)
-  (local-set-key [?\C-,] 'markdown-mmmify-lines)
-  (local-set-key "\C-ch" 'add-hask)
-  (local-set-key "\C-cH" 'add-haskell)
-  (local-set-key "@" 'twee-code-mmm)
-  (local-set-key "\C-c*" 'surround-double-slash)
-  (local-set-key [?\C-*] 'surround-double-slash)
-  ;; (local-set-key "\C-c@" (twee-delim-command "@" "@"))
-  )
+;; (defun my-twee-mode-hook ()
+;;   (turn-on-font-lock)
+;;   (modify-syntax-entry ?\' "w")  ; for my abbrevs
+;;   (ispell-minor-mode 1)
+;;   (abbrev-mode 1)
+;;   (setq indent-tabs-mode nil)
+;;   (local-set-key "\C-cc" 'twee-add-code-env)
+;;   (local-set-key "\C-c>" 'twee-add-quote-env)
+;;   (local-set-key "\C-cs" 'add-spec-env)
+;;   (local-set-key "\C-c@" 'add-code)
+;;   (local-set-key [?\C-'] 'add-code)
+;;   (local-set-key [?\C-,] 'markdown-mmmify-lines)
+;;   (local-set-key "\C-ch" 'add-hask)
+;;   (local-set-key "\C-cH" 'add-haskell)
+;;   (local-set-key "@" 'twee-code-mmm)
+;;   (local-set-key "\C-c*" 'surround-double-slash)
+;;   (local-set-key [?\C-*] 'surround-double-slash)
+;;   ;; (local-set-key "\C-c@" (twee-delim-command "@" "@"))
+;;   )
 
 
 ;; (defun add-code ()
