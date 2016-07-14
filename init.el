@@ -1039,7 +1039,9 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(longlines-show-hard-newlines nil)
  '(longlines-wrap-follows-window-size t)
  '(mac-pass-command-to-system nil)
+ '(markdown-asymmetric-header t)
  '(markdown-command "pandoc --toc --smart --standalone --to html")
+ '(markdown-enable-math t)
  '(markdown-indent-on-enter t)
  '(markdown-unordered-list-item-prefix "
 *   ")
@@ -1047,8 +1049,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
  '(mmm-mode-ext-classes-alist
    (quote
-    (;; (twee-mode nil twee)
-     (markdown-mode nil markdown)
+    ((markdown-mode nil markdown)
      (latex-mode nil literate-haskell-lhs2TeX))) nil (mmm-mode))
  '(mmm-submode-decoration-level 2)
  '(parens-require-spaces nil)
@@ -1373,5 +1374,10 @@ I'd rather fix the real problem than keep patching it up."
 (defun git-push ()
   (interactive)
   (git-cmd "push"))
+
+;;; http://oremacs.com/2015/05/22/define-word/
+(package-install 'define-word)
+(global-set-key (kbd "C-c d") 'define-word-at-point)
+(global-set-key (kbd "C-c D") 'define-word)
 
 ;;; End of customizations
