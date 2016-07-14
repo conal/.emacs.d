@@ -1,9 +1,10 @@
-personal_ws-1.1 en 177 
+personal_ws-1.1 en 181 
 memoize
 API
 hylomorphic
 uncurried
 deterministically
+unparse
 functor
 combinator
 monotonicity
@@ -11,8 +12,8 @@ hylomorphism
 defunctionalize
 logarithmically
 MDPs
-scrutinee
 ODEs
+scrutinee
 SecureConnect
 Ashwin
 iOS
@@ -38,6 +39,7 @@ monoid
 monomorphic
 HipChat
 memoization
+FP
 webmail
 manzanita
 RSA
@@ -68,7 +70,9 @@ encodable
 repo
 ifThenElse
 newtype
+Okasaki
 coproducts
+reparse
 Ubuntu
 haskell
 anamorphism
@@ -169,8 +173,8 @@ homomorphism
 journaling
 refactored
 refactoring
-iphone
 iPhone
+iphone
 nondeterminism
 Croydon
 reifying
