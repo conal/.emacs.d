@@ -212,21 +212,21 @@ Spotlight binding from command-space to option-space."
          (entry-header (format-time-string "# %A, %B %d\n" now)))
     (make-directory (file-name-directory file-name) t) ;; make if doesn't exist
     (find-file file-name)
-    (twee-no-longlines
+    (progn ;; twee-no-longlines
      (when (= (buffer-size) 0)
        ;; Header info. The space before html comments avoid confusion with
        ;; literate Haskell. Using %e causes the day # to be blank-padded
        ;; instead of zero-padded.
        ;; Or use %-e or %-d for no padding.
-       ;; 2016-07-08: added a space after "---" to avoid some sort of mmm bug
-       ;; when there is another line ending in three dashes. Another fix is to
-       ;; add a blank line before, but doing so seems to break Pandoc's
-       ;; recognition of the page context.
-       (insert (format-time-string "--- \ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
+       (insert (format-time-string "---\ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
        ;; See Journal 2016-07-07. Seems a bad idea, since the non-displayed
        ;; content is likely to get carried along when pasting HTML.
        ;; (insert " <!-- <style>.private { display: none; }</style> -->")
-       (insert " <!-- References -->\n\n <!-- -->\n"))
+       ;; 2016-07-11: This HTML comment line leads to an mmm-mode error unless
+       ;; preceded by another blank line. For now, just don't insert the
+       ;; comments.
+       ;; (insert " <!-- References -->\n\n <!-- -->\n")
+       )
      ;; Insert entry header if not already present
      (let ((was-point (point)))
        (goto-char (point-min))
@@ -352,8 +352,8 @@ Stash the result to the kill ring for pasting into a disqus comment box."
              ;; ("\\.lhs$"           . latex-mode)              ; rely on mmm-mode
 ;;                 ("\\.ly$"            . literate-haskell-mode)
              ;; ("itsalltext/.*"     . twee-mode) ;; before \\.txt
-                ("mozex\\.textarea"  . twee-mode) ;; before \\.txt
-                ("\\.tw$"            . twee-mode)
+;;                 ("mozex\\.textarea"  . twee-mode) ;; before \\.txt
+;;                 ("\\.tw$"            . twee-mode)
                 ("\\.css$"           . css-mode)
                 ("\\.js$"            . javascript-mode)
                 ("\\-make.inc"       . makefile-mode)
@@ -589,6 +589,8 @@ doesn't error out when the process is not running."
 ;; A Mac OS system file
 (add-to-list 'completion-ignored-extensions ".DS_Store")
 (add-to-list 'completion-ignored-extensions "._.DS_Store")
+
+(add-to-list 'completion-ignored-extensions "Junk.hs")
 
 (defun zap-matching ()
   "Zap away the current opening delimiter and its matching closer."
@@ -949,7 +951,7 @@ logs, putting in a Last Modified in a new file, etc."
 (defun pasteboard-insert-markdown ()
   "Extract html from Mac OS X pasteboard, convert to markdown, and paste/yank."
   (interactive)
-  (twee-no-longlines
+  (progn ;; twee-no-longlines
    (call-process-shell-command "PasteMarkdown" nil t))
   ;; (delete-backward-char 3) ; extraneous chars
   )
@@ -1045,7 +1047,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
  '(mmm-mode-ext-classes-alist
    (quote
-    ((twee-mode nil twee)
+    (;; (twee-mode nil twee)
      (markdown-mode nil markdown)
      (latex-mode nil literate-haskell-lhs2TeX))) nil (mmm-mode))
  '(mmm-submode-decoration-level 2)
@@ -1212,7 +1214,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
   "Patch up after longlines mode messes up and inserts real line breaks.
 I'd rather fix the real problem than keep patching it up."
   (interactive)
-  (twee-no-longlines
+  (progn ;; twee-no-longlines
    (query-replace-regexp "\\([a-z0-9',`\"_):&]\\)\n\\([a-z0-9'`\"(&_[]\\)" "\\1 \\2")))
 
 (autoload 'wikipedia-mode "wikipedia-mode.el"
