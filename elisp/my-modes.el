@@ -10,12 +10,6 @@
 (require 'find-file)  ;; for cc-other-file-alist
 (require 'mmm-mode)
 
-(require 'company)
-
-(global-company-mode) ;; everywhere!
-;; Enable dabbrev everywhere company-mode is on.
-(add-to-list 'company-backends 'company-dabbrev)
-
 (require 'haskell-interactive-mode)
 (require 'haskell-process)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
@@ -606,14 +600,13 @@ start of comment.  TODO: handle {- ... -} comments."
 (defun md-add-blockquote (arg)
   "Add a blockquote, either as a simple \" >\" (if ARG present) or as html (if not)"
   (interactive "P")
-  (twee-no-longlines
-   (end-of-line)
-   (insert "\n")
-   (insert
-    (if arg "\n > " "\n <blockquote>\n\n\n\n </blockquote>")
-    "\n")
-   (previous-line (if arg 1 3))
-   (end-of-line)))
+  (end-of-line)
+  (insert "\n")
+  (insert
+   (if arg "\n > " "\n <blockquote>\n\n\n\n </blockquote>")
+   "\n")
+  (previous-line (if arg 1 3))
+  (end-of-line))
 
 (defun md-add-lhs (arg)
   "Add a literate Haskell block as \"> \""
@@ -685,16 +678,15 @@ See 'markdown-add-header-equals' and 'markdown-add-header-hyphen'"
     (end-of-line)
     (let ((to (point)))
       ;; (newline)
-      (twee-no-longlines
-       (let ((divider-regexp (concat "\n\\(" header "\\)*$")))
-         (when (looking-at divider-regexp)
-           ;; (message "i see the divider!")
-           (delete-region (point) (match-end 0))
-           )
-         (insert "\n" (replace-regexp-in-string "." header (buffer-substring from to)))
-         (if (looking-at "\n") (beginning-of-line 2) (newline))
-         (newline)
-         )))))
+      (let ((divider-regexp (concat "\n\\(" header "\\)*$")))
+        (when (looking-at divider-regexp)
+          ;; (message "i see the divider!")
+          (delete-region (point) (match-end 0))
+          )
+        (insert "\n" (replace-regexp-in-string "." header (buffer-substring from to)))
+        (if (looking-at "\n") (beginning-of-line 2) (newline))
+        (newline)
+        ))))
 
 (defun markdown-add-header-equals ()
   "Add a line following the current one and having the same length, 
@@ -923,10 +915,9 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
 
 (defun add-env (env)
   "Insert \"\\begin{<ENV>} .... \\end{<ENV>}\"."
-  (unless (bolp) (newline)) ; start on new line
-  (twee-no-longlines
-   (insert "\\begin{" env "}\n\n\\end{" env "}")
-   (previous-line 1))
+  (unless (bolp) (newline))                             ; start on new line
+  (insert "\\begin{" env "}\n\n\\end{" env "}")
+  (previous-line 1)
   (when mmm-mode (mmm-parse-block 1))
   )
 
@@ -935,38 +926,38 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
   (interactive)
   (add-env "code"))
 
-(defun twee-add-code-env ()
-  "Like \\[add-code-env] but for use in twee-mode.  First does \\[twee-add-sublist] if not at
-beginning of line."
-  (interactive)
-  (unless (bolp)
-    (twee-add-sublist)
-    ;; remove usual first list item
-    ;; (beginning-of-line) (kill-line)
-    ;; Use delete-region instead, to preserve kill-buffer state
-    (delete-region (save-excursion (beginning-of-line) (point)) (point))
-    )
-  (add-code-env))
+;; (defun twee-add-code-env ()
+;;   "Like \\[add-code-env] but for use in twee-mode.  First does \\[twee-add-sublist] if not at
+;; beginning of line."
+;;   (interactive)
+;;   (unless (bolp)
+;;     (twee-add-sublist)
+;;     ;; remove usual first list item
+;;     ;; (beginning-of-line) (kill-line)
+;;     ;; Use delete-region instead, to preserve kill-buffer state
+;;     (delete-region (save-excursion (beginning-of-line) (point)) (point))
+;;     )
+;;   (add-code-env))
 
-(defun twee-add-quote-env ()
-  "Add a nested quote."
-  (interactive)
-  (twee-add-sublist)
-  ;; remove usual first list item
-  ;; (beginning-of-line) (kill-line)
-  ;; Use delete-region instead, to preserve kill-buffer state
-  (delete-region (save-excursion (beginning-of-line) (point)) (point))
-  (backward-char 1)
-  (insert ">")
-  (forward-char 1)
-  )
+;; (defun twee-add-quote-env ()
+;;   "Add a nested quote."
+;;   (interactive)
+;;   (twee-add-sublist)
+;;   ;; remove usual first list item
+;;   ;; (beginning-of-line) (kill-line)
+;;   ;; Use delete-region instead, to preserve kill-buffer state
+;;   (delete-region (save-excursion (beginning-of-line) (point)) (point))
+;;   (backward-char 1)
+;;   (insert ">")
+;;   (forward-char 1)
+;;   )
 
-(defun twee-code-mmm ()
-  "Insert an \"@\" and redo mmm-parse for recent text, to highlight.  Helps with the closing \"@\"."
-  (interactive)
-  (insert "@")
-  (mmm-parse-block 1)
-  )
+;; (defun twee-code-mmm ()
+;;   "Insert an \"@\" and redo mmm-parse for recent text, to highlight.  Helps with the closing \"@\"."
+;;   (interactive)
+;;   (insert "@")
+;;   (mmm-parse-block 1)
+;;   )
 
 
 (defun add-spec-env ()
@@ -983,9 +974,8 @@ beginning of line."
 (defun add-haskell ()
   "Insert \"<haskell>...</haskell>\""
   (interactive)
-  (twee-no-longlines
-   (insert "<haskell>\n\n</haskell>")
-   (previous-line 1))
+  (insert "<haskell>\n\n</haskell>")
+  (previous-line 1)
   (when mmm-mode (mmm-parse-block 1)))
 
 
