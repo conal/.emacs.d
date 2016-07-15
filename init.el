@@ -125,11 +125,10 @@ Spotlight binding from command-space to option-space."
 ;;   (interactive "f")
 ;;   (find-file file-name)
 ;;   (goto-char (point-max))
-;;   (twee-no-longlines
-;;    (unless (bolp) (newline)) ; start on fresh line
-;;    (insert (format-time-string "\n:: %Y-%m-%d [%Y-%m day]\n* "))
-;;    (open-line 1)
-;;    ))
+;;   (unless (bolp) (newline))                             ; start on fresh line
+;;   (insert (format-time-string "\n:: %Y-%m-%d [%Y-%m day]\n* "))
+;;   (open-line 1)
+;;   )
 
 ;; (defun new-day-tw ()
 ;;   "Insert a new journal entry."
@@ -148,16 +147,15 @@ Spotlight binding from command-space to option-space."
 ;;   (interactive)
 ;;   (journal-entry "~/anygma/journal.tw"))
 
-;; (defun new-day ()
-;;   "Insert a new journal entry at start of file named by variable my-journal-twee."
-;;   (interactive)
-;;   (find-file my-journal-twee)
-;;   (goto-char (point-max))
-;;   (twee-no-longlines
-;;    (unless (bolp) (newline)) ; start on fresh line
-;;    (insert (format-time-string "\n:: %Y-%m-%d [%Y-%m day]\n* "))
-;;    (open-line 1)
-;;    ))
+(defun new-day ()
+  "Insert a new journal entry at start of file named by variable my-journal-twee."
+  (interactive)
+  (find-file my-journal-twee)
+  (goto-char (point-max))
+  (unless (bolp) (newline))                             ; start on fresh line
+  (insert (format-time-string "\n:: %Y-%m-%d [%Y-%m day]\n* "))
+  (open-line 1)
+  )
 
 ;; (defun anygma ()
 ;;   "Insert a new Anygma journal entry."
@@ -212,40 +210,39 @@ Spotlight binding from command-space to option-space."
          (entry-header (format-time-string "# %A, %B %d\n" now)))
     (make-directory (file-name-directory file-name) t) ;; make if doesn't exist
     (find-file file-name)
-    (progn ;; twee-no-longlines
-     (when (= (buffer-size) 0)
-       ;; Header info. The space before html comments avoid confusion with
-       ;; literate Haskell. Using %e causes the day # to be blank-padded
-       ;; instead of zero-padded.
-       ;; Or use %-e or %-d for no padding.
-       (insert (format-time-string "---\ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
-       ;; See Journal 2016-07-07. Seems a bad idea, since the non-displayed
-       ;; content is likely to get carried along when pasting HTML.
-       ;; (insert " <!-- <style>.private { display: none; }</style> -->")
-       ;; 2016-07-11: This HTML comment line leads to an mmm-mode error unless
-       ;; preceded by another blank line. For now, just don't insert the
-       ;; comments.
-       ;; (insert " <!-- References -->\n\n <!-- -->\n")
-       )
-     ;; Insert entry header if not already present
-     (let ((was-point (point)))
-       (goto-char (point-min))
-       (if (search-forward entry-header nil t)
-           ;; (goto-char was-point) ;;  (1- (point-max))
-           (goto-char (if (= was-point (point-min)) (point-max) was-point))
-         (goto-char (point-max))
-         (unless (bolp) (insert "\n"))                  ; start on blank line
-         ;; Clear final newlines for uniform separation
-         (looking-back "\n+" nil t)
-         (delete-region (match-beginning 0) (match-end 0))
-         (newline 4)                                    ; start on fresh line
-         (previous-line)
-         (insert entry-header "\n")
-         ;;        (insert "## Hours\n\nxx hours: \n\n## ")
-         ;;        (previous-line 2) (end-of-line)
-         (markdown-mode)                       ; cleans up lhs mode spill-over
-         ))
-     ))
+    (when (= (buffer-size) 0)
+      ;; Header info. The space before html comments avoid confusion with
+      ;; literate Haskell. Using %e causes the day # to be blank-padded
+      ;; instead of zero-padded.
+      ;; Or use %-e or %-d for no padding.
+      (insert (format-time-string "---\ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
+      ;; See Journal 2016-07-07. Seems a bad idea, since the non-displayed
+      ;; content is likely to get carried along when pasting HTML.
+      ;; (insert " <!-- <style>.private { display: none; }</style> -->")
+      ;; 2016-07-11: This HTML comment line leads to an mmm-mode error unless
+      ;; preceded by another blank line. For now, just don't insert the
+      ;; comments.
+      ;; (insert " <!-- References -->\n\n <!-- -->\n")
+      )
+    ;; Insert entry header if not already present
+    (let ((was-point (point)))
+      (goto-char (point-min))
+      (if (search-forward entry-header nil t)
+          ;; (goto-char was-point) ;;  (1- (point-max))
+          (goto-char (if (= was-point (point-min)) (point-max) was-point))
+        (goto-char (point-max))
+        (unless (bolp) (insert "\n"))                   ; start on blank line
+        ;; Clear final newlines for uniform separation
+        (looking-back "\n+" nil t)
+        (delete-region (match-beginning 0) (match-end 0))
+        (newline 4)                                     ; start on fresh line
+        (previous-line)
+        (insert entry-header "\n")
+        ;;        (insert "## Hours\n\nxx hours: \n\n## ")
+        ;;        (previous-line 2) (end-of-line)
+        (markdown-mode)                        ; cleans up lhs mode spill-over
+        ))
+    )
   ;; For convenience, rename the buffer. If there's already a different
   ;; journal file, rename it first.
   (let ((journal-name "journal")
@@ -318,7 +315,6 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 (load "my-text")
 (load "my-tex")
 (load "my-modes")
-(load "my-mmm")
 
 ;;(load "my-shell")
 
@@ -951,8 +947,7 @@ logs, putting in a Last Modified in a new file, etc."
 (defun pasteboard-insert-markdown ()
   "Extract html from Mac OS X pasteboard, convert to markdown, and paste/yank."
   (interactive)
-  (progn ;; twee-no-longlines
-   (call-process-shell-command "PasteMarkdown" nil t))
+  (call-process-shell-command "PasteMarkdown" nil t)
   ;; (delete-backward-char 3) ; extraneous chars
   )
 (global-set-key "\C-\M-y" 'pasteboard-insert-markdown)
@@ -1042,16 +1037,14 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(markdown-asymmetric-header t)
  '(markdown-command "pandoc --toc --smart --standalone --to html")
  '(markdown-enable-math t)
+ '(markdown-hr-strings
+   (quote
+    ("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------" "* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------")))
  '(markdown-indent-on-enter t)
  '(markdown-unordered-list-item-prefix "
 *   ")
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
- '(mmm-mode-ext-classes-alist
-   (quote
-    ((markdown-mode nil markdown)
-     (latex-mode nil literate-haskell-lhs2TeX))) nil (mmm-mode))
- '(mmm-submode-decoration-level 2)
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
@@ -1215,8 +1208,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
   "Patch up after longlines mode messes up and inserts real line breaks.
 I'd rather fix the real problem than keep patching it up."
   (interactive)
-  (progn ;; twee-no-longlines
-   (query-replace-regexp "\\([a-z0-9',`\"_):&]\\)\n\\([a-z0-9'`\"(&_[]\\)" "\\1 \\2")))
+  (query-replace-regexp "\\([a-z0-9',`\"_):&]\\)\n\\([a-z0-9'`\"(&_[]\\)" "\\1 \\2"))
 
 (autoload 'wikipedia-mode "wikipedia-mode.el"
   "Major mode for editing documents in Wikipedia markup." t)
@@ -1334,8 +1326,6 @@ I'd rather fix the real problem than keep patching it up."
   (interactive "p")
   (kmacro-exec-ring-item (quote ("\355mv \"\" \242\202\213 " 0 "%d")) arg))
 
-(setq debug-on-error nil)
-
 ;; (let ((tags-add-tables t))
 ;;   (mapc #'visit-tags-table
 ;;         '(
@@ -1380,4 +1370,72 @@ I'd rather fix the real problem than keep patching it up."
 (global-set-key (kbd "C-c d") 'define-word-at-point)
 (global-set-key (kbd "C-c D") 'define-word)
 
+;;; mmm-mode stuff
+
+;; (load "my-mmm") ; abandoning
+
+;;; Fenced code in Markdown, thanks to http://jblevins.org/log/mmm
+
+(defun my-mmm-markdown-auto-class (lang &optional submode)
+  "Define a mmm-mode class for LANG in `markdown-mode' using SUBMODE.
+If SUBMODE is not provided, use `LANG-mode' by default."
+  (let ((class (intern (concat "markdown-" lang)))
+        (submode (or submode (intern (concat lang "-mode"))))
+        (front (concat "^```" lang "[\n\r]+"))
+        (back "^```"))
+    (mmm-add-classes (list (list class :submode submode :front front :back back)))
+    (mmm-add-mode-ext-class 'markdown-mode nil class)))
+
+;; Mode names that derive directly from the language name
+(mapc 'my-mmm-markdown-auto-class
+      '(
+        "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
+        "markdown" "python" "r" "ruby" "sql" "stata" "xml"
+        "haskell"
+        ))
+
+;; Mode names that differ from the language name
+(my-mmm-markdown-auto-class "fortran" 'f90-mode)
+(my-mmm-markdown-auto-class "perl" 'cperl-mode)
+(my-mmm-markdown-auto-class "shell" 'shell-script-mode)
+
+(mmm-add-classes
+ '((markdown-haskell-birdtracks
+    :submode haskell-mode
+    :front "^> "
+    :back "^$"
+    :include-front true
+    )))
+
+(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-birdtracks)
+
+
+;; (mmm-add-classes
+;;  '((markdown-fenced-plain
+;;     :submode awk-mode ;; fundamental-mode
+;;     ;; :front "^```[\n\r]+"
+;;     :front "^[\r\n]```[\r\n]+"
+;;     :back "[^\r\n][\r\n]```$"
+;;     :back-offset 1
+;;     ;; :include-front true
+;;     )))
+;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-fenced-plain)
+
+;;; I finally got the regexps right, but I think font-locking doesn't work in
+;;; fundamental-mode.
+
+;; (search-forward-regexp "[\r\n]```[\r\n]+")
+
+;;; When I use customize, I get
+;;; Error running timer `mmm-mode-idle-reparse': (void-variable company-backends)
+(setq mmm-parse-when-idle t)
+
+(require 'company)
+
+(global-company-mode) ;; everywhere!
+;; Enable dabbrev everywhere company-mode is on.
+(add-to-list 'company-backends 'company-dabbrev)
+
 ;;; End of customizations
+
+;; (setq debug-on-error nil)
