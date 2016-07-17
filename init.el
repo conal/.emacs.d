@@ -5,7 +5,9 @@
 (require 'package)
 (add-to-list
   'package-archives
-  '("melpa" . "http://melpa.org/packages/") t)
+  '("melpa" . "http://melpa.org/packages/")
+  ;; '("melpa-stable" . "http://stable.melpa.org/packages/")
+  t)
 (package-initialize)
 
 ;;; (package-refresh-contents)  ; Do occasionally
@@ -13,6 +15,10 @@
 (package-install 'company)
 (package-install 'mmm-mode)
 (package-install 'zoom-frm)
+(package-install 'elisp-slime-nav)
+(package-install 'exec-path-from-shell)
+
+(require 'mmm-mode)
 
 ;;; Common Lisp conveniences
 (load-library "cl")
@@ -1018,6 +1024,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(erc-whowas-on-nosuchnick t)
  '(eval-expression-print-length 200)
  '(eval-expression-print-level 12)
+ '(flycheck-disabled-checkers (quote (haskell-stack-ghc)))
  '(flymake-no-changes-timeout 0.5)
  '(fringe-mode (quote (1 . 1)) nil (fringe))
  '(git-branch-buffer-closes-after-action nil)
@@ -1045,9 +1052,11 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 *   ")
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
+ '(mmm-idle-timer-delay 1)
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
+ '(read-buffer-completion-ignore-case t)
  '(scroll-conservatively 1000)
  '(sentence-end-double-space nil)
  '(tags-case-fold-search nil)
@@ -1352,11 +1361,17 @@ I'd rather fix the real problem than keep patching it up."
       (mapcar #'expand-file-name
               '("/usr/local/bin" "~/bin" "~/.cabal/bin")))
 
-;;; Since Mac OS 10.11 (El Capitan), I don't know how to get interactive app
-;;; launching to read my environment variables.
-(dolist (str my-extra-path)
-  (pushnew str exec-path :test #'string-equal)
-  (setenv "PATH" (concat str ":" (getenv "PATH"))))
+;; ;;; Since Mac OS 10.11 (El Capitan), I don't know how to get interactive app
+;; ;;; launching to read my environment variables.
+;; (dolist (str my-extra-path)
+;;   (pushnew str exec-path :test #'string-equal)
+;;   (setenv "PATH" (concat str ":" (getenv "PATH"))))
+
+;; Alternatively,
+
+;; https://github.com/purcell/exec-path-from-shell
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;; (pushnew "/usr/local/bin" exec-path)
 ;; (pushnew (expand-file-name "~/bin") exec-path :test #'string-equal)
@@ -1381,9 +1396,10 @@ I'd rather fix the real problem than keep patching it up."
 If SUBMODE is not provided, use `LANG-mode' by default."
   (let ((class (intern (concat "markdown-" lang)))
         (submode (or submode (intern (concat lang "-mode"))))
-        (front (concat "^```" lang "[\n\r]+"))
+        ;; (front (concat "^``` *" lang "[\n\r]+"))
+        (front (concat "^``` *" lang "$"))
         (back "^```"))
-    (mmm-add-classes (list (list class :submode submode :front front :back back)))
+    (mmm-add-classes (list (list class :submode submode :front front :back back :front-offset 1)))
     (mmm-add-mode-ext-class 'markdown-mode nil class)))
 
 ;; Mode names that derive directly from the language name
@@ -1426,9 +1442,10 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 
 ;; (search-forward-regexp "[\r\n]```[\r\n]+")
 
-;;; When I use customize, I get
-;;; Error running timer `mmm-mode-idle-reparse': (void-variable company-backends)
-(setq mmm-parse-when-idle t)
+;; ;; Still experimenting with this one. When I decide, move it to customize
+;; (setq mmm-parse-when-idle t)
+
+;; markdown-mode binds mmm-parse-buffer to C-M-,
 
 (require 'company)
 
@@ -1436,6 +1453,16 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 ;; Enable dabbrev everywhere company-mode is on.
 (add-to-list 'company-backends 'company-dabbrev)
 
+;; Emacs Lisp code all effortlessly available via `M-.` (poppable via `M-*`).
+(require 'elisp-slime-nav)
+(add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
+
+;;; Jump to elisp definitions. Thanks to
+;;; http://emacsredux.com/blog/2014/06/18/quickly-find-emacs-lisp-sources/
+(define-key 'help-command (kbd "C-f") 'find-function)
+(define-key 'help-command (kbd "C-k") 'find-function-on-key)
+(define-key 'help-command (kbd "C-v") 'find-variable)
+
 ;;; End of customizations
 
-;; (setq debug-on-error nil)
+(setq debug-on-error nil)
