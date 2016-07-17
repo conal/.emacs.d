@@ -2,6 +2,7 @@
 
 (package-install 'markdown-mode)
 (package-install 'haskell-mode)
+;; (package-install 'flycheck-haskell) ;; needed with haskell-mode?
 
 (require 'my-text)
 (require 'my-tex)
@@ -18,7 +19,7 @@
 (dolist (hook '(haskell-mode-hook literate-haskell-mode-hook))
   (dolist (extra '(interactive-haskell-mode
                    haskell-decl-scan-mode
-                   flycheck-mode
+                   flycheck-mode  ;; or set global-flycheck-mode
                    flyspell-prog-mode))
     (add-hook hook extra)))
 
@@ -30,6 +31,10 @@
     '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
 (eval-after-load "haskell-mode"
     '(define-key haskell-mode-map (kbd "M-[") 'align))
+
+;; ;; or set global-flycheck-mode
+;; (eval-after-load 'flycheck
+;;   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 (eval-after-load "haskell-cabal"
     '(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile))
@@ -813,6 +818,11 @@ consisting of repeated '-'. For an <h2>."
 ;; ;;   (local-set-key "\C-ci" 'twee-add-item)
 ;;   )
 
+(defun markdown-insert-haskell-code-block ()
+  "'markdown-insert-gfm-code-block' specialized for Haskell"
+  (interactive)
+  (markdown-insert-gfm-code-block "haskell"))
+
 (defun my-markdown-mode-hook ()
   (visual-line-mode t)
   (auto-fill-mode 0)
@@ -834,6 +844,7 @@ consisting of repeated '-'. For an <h2>."
   (setq page-delimiter "^# ")
   (local-set-key "\C-cv" 'blogify-foo)
   (local-set-key "\C-c\C-v" 'blogify-view-foo)
+  (local-set-key "\C-c\C-sh" 'markdown-insert-haskell-code-block)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
   (modify-syntax-entry ?\\ "w")  ; for LaTex
 )
@@ -1021,3 +1032,56 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
   )
 
 (add-hook 'git-comment-hook 'my-git-comment-hook)
+
+;;; Tweaked from markdown-mode. To submit as a patch.
+
+(require 'markdown-mode)
+
+(defun markdown-insert-gfm-code-block (&optional lang)
+  "Insert GFM code block for language LANG.
+If LANG is nil, the language will be queried from user.  If a
+region is active, wrap this region with the markup instead.  If
+the region boundaries are not on empty lines, these are added
+automatically in order to have the correct markup."
+  (interactive
+   (list (let ((completion-ignore-case nil))
+           (condition-case nil
+               (markdown-clean-language-string
+                (completing-read
+                 "Programming language: "
+                 (markdown-gfm-get-corpus)
+                 nil 'confirm (car markdown-gfm-used-languages)
+                 'markdown-gfm-language-history))
+             (quit "")))))
+  (unless (string= lang "") (markdown-gfm-add-used-language lang))
+  (when (> (length lang) 0) (setq lang (concat " " lang)))
+  (if (markdown-use-region-p)
+      (let ((b (region-beginning)) (e (region-end)))
+        (goto-char e)
+        ;; if we're on a blank line, don't newline, otherwise the ```
+        ;; should go on its own line
+        (unless (looking-back "\n" nil)
+          (newline))
+        (insert "```")
+        (markdown-ensure-blank-line-after)
+        (goto-char b)
+        ;; if we're on a blank line, insert the quotes here, otherwise
+        ;; add a new line first
+        (unless (looking-at-p "\n")
+          (newline)
+          (forward-line -1))
+        (markdown-ensure-blank-line-before)
+        (insert "```" lang))
+    (markdown-ensure-blank-line-before)
+    (insert "```" lang "\n\n```")
+    (markdown-ensure-blank-line-after)
+    (forward-line -1)))
+
+;; Change to keep most recently used at the beginning
+(defun markdown-gfm-add-used-language (lang)
+  "Clean LANG and add to list of used languages."
+  ;; (add-to-list 'markdown-gfm-used-languages
+  ;;              (markdown-clean-language-string lang))
+  (setq markdown-gfm-used-languages
+        (cons lang (remove lang markdown-gfm-used-languages)))
+  )
