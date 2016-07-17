@@ -1,4 +1,4 @@
-personal_ws-1.1 en 182 
+personal_ws-1.1 en 183 
 memoize
 API
 hylomorphic
@@ -89,6 +89,7 @@ Hashtables
 catamorphism
 memoized
 modularity
+reifier
 Banas
 reifies
 ghc
@@ -174,8 +175,8 @@ homomorphism
 journaling
 refactored
 refactoring
-iphone
 iPhone
+iphone
 nondeterminism
 Croydon
 reifying
