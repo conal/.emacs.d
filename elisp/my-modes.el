@@ -710,7 +710,6 @@ consisting of repeated '-'. For an <h2>."
 (defun my-markdown-insert-list-item (&optional arg)
   "Like 'markdown-insert-list-item', but automatically increase indentation if we're looking at a colon"
   (interactive "p")
-  (message "arg: %s" arg)
   (markdown-insert-list-item
    (if (= (char-before) ?:) 16 arg)))
 
@@ -832,6 +831,7 @@ consisting of repeated '-'. For an <h2>."
   ;; (local-set-key "\C-ci" 'add-starred-item)
   (local-set-key "\C-cq" 'md-add-blockquote)
   (local-set-key [?\C-$] 'surround-dollars)
+  (local-set-key [M-return] 'my-markdown-insert-list-item)
   ;; Next one conflicts with flyspell-goto-next-error
   ;; (local-set-key [?\C-,] 'markdown-mmmify-lines)
   ;; (local-set-key [?\M-\C-,] 'markdown-mmmify-lines)  -- global
