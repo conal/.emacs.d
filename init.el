@@ -1053,10 +1053,18 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
  '(mmm-idle-timer-delay 1)
+ '(mmm-parse-when-idle t)
+ '(ns-use-native-fullscreen nil)
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
  '(read-buffer-completion-ignore-case t)
+ '(safe-local-variable-values
+   (quote
+    ((flycheck-disabled-checkers quote
+                                 (haskell-ghc haskell-stack-ghc))
+     (flycheck-disabled-checkers quote
+                                 (haskell-stack-ghc)))))
  '(scroll-conservatively 1000)
  '(sentence-end-double-space nil)
  '(tags-case-fold-search nil)
@@ -1106,20 +1114,22 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 
 ;; (set-frame-parameter nil 'fullscreen 'fullboth)
 
-;; If you put the following in your ~/.emacs.el, you can toggle fullscreen
-;; with M-Ret.
+;; (defun toggle-fullscreen ()
+;;   (interactive)
+;;   (set-frame-parameter nil 'fullscreen
+;;                        (if (is-fullscreen) nil 'fullboth)))
 
-(defun toggle-fullscreen ()
-  (interactive)
-  (set-frame-parameter nil 'fullscreen
-                       (if (is-fullscreen) nil 'fullboth)))
+;; (defun is-fullscreen ()
+;;   (frame-parameter nil 'fullscreen))
 
-(defun is-fullscreen ()
-  (frame-parameter nil 'fullscreen))
+;; (global-set-key [(meta return)] 'toggle-fullscreen)
+;; (global-set-key [(control meta return)] 'toggle-fullscreen)
 
-(global-set-key [(meta return)] 'toggle-fullscreen)
-(global-set-key [(control meta return)] 'toggle-fullscreen)
+;;; http://superuser.com/questions/256404/fullscreen-emacs-in-osx
+(global-set-key [(meta return)] 'toggle-frame-fullscreen)
+(global-set-key [(control meta return)] 'toggle-frame-fullscreen)
 
+(toggle-frame-fullscreen)
 
 ;;; Turn off some especially dangerous mac-style bindings for Cocoa Emacs
 (global-unset-key [(super v)])
@@ -1335,15 +1345,18 @@ I'd rather fix the real problem than keep patching it up."
   (interactive "p")
   (kmacro-exec-ring-item (quote ("\355mv \"\" \242\202\213 " 0 "%d")) arg))
 
-;; (let ((tags-add-tables t))
-;;   (mapc #'visit-tags-table
-;;         '(
-;;           ;; find-tags favors later entries in this list
-;;           "~/git-repos/ghc-2016-04-05/compiler/TAGS"
+(let ((tags-add-tables t))
+  (mapc #'visit-tags-table
+        '(
+          ;; Find-tags favors later entries in this list
+          ;; find . -name '*.*hs' | xargs hasktags -e
+          "~/git-repos/ghc/compiler/TAGS"
+          )))
+
 ;;           "~/Haskell/circat/src/TAGS"
 ;;           "~/Haskell/shaped-types/src/TAGS"
 ;;           "~/Haskell/reification-rules/src/TAGS"
-;;           )))
+
 
 ;;           "~/git-repos/kure/TAGS"
 ;;           "~/git-repos/ku-latest/hermit/src/TAGS"
@@ -1415,16 +1428,28 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 (my-mmm-markdown-auto-class "perl" 'cperl-mode)
 (my-mmm-markdown-auto-class "shell" 'shell-script-mode)
 
+;; (mmm-add-classes
+;;  '((markdown-haskell-birdtracks
+;;     :submode haskell-mode
+;;     :front "^> "
+;;     ;; :back "^$"
+;;     ;; :back "\n[^>]"
+;;     ;; :back "^\\($\\|[^>]\\)"
+;;     :back "$"         ; experiment
+;;     :include-front nil
+;;     :include-back  t  ; experiment
+;;     )))
+
 (mmm-add-classes
  '((markdown-haskell-birdtracks
-    :submode haskell-mode
+    :submode literate-haskell-mode
     :front "^> "
     :back "^$"
-    :include-front true
+    :include-front t
+    :include-back  nil
     )))
 
 (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-birdtracks)
-
 
 ;; (mmm-add-classes
 ;;  '((markdown-fenced-plain
@@ -1457,11 +1482,18 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 (require 'elisp-slime-nav)
 (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
-;;; Jump to elisp definitions. Thanks to
+;;; Jump to elisp definitions.
 ;;; http://emacsredux.com/blog/2014/06/18/quickly-find-emacs-lisp-sources/
 (define-key 'help-command (kbd "C-f") 'find-function)
 (define-key 'help-command (kbd "C-k") 'find-function-on-key)
 (define-key 'help-command (kbd "C-v") 'find-variable)
+
+;;; Elide uninteresting files in dired (including auto-save)
+;;; https://www.emacswiki.org/emacs/DiredOmitMode
+(require 'dired-x)
+(setq-default dired-omit-files-p t) ; Buffer-local variable
+;; (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+(setq dired-omit-files (concat dired-omit-files "\\|^\\.DS_Store$"))
 
 ;;; End of customizations
 
