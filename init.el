@@ -1077,11 +1077,12 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 
 ;;; For git--config-get-email, overriding user-mail-address variable.
 (defun user-mail-address ()
-  (completing-read "email: "
-   '("Conal.Elliott@target.com")
-   nil nil
-   "conal@conal.net"
-   ))
+  (let ((email (completing-read 
+                "email: " '("Conal.Elliott@target.com")
+                nil nil "conal@conal.net")))
+    (git--config "user.email" email)
+    (message "Repo user email set to %s" email)
+    email))
 
 ;;; See http://www.emacswiki.org/emacs/EmacsClient#toc21
 ;;; 
