@@ -1076,6 +1076,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 ;;  '(user-mail-address "conal@conal.net")
 
 ;;; For git--config-get-email, overriding user-mail-address variable.
+;;; Might not be the right thing for other uses of (user-mail-address).
 (defun user-mail-address ()
   (let ((email (completing-read 
                 "email: " '("Conal.Elliott@target.com")
