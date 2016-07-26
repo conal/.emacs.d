@@ -1129,7 +1129,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 (global-set-key [(meta return)] 'toggle-frame-fullscreen)
 (global-set-key [(control meta return)] 'toggle-frame-fullscreen)
 
-(toggle-frame-fullscreen)
+;;; (toggle-frame-fullscreen)
 
 ;;; Turn off some especially dangerous mac-style bindings for Cocoa Emacs
 (global-unset-key [(super v)])
@@ -1178,7 +1178,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
     ;; Next one causes line centering. How?
     ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.10.5/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
     (insert "<script src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
-    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/blogify-screen.css\" type=\"text/css\"/>\n")
+    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/blogify-screen.css\" type=\"text/css\"/>\n")
     (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" type=\"text/css\"/>\n")
     (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/hk-pyg.css\" type=\"text/css\"/>\n")
     ;; Crazy hack. I've been unable to get consistent top padding between gitit and blogify-foo.
@@ -1215,19 +1215,9 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
       (insert "<title>" title "</title>\n")
       (write-region (point-min) (point-max) "foo.html"))))
 
-;;; I keep running afoul of an oddity/bug in longlines-mode.
-;;; Some of my long lines get hard breaks on saving.
-;;; Here's a temporary hack to help me cope while I'm investigating.
-;;; I wonder if it would help to turn longlines mode off while saving.
-;;;
-;;; Note 2011-10-28: I've switched from longlines-mode to
-;;; visual-line-mode. Hopefully no more bogus line breaks.
-
-(defun oops-longlines-breaks ()
-  "Patch up after longlines mode messes up and inserts real line breaks.
-I'd rather fix the real problem than keep patching it up."
-  (interactive)
-  (query-replace-regexp "\\([a-z0-9',`\"_):&]\\)\n\\([a-z0-9'`\"(&_[]\\)" "\\1 \\2"))
+;; Experiment: set globally rather than just in markdown-mode, since I use mmm-mode.
+(global-set-key "\C-cv" 'blogify-foo)
+(global-set-key "\C-c\C-v" 'blogify-view-foo)
 
 (autoload 'wikipedia-mode "wikipedia-mode.el"
   "Major mode for editing documents in Wikipedia markup." t)
