@@ -92,12 +92,6 @@
 ;;   (setq paragraph-start "\\(\\+ +\\)\\|$"                  ; "^$"
 ;;         paragraph-separate "^$"               ; "^$"
 ;;         )
-  (when t
-    ;; Use "> " as the comment character.  This lets me
-    ;; conveniently edit mail replies to non-Exchange users.
-    (setq comment-start ">"
-          comment-end ""
-          comment-start-skip "^>  *"))
   (setq adaptive-fill-regexp nil)
   (setq adaptive-fill-function 'my-text-adaptive-fill-function)
   ;; In Emacs 20, indented-text-mode is an alias for text-mode.  (I
@@ -855,6 +849,12 @@ consisting of repeated '-'. For an <h2>."
   (local-set-key "\C-c\C-sl" 'markdown-insert-lisp-code-block)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
   (modify-syntax-entry ?\\ "w")  ; for LaTex
+  (when t
+    ;; Use "> " as the comment character.  This lets me
+    ;; conveniently edit mail replies to non-Exchange users.
+    (setq comment-start ">"
+          comment-end ""
+          comment-start-skip "^>  *"))
 )
 
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
@@ -1010,7 +1010,7 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
   (setq indent-tabs-mode nil)
   (abbrev-mode t))
 
-;; (add-hook 'haskell-cabal-mode-hook 'my-haskell-cabal-mode-hook)
+(add-hook 'haskell-cabal-mode-hook 'my-haskell-cabal-mode-hook)
 
 (defun my-bibtex-mode-hook ()
   (setq indent-tabs-mode nil)
