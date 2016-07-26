@@ -1070,8 +1070,18 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(tags-case-fold-search nil)
  '(tex-shell-file-name "bash")
  '(tool-bar-mode nil)
- '(user-mail-address "conal@conal.net")
+ '(user-mail-address nil)
  '(vc-make-backup-files t))
+
+;;  '(user-mail-address "conal@conal.net")
+
+;;; For git--config-get-email, overriding user-mail-address variable.
+(defun user-mail-address ()
+  (completing-read "email: "
+   '("Conal.Elliott@target.com")
+   nil nil
+   "conal@conal.net"
+   ))
 
 ;;; See http://www.emacswiki.org/emacs/EmacsClient#toc21
 ;;; 
