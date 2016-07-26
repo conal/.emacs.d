@@ -280,6 +280,8 @@
   (setq local-abbrev-table haskell-mode-abbrev-table)
   (abbrev-mode 1)                       ; Use abbreviations
   (local-set-key "\C-cs" 'haskell-insert-section-header)
+  ;; Was haskell-mode-enable-process-minor-mode. Save for blogify-view-foo.
+  (local-unset-key "\C-c\C-v")
   )
 
 (add-hook 'interactive-haskell-mode-hook 'my-interactive-haskell-mode-hook)
@@ -790,10 +792,9 @@ consisting of repeated '-'. For an <h2>."
                         "stack.yaml")))
     (and stack (file-exists-p stack) stack)))
 
-(defun intero-mode-if-stack ()
-  (if (haskell-stack-find-file) (intero-mode)))
-
-(package-install 'intero)
+;; (defun intero-mode-if-stack ()
+;;   (if (haskell-stack-find-file) (intero-mode)))
+;; (package-install 'intero)
 
 ;; (add-hook 'haskell-mode-hook 'intero-mode)
 
@@ -842,8 +843,9 @@ consisting of repeated '-'. For an <h2>."
   (setq tab-always-indent t)
   ;; (setq require-final-newline nil)
   (setq page-delimiter "^# ")
-  (local-set-key "\C-cv" 'blogify-foo)
-  (local-set-key "\C-c\C-v" 'blogify-view-foo)
+  ;; Experiment: set globally, considering mmm
+  ;; (local-set-key "\C-cv" 'blogify-foo)
+  ;; (local-set-key "\C-c\C-v" 'blogify-view-foo)
   (local-set-key "\C-c\C-sh" 'markdown-insert-haskell-code-block)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
   (modify-syntax-entry ?\\ "w")  ; for LaTex
