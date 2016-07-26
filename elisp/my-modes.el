@@ -823,6 +823,11 @@ consisting of repeated '-'. For an <h2>."
   (interactive)
   (markdown-insert-gfm-code-block "haskell"))
 
+(defun markdown-insert-lisp-code-block ()
+  "'markdown-insert-gfm-code-block' specialized for Lisp"
+  (interactive)
+  (markdown-insert-gfm-code-block "lisp"))
+
 (defun my-markdown-mode-hook ()
   (visual-line-mode t)
   (auto-fill-mode 0)
@@ -847,6 +852,7 @@ consisting of repeated '-'. For an <h2>."
   ;; (local-set-key "\C-cv" 'blogify-foo)
   ;; (local-set-key "\C-c\C-v" 'blogify-view-foo)
   (local-set-key "\C-c\C-sh" 'markdown-insert-haskell-code-block)
+  (local-set-key "\C-c\C-sl" 'markdown-insert-lisp-code-block)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
   (modify-syntax-entry ?\\ "w")  ; for LaTex
 )
