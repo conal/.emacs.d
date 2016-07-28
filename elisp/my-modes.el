@@ -1053,14 +1053,15 @@ the region boundaries are not on empty lines, these are added
 automatically in order to have the correct markup."
   (interactive
    (list (let ((completion-ignore-case nil))
-           (condition-case nil
+           ;; (condition-case nil
                (markdown-clean-language-string
                 (completing-read
                  "Programming language: "
                  (markdown-gfm-get-corpus)
                  nil 'confirm (car markdown-gfm-used-languages)
                  'markdown-gfm-language-history))
-             (quit "")))))
+           ;;  (quit ""))
+           )))
   (unless (string= lang "") (markdown-gfm-add-used-language lang))
   (when (> (length lang) 0) (setq lang (concat " " lang)))
   (if (markdown-use-region-p)
