@@ -1052,7 +1052,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 *   ")
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
- '(mmm-idle-timer-delay 1)
+ '(mmm-idle-timer-delay 0.2)
  '(mmm-parse-when-idle t)
  '(ns-use-native-fullscreen nil)
  '(parens-require-spaces nil)
@@ -1391,9 +1391,8 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 ;; (pushnew "/usr/local/bin" exec-path)
 ;; (pushnew (expand-file-name "~/bin") exec-path :test #'string-equal)
 
-(defun git-push ()
-  (interactive)
-  (git-cmd "push"))
+(defun git-push () (interactive) (git-cmd "push"))
+(defun git-pull () (interactive) (git-cmd "pull"))
 
 ;;; http://oremacs.com/2015/05/22/define-word/
 (package-install 'define-word)
@@ -1430,6 +1429,9 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 (my-mmm-markdown-auto-class "perl" 'cperl-mode)
 (my-mmm-markdown-auto-class "shell" 'shell-script-mode)
 
+;; 
+(my-mmm-markdown-auto-class "bash" 'shell-script-mode)
+
 ;; (mmm-add-classes
 ;;  '((markdown-haskell-birdtracks
 ;;     :submode haskell-mode
@@ -1451,6 +1453,16 @@ If SUBMODE is not provided, use `LANG-mode' by default."
     ;; :include-front t
     )))
 (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-birdtracks)
+
+;; ;; Experiment
+;; (mmm-add-classes
+;;  '((markdown-haskell-inline
+;;     :submode haskell-mode
+;;     :front "\\( \\|^\\)`+"
+;;     :back "`+[ ,.\n]"
+;;     ;; :include-front t
+;;     )))
+;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-inline)
 
 ;; (mmm-add-classes
 ;;  '((markdown-fenced-plain
