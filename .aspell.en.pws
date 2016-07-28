@@ -1,11 +1,13 @@
-personal_ws-1.1 en 206 
+personal_ws-1.1 en 216 
 TCM
 TDH
+unordered
 PDFs
 exponentials
 optimizations
 engrained
 RSA
+booleans
 refactoring
 polymorphism
 homomorphic
@@ -25,12 +27,14 @@ Anygma
 linux
 monads
 differentiable
+boolean
 journaling
 foldable
 implementers
 FFT
 encodings
 programmatically
+computability
 MDPs
 inlining
 anamorphism
@@ -72,6 +76,7 @@ Bool
 gitit
 customizations
 readme
+wikidata
 morphically
 monomorphizes
 Tikhon
@@ -107,6 +112,7 @@ monotonicity
 nondeterministically
 reconnection
 iOS
+codomains
 substMap
 Ralf
 manzanita
@@ -117,8 +123,8 @@ iteratively
 Kleisli
 existentials
 liftA
-catamorphism
 indirections
+catamorphism
 MDP
 indices
 isomorphism
@@ -136,14 +142,17 @@ Elliotts
 redex
 Hashtables
 applicatives
+monoids
 sustainably
 MyAccess
+computable
+dimensionality
 functors
 functor
-dimensionality
 refactored
 iphone
 iPhone
+subdirectory
 ODEs
 newtype
 slashdot
@@ -159,6 +168,7 @@ ifThenElse
 hylomorphic
 Yoneda
 reinstall
+renamings
 morphisms
 desugared
 instantiation
