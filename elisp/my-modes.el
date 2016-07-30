@@ -251,9 +251,26 @@
 
 ;; (require 'hoogle)
 
+;;; Experimental hack: redefine mmm-mode-idle-reparse from mmm-vars.el to
+;;; mmm-apply-all to a smaller region than the whole buffer.
+(defun mmm-mode-idle-reparse (buffer)
+  (when (buffer-live-p buffer)
+    (with-current-buffer buffer
+      (when mmm-mode-buffer-dirty
+        ;; (mmm-apply-all)
+        ;; Conal: replaced previous sexp by following
+        (let ((here (point))
+              (range 1000))
+          (mmm-apply-all :start (- here range) :stop (+ here range)))
+        (setq mmm-mode-buffer-dirty nil)
+        (setq mmm-mode-parse-timer nil)))))
+
+
 (defun haskell-insert-section-header ()
   "Insert a pretty section header."
   (interactive)
+  (unless (bolp) (newline))
+  (unless (char-equal (char-before (- (point) 1)) ?\n) (newline))
   (insert "{--------------------------------------------------------------------\n")
   (insert"    \n")
   (insert"--------------------------------------------------------------------}\n")
@@ -855,6 +872,10 @@ consisting of repeated '-'. For an <h2>."
     (setq comment-start ">"
           comment-end ""
           comment-start-skip "^>  *"))
+  ;; Working here. Trying unsuccessfully to keep literate-haskell == 'bird, at
+  ;; least in mmm-local haskell or literate haskell. Then get RET there to be
+  ;; haskell-indentation-newline-and-indent.
+  (setq literate-haskell 'bird)
 )
 
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
