@@ -546,7 +546,6 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-window-excursion
     (compile "make" t)))
 
-
 ;; Can I use catch instead?  How does one catch an error in e-lisp?
 (defun kill-compilation-or-not ()
   "Kill the process made by the \\[compile] or \\[grep] commands.  Like kill-compilation, but
@@ -557,8 +556,6 @@ doesn't error out when the process is not running."
 	(interrupt-process (get-buffer-process buffer))
       ;; (error "The %s process is not running" (downcase mode-name))
       )))
-
-
 
 (global-set-key [f7] 'save-make-go)
 (global-set-key [f8] 'save-make-go)
@@ -1165,7 +1162,6 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 (autoload 'git-blame-mode "git-blame"
   "Minor mode for incremental blame for Git." t)
 
-
 ;keybindindings for git
 (global-set-key [(meta super s)] 'git-status)
 
@@ -1394,6 +1390,10 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 (defun git-push () (interactive) (git-cmd "push"))
 (defun git-pull () (interactive) (git-cmd "pull"))
 
+(global-set-key "\C-xgp" 'git-pull)
+(global-set-key "\C-xgP" 'git-push)
+
+
 ;;; http://oremacs.com/2015/05/22/define-word/
 (package-install 'define-word)
 (global-set-key (kbd "C-c d") 'define-word-at-point)
@@ -1446,13 +1446,24 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 
 (mmm-add-classes
  '((markdown-haskell-birdtracks
-    :submode haskell-mode ; literate-haskell-mode
+    :submode haskell-mode
     :front "^> "
     ;; :back "^$" :back-offset -1
     :back "$"
-    ;; :include-front t
+    :include-front nil
     )))
 (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-birdtracks)
+
+;; Alternatively,
+
+;; (mmm-add-classes
+;;  '((markdown-haskell-birdtracks
+;;     :submode literate-haskell-mode
+;;     :front "^> "
+;;     ;; :back "^$" :back-offset -1
+;;     :back "$"
+;;     :include-front nil
+;;     )))
 
 ;; ;; Experiment
 ;; (mmm-add-classes
@@ -1466,7 +1477,7 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 
 ;; (mmm-add-classes
 ;;  '((markdown-fenced-plain
-;;     :submode awk-mode ;; fundamental-mode
+;;     :submode fundamental-mode
 ;;     ;; :front "^```[\n\r]+"
 ;;     :front "^[\r\n]```[\r\n]+"
 ;;     :back "[^\r\n][\r\n]```$"
