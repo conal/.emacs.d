@@ -1,13 +1,13 @@
-personal_ws-1.1 en 216 
-TCM
+personal_ws-1.1 en 220 
 TDH
+TCM
 unordered
 PDFs
 exponentials
 optimizations
 engrained
-RSA
 booleans
+RSA
 refactoring
 polymorphism
 homomorphic
@@ -15,6 +15,7 @@ memoized
 ZipList
 applicative
 monoid
+coalgebra
 defunctionalize
 modularity
 darwin
@@ -67,6 +68,7 @@ VPN
 FRP
 denotational
 fmap
+numerics
 affine
 conal
 commutativity
@@ -141,8 +143,8 @@ jekyll
 Elliotts
 redex
 Hashtables
-applicatives
 monoids
+applicatives
 sustainably
 MyAccess
 computable
@@ -153,6 +155,7 @@ refactored
 iphone
 iPhone
 subdirectory
+Stochasticity
 ODEs
 newtype
 slashdot
@@ -193,6 +196,7 @@ traversable
 HipChat
 retransmission
 CCC
+contractivity
 axiomatized
 reconfigurable
 combinators
