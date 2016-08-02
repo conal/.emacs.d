@@ -260,8 +260,12 @@
         ;; (mmm-apply-all)
         ;; Conal: replaced previous sexp by following
         (let ((here (point))
-              (range 1000))
-          (mmm-apply-all :start (- here range) :stop (+ here range)))
+              (radius 1000))
+          (mmm-apply-all
+           :start (max (point-min) (- here radius))
+           :stop  (min (point-max) (+ here radius))))
+        ;; To do: use logical blocks instead of characters, so that the cutoff
+        ;; doesn't fall in the middle of a code block.
         (setq mmm-mode-buffer-dirty nil)
         (setq mmm-mode-parse-timer nil)))))
 
@@ -723,6 +727,7 @@ consisting of repeated '-'. For an <h2>."
 (defun my-markdown-insert-list-item (&optional arg)
   "Like 'markdown-insert-list-item', but automatically increase indentation if we're looking at a colon"
   (interactive "p")
+  ;; (when (and (bolp) (= (preceding-char) ?\n)) (previous-line))
   (markdown-insert-list-item
    (if (= (char-before) ?:) 16 arg)))
 
