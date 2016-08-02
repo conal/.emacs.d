@@ -1165,17 +1165,20 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 ;keybindindings for git
 (global-set-key [(meta super s)] 'git-status)
 
-(defun blogify-region (from to)
+(defun blogify-region (from to &optional private)
   "Run blogify on the contents of the region bounded by FROM and TO and save the result in the inter-program copy buffer."
-  (interactive "r")
+  (interactive "rP")
+  (when private (message "(private)"))
   (save-window-excursion
-    (shell-command-on-region from to "blogify")
+    (shell-command-on-region 
+     from to
+     (if private "blogify --private" "blogify"))
     (switch-to-buffer "*Shell Command Output*")
     (beginning-of-buffer)
     ;; Pandoc inserts annotations elements when generating MathML from LaTeX.
     ;; When I copying from the browser and paste into an email message, the annotations become visible.
     ;; To fix, we can remove the annotation or make it invisible with "display:none" CSS.
-    (if t
+    (if nil
         (while (re-search-forward "<annotation " nil t)
           (replace-match "<annotation style=\"display:none\" " nil nil))
       ;; Alternatively,
@@ -1198,20 +1201,20 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
     ;; (x-select-text (buffer-string))
     ))
 
-(defun blogify-buffer ()
+(defun blogify-buffer (&optional private)
   "Run blogify on the contents of the current buffer and save the result in the inter-program copy buffer."
-  (interactive)
-  (blogify-region (point-min) (point-max)))
+  (interactive "P")
+  (blogify-region (point-min) (point-max) private))
 
-(defun blogify-view-foo ()
+(defun blogify-view-foo (&optional private)
   "'blogify-buffer' and browser-view the resulting foo.html."
-  (interactive)
-  (blogify-foo)
+  (interactive "P")
+  (blogify-foo private)
   (browse-url "foo.html"))
 
-(defun blogify-foo ()
-  (interactive)
-  (blogify-buffer)
+(defun blogify-foo (&optional private)
+  (interactive "P")
+  (blogify-buffer private)
   (let ((title (save-excursion
                  (beginning-of-buffer)
                  (if (search-forward "\ntitle: " nil t)
