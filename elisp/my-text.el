@@ -234,7 +234,8 @@ If AFTER is missing, it defaults to BEFORE."
   (let ((negflag (< count 0))
         ;; After inserting, if at end of word, advance past before
         (after (or after before))
-        (then-forward (if (looking-at "\\b")
+        (then-forward (if ; tuning
+                          (and nil (looking-at "\\b"))
                           (if (stringp after)
                               (length after)
                             1)
