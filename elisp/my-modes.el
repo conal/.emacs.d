@@ -257,18 +257,18 @@
   (when (buffer-live-p buffer)
     (with-current-buffer buffer
       (when mmm-mode-buffer-dirty
+          ;; Conal: only reparse in submodes
+          ;; (and mmm-mode-buffer-dirty (not (eql major-mode 'markdown-mode)))
         ;; (mmm-apply-all)
         ;; Conal: replaced previous sexp by following
-        (let ((here (point))
-              (radius 1000))
-          (mmm-apply-all
-           :start (max (point-min) (- here radius))
-           :stop  (min (point-max) (+ here radius))))
-        ;; To do: use logical blocks instead of characters, so that the cutoff
-        ;; doesn't fall in the middle of a code block.
+        (let ((point-was (point))
+              (start (progn (markdown-backward-paragraph 1) (point)))
+              (stop  (progn (markdown-forward-paragraph  1) (point))))
+          (goto-char point-was)
+          ;; (message "reparsing mmm region")
+          (mmm-apply-all :start start :stop  stop))
         (setq mmm-mode-buffer-dirty nil)
         (setq mmm-mode-parse-timer nil)))))
-
 
 (defun haskell-insert-section-header ()
   "Insert a pretty section header."
