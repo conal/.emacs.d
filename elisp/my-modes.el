@@ -839,6 +839,20 @@ consisting of repeated '-'. For an <h2>."
   (interactive)
   (markdown-insert-gfm-code-block "haskell"))
 
+(defun markdown-insert-haskell-code-block-yank ()
+  "'markdown-insert-haskell-code-block' with a yank"
+  (interactive)
+  (markdown-insert-haskell-code-block)
+  (let ((p (point)))
+    (yank)
+    (when (eolp) (delete-char 1))
+    (goto-char p)
+    (when (eolp) (delete-char 1))))
+
+;;; TODO: generalize markdown-insert-haskell-code-block-yank to
+;;; markdown-insert-gfm-code-block-yank, and specialize to
+;;; markdown-insert-haskell-code-block-yank.
+
 (defun markdown-insert-lisp-code-block ()
   "'markdown-insert-gfm-code-block' specialized for Lisp"
   (interactive)
@@ -868,6 +882,8 @@ consisting of repeated '-'. For an <h2>."
   ;; (local-set-key "\C-cv" 'blogify-foo)
   ;; (local-set-key "\C-c\C-v" 'blogify-view-foo)
   (local-set-key "\C-c\C-sh" 'markdown-insert-haskell-code-block)
+  (local-set-key (kbd "C-s-h") 'markdown-insert-haskell-code-block)
+  (local-set-key (kbd "C-s-M-h") 'markdown-insert-haskell-code-block-yank)
   (local-set-key "\C-c\C-sl" 'markdown-insert-lisp-code-block)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
   (modify-syntax-entry ?\\ "w")  ; for LaTex
