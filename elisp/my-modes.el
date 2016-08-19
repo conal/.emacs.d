@@ -77,11 +77,20 @@
   (local-set-key "\M-\t" 'ispell-complete-word) ;; esc-tab in Windows
   )
 
-
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 
 (defun my-python-mode-hook ()
   (my-common-mode-stuff))
+
+;; (defun my-fundamental-mode-hook ()
+;;   (modify-syntax-entry ?\' "w"))
+
+;; ;;; There doesn't seem to be a fundamental-mode-hook. Hm.
+;; (add-hook 'fundamental-mode-hook 'my-fundamental-mode-hook)
+
+;; Try this instead:
+(modify-syntax-entry ?\' "w" (standard-syntax-table))
+;; Maybe overkill. I'm really going after git commit buffers.
 
 (setq text-mode-hook 'my-text-mode-hook)
 
@@ -262,8 +271,8 @@
         ;; (mmm-apply-all)
         ;; Conal: replaced previous sexp by following
         (let ((point-was (point))
-              (start (progn (markdown-backward-paragraph 1) (point)))
-              (stop  (progn (markdown-forward-paragraph  1) (point))))
+              (start (progn (markdown-backward-paragraph 3) (point)))
+              (stop  (progn (markdown-forward-paragraph  3) (point))))
           (goto-char point-was)
           ;; (message "reparsing mmm region")
           (mmm-apply-all :start start :stop  stop))
@@ -834,20 +843,22 @@ consisting of repeated '-'. For an <h2>."
 ;; ;;   (local-set-key "\C-ci" 'twee-add-item)
 ;;   )
 
-(defun markdown-insert-haskell-code-block ()
-  "'markdown-insert-gfm-code-block' specialized for Haskell"
-  (interactive)
-  (markdown-insert-gfm-code-block "haskell"))
+(defun markdown-insert-gfm-code-block-maybe-yank (lang &optional arg)
+  "'markdown-insert-gfm-code-block' with a yank if ARG"
+  (interactive "P")
+  (markdown-insert-gfm-code-block lang)
+  (when arg
+    (let ((p (point)))
+      (yank)
+      (when (eolp) (delete-char 1))
+      (goto-char p)
+      (when (eolp) (delete-char 1))
+      (setq mmm-mode-buffer-dirty t))))
 
-(defun markdown-insert-haskell-code-block-yank ()
-  "'markdown-insert-haskell-code-block' with a yank"
-  (interactive)
-  (markdown-insert-haskell-code-block)
-  (let ((p (point)))
-    (yank)
-    (when (eolp) (delete-char 1))
-    (goto-char p)
-    (when (eolp) (delete-char 1))))
+(defun markdown-insert-haskell-code-block (&optional arg)
+  "'markdown-insert-gfm-code-block' specialized for Haskell"
+  (interactive "P")
+  (markdown-insert-gfm-code-block-maybe-yank "haskell" arg))
 
 ;;; TODO: generalize markdown-insert-haskell-code-block-yank to
 ;;; markdown-insert-gfm-code-block-yank, and specialize to
@@ -856,7 +867,7 @@ consisting of repeated '-'. For an <h2>."
 (defun markdown-insert-lisp-code-block ()
   "'markdown-insert-gfm-code-block' specialized for Lisp"
   (interactive)
-  (markdown-insert-gfm-code-block "lisp"))
+  (markdown-insert-gfm-code-block-yank "lisp"))
 
 (defun my-markdown-mode-hook ()
   (visual-line-mode t)
@@ -883,7 +894,6 @@ consisting of repeated '-'. For an <h2>."
   ;; (local-set-key "\C-c\C-v" 'blogify-view-foo)
   (local-set-key "\C-c\C-sh" 'markdown-insert-haskell-code-block)
   (local-set-key (kbd "C-s-h") 'markdown-insert-haskell-code-block)
-  (local-set-key (kbd "C-s-M-h") 'markdown-insert-haskell-code-block-yank)
   (local-set-key "\C-c\C-sl" 'markdown-insert-lisp-code-block)
   (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
   (modify-syntax-entry ?\\ "w")  ; for LaTex
