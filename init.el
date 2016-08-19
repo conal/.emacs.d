@@ -1022,12 +1022,16 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(erc-whowas-on-nosuchnick t)
  '(eval-expression-print-length 200)
  '(eval-expression-print-level 12)
+ '(fill-column 80)
  '(flycheck-disabled-checkers (quote (haskell-stack-ghc)))
  '(flymake-no-changes-timeout 0.5)
  '(fringe-mode (quote (1 . 1)) nil (fringe))
  '(git-branch-buffer-closes-after-action nil)
  '(git-working-dir-change-behaviour (quote git-refresh-all-saved))
- '(haskell-auto-insert-module-format-string "{-# OPTIONS_GHC -Wall #-}
+ '(haskell-auto-insert-module-format-string "
+
+{-# OPTIONS_GHC -Wall #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-} -- TEMP
 
 -- | 
 
@@ -1176,7 +1180,7 @@ module %s where
 (defun blogify-region (from to &optional private)
   "Run blogify on the contents of the region bounded by FROM and TO and save the result in the inter-program copy buffer."
   (interactive "rP")
-  (when private (message "(private)"))
+  (message "(%s)" (if private "private" "public"))
   (save-window-excursion
     (shell-command-on-region 
      from to
@@ -1197,6 +1201,7 @@ module %s where
     ;; Next one causes line centering. How?
     ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
     (insert "<script src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
+    ;; (insert "<script src=\"file:///Users/conal/Downloads/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
     ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/blogify-screen.css\" type=\"text/css\"/>\n")
     (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" media=\"all\" type=\"text/css\"/>\n")
     ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" media=\"screen, projection\" type=\"text/css\"/>\n")
@@ -1356,13 +1361,13 @@ module %s where
   (interactive "p")
   (kmacro-exec-ring-item (quote ("\355mv \"\" \242\202\213 " 0 "%d")) arg))
 
-(let ((tags-add-tables t))
-  (mapc #'visit-tags-table
-        '(
-          ;; Find-tags favors later entries in this list
-          ;; find . -name '*.*hs' | xargs hasktags -e
-          "~/git-repos/ghc/compiler/TAGS"
-          )))
+;; (let ((tags-add-tables t))
+;;   (mapc #'visit-tags-table
+;;         '(
+;;           ;; Find-tags favors later entries in this list
+;;           ;; find . -name '*.*hs' | xargs hasktags -e
+;;           "~/git-repos/ghc/compiler/TAGS"
+;;           )))
 
 ;;           "~/Haskell/circat/src/TAGS"
 ;;           "~/Haskell/shaped-types/src/TAGS"
