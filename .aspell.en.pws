@@ -1,6 +1,6 @@
-personal_ws-1.1 en 238 
-TDH
+personal_ws-1.1 en 243 
 TCM
+TDH
 unordered
 PDFs
 cartesian
@@ -28,6 +28,7 @@ inlined
 subinterval
 bilinear
 plugin
+parametrize
 modularize
 Anygma
 Dually
@@ -151,6 +152,7 @@ Hm
 unboxed
 meetup
 Verilog
+Isomorphically
 coercions
 jekyll
 Elliotts
@@ -192,6 +194,7 @@ instantiation
 homomorphism
 Everyware
 Okasaki
+automata
 ux
 scrutinee
 mux
@@ -209,6 +212,7 @@ github
 parametrized
 unreified
 traversable
+composable
 HipChat
 retransmission
 CCC
@@ -222,6 +226,7 @@ genericity
 pre
 WriterT
 haskell
+differentiability
 API
 injectivity
 foldMap
