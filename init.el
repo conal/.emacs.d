@@ -491,6 +491,9 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "ﬀ" "ff")
   (save-replace "􏰡" "π")
   (save-replace " " " ")
+  (save-replace "⇒" "=>")
+  (save-replace "→" "->")
+  (save-replace "◦" ".")
   )
 
 (defun fix-pdf ()
@@ -1028,7 +1031,8 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(fringe-mode (quote (1 . 1)) nil (fringe))
  '(git-branch-buffer-closes-after-action nil)
  '(git-working-dir-change-behaviour (quote git-refresh-all-saved))
- '(haskell-auto-insert-module-format-string "
+ '(haskell-auto-insert-module-format-string
+   "
 
 {-# OPTIONS_GHC -Wall #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-} -- TEMP
@@ -1055,7 +1059,7 @@ module %s where
  '(markdown-enable-math t)
  '(markdown-hr-strings
    (quote
-    ("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------" "* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------")))
+    ("* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------" "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------")))
  '(markdown-indent-on-enter t)
  '(markdown-unordered-list-item-prefix "
 *   ")
@@ -1075,6 +1079,7 @@ module %s where
      (flycheck-disabled-checkers quote
                                  (haskell-stack-ghc)))))
  '(scroll-conservatively 1000)
+ '(scroll-margin 10)
  '(sentence-end-double-space nil)
  '(tags-case-fold-search nil)
  '(tex-shell-file-name "bash")
@@ -1147,8 +1152,10 @@ module %s where
 ;; (global-set-key [(control meta return)] 'toggle-fullscreen)
 
 ;;; http://superuser.com/questions/256404/fullscreen-emacs-in-osx
-(global-set-key [(meta return)] 'toggle-frame-fullscreen)
 (global-set-key [(control meta return)] 'toggle-frame-fullscreen)
+
+;;; ;;; Save for insert item in latex and markdown modes
+;;; (global-set-key [(meta return)] 'toggle-frame-fullscreen)
 
 ;;; (toggle-frame-fullscreen)
 
@@ -1198,9 +1205,11 @@ module %s where
         (replace-match "" nil nil)))
     (beginning-of-buffer)
     (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
-    ;; Next one causes line centering. How?
-    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/screen.css\" type=\"text/css\" media=\"screen\" />\n")
-    (insert "<script src=\"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
+    (insert "<script src=\""
+            (if private
+                "https://cdn.mathjax.org/mathjax/latest"
+              "file:///Users/conal/Downloads/MathJax-master")
+            "/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
     ;; (insert "<script src=\"file:///Users/conal/Downloads/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
     ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/blogify-screen.css\" type=\"text/css\"/>\n")
     (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" media=\"all\" type=\"text/css\"/>\n")
@@ -1209,7 +1218,8 @@ module %s where
     ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/hk-pyg.css\" type=\"text/css\"/>\n")
     ;; Crazy hack. I've been unable to get consistent top padding between gitit and blogify-foo.
     (insert "<style>blockquote { padding-top: 0em; }</style>\n")
-    (insert "<body>\n") ;  style=\"font-size:85%\"
+    (insert "<style media=print>body { font-size:70%; }</style>")
+    (insert "<body>\n")
     (end-of-buffer)
     (insert "\n</body>\n")
     (kill-ring-save (point-min) (point-max))
