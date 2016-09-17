@@ -272,7 +272,7 @@
         ;; Conal: replaced previous sexp by following
         (let ((point-was (point))
               (start (progn (markdown-backward-paragraph 3) (point)))
-              (stop  (progn (markdown-forward-paragraph  3) (point))))
+              (stop  (progn (markdown-forward-paragraph  6) (point))))
           (goto-char point-was)
           ;; (message "reparsing mmm region")
           (mmm-apply-all :start start :stop  stop))
@@ -307,6 +307,8 @@
   ;; Was haskell-mode-enable-process-minor-mode. Save for blogify-view-foo.
   (local-unset-key "\C-c\C-v")
   )
+
+(global-set-key (kbd "M-s-n") 'next-error)
 
 (add-hook 'interactive-haskell-mode-hook 'my-interactive-haskell-mode-hook)
 
@@ -1121,8 +1123,7 @@ automatically in order to have the correct markup."
         (goto-char e)
         ;; if we're on a blank line, don't newline, otherwise the ```
         ;; should go on its own line
-        (unless (looking-back "\n" nil)
-          (newline))
+        (unless (looking-back "\n" nil) (newline))
         (insert "```")
         (markdown-ensure-blank-line-after)
         (goto-char b)
@@ -1146,3 +1147,29 @@ automatically in order to have the correct markup."
   (setq markdown-gfm-used-languages
         (cons lang (remove lang markdown-gfm-used-languages)))
   )
+
+
+;;; • Expected kind ‘* -> * -> *’,
+;;;     but ‘(|-)’ has kind ‘Constraint -> Constraint -> *’
+;;; • In the first argument of ‘ProductCat’, namely ‘(|-)’
+
+
+(defun fix-ghc-message ()
+  (interactive)
+  (save-excursion ;; needed?
+    (save-restriction
+      (narrow-to-region (region-beginning) (region-end))
+      (indent-rigidly (point-min) (point-max) -4)
+      (goto-char (point-min))
+      (replace-re "[‘’]" "``")
+      (replace-re "• " "* ")
+      (insert "\n<blockquote class=ghc>")
+      (goto-char (point-max))
+      (insert "</blockquote>\n")
+      )))
+
+(defun replace-re (from to)
+  (let ((point-was (point)))
+    (while (re-search-forward from nil t)
+      (replace-match to nil nil))
+    (goto-char point-was)))
