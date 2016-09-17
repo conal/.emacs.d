@@ -333,8 +333,8 @@ being punctuation"
   ;; tex-bibtex-file doesn't find the parent doc.
   (local-unset-key "\C-c\C-I")
   (auto-fill-mode 0)
+  (visual-line-mode t)
   )
-
 
 (defun tex-mode-hook-function ()
   ;;(setup-TeX-mode)
@@ -349,7 +349,8 @@ being punctuation"
   ;; (local-set-key "\C-c\C-s" 'tex-subsection)
   ;; (local-set-key "\C-cS" 'tex-subsubsection)
   ;; (local-set-key "\C-ci" 'tex-insert-item)
-  (local-set-key "\C-ci" 'latex-insert-item) ; also on M-<RET>
+  (local-set-key "\C-ci" 'latex-insert-item)
+  (local-set-key [M-return] 'latex-insert-item)
   ;;(local-set-key "\C-cc" 'continue-item) ; from my-text.el
   (local-set-key "\C-cc" 'add-code-env)
   (local-set-key "\C-cs" 'add-spec-env)
