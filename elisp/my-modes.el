@@ -1163,9 +1163,9 @@ automatically in order to have the correct markup."
       (goto-char (point-min))
       (replace-re "[‘’]" "``")
       (replace-re "• " "* ")
-      (insert "\n<blockquote class=ghc>")
+      (insert "\n<blockquote class=ghc>\n")
       (goto-char (point-max))
-      (insert "</blockquote>\n")
+      (insert "\n</blockquote>\n")
       )))
 
 (defun replace-re (from to)
@@ -1173,3 +1173,6 @@ automatically in order to have the correct markup."
     (while (re-search-forward from nil t)
       (replace-match to nil nil))
     (goto-char point-was)))
+
+(defun my-git-comment-hook () (company-mode-on))
+(add-hook 'git-comment-hook 'my-git-comment-hook)
