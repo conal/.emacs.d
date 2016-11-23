@@ -15,13 +15,16 @@
 (require 'haskell-process)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
-;;; Enhance haskell & literate haskell modes
-(dolist (hook '(haskell-mode-hook literate-haskell-mode-hook))
-  (dolist (extra '(interactive-haskell-mode
-                   haskell-decl-scan-mode
-                   flycheck-mode  ;; or set global-flycheck-mode
-                   flyspell-prog-mode))
-    (add-hook hook extra)))
+;; Something is slowing down Emacs.
+;; Disable the following group for now:
+
+;; ;;; Enhance haskell & literate haskell modes
+;; (dolist (hook '(haskell-mode-hook literate-haskell-mode-hook))
+;;   (dolist (extra '(interactive-haskell-mode
+;;                    haskell-decl-scan-mode
+;;                    flycheck-mode  ;; or set global-flycheck-mode
+;;                    flyspell-prog-mode))
+;;     (add-hook hook extra)))
 
 (eval-after-load "which-func"
   '(add-to-list 'which-func-modes 'haskell-mode))
@@ -44,6 +47,12 @@
 (eval-after-load "flyspell"
     '(define-key flyspell-mode-map (kbd "C-s-;") 
        'flyspell-auto-correct-previous-word))
+
+;;; The backtick-style fenced code block highlighting in markdown-mode
+;;; conflict with the ones I use for mmm-mode. For now, disable the
+;;; markdown-mode ones. TODO: see about reconciling the two.
+(eval-after-load "markdown-mode"
+  '(setq markdown-fenced-block-pairs (subseq markdown-fenced-block-pairs 0 2)))
 
 ;; ;;; C-; is easy to trigger accidentally without noticing
 ;; (eval-after-load "flyspell"
@@ -270,9 +279,10 @@
           ;; (and mmm-mode-buffer-dirty (not (eql major-mode 'markdown-mode)))
         ;; (mmm-apply-all)
         ;; Conal: replaced previous sexp by following
-        (let ((point-was (point))
-              (start (progn (markdown-backward-paragraph 3) (point)))
-              (stop  (progn (markdown-forward-paragraph  6) (point))))
+        (let* ((point-was (point))
+               (n 6)                                    ; TODO: replace with a defvar
+               (start (progn (markdown-backward-paragraph (* 1 n)) (point)))
+               (stop  (progn (markdown-forward-paragraph  (* 2 n)) (point))))
           (goto-char point-was)
           ;; (message "reparsing mmm region")
           (mmm-apply-all :start start :stop  stop))
@@ -874,7 +884,7 @@ consisting of repeated '-'. For an <h2>."
 (defun my-markdown-mode-hook ()
   (visual-line-mode t)
   (auto-fill-mode 0)
-  (flyspell-mode-on)
+  (flyspell-mode 1)
   (local-set-key [?\C-'] 'markdown-inline-code)
   ;; Use M-RET (markdown-insert-list-item):
   ;; (local-set-key "\C-ci" 'add-starred-item)
@@ -897,7 +907,8 @@ consisting of repeated '-'. For an <h2>."
   (local-set-key "\C-c\C-sh" 'markdown-insert-haskell-code-block)
   (local-set-key (kbd "C-s-h") 'markdown-insert-haskell-code-block)
   (local-set-key "\C-c\C-sl" 'markdown-insert-lisp-code-block)
-  (modify-syntax-entry ?\` "$")  ; self-matching, for code fragments
+  ;; (modify-syntax-entry ?\* "$")  ; italics" self-matching
+  (modify-syntax-entry ?\` "$")  ; code fragment: self-matching 
   (modify-syntax-entry ?\\ "w")  ; for LaTex
   (when t
     ;; Use "> " as the comment character.  This lets me
@@ -921,7 +932,7 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
   (if visual-line-mode
       (progn
         (beep)
-        (message "I'm guessing you don't really want to use `fill-paragraph' in visual-line-mode."))
+        (message "I bet you don't really want to use `fill-paragraph' in visual-line-mode."))
     (fill-paragraph nil)))
 
 ;;; for gitit
@@ -1161,7 +1172,7 @@ automatically in order to have the correct markup."
       (narrow-to-region (region-beginning) (region-end))
       (indent-rigidly (point-min) (point-max) -4)
       (goto-char (point-min))
-      (replace-re "[‘’]" "``")
+      (replace-re "[‘’]" "`")
       (replace-re "• " "* ")
       (insert "\n<blockquote class=ghc>\n")
       (goto-char (point-max))
@@ -1174,5 +1185,8 @@ automatically in order to have the correct markup."
       (replace-match to nil nil))
     (goto-char point-was)))
 
-(defun my-git-comment-hook () (company-mode-on))
+(defun my-git-comment-hook () 
+  (company-mode-on)
+  (abbrev-mode 1))
+
 (add-hook 'git-comment-hook 'my-git-comment-hook)

@@ -59,111 +59,6 @@ Spotlight binding from command-space to option-space."
 (when (eq system-type 'darwin)
   (swap-option-command))
 
-(defconst tabula-dir
-  (expand-file-name
-   (if (eq system-type 'gnu/linux) "~" "~/Tabula"))
-  "Directory for Tabula content.")
-
-
-(put 'narrow-to-region 'disabled nil)
-(put 'minibuffer-complete-and-exit 'disabled nil)
-;; (put 'indent-region 'disabled nil)
-
-
-; Backups.
-(setq version-control 't)
-(setq kept-old-versions 1)
-(setq kept-new-versions 2)
-(setq delete-old-versions t)
-
-
-(load "bibtex")
-
-;; (load "codeconv.el")
-;;;(load "comment-region.el")  ;;; missing from winemacs
-
-
-;; Dealing with control-m's and input echoing.  See
-; http://www.cs.washington.edu/homes/voelker/ntemacs.html#shell-ctrlm
-;; Doesn't seem to work
-;; (add-hook 'comint-output-filter-functions 'shell-strip-ctrl-m)
-
-;; (defun my-comint-init ()
-;;   ;; (setq comint-process-echoes t)
-;;   )
-;; (add-hook 'comint-mode-hook 'my-comint-init)
-
-;; Python support
-(push "~/gnu/python-mode-1.0" load-path)
-(push '("\\.py$" . python-mode) auto-mode-alist)
-(push '("python" . python-mode) interpreter-mode-alist)
-(autoload 'python-mode "python-mode" "Python editing mode." t)
-
-;;; (defvar comint-mode-hook
-;;;   '(lambda () "strip ^M"
-;;;      (setq comint-output-filter-functions
-;;;            (append '(comint-strip-ctrl-m) comint-output-filter-functions))))
-
-;;; For remote file editing.  Not working yet.
-
-;; (push "~/gnu/tramp-2.1.7/lisp" load-path)
-;; (require 'tramp)
-
-;; Use visual-lines-mode instead. Works sensibly with next-error.
-;; (require 'longlines)
-
-;;; Instead, require longlines where needed.
-;; (autoload 'longlines-mode
-;;   "longlines.el"
-;;   "Minor mode for automatically wrapping long lines." t)
-
-;; For tiddlywiki editing. see http://gimcrackd.com/etc/src/#Twee
-
-;; used in longlines.el (used by twee)
-(setq window-min-width 2)
-
-;; (defvar my-journal-twee "~/Journal/journal.tw"
-;;   "Location of daily journal twee file.")
-
-;; (setq my-journal-twee "~/anygma/journal.tw")
-
-;; (defun journal-entry (file-name)
-;;   "Insert a new journal entry at start of file named by FILE-NAME."
-;;   (interactive "f")
-;;   (find-file file-name)
-;;   (goto-char (point-max))
-;;   (unless (bolp) (newline))                             ; start on fresh line
-;;   (insert (format-time-string "\n:: %Y-%m-%d [%Y-%m day]\n* "))
-;;   (open-line 1)
-;;   )
-
-;; (defun new-day-tw ()
-;;   "Insert a new journal entry."
-;;   (interactive)
-;;   (journal-entry "~/Journal/journal.tw")
-;; ;;   (newline)(newline)
-;; ;;   (insert "------------------") (newline)
-;; ;;   (insert "LambdaPix hours: ") (newline)
-;; ;;   (previous-line 4)
-;; ;;   (end-of-line)
-;;   )
-
-;; ;; While I'm working with Anygma, use a different journal file.  Sort out non-private stuff later.
-;; (defun anygma ()
-;;   "Insert a new journal entry for anygma work."
-;;   (interactive)
-;;   (journal-entry "~/anygma/journal.tw"))
-
-(defun new-day ()
-  "Insert a new journal entry at start of file named by variable my-journal-twee."
-  (interactive)
-  (find-file my-journal-twee)
-  (goto-char (point-max))
-  (unless (bolp) (newline))                             ; start on fresh line
-  (insert (format-time-string "\n:: %Y-%m-%d [%Y-%m day]\n* "))
-  (open-line 1)
-  )
-
 ;; (defun anygma ()
 ;;   "Insert a new Anygma journal entry."
 ;;   (interactive)
@@ -568,6 +463,7 @@ doesn't error out when the process is not running."
 (read-abbrev-file abbrev-file-name)
 
 (put 'eval-expression 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 ;;; Load a partial-completion mechanism, which makes minibuffer completion
 ;;; search multiple words instead of just prefixes; for example, the command
@@ -588,6 +484,8 @@ doesn't error out when the process is not running."
 
 ;; (push ".DS_Store" PC-ignored-extensions)
 ;; (push "._.DS_Store" PC-ignored-extensions)
+
+(add-to-list 'completion-ignored-extensions ".pdf")
 
 ;; A Mac OS system file
 (add-to-list 'completion-ignored-extensions ".DS_Store")
@@ -1002,6 +900,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
       (tool-bar-lines . 0)
       (menu-bar-lines . 1))))
  '(default-input-method "TeX")
+ '(delete-old-versions t)
  '(display-buffer-reuse-frames t)
  '(erc-autojoin-channels-alist
    (quote
@@ -1013,11 +912,11 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(erc-mode-hook
    (quote
     (erc-munge-invisibility-spec pcomplete-erc-setup erc-button-add-keys
-                                 (lambda nil
-                                   (setq imenu-create-index-function
-                                         (quote erc-create-imenu-index)))
-                                 (lambda nil
-                                   (abbrev-mode 1)))))
+				 (lambda nil
+				   (setq imenu-create-index-function
+					 (quote erc-create-imenu-index)))
+				 (lambda nil
+				   (abbrev-mode 1)))))
  '(erc-nick "conal")
  '(erc-nick-uniquifier "+")
  '(erc-prompt-for-password t)
@@ -1033,7 +932,6 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(git-working-dir-change-behaviour (quote git-refresh-all-saved))
  '(haskell-auto-insert-module-format-string
    "
-
 {-# OPTIONS_GHC -Wall #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-} -- TEMP
 
@@ -1045,6 +943,7 @@ module %s where
  '(haskell-hoogle-command nil)
  '(haskell-indent-offset 2)
  '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
  '(haskell-process-suggest-hoogle-imports t)
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-tags-on-save t)
@@ -1068,6 +967,9 @@ module %s where
  '(mmm-idle-timer-delay 0.2)
  '(mmm-parse-when-idle t)
  '(ns-use-native-fullscreen nil)
+ '(package-selected-packages
+   (quote
+    (haskell-mode company zoom-frm yaml-mode w3m mmm-mode markdown-mode intero flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
@@ -1075,11 +977,11 @@ module %s where
  '(safe-local-variable-values
    (quote
     ((flycheck-disabled-checkers quote
-                                 (haskell-ghc haskell-stack-ghc))
+				 (haskell-ghc haskell-stack-ghc))
      (flycheck-disabled-checkers quote
-                                 (haskell-stack-ghc)))))
+				 (haskell-stack-ghc)))))
  '(scroll-conservatively 1000)
- '(scroll-margin 10)
+ '(scroll-margin 3)
  '(sentence-end-double-space nil)
  '(tags-case-fold-search nil)
  '(tex-shell-file-name "bash")
@@ -1189,39 +1091,14 @@ module %s where
   (interactive "rP")
   (message "(%s)" (if private "private" "public"))
   (save-window-excursion
-    (shell-command-on-region 
-     from to
-     (if private "blogify --private" "blogify"))
+    (shell-command-on-region from to (if private "blogify --private" "blogify"))
     (switch-to-buffer "*Shell Command Output*")
     (beginning-of-buffer)
     ;; Pandoc inserts annotations elements when generating MathML from LaTeX.
     ;; When I copying from the browser and paste into an email message, the annotations become visible.
     ;; To fix, we can remove the annotation or make it invisible with "display:none" CSS.
-    (if nil
-        (while (re-search-forward "<annotation " nil t)
-          (replace-match "<annotation style=\"display:none\" " nil nil))
-      ;; Alternatively,
-      (while (re-search-forward "<annotation .*?</annotation>" nil t)
-        (replace-match "" nil nil)))
-    (beginning-of-buffer)
-    (insert "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
-    (insert "<script src=\""
-            (if private
-                "https://cdn.mathjax.org/mathjax/latest"
-              "file:///Users/conal/Downloads/MathJax-master")
-            "/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
-    ;; (insert "<script src=\"file:///Users/conal/Downloads/MathJax.js?config=TeX-AMS-MML_HTMLorMML\" type=\"text/javascript\"></script>\n")
-    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/blogify-screen.css\" type=\"text/css\"/>\n")
-    (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" media=\"all\" type=\"text/css\"/>\n")
-    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/custom.css\" media=\"screen, projection\" type=\"text/css\"/>\n")
-    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/Journals/Current/wikidata/static/css/print.css\" media=\"print\" type=\"text/css\"/>\n")
-    ;; (insert "<link rel=\"stylesheet\" href=\"file:///Users/conal/cabal/gitit-0.12.1.1/data/static/css/hk-pyg.css\" type=\"text/css\"/>\n")
-    ;; Crazy hack. I've been unable to get consistent top padding between gitit and blogify-foo.
-    (insert "<style>blockquote { padding-top: 0em; }</style>\n")
-    (insert "<style media=print>body { font-size:70%; }</style>")
-    (insert "<body>\n")
-    (end-of-buffer)
-    (insert "\n</body>\n")
+    (while (re-search-forward "<annotation .*?</annotation>" nil t)
+      (replace-match "" nil nil))
     (kill-ring-save (point-min) (point-max))
     ;; (x-select-text (buffer-string))
     ))
@@ -1371,13 +1248,13 @@ module %s where
   (interactive "p")
   (kmacro-exec-ring-item (quote ("\355mv \"\" \242\202\213 " 0 "%d")) arg))
 
-;; (let ((tags-add-tables t))
-;;   (mapc #'visit-tags-table
-;;         '(
-;;           ;; Find-tags favors later entries in this list
-;;           ;; find . -name '*.*hs' | xargs hasktags -e
-;;           "~/git-repos/ghc/compiler/TAGS"
-;;           )))
+(let ((tags-add-tables t))
+  (mapc #'visit-tags-table
+        '(
+          ;; Find-tags favors later entries in this list
+          ;; find . -name '*.*hs' | xargs hasktags -e
+          "~/git-repos/ghc/compiler/TAGS"
+          )))
 
 ;;           "~/Haskell/circat/src/TAGS"
 ;;           "~/Haskell/shaped-types/src/TAGS"
@@ -1439,8 +1316,8 @@ If SUBMODE is not provided, use `LANG-mode' by default."
   (let ((class (intern (concat "markdown-" lang)))
         (submode (or submode (intern (concat lang "-mode"))))
         ;; (front (concat "^``` *" lang "[\n\r]+"))
-        (front (concat "^``` *" lang "$"))
-        (back "^```"))
+        (front (concat "^ *``` *" lang "$"))
+        (back "^ *```"))
     (mmm-add-classes (list (list class :submode submode :front front :back back :front-offset 1)))
     (mmm-add-mode-ext-class 'markdown-mode nil class)))
 
@@ -1456,8 +1333,6 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 (my-mmm-markdown-auto-class "fortran" 'f90-mode)
 (my-mmm-markdown-auto-class "perl" 'cperl-mode)
 (my-mmm-markdown-auto-class "shell" 'shell-script-mode)
-
-;; 
 (my-mmm-markdown-auto-class "bash" 'shell-script-mode)
 
 ;; (mmm-add-classes

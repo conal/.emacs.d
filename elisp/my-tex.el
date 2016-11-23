@@ -375,6 +375,7 @@ being punctuation"
   (modify-syntax-entry ?_ "w")          ; for abbreviations
   ;; enable the $-hack (see dollar-toggle)
   (modify-syntax-entry ?\$ "$")
+  (modify-syntax-entry ?\| "$")  ; lhs2tex code fragment: self-matching 
   (no-match-angle)                      ; make angle brackets not match
   ;; Punt specialized versions of these.
   ;;(local-set-key "\C-c\C-f" nil)

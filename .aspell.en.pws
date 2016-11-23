@@ -1,4 +1,4 @@
-personal_ws-1.1 en 269 
+personal_ws-1.1 en 293 
 TCM
 TDH
 unordered
@@ -22,8 +22,10 @@ applicative
 monoid
 coalgebra
 defunctionalize
+semirings
 modularity
 compositionally
+differentiations
 darwin
 sequentiality
 deriv
@@ -38,6 +40,7 @@ parametrize
 modularize
 Anygma
 Dually
+magmas
 linux
 monads
 differentiable
@@ -67,6 +70,7 @@ accessor
 untyped
 Banas
 coproducts
+targ
 reifier
 reifies
 hylomorphism
@@ -83,6 +87,7 @@ reddit
 morphism
 finiteness
 overloadings
+functorially
 VPN
 FRP
 denotational
@@ -92,6 +97,7 @@ affine
 quadratically
 conal
 commutativity
+canonicalize
 monoidal
 echinacea
 Bool
@@ -99,13 +105,16 @@ gitit
 hackery
 customizations
 readme
+pragma
 adjunction
 wikidata
 morphically
 monomorphizes
 Tikhon
+scrutinees
 netlist
 quicksort's
+refactor
 bilinearity
 homomorphically
 inline
@@ -127,6 +136,7 @@ quicksort
 radix
 equational
 reschedulable
+adversarially
 executability
 fromInteger
 monadically
@@ -138,6 +148,7 @@ ByteString
 monotonicity
 nondeterministically
 reconnection
+covector
 iOS
 codomains
 injective
@@ -156,7 +167,9 @@ disjunction
 iteratively
 Kleisli
 existentials
+parenthesization
 liftA
+functoriality
 exponentiating
 subdifferential
 indirections
@@ -166,6 +179,7 @@ indices
 isomorphism
 FP
 webmail
+kinded
 reparse
 desugar
 monomorphize
@@ -184,13 +198,16 @@ monoids
 applicatives
 sustainably
 MyAccess
+foundational
+optimizability
 computable
 dimensionality
 functors
 functor
+ng
 refactored
-iphone
 iPhone
+iphone
 subdirectory
 Stochasticity
 ODEs
@@ -200,7 +217,9 @@ Ashwin
 Croydon
 nondeterminacy
 reboxing
+reprogrammable
 Hinze
+bicartesian
 msd
 subtree
 defunctionalizes
@@ -211,13 +230,16 @@ Yoneda
 reinstall
 superclass
 renamings
+functorial
 morphisms
 desugared
+kindedness
 instantiation
 homomorphism
 Everyware
 Okasaki
 semimodule
+decompositions
 automata
 ux
 scrutinee
@@ -226,6 +248,7 @@ reifying
 parametrization
 uncurrying
 Ubuntu
+simplifier
 codomain
 subintervals
 repo
@@ -261,6 +284,7 @@ Kolmogorov
 parametrizing
 memoize
 blockquote
+invertible
 memoizing
 bitwise
 reify
