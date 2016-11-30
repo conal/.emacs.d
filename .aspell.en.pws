@@ -1,6 +1,6 @@
-personal_ws-1.1 en 293 
-TCM
+personal_ws-1.1 en 295 
 TDH
+TCM
 unordered
 PDFs
 adjunctions
@@ -189,6 +189,7 @@ meetup
 Isomorphically
 Verilog
 coercions
+unhandled
 jekyll
 entailments
 Elliotts
@@ -206,8 +207,8 @@ functors
 functor
 ng
 refactored
-iPhone
 iphone
+iPhone
 subdirectory
 Stochasticity
 ODEs
@@ -274,6 +275,7 @@ genericity
 pre
 WriterT
 haskell
+inlinable
 Haskell's
 differentiability
 API
