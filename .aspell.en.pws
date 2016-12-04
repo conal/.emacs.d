@@ -1,6 +1,6 @@
-personal_ws-1.1 en 295 
-TDH
+personal_ws-1.1 en 299 
 TCM
+TDH
 unordered
 PDFs
 adjunctions
@@ -54,6 +54,7 @@ encodings
 programmatically
 computability
 MDPs
+Jacobian
 inlining
 anamorphism
 reified
@@ -136,6 +137,7 @@ quicksort
 radix
 equational
 reschedulable
+simplifier's
 adversarially
 executability
 fromInteger
@@ -207,8 +209,8 @@ functors
 functor
 ng
 refactored
-iphone
 iPhone
+iphone
 subdirectory
 Stochasticity
 ODEs
@@ -223,6 +225,7 @@ Hinze
 bicartesian
 msd
 subtree
+CCCs
 defunctionalizes
 PDF
 ifThenElse
@@ -241,6 +244,7 @@ Everyware
 Okasaki
 semimodule
 decompositions
+unoptimized
 automata
 ux
 scrutinee
