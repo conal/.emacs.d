@@ -1,7 +1,8 @@
-personal_ws-1.1 en 299 
-TCM
+personal_ws-1.1 en 304 
 TDH
+TCM
 unordered
+pragmas
 PDFs
 adjunctions
 disjunctions
@@ -21,6 +22,7 @@ ZipList
 applicative
 monoid
 coalgebra
+Noodlings
 defunctionalize
 semirings
 modularity
@@ -53,8 +55,8 @@ FFT
 encodings
 programmatically
 computability
-MDPs
 Jacobian
+MDPs
 inlining
 anamorphism
 reified
@@ -67,6 +69,7 @@ FieldTrip
 compositional
 combinational
 quantizes
+unlifted
 accessor
 untyped
 Banas
@@ -188,6 +191,7 @@ monomorphize
 Hm
 unboxed
 meetup
+covectors
 Isomorphically
 Verilog
 coercions
@@ -209,8 +213,8 @@ functors
 functor
 ng
 refactored
-iPhone
 iphone
+iPhone
 subdirectory
 Stochasticity
 ODEs
@@ -281,6 +285,7 @@ WriterT
 haskell
 inlinable
 Haskell's
+algorithmically
 differentiability
 API
 injectivity
