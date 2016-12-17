@@ -969,7 +969,7 @@ module %s where
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
-    (haskell-mode company zoom-frm yaml-mode w3m mmm-mode markdown-mode intero flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
+    (image+ haskell-mode company zoom-frm yaml-mode w3m mmm-mode markdown-mode intero flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
