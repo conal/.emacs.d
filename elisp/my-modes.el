@@ -314,9 +314,33 @@
   (setq local-abbrev-table haskell-mode-abbrev-table)
   (abbrev-mode 1)                       ; Use abbreviations
   (local-set-key "\C-cs" 'haskell-insert-section-header)
+  (local-set-key [?\C-'] 'haskell-inline-code)
   ;; Was haskell-mode-enable-process-minor-mode. Save for blogify-view-foo.
   (local-unset-key "\C-c\C-v")
   )
+
+(defun haskell-inline-code (arg)
+  "Surround previous ARG sexps with haddock symbol quotes."
+  (interactive "p")
+  (expand-abbrev)
+  (surround-punct "'" "'" arg))
+
+;;; https://github.com/haskell/haskell-mode/issues/1553#issuecomment-358373643
+(setq haskell-process-args-ghci '("-ferror-spans"))
+(setq haskell-process-args-cabal-repl
+      '("--ghc-options=-ferror-spans"))
+(setq haskell-process-args-stack-ghci
+      '("--ghci-options=-ferror-spans"
+        "--no-build" "--no-load"))
+(setq haskell-process-args-cabal-new-repl
+      '("--ghc-options=-ferror-spans"))
+;; Correction:
+(setq haskell-process-args-cabal-repl
+      '("--ghc-options --ghc-options -ferror-spans"))
+
+;; I removed "-fshow-loaded-modules" from the variables above, as I was
+;; getting errors.
+
 
 (global-set-key (kbd "M-s-n") 'next-error)
 
@@ -644,7 +668,7 @@ start of comment.  TODO: handle {- ... -} comments."
   "Add a blockquote, either as a simple \" >\" (if ARG present) or as html (if not)"
   (interactive "P")
   (end-of-line)
-  (insert "\n")
+  (unless (bolp) (insert "\n"))
   (insert
    (if arg "\n > " "\n <blockquote>\n\n\n\n </blockquote>")
    "\n")
@@ -862,7 +886,7 @@ consisting of repeated '-'. For an <h2>."
   (when arg
     (let ((p (point)))
       (yank)
-      (when (eolp) (delete-char 1))
+      (when (bolp) (delete-char 1))
       (goto-char p)
       (when (eolp) (delete-char 1))
       (setq mmm-mode-buffer-dirty t))))
@@ -920,6 +944,11 @@ consisting of repeated '-'. For an <h2>."
   ;; least in mmm-local haskell or literate haskell. Then get RET there to be
   ;; haskell-indentation-newline-and-indent.
   (setq literate-haskell 'bird)
+  (setq electric-indent-mode 0)
+  ;; Avoid "Stack overflow in regexp matcher" from '$' in Haskell code.
+  (setq markdown-enable-math nil)
+  ;; Link insertion sub-keymap. They're not very useful, so recover the global align-regexp
+  (local-unset-key "\C-c\C-a")
 )
 
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
@@ -1062,7 +1091,6 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
   (previous-line 1)
   (when mmm-mode (mmm-parse-block 1)))
 
-
 (defun my-diff-mode-hook ()
   ;; (local-set-key "\M-o" 'diff-goto-source) ; default
   (local-set-key "\M-o" 'other-window)
@@ -1164,7 +1192,6 @@ automatically in order to have the correct markup."
 ;;;     but ‘(|-)’ has kind ‘Constraint -> Constraint -> *’
 ;;; • In the first argument of ‘ProductCat’, namely ‘(|-)’
 
-
 (defun fix-ghc-message ()
   (interactive)
   (save-excursion ;; needed?
@@ -1174,9 +1201,9 @@ automatically in order to have the correct markup."
       (goto-char (point-min))
       (replace-re "[‘’]" "`")
       (replace-re "• " "* ")
-      (insert "\n<blockquote class=ghc>\n")
+      (insert "\n<blockquote class=ghc>")
       (goto-char (point-max))
-      (insert "\n</blockquote>\n")
+      (insert "</blockquote>\n")
       )))
 
 (defun replace-re (from to)
