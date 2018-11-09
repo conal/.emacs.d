@@ -6,17 +6,34 @@
 (add-to-list
   'package-archives
   '("melpa" . "http://melpa.org/packages/")
-  ;; '("melpa-stable" . "http://stable.melpa.org/packages/")
-  t)
+  '("melpa-stable" . "http://stable.melpa.org/packages/")
+  )
 (package-initialize)
 
 ;;; (package-refresh-contents)  ; Do occasionally
 
-(package-install 'company)
-(package-install 'mmm-mode)
-(package-install 'zoom-frm)
-(package-install 'elisp-slime-nav)
-(package-install 'exec-path-from-shell)
+;; (package-install 'nlinum)
+;; (package-install 'company)
+;; (package-install 'mmm-mode)
+;; (package-install 'zoom-frm)
+;; (package-install 'elisp-slime-nav)
+;; (package-install 'exec-path-from-shell)
+
+(setq my-extra-load-path
+      '(;;;"~/gnu"
+        "~/.emacs.d/elisp"
+        "~/git-repos/git-emacs"
+        "~/git-repos/markdown-mode"  ; for https://github.com/jrblevin/markdown-mode/commit/62d5b
+        "~/git-repos/glsl-mode"
+        "~/git-repos/graphviz-dot-mode"
+        ;; I'm getting haskell-mode and intero from melpa (not melpa-stable)
+	;; "~/git-repos/haskell-mode"
+        ;; "~/git-repos/intero"
+        ))
+
+(setq load-path
+      (append (mapcar #'expand-file-name my-extra-load-path)
+              load-path))
 
 (require 'mmm-mode)
 
@@ -27,16 +44,8 @@
 ;; (setq user-emacs-directory (getenv "HOME"))
 ;; Default is "~/.emacs.d/". I want to move my customizations there.
 
-(setq my-extra-load-path
-      '(;;;"~/gnu"
-        "~/.emacs.d/elisp"
-        "~/git-repos/git-emacs"
-        "~/git-repos/markdown-mode"  ; for https://github.com/jrblevin/markdown-mode/commit/62d5b
-        ))
-
-(setq load-path
-      (append (mapcar #'expand-file-name my-extra-load-path)
-              load-path))
+(require 'graphviz-dot-mode)
+(require 'titlecase)
 
 (setq inhibit-startup-message t)
 
@@ -339,6 +348,9 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (interactive)
   ;; I guess there are a lot of unicode variations of quotation marks.
   ;; TODO: trade in these non-regexp replacements with regexp versions so that there's only one per result.
+  (save-replace "’" "'")
+  (save-replace "\342\200\234" "\"")
+  (save-replace "\342\200\235" "\"")
   (save-replace "\205" "...")
   (save-replace "…" "...")
   (save-replace "\222" "'")
@@ -347,6 +359,8 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "\226" "---")
   (save-replace "\227" "--")
   (save-replace "—" "---")
+  (save-replace "―" "---")
+  (save-replace " – " "---")
   (save-replace "–" "-")
   (save-replace "" "--")
   (save-replace "" "\"")
@@ -389,6 +403,21 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "⇒" "=>")
   (save-replace "→" "->")
   (save-replace "◦" ".")
+  ;; (save-replace "😊" ":)")
+  (save-replace "🙂" ":)")
+  ;; (save-replace "🙂" ":)")
+  ;; (save-replace "😉" ";)")
+  ;; (save-replace "😞" ":(")
+  (save-replace "😊" ":smiley:")
+  ;; Investigate these next two. Are they really :smiley:
+  ;; (save-replace "🙂" ":smiley:")
+  ;; (save-replace "🙂" ":smiley:")
+  (save-replace "😉" ":wink:")
+  (save-replace "😞" ":disappointed:")
+  (save-replace "∀" "forall ")
+  (save-replace "∃" "exists ")
+  (save-replace "×" ":*")
+  (save-replace "′" "'")
   )
 
 (defun fix-pdf ()
@@ -435,14 +464,27 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 
 (global-set-key "\C-cm" 'do-make)
 
-(defun save-make-go ()
-  "Save buffers and run make with no arguments."
-  (interactive)
+;; (defun do-make-noninteractive ()
+;;   (interactive)
+;;   (save-some-buffers t)
+;;   (save-window-excursion
+;;     (compile "make")))
+
+;; (defun do-make-see-noninteractive ()
+;;   (interactive)
+;;   (save-some-buffers t)
+;;   (save-window-excursion
+;;     (compile "make see")))
+
+(defun save-make-go (clean-first)
+  "Save buffers and run make. If there's an argument, begin \"make clean\"."
+  (interactive "P")
   (save-some-buffers t)
   ;; How to kill-compilation if it's running?
   ;; (catch 'error (kill-compilation))
   (kill-compilation-or-not)
   (save-window-excursion
+    (when clean-first (call-process "make" nil nil t "clean"))
     (compile "make" t)))
 
 ;; Can I use catch instead?  How does one catch an error in e-lisp?
@@ -889,7 +931,7 @@ logs, putting in a Last Modified in a new file, etc."
  '(c-style-variables-are-local-p nil)
  '(c-tab-always-indent t)
  '(column-number-mode t)
- '(comment-style (quote plain))
+ '(comment-style (quote indent))
  '(dabbrev-case-fold-search nil)
  '(default-frame-alist-qqq
     (quote
@@ -930,10 +972,12 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(fringe-mode (quote (1 . 1)) nil (fringe))
  '(git-branch-buffer-closes-after-action nil)
  '(git-working-dir-change-behaviour (quote git-refresh-all-saved))
+ '(graphviz-dot-preview-extension "pdf")
+ '(graphviz-dot-view-command "view-dot %s")
  '(haskell-auto-insert-module-format-string
    "
 {-# OPTIONS_GHC -Wall #-}
-{-# OPTIONS_GHC -fno-warn-unused-imports #-} -- TEMP
+{-# OPTIONS_GHC -Wno-unused-imports #-} -- TEMP
 
 -- | 
 
@@ -942,10 +986,13 @@ module %s where
 " t)
  '(haskell-hoogle-command nil)
  '(haskell-indent-offset 2)
+ '(haskell-process-args-cabal-repl (quote ("--ghc-option=-ferror-spans")))
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
+ '(haskell-process-suggest-haskell-docs-imports nil)
  '(haskell-process-suggest-hoogle-imports t)
  '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-use-presentation-mode t)
  '(haskell-tags-on-save t)
  '(inferior-haskell-wait-and-jump t)
  '(ispell-program-name "aspell")
@@ -955,7 +1002,7 @@ module %s where
  '(mac-pass-command-to-system nil)
  '(markdown-asymmetric-header t)
  '(markdown-command "pandoc --toc --smart --standalone --to html")
- '(markdown-enable-math t)
+ '(markdown-enable-math nil)
  '(markdown-hr-strings
    (quote
     ("* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------" "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------")))
@@ -969,7 +1016,7 @@ module %s where
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
-    (image+ haskell-mode company zoom-frm yaml-mode w3m mmm-mode markdown-mode intero flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
+    (haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
@@ -987,7 +1034,8 @@ module %s where
  '(tex-shell-file-name "bash")
  '(tool-bar-mode nil)
  '(user-mail-address nil)
- '(vc-make-backup-files t))
+ '(vc-make-backup-files t)
+ '(warning-suppress-types (quote ((undo discard-info)))))
 
 ;;  '(user-mail-address "conal@conal.net")
 
@@ -1130,6 +1178,7 @@ module %s where
 
 ;; Experiment: set globally rather than just in markdown-mode, since I use mmm-mode.
 (global-set-key "\C-cv" 'blogify-foo)
+(global-set-key "\C-c\C-r" 'blogify-foo)
 (global-set-key "\C-c\C-v" 'blogify-view-foo)
 
 (autoload 'wikipedia-mode "wikipedia-mode.el"
@@ -1243,6 +1292,130 @@ module %s where
 
 ;; (journal)
 
+(defun exercise-journal ()
+  (interactive "")
+  (switch-to-buffer "journal")
+  (goto-char (point-max))
+  (if (looking-back "\n+" nil t)
+      (progn
+        (delete-region (match-beginning 0) (match-end 0))
+        (newline 2)
+        (previous-line))
+    (insert "\n"))
+  ;; (insert "\n## Exercise\n\nMini-elliptical:\n\n*   Distance: \n*   Count: \n*   Time: \n*   Calories: \n")
+  ;; (previous-line 4)
+  (end-of-line)
+  (insert "\n## Exercise\n\nMini-elliptical:  miles.\n")
+  (backward-word 1) (backward-char 1))
+
+(defun hipchat-trim (start end)
+  "Tidy HipChat output after copy&paste."
+  (interactive "r")
+  ;; (message "hipchat-trim: %d %d" start end)
+  (narrow-to-region start end)
+  (save-excursion
+    (while (re-search-forward "^\\[.*\\] \\([^ ]+\\)[^:]*:" nil t)
+      (replace-match "*\\1:*" nil)))
+  (save-excursion
+    (while (re-search-forward "\\(.\\)\n" nil t)
+      (replace-match "\\1  \n" nil)))
+  (widen))
+
+(defun slack-trim (start end)
+  "Tidy Slack output after copy&paste."
+  (interactive "r")
+  ;; (message "slack-trim: %d %d" start end)
+  (narrow-to-region start end)  ;; restore after testing
+  ;; Usernames can be up to 21 characters long. They can contain lowercase
+  ;; letters a to z (without accents), numbers 0 to 9, hyphens, periods, and
+  ;; underscores.
+  ;; https://get.slack.help/hc/en-us/articles/216360827-Change-your-username
+  (save-excursion
+    (goto-char start)
+    (save-excursion
+      (while (re-search-forward "^\n+\\([a-z0-9._é-]+\\)[ \n]*\\[[:0-9 APM]*\\] *$" nil t)
+        (replace-match "\n*\\1:*" nil)))
+    ;; Same speaker continuing looks like blank lines and a bracketed date line.
+    (save-excursion
+      (while (re-search-forward "\n+\\[[:0-9 APM]+\\] *\n" nil t)
+        (replace-match "  \n" nil)))
+    (save-excursion
+      (while (search-forward ":slightly_smiling_face:" nil t)
+        (replace-match ":smile:" nil)))
+    (save-excursion
+      (while (re-search-forward "\\(.\\)\n" nil t)
+        (replace-match "\\1  \n" nil)))
+    (save-excursion
+      (while (search-forward ":*  \n" nil t)
+        (replace-match ":*\n" nil)))
+    (fix-quotes))
+  (widen))
+
+(defun messages-trim (start end)
+  "Tidy Apple Messages output after copy&paste."
+  (interactive "r")
+  ;; (message "messages-trim: %d %d" start end)
+  (narrow-to-region start end)  ;; restore after testing
+  (when (eolp) (delete-char 1))
+  (save-excursion
+    (goto-char start)
+    ;; Speaker lines end in a colon
+    (save-excursion
+      ;; (replace-regexp "\\([A-Za-z ]+\\):$" "\n*\\1:*"))
+      (while (search-forward-regexp "^\\([A-Za-z ]+\\):$" nil t)
+        (replace-match "\n*\\1:*")))
+    ;; Content lines begin with a tab
+    (save-excursion
+      ;; (replace-regexp "^\t\\(.*\\)" "\\1  "))
+      (while (search-forward-regexp "^\t\\(.*\\)" nil t)
+        (replace-match "\\1  ")))
+    (fix-quotes))
+  (widen))
+
+(defun hangouts-trim (start end)
+  "Tidy Google Hangouts output after copy&paste."
+  (interactive "r")
+  ;; (message "hangouts-trim: %d %d" start end)
+  (narrow-to-region start end)  ;; restore after testing
+  (when (eolp) (delete-char 1))
+  (save-excursion
+    (goto-char start)
+    ;; Speaker lines can be tricky to identify.
+    ;; For now, two capitalized names.
+    (save-excursion
+      (while (search-forward-regexp "^\\([A-Z][a-z]+ [A-Z][a-z]+\\)$" nil t)
+        (replace-match "\n_\\1:_")))
+    ;; Remove date/time lines, e.g., "Thursday, August 23, 2018 8:54 AM"
+    (save-excursion
+      (while (search-forward-regexp "^[A-Z][a-z]+day,.*[AP]M\n" nil t)
+        (replace-match "")))
+    ;; add two spaces to the end of content lines (for line breaks)
+    (save-excursion
+      (while (search-forward-regexp "^\\(.+\\)" nil t)
+        (replace-match "\\1  ")))
+    (fix-quotes))
+  (widen))
+
+(defun irc-trim (start end)
+  "Tidy IRC output after copy&paste."
+  (interactive "r")
+  ;; (message "irc-trim: %d %d" start end)
+  (narrow-to-region start end) ;; restore after testing
+  ;; Usernames can be up to 21 characters long. They can contain lowercase
+  ;; letters a to z (without accents), numbers 0 to 9, hyphens, periods, and
+  ;; underscores.
+  ;; https://get.slack.help/hc/en-us/articles/216360827-Change-your-username
+  (save-excursion
+    (while (re-search-forward
+            ;; "^\n*\\[[:0-9 APM]*\\] *<\\([A-Za-z0-9._-]+\\)>"
+            "^\n*\\([A-Za-z0-9._-]+\\) *\\[[:0-9 APM]*\\]"
+            nil t)
+      (replace-match "\n*\\1:*" nil)))
+  (save-excursion
+    (while (search-forward "\t" nil t)
+      (replace-match " " nil)))
+  (widen))
+
 (defun amazon-track-rename (&optional arg)
   "Keyboard macro."
   (interactive "p")
@@ -1253,8 +1426,9 @@ module %s where
         '(
           ;; Find-tags favors later entries in this list
           ;; find . -name '*.*hs' | xargs hasktags -e
-          "~/git-repos/ghc/compiler/TAGS"
           )))
+
+          ;; "~/git-repos/ghc/compiler/TAGS"
 
 ;;           "~/Haskell/circat/src/TAGS"
 ;;           "~/Haskell/shaped-types/src/TAGS"
@@ -1326,7 +1500,8 @@ If SUBMODE is not provided, use `LANG-mode' by default."
       '(
         "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
         "markdown" "python" "r" "ruby" "sql" "stata" "xml"
-        "haskell"
+        "javascript" "haskell" "glsl" "verilog"
+        "yaml"
         ))
 
 ;; Mode names that differ from the language name
@@ -1334,6 +1509,11 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 (my-mmm-markdown-auto-class "perl" 'cperl-mode)
 (my-mmm-markdown-auto-class "shell" 'shell-script-mode)
 (my-mmm-markdown-auto-class "bash" 'shell-script-mode)
+(my-mmm-markdown-auto-class "json" 'javascript-mode)
+
+;; Slows down scrolling quite a lot when point is in a dot region
+(my-mmm-markdown-auto-class "dot" 'graphviz-dot-mode)
+;; (my-mmm-markdown-auto-class "dot" 'text-mode)
 
 ;; (mmm-add-classes
 ;;  '((markdown-haskell-birdtracks
@@ -1421,6 +1601,8 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 (setq-default dired-omit-files-p t) ; Buffer-local variable
 ;; (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 (setq dired-omit-files (concat dired-omit-files "\\|^\\.DS_Store$"))
+
+(display-time-mode) ; show time in mode line
 
 ;;; End of customizations
 
