@@ -319,17 +319,21 @@ being punctuation"
   (local-set-key [?\C-$] 'tex-math-sexp)
   (local-set-key "\C-ct" 'tex-texttt)
   (local-set-key "\C-ch" 'tex-hs)
-  (local-set-key "\C-c\C-v" 'tex-verb)
+  ;; (local-set-key "\C-c\C-v" 'tex-verb)
   (local-set-key "\C-cf" 'tex-footnote)
   (local-set-key "\C-c\C-f" 'tex-footnote) ;; was tex-file
   (local-set-key "\C-c\C-n" 'tex-notefoot)
+  ;; (local-unset-key "\C-c\C-p") ;; was tex-print
+  ;; (local-unset-key "\C-c\C-n")
   (local-set-key "\C-cn" 'tex-note)
   (local-set-key "\e\"" 'my-tex-insert-quotes)
   (local-set-key [?\C-,] 'markdown-mmmify-lines)
   (local-set-key [?\C-'] 'add-code)
   (local-set-key [?\C-|] 'add-spec)
   (local-set-key [?\C-\\] 'add-spec) ; was toggle-input-method
-  (local-unset-key "\C-c\C-c")  ;; was tex-compile
+  (local-set-key "\C-cv" 'do-make-noninteractive)
+  ;; (local-set-key "\C-c\C-v" 'do-make-see-noninteractive)
+  ;; There's also save-make-go ("\C-c\C-r")
   ;; tex-bibtex-file doesn't find the parent doc.
   (local-unset-key "\C-c\C-I")
   (auto-fill-mode 0)
@@ -407,22 +411,23 @@ being punctuation"
   ;; is here.  If instead, I wait and do the longlines-mode explicitly,
   ;; all is fine.  I think.  Fixed in my tweaked mmm-mode.
   ;; 
-  (local-set-key "\C-c\C-r" 'my-tex-region)
+  ;; (local-set-key "\C-c\C-r" 'my-tex-region)
+  (local-set-key "\C-c\C-r" 'save-make-go)
   (local-unset-key "\C-c\C-j")  ; i want save-junk, not LaTeX-insert-item
 ;;   (unless (string-equal (buffer-name) "Junk.lhs")
 ;;     (longlines-mode))
   ;; (TeX-fold-mode 1) ; present in carbon emacs
   )
 
-(defun my-tex-region (start end)
-  "Copy region to \"body.lhs\" and invoke make."
-  (interactive "r")
-  (save-some-buffers t)
-  (write-region start end "body.lhs")
-  (kill-compilation-or-not)  ;; from ~/.emacs
-  (save-window-excursion
-    (compile "make" t))
-  )
+;; (defun my-tex-region (start end)
+;;   "Copy region to \"body.lhs\" and invoke make."
+;;   (interactive "r")
+;;   (save-some-buffers t)
+;;   (write-region start end "body.lhs")
+;;   (kill-compilation-or-not)  ;; from ~/.emacs
+;;   (save-window-excursion
+;;     (compile "make" t))
+;;   )
 
 
 ;; "tex-mode-hook" used to work.  when did emacs get case-sensitivie?
