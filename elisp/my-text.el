@@ -355,9 +355,18 @@ prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
   (perhaps-expand-abbrev)
   (end-of-visual-line))
 
+(defun abbrev-expand-just-one-space ()
+  "Like just-one-space, but first do perhaps-expand-abbrev"
+  (interactive)
+  (just-one-space)
+  (backward-char 1)
+  (perhaps-expand-abbrev)
+  (forward-char 1))
+
 ;; (define-key visual-line-mode-map [remap move-end-of-line] 'abbrev-expand-end-of-visual-line)
 (define-key visual-line-mode-map [remap abbrev-expand-eol] 'abbrev-expand-end-of-visual-line)
 
+(global-set-key (kbd "M-SPC") 'abbrev-expand-just-one-space)
 
 ;;; "[.?!][]\"')}]*\\($\\|\t\\|  \\)[ \t\n]*"
 ;;; Took out one space, because some folks won't put in two!!
