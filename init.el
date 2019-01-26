@@ -1016,7 +1016,7 @@ module %s where
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
-    (haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
+    (popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
@@ -1138,18 +1138,19 @@ module %s where
   "Run blogify on the contents of the region bounded by FROM and TO and save the result in the inter-program copy buffer."
   (interactive "rP")
   (message "(%s)" (if private "private" "public"))
-  (save-window-excursion
-    (shell-command-on-region from to (if private "blogify --private" "blogify"))
-    (switch-to-buffer "*Shell Command Output*")
-    (beginning-of-buffer)
-    ;; Pandoc inserts annotations elements when generating MathML from LaTeX.
-    ;; When I copying from the browser and paste into an email message, the annotations become visible.
-    ;; To fix, we can remove the annotation or make it invisible with "display:none" CSS.
-    (while (re-search-forward "<annotation .*?</annotation>" nil t)
-      (replace-match "" nil nil))
-    (kill-ring-save (point-min) (point-max))
-    ;; (x-select-text (buffer-string))
-    ))
+  (let ((blogify-program "blogify")) ; "blogify-was1"
+    (save-window-excursion
+      (shell-command-on-region from to (concat blogify-program (if private " --private" "")))
+      (switch-to-buffer "*Shell Command Output*")
+      (beginning-of-buffer)
+      ;; Pandoc inserts annotations elements when generating MathML from LaTeX.
+      ;; When I copying from the browser and paste into an email message, the annotations become visible.
+      ;; To fix, we can remove the annotation or make it invisible with "display:none" CSS.
+      (while (re-search-forward "<annotation .*?</annotation>" nil t)
+        (replace-match "" nil nil))
+      (kill-ring-save (point-min) (point-max))
+      ;; (x-select-text (buffer-string))
+      )))
 
 (defun blogify-buffer (&optional private)
   "Run blogify on the contents of the current buffer and save the result in the inter-program copy buffer."
@@ -1474,7 +1475,7 @@ module %s where
 
 
 ;;; http://oremacs.com/2015/05/22/define-word/
-(package-install 'define-word)
+;; (package-install 'define-word)
 (global-set-key (kbd "C-c d") 'define-word-at-point)
 (global-set-key (kbd "C-c D") 'define-word)
 
@@ -1603,6 +1604,9 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 (setq dired-omit-files (concat dired-omit-files "\\|^\\.DS_Store$"))
 
 (display-time-mode) ; show time in mode line
+
+;; (require 'popwin)
+;; (popwin-mode 1)
 
 ;;; End of customizations
 
