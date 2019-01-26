@@ -225,12 +225,10 @@ right after next closing delimiter (see variable my-up-list-regexp)"
 
 (global-set-key "\C-j" 'my-newline-and-indent)
 
-
 (defun surround-sexp (count before &optional after)
   "Insert a BEFORE and AFTER around previous N sexp's, where N is the
 prefix arg.  But if N is negative, instead starify the (-N)th previous sexp.
 If AFTER is missing, it defaults to BEFORE."
-  (expand-abbrev)
   (let ((negflag (< count 0))
         ;; After inserting, if at end of word, advance past before
         (after (or after before))
@@ -248,7 +246,8 @@ If AFTER is missing, it defaults to BEFORE."
       (insert after))
     (forward-char then-forward)
     ;; (unless negflag (insert " ")) ; experiment
-    ))
+  (expand-abbrev)
+  ))
 
 ;;; For text, *foo* looks good, but Word autoformats *foo* to bold and
 ;;; _foo_ to italics
