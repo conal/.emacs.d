@@ -1,7 +1,7 @@
 ;;;; Misc mode settings.
 
-(package-install 'markdown-mode)
-(package-install 'haskell-mode)
+;; (package-install 'markdown-mode)
+;; (package-install 'haskell-mode)
 ;; (package-install 'flycheck-haskell) ;; needed with haskell-mode?
 
 (require 'my-text)
@@ -325,24 +325,35 @@
   (expand-abbrev)
   (surround-punct "'" "'" arg))
 
-;;; https://github.com/haskell/haskell-mode/issues/1553#issuecomment-358373643
-(setq haskell-process-args-ghci '("-ferror-spans"))
-(setq haskell-process-args-cabal-repl
-      '("--ghc-options=-ferror-spans"))
-(setq haskell-process-args-stack-ghci
-      '("--ghci-options=-ferror-spans"
-        "--no-build" "--no-load"))
-(setq haskell-process-args-cabal-new-repl
-      '("--ghc-options=-ferror-spans"))
-;; Correction:
-(setq haskell-process-args-cabal-repl
-      '("--ghc-options --ghc-options -ferror-spans"))
+(with-eval-after-load 'haskell-mode
+ (setq haskell-process-args-ghci
+       '("-ferror-spans" "-fshow-loaded-modules"))
+ (setq haskell-process-args-cabal-repl
+       '("--ghc-options=-ferror-spans -fshow-loaded-modules"))
+ (setq haskell-process-args-stack-ghci
+       '("--ghci-options=-ferror-spans -fshow-loaded-modules"
+         "--no-build" "--no-load"))
+ (setq haskell-process-args-cabal-new-repl
+       '("--ghc-options=-ferror-spans -fshow-loaded-modules")))
+
+;; ;;; https://github.com/haskell/haskell-mode/issues/1553#issuecomment-358373643
+;; (setq haskell-process-args-ghci '("-ferror-spans"))
+;; (setq haskell-process-args-cabal-repl
+;;       '("--ghc-options=-ferror-spans"))
+;; (setq haskell-process-args-stack-ghci
+;;       '("--ghci-options=-ferror-spans"
+;;         "--no-build" "--no-load"))
+;; (setq haskell-process-args-cabal-new-repl
+;;       '("--ghc-options=-ferror-spans"))
+;; ;; Correction:
+;; (setq haskell-process-args-cabal-repl
+;;       '("--ghc-options --ghc-options -ferror-spans"))
 
 ;; I removed "-fshow-loaded-modules" from the variables above, as I was
 ;; getting errors.
 
-
 (global-set-key (kbd "M-s-n") 'next-error)
+(global-set-key (kbd "M-s-p") 'previous-error)
 
 (add-hook 'interactive-haskell-mode-hook 'my-interactive-haskell-mode-hook)
 
@@ -933,6 +944,7 @@ consisting of repeated '-'. For an <h2>."
   (local-set-key "\C-c\C-sl" 'markdown-insert-lisp-code-block)
   ;; (modify-syntax-entry ?\* "$")  ; italics" self-matching
   (modify-syntax-entry ?\` "$")  ; code fragment: self-matching 
+  (modify-syntax-entry ?$ "$")  ; code fragment: self-matching 
   (modify-syntax-entry ?\\ "w")  ; for LaTex
   (when t
     ;; Use "> " as the comment character.  This lets me
@@ -1217,3 +1229,27 @@ automatically in order to have the correct markup."
   (abbrev-mode 1))
 
 (add-hook 'git-comment-hook 'my-git-comment-hook)
+
+;;; https://github.com/jyp/dante
+(use-package dante
+  :ensure t
+  :after haskell-mode
+  :commands 'dante-mode
+  :init
+  (add-hook 'haskell-mode-hook 'flycheck-mode)
+  ;; OR:
+  ;; (add-hook 'haskell-mode-hook 'flymake-mode)
+  ;; Git-emacs chokes if flycheck-mode comes after dante-mode, e.g.,
+  ;; "HEAD:src/: no such directory"
+  (add-hook 'haskell-mode-hook 'dante-mode)
+  )
+
+;; (setq flymake-no-changes-timeout nil) ; default 0.5
+;; (setq flymake-start-syntax-check-on-newline nil) ; default t
+;; ;; Default: (save idle-change new-line mode-enabled)
+;; (setq flycheck-check-syntax-automatically '(save mode-enabled))
+
+(add-hook 'dante-mode-hook
+   '(lambda () (flycheck-add-next-checker 'haskell-dante
+                '(warning . haskell-hlint))))
+
