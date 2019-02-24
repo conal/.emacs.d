@@ -12,12 +12,19 @@
 
 ;;; (package-refresh-contents)  ; Do occasionally
 
-;; (package-install 'nlinum)
-;; (package-install 'company)
-;; (package-install 'mmm-mode)
-;; (package-install 'zoom-frm)
-;; (package-install 'elisp-slime-nav)
-;; (package-install 'exec-path-from-shell)
+;; List from package-activated-list
+;; https://stackoverflow.com/questions/10092322/how-to-automatically-install-emacs-packages-by-specifying-a-list-of-package-name
+(let ((package-list
+       '(attrap
+         dante define-word elisp-slime-nav exec-path-from-shell f 
+         flycheck-haskell intero haskell-mode company flycheck lcr dash
+         markdown-mode mmm-mode nlinum pkg-info epl popwin s seq
+         use-package bind-key w3m yaml-mode zoom-frm frame-cmds 
+         ;; frame-functions
+         )))
+  (dolist (package package-list)
+    (unless (package-installed-p package)
+      (package-install package))))
 
 (setq my-extra-load-path
       '(;;;"~/gnu"
@@ -483,6 +490,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   ;; How to kill-compilation if it's running?
   ;; (catch 'error (kill-compilation))
   (kill-compilation-or-not)
+  (sleep-for 0.1)
   (save-window-excursion
     (when clean-first (call-process "make" nil nil t "clean"))
     (compile "make" t)))
@@ -954,11 +962,11 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(erc-mode-hook
    (quote
     (erc-munge-invisibility-spec pcomplete-erc-setup erc-button-add-keys
-				 (lambda nil
-				   (setq imenu-create-index-function
-					 (quote erc-create-imenu-index)))
-				 (lambda nil
-				   (abbrev-mode 1)))))
+                                 (lambda nil
+                                   (setq imenu-create-index-function
+                                         (quote erc-create-imenu-index)))
+                                 (lambda nil
+                                   (abbrev-mode 1)))))
  '(erc-nick "conal")
  '(erc-nick-uniquifier "+")
  '(erc-prompt-for-password t)
@@ -1016,7 +1024,7 @@ module %s where
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
-    (popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
+    (attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
@@ -1024,9 +1032,9 @@ module %s where
  '(safe-local-variable-values
    (quote
     ((flycheck-disabled-checkers quote
-				 (haskell-ghc haskell-stack-ghc))
+                                 (haskell-ghc haskell-stack-ghc))
      (flycheck-disabled-checkers quote
-				 (haskell-stack-ghc)))))
+                                 (haskell-stack-ghc)))))
  '(scroll-conservatively 1000)
  '(scroll-margin 3)
  '(sentence-end-double-space nil)
