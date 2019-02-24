@@ -1,9 +1,5 @@
 ;;;; Misc mode settings.
 
-;; (package-install 'markdown-mode)
-;; (package-install 'haskell-mode)
-;; (package-install 'flycheck-haskell) ;; needed with haskell-mode?
-
 (require 'my-text)
 (require 'my-tex)
 ;; (require 'twee)
@@ -833,8 +829,6 @@ consisting of repeated '-'. For an <h2>."
 ;;; Use w3m to browse haddock docs
 ;;; http://haskell.github.io/haskell-mode/manual/latest/Browsing-Haddocks.html#Browsing-Haddocks
 
-(package-install 'w3m)
-
 (setq w3m-mode-map (make-sparse-keymap))
 
 (define-key w3m-mode-map (kbd "RET") 'w3m-view-this-url)
@@ -866,7 +860,6 @@ consisting of repeated '-'. For an <h2>."
 
 ;; (defun intero-mode-if-stack ()
 ;;   (if (haskell-stack-find-file) (intero-mode)))
-;; (package-install 'intero)
 
 ;; (add-hook 'haskell-mode-hook 'intero-mode)
 
