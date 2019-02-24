@@ -330,12 +330,16 @@ prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
 
 (global-set-key "\C-?" 'backward-delete-char-untabify)
 
-
-(defun insert-braces ()
+(defun insert-braces-old ()
   "Insert a pair of curly braces and place point between them."
   (interactive)
   (insert "{}")
   (backward-char 1))
+
+(defun insert-braces (&optional arg)
+  "Insert a pair of curly braces, in the style of `insert-parentheses'."
+  (interactive "P")
+  (insert-pair arg ?\{ ?\}))
 
 (global-set-key (kbd "C-M-{") 'insert-braces)
 (global-set-key (kbd "C-{")   'insert-braces)
