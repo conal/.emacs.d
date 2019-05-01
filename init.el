@@ -362,6 +362,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "…" "...")
   (save-replace "\222" "'")
   (save-replace "\223" "\"")
+  (save-replace "”" "\"")
   (save-replace "\224" "\"")
   (save-replace "\226" "---")
   (save-replace "\227" "--")
@@ -405,6 +406,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "ﬁ" "fi")
   (save-replace "􏰛" "fi")
   (save-replace "ﬀ" "ff")
+  (save-replace " " "ffi")
   (save-replace "􏰡" "π")
   (save-replace " " " ")
   (save-replace "⇒" "=>")
@@ -903,7 +905,7 @@ logs, putting in a Last Modified in a new file, etc."
   "Extract html from Mac OS X pasteboard, convert to markdown, and paste/yank."
   (interactive)
   (call-process-shell-command "PasteMarkdown" nil t)
-  ;; (delete-backward-char 3) ; extraneous chars
+  (delete-backward-char 1) ; final newline
   )
 (global-set-key "\C-\M-y" 'pasteboard-insert-markdown)
 
@@ -940,7 +942,8 @@ logs, putting in a Last Modified in a new file, etc."
  '(c-tab-always-indent t)
  '(column-number-mode t)
  '(comment-style (quote indent))
- '(dabbrev-case-fold-search nil)
+ '(dabbrev-case-fold-search (quote case-fold-search))
+ '(dabbrev-case-replace (quote case-replace))
  '(default-frame-alist-qqq
     (quote
      ((height . 37)
