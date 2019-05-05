@@ -361,6 +361,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "\205" "...")
   (save-replace "…" "...")
   (save-replace "\222" "'")
+  (save-replace "’" "'")
   (save-replace "\223" "\"")
   (save-replace "”" "\"")
   (save-replace "\224" "\"")
@@ -943,7 +944,7 @@ logs, putting in a Last Modified in a new file, etc."
  '(column-number-mode t)
  '(comment-style (quote indent))
  '(dabbrev-case-fold-search (quote case-fold-search))
- '(dabbrev-case-replace (quote case-replace))
+ '(dabbrev-case-replace t)
  '(default-frame-alist-qqq
     (quote
      ((height . 37)
@@ -1012,7 +1013,7 @@ module %s where
  '(longlines-wrap-follows-window-size t)
  '(mac-pass-command-to-system nil)
  '(markdown-asymmetric-header t)
- '(markdown-command "pandoc --toc --smart --standalone --to html")
+ '(markdown-command "pandoc --toc --standalone --to html+smart")
  '(markdown-enable-math nil)
  '(markdown-hr-strings
    (quote
