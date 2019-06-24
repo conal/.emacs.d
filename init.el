@@ -348,62 +348,59 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 
 (defun save-replace (from to)
   (save-excursion
-    (replace-string from to nil nil nil)))
+    (replace-regexp from to nil nil nil)))
 
 (defun fix-quotes ()
   "Replace non-ascii quotes by ascii quotes"
   (interactive)
   ;; I guess there are a lot of unicode variations of quotation marks.
   ;; TODO: trade in these non-regexp replacements with regexp versions so that there's only one per result.
-  (save-replace "’" "'")
-  (save-replace "\342\200\234" "\"")
-  (save-replace "\342\200\235" "\"")
+
+  (save-replace "" "--")
+  (save-replace "" "'")
+  (save-replace "" "\"")
+  (save-replace "" "\"")
+  (save-replace " " " ")
+  (save-replace " – " "---")
   (save-replace "\205" "...")
-  (save-replace "…" "...")
   (save-replace "\222" "'")
-  (save-replace "’" "'")
   (save-replace "\223" "\"")
-  (save-replace "”" "\"")
   (save-replace "\224" "\"")
   (save-replace "\226" "---")
   (save-replace "\227" "--")
-  (save-replace "—" "---")
-  (save-replace "―" "---")
-  (save-replace " – " "---")
-  (save-replace "–" "-")
-  (save-replace "" "--")
-  (save-replace "" "\"")
-  (save-replace "" "\"")
-  (save-replace "" "'")
+  (save-replace "\342\200\234" "\"")
+  (save-replace "\342\200\235" "\"")
   (save-replace "½" "1/2")
-  (save-replace "“" "\"")
-  (save-replace "”" "\"")
+  (save-replace "×" ":*")
   (save-replace "‘" "'")
   (save-replace "’" "'")
-  (save-replace "ﬁ" "fi")
-  (save-replace "􏰛" "fi")
-  (save-replace "ﬀ" "ff")
-  (save-replace " " "ffi")
-  (save-replace "􏰡" "π")
-  (save-replace " " " ")
-  (save-replace "⇒" "=>")
+  (save-replace "′" "'")
+  (save-replace "–" "-")
+  (save-replace "—" "---")
+  (save-replace "―" "---")
   (save-replace "→" "->")
   (save-replace "◦" ".")
-  ;; (save-replace "😊" ":)")
+  (save-replace "…" "...")
   (save-replace "🙂" ":)")
-  ;; (save-replace "🙂" ":)")
-  ;; (save-replace "😉" ";)")
-  ;; (save-replace "😞" ":(")
-  (save-replace "😊" ":smiley:")
-  ;; Investigate these next two. Are they really :smiley:
-  ;; (save-replace "🙂" ":smiley:")
-  ;; (save-replace "🙂" ":smiley:")
-  (save-replace "😉" ":wink:")
   (save-replace "😞" ":disappointed:")
-  (save-replace "∀" "forall ")
+  (save-replace "😊" ":smiley:")
+  (save-replace "😉" ":wink:")
+  (save-replace "⇒" "=>")
+  (save-replace "“" "\"")
+  (save-replace "”" "\"")
   (save-replace "∃" "exists ")
-  (save-replace "×" ":*")
-  (save-replace "′" "'")
+  (save-replace "ﬀ" "ff")
+  (save-replace "ﬁ" "fi")
+  (save-replace "􏰛" "fi")
+  (save-replace "∀" "forall ")
+  (save-replace "􏰡" "π")
+  ;; (save-replace "😞" ":(")
+  ;; (save-replace "😊" ":)")
+  ;; (save-replace "🙂" ":)")
+  ;; (save-replace "🙂" ":smiley:")
+  ;; (save-replace "😉" ";)")
+  ;; Investigate these next two. Are they really :smiley:
+
   )
 
 (defun fix-pdf ()
@@ -549,9 +546,9 @@ logs, putting in a Last Modified in a new file, etc."
   (insert "\n\n** " (current-time-string) " by " (user-full-name) "\n")
   (insert "    "))
 
-;;; dynamic abbreviation
-(setq dabbrev-case-fold-search 'case-fold-search)
-(setq dabbrev-case-replace nil)         ; or 'case-replace
+;; ;;; dynamic abbreviation
+;; (setq dabbrev-case-fold-search 'case-fold-search)
+;; (setq dabbrev-case-replace nil)         ; or 'case-replace
 
 (setq explicit-shell-file-name nil)
 
@@ -920,7 +917,7 @@ logs, putting in a Last Modified in a new file, etc."
  '(column-number-mode t)
  '(comment-style (quote indent))
  '(dabbrev-case-fold-search (quote case-fold-search))
- '(dabbrev-case-replace t)
+ '(dabbrev-case-replace (quote case-replace))
  '(default-frame-alist-qqq
     (quote
      ((height . 37)
