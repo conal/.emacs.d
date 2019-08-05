@@ -78,7 +78,6 @@
   ;; (local-set-key 'delete 'delete-char)
   (local-set-key "\C-ci" 'text-insert-item)
   (local-set-key "\C-cI" 'fix-next-marker)
-  (setq dabbrev-case-replace nil)
   (local-set-key "\M-\t" 'ispell-complete-word) ;; esc-tab in Windows
   )
 
@@ -951,7 +950,7 @@ consisting of repeated '-'. For an <h2>."
   (setq literate-haskell 'bird)
   (setq electric-indent-mode 0)
   ;; Avoid "Stack overflow in regexp matcher" from '$' in Haskell code.
-  (setq markdown-enable-math nil)
+  ;;; (setq markdown-enable-math nil)
   ;; Link insertion sub-keymap. They're not very useful, so recover the global align-regexp
   (local-unset-key "\C-c\C-a")
 )
