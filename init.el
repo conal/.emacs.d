@@ -1292,7 +1292,7 @@ module %s where
   (save-excursion
     (goto-char start)
     (save-excursion
-      (while (re-search-forward "^\n+\\([a-z0-9._é-]+\\)[ \n]*\\[[:0-9 APM]*\\] *$" nil t)
+      (while (re-search-forward "^\n*\\([a-z0-9._é-]+\\)[ \n]*[:0-9 APM]* *$" nil t)
         (replace-match "\n*\\1:*" nil)))
     ;; Same speaker continuing looks like blank lines and a bracketed date line.
     (save-excursion
