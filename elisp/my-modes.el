@@ -674,11 +674,11 @@ start of comment.  TODO: handle {- ... -} comments."
   "Add a blockquote, either as a simple \" >\" (if ARG present) or as html (if not)"
   (interactive "P")
   (end-of-line)
-  (unless (bolp) (insert "\n"))
+  ;; (unless (bolp) (insert "\n"))
   (insert
-   (if arg "\n > " "\n <blockquote>\n\n\n\n </blockquote>")
+   (if arg "\n> " "\n<blockquote>\n\n</blockquote>")
    "\n")
-  (previous-line (if arg 1 3))
+  (previous-line (if arg 1 2))
   (end-of-line))
 
 (defun md-add-lhs (arg)
@@ -701,9 +701,8 @@ start of comment.  TODO: handle {- ... -} comments."
 (defun markdown-inline-code (arg)
   "Surround previous ARG sexps with markdown backquotes."
   (interactive "p")
-  (expand-abbrev)
+  ;; Don't (expand-abbrev), since abbrevs can differ in embedded code
   (surround-punct "`" "`" arg)
-  ;; (insert " ")
   (when mmm-mode (mmm-parse-block 2)))
 
 (defun markdown-emphasize (arg)
@@ -921,7 +920,8 @@ consisting of repeated '-'. For an <h2>."
   ;; Next one conflicts with flyspell-goto-next-error
   ;; (local-set-key [?\C-,] 'markdown-mmmify-lines)
   ;; (local-set-key [?\M-\C-,] 'markdown-mmmify-lines)  -- global
-  (local-set-key (kbd "M-q") 'dont-fill-paragraph)
+  ;; (local-set-key (kbd "M-q") 'dont-fill-paragraph)
+  (local-set-key (kbd "M-q") 'fill-paragraph-maybe-infinitely)
   (setq markdown-enable-math t)
   (local-unset-key "\C-c\C-j")
   (setq indent-line-function 'indent-relative)
@@ -938,6 +938,8 @@ consisting of repeated '-'. For an <h2>."
   (modify-syntax-entry ?\` "$")  ; code fragment: self-matching 
   (modify-syntax-entry ?$ "$")  ; code fragment: self-matching 
   (modify-syntax-entry ?\\ "w")  ; for LaTex
+  (modify-syntax-entry ?/ ".")  ; punctuation. was "_"/symbol
+  ;; (modify-syntax-entry ?: "_")  ; symbol. was "."/punctuation
   (when t
     ;; Use "> " as the comment character.  This lets me
     ;; conveniently edit mail replies to non-Exchange users.
@@ -966,6 +968,14 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
       (progn
         (beep)
         (message "I bet you don't really want to use `fill-paragraph' in visual-line-mode."))
+    (fill-paragraph nil)))
+
+(defun fill-paragraph-maybe-infinitely ()
+  "Fill a paragraph to infinite length for Markdown etc"
+  (interactive)
+  (if visual-line-mode
+      (let ((fill-column 1000000))
+        (fill-paragraph))
     (fill-paragraph nil)))
 
 ;;; for gitit
