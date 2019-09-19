@@ -978,6 +978,19 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
         (fill-paragraph))
     (fill-paragraph nil)))
 
+(defun fill-paragraph-infinitely-break-sentences ()
+  "Fill a paragraph to infinite length for Markdown etc"
+  (interactive)
+  (if visual-line-mode
+      (let ((fill-column 1000000))
+        (fill-paragraph)
+        (mark-paragraph)
+        ;; I don't think I'm doing this next bit correctly.
+        (query-replace-regexp 
+         "\\([.?]\\) +" "\\1\n"
+         nil (region-beginning) (region-end)))
+    (fill-paragraph nil)))
+
 ;;; for gitit
 (push '("\\.page$" . markdown-mode) auto-mode-alist)
 
