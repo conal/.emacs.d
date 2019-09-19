@@ -60,7 +60,7 @@
     :classes (;; match blocks before inlines, for infix ops like "f `fmap` q"
               ;; markdown-delimited-code-block
               ;; markdown-code-block ; gets confused with text in lists
-              literate-haskell-lhs2TeX-bird-code  ; experimental
+              ;; literate-haskell-lhs2TeX-bird-code  ; experimental
               ;; literate-haskell-lhs2TeX-code   -- treats all code as comments
               ;; markdown-haskell-inline-double
               ;; haskell coloring spills into outer context
@@ -122,7 +122,7 @@
     )
    (literate-haskell-lhs2TeX
     :classes (literate-haskell-lhs2TeX-nobird
-              literate-haskell-lhs2TeX-bird-code
+              ;; literate-haskell-lhs2TeX-bird-code
               ;; literate-haskell-lhs2TeX-bird-spec
               )
     )
@@ -164,25 +164,25 @@
                  @ "<hask>" @ _ @ "</hask>" @
              ))
     )
-   (literate-haskell-lhs2TeX-bird-code
-    :submode literate-haskell-mode
-    :front "^\\(    \\)*[><] "
-    :include-front true
-    :back "^$" ; "^\\([^><]\\|$\\)" ; "^[^><]"
-    :back-offset (beginning-of-line -1)
-    :insert ((?b insert-literate-haskell-bird-region
-                 nil
-                 @ ">" @ " " _ @ "\n" @ "\n"))
-    )
+   ;; (literate-haskell-lhs2TeX-bird-code
+   ;;  :submode literate-haskell-mode
+   ;;  :front "^\\(    \\)*[><] "
+   ;;  :include-front true
+   ;;  :back "^$" ; "^\\([^><]\\|$\\)" ; "^[^><]"
+   ;;  :back-offset (beginning-of-line -1)
+   ;;  :insert ((?b insert-literate-haskell-bird-region
+   ;;               nil
+   ;;               @ ">" @ " " _ @ "\n" @ "\n"))
+   ;;  )
 ; literate-haskell-mode doesn't understand <...
 ; mmm-mode doesn't handle :back "$" :back-offset 0 very well. The
 ; keyboard bindings of the two modes aren't handled correctly.
-   (literate-haskell-lhs2TeX-bird-spec
-    :submode haskell-mode
-    :front "^< "
-    :back "^$" ; "^\\([^<]\\|$\\)"
-    :back-offset -1
-    )
+   ;; (literate-haskell-lhs2TeX-bird-spec
+   ;;  :submode haskell-mode
+   ;;  :front "^< "
+   ;;  :back "^$" ; "^\\([^<]\\|$\\)"
+   ;;  :back-offset -1
+   ;;  )
    ;; @..@
    (literate-haskell-lhs2TeX-verb
     :submode haskell-mode
