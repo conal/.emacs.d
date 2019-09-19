@@ -1488,15 +1488,15 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 ;;     :include-back  t  ; experiment
 ;;     )))
 
-(mmm-add-classes
- '((markdown-haskell-birdtracks
-    :submode haskell-mode
-    :front "^> "
-    ;; :back "^$" :back-offset -1
-    :back "$"
-    :include-front nil
-    )))
-(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-birdtracks)
+;; (mmm-add-classes
+;;  '((markdown-haskell-birdtracks
+;;     :submode haskell-mode
+;;     :front "^> "
+;;     ;; :back "^$" :back-offset -1
+;;     :back "$"
+;;     :include-front nil
+;;     )))
+;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-birdtracks)
 
 ;; Alternatively,
 
