@@ -17,9 +17,10 @@
 (let ((package-list
        '(attrap
          dante define-word elisp-slime-nav exec-path-from-shell f 
-         flycheck-haskell intero haskell-mode company flycheck lcr dash
+         flycheck-haskell frame-cmds intero haskell-mode company flycheck lcr dash
          markdown-mode mmm-mode nlinum pkg-info epl popwin s seq
-         use-package bind-key w3m yaml-mode zoom-frm frame-cmds 
+         use-package bind-key w3m yaml-mode zoom-frm
+         pos-tip popup button-lock flycheck-color-mode-line
          ;; frame-functions
          )))
   (dolist (package package-list)
@@ -33,6 +34,8 @@
         "~/git-repos/markdown-mode"  ; for https://github.com/jrblevin/markdown-mode/commit/62d5b
         "~/git-repos/glsl-mode"
         "~/git-repos/graphviz-dot-mode"
+        "~/git-repos/flycheck-liquidhs.el"
+        "~/git-repos/liquid-tip.el"
         ;; I'm getting haskell-mode and intero from melpa (not melpa-stable)
 	;; "~/git-repos/haskell-mode"
         ;; "~/git-repos/intero"
@@ -961,6 +964,7 @@ module %s where
  '(mac-pass-command-to-system nil)
  '(markdown-asymmetric-header t)
  '(markdown-command "pandoc --toc --standalone --to html+smart")
+ '(markdown-enable-html nil)
  '(markdown-hr-strings
    (quote
     ("* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------" "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------")))
@@ -974,7 +978,7 @@ module %s where
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
-    (attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
+    (flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
