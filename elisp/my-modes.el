@@ -885,6 +885,8 @@ consisting of repeated '-'. For an <h2>."
   "'markdown-insert-gfm-code-block' with a yank if ARG"
   (interactive "P")
   (markdown-insert-gfm-code-block lang)
+  ;; Experiment: drop initial blank line
+  ;; (previous-line 1) (delete-char -1) (next-line 1)
   (when arg
     (let ((p (point)))
       (yank)
@@ -1245,19 +1247,39 @@ automatically in order to have the correct markup."
 
 (add-hook 'git-comment-hook 'my-git-comment-hook)
 
+(add-hook 'haskell-mode-hook 'flycheck-mode)
+
+;; Wait for https://github.com/themattchan/flycheck-liquidhs.el/issues/8
+
+;; ;;; https://github.com/ucsd-progsys/liquid-types.el
+;; (require 'flycheck-liquidhs)
+;; (add-hook 'haskell-mode-hook
+;;           '(lambda () (flycheck-select-checker 'haskell-stack-liquid))) ; or 'haskell-liquid
+;; (add-hook 'literate-haskell-mode-hook
+;;           '(lambda () (flycheck-select-checker 'haskell-stack-liquid))) ; or 'haskell-liquid
+
+(require 'liquid-types)
+;; ;; Toggle minor mode on entering Haskell mode.
+;; (add-hook 'haskell-mode-hook
+;;           '(lambda () (liquid-types-mode)))
+;; (add-hook 'literate-haskell-mode-hook
+;; 	  '(lambda () (liquid-types-mode)))
+
 ;;; https://github.com/jyp/dante
 (use-package dante
   :ensure t
   :after haskell-mode
   :commands 'dante-mode
   :init
-  (add-hook 'haskell-mode-hook 'flycheck-mode)
+  ;; (add-hook 'haskell-mode-hook 'flycheck-mode)
   ;; OR:
   ;; (add-hook 'haskell-mode-hook 'flymake-mode)
   ;; Git-emacs chokes if flycheck-mode comes after dante-mode, e.g.,
   ;; "HEAD:src/: no such directory"
   (add-hook 'haskell-mode-hook 'dante-mode)
   )
+
+;; dante-mode must be added to haskell-mode-hook after the liquid hooks.
 
 ;; (setq flymake-no-changes-timeout nil) ; default 0.5
 ;; (setq flymake-start-syntax-check-on-newline nil) ; default t
@@ -1267,4 +1289,3 @@ automatically in order to have the correct markup."
 (add-hook 'dante-mode-hook
    '(lambda () (flycheck-add-next-checker 'haskell-dante
                 '(warning . haskell-hlint))))
-
