@@ -275,9 +275,13 @@
         ;; (mmm-apply-all)
         ;; Conal: replaced previous sexp by following
         (let* ((point-was (point))
-               (n 6)                                    ; TODO: replace with a defvar
-               (start (progn (markdown-backward-paragraph (* 1 n)) (point)))
-               (stop  (progn (markdown-forward-paragraph  (* 2 n)) (point))))
+               ;; (n 6)                                    ; TODO: replace with a defvar
+               ;; (start (progn (markdown-backward-paragraph (* 1 n)) (point)))
+               ;; (stop  (progn (markdown-forward-paragraph  (* 2 n)) (point)))
+               (n 100)
+               (start (max (point-min) (- point-was n)))
+               (stop  (min (point-max) (- point-was n)))
+               )
           (goto-char point-was)
           ;; (message "reparsing mmm region")
           (mmm-apply-all :start start :stop  stop))
@@ -885,6 +889,7 @@ consisting of repeated '-'. For an <h2>."
   "'markdown-insert-gfm-code-block' with a yank if ARG"
   (interactive "P")
   (markdown-insert-gfm-code-block lang)
+  (mmm-parse-block 1)
   ;; Experiment: drop initial blank line
   ;; (previous-line 1) (delete-char -1) (next-line 1)
   (when arg
