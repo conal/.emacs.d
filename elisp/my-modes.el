@@ -293,9 +293,12 @@
   (interactive)
   (unless (bolp) (newline))
   (unless (char-equal (char-before (- (point) 1)) ?\n) (newline))
-  (insert "{--------------------------------------------------------------------\n")
-  (insert"    \n")
-  (insert"--------------------------------------------------------------------}\n")
+  (insert "-------------------------------------------------------------------------------\n")
+  (insert"-- | \n")
+  (insert "-------------------------------------------------------------------------------\n")
+  ;; (insert "{--------------------------------------------------------------------\n")
+  ;; (insert"    \n")
+  ;; (insert"--------------------------------------------------------------------}\n")
   (forward-line -2)
   (end-of-line))
 
@@ -890,7 +893,7 @@ consisting of repeated '-'. For an <h2>."
   (interactive "P")
   (markdown-insert-gfm-code-block lang)
   (mmm-parse-block 1)
-  ;; Experiment: drop initial blank line
+  ;; Experiment: drop initial blank line. Needs work.
   ;; (previous-line 1) (delete-char -1) (next-line 1)
   (when arg
     (let ((p (point)))
