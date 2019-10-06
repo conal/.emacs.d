@@ -17,7 +17,8 @@
 (let ((package-list
        '(attrap
          dante define-word elisp-slime-nav exec-path-from-shell f 
-         flycheck-haskell frame-cmds intero haskell-mode company flycheck lcr dash
+         flycheck-haskell frame-cmds idris-mode intero haskell-mode
+         company flycheck lcr dash
          markdown-mode mmm-mode nlinum pkg-info epl popwin s seq
          use-package bind-key w3m yaml-mode zoom-frm
          pos-tip popup button-lock flycheck-color-mode-line
@@ -136,7 +137,13 @@ Spotlight binding from command-space to option-space."
       ;; literate Haskell. Using %e causes the day # to be blank-padded
       ;; instead of zero-padded.
       ;; Or use %-e or %-d for no padding.
-      (insert (format-time-string "---\ntitle: Notes for week of %B %e, %Y\n...\n\n" sunday))
+      (insert
+       (format-time-string "---\ntitle: Notes for week of %B %e, %Y\n" sunday)
+       "format: markdown\n"
+       "autolink_bare_uris: true\n"
+       "substMap: []\n"
+       "...\n\n"
+       )
       ;; See Journal 2016-07-07. Seems a bad idea, since the non-displayed
       ;; content is likely to get carried along when pasting HTML.
       ;; (insert " <!-- <style>.private { display: none; }</style> -->")
@@ -965,6 +972,7 @@ module %s where
  '(markdown-asymmetric-header t)
  '(markdown-command "pandoc --toc --standalone --to html+smart")
  '(markdown-enable-html nil)
+ '(markdown-enable-math t)
  '(markdown-hr-strings
    (quote
     ("* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------" "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------")))
@@ -974,11 +982,11 @@ module %s where
  '(message-log-max 500)
  '(mmm-global-mode (quote maybe) nil (mmm-mode))
  '(mmm-idle-timer-delay 0.2)
- '(mmm-parse-when-idle t)
+ '(mmm-parse-when-idle nil)
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
-    (flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
+    (idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
@@ -1028,6 +1036,7 @@ module %s where
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "tomato4"))))
+ '(markdown-code-face ((t (:inherit fixed-pitch :height 1.1))))
  '(mmm-default-submode-face ((t (:background "lemon chiffon")))))
 
 
@@ -1138,6 +1147,8 @@ module %s where
       (beginning-of-buffer)
       (insert "<title>" title "</title>\n")
       (write-region (point-min) (point-max) "foo.html"))))
+
+;;; To do: make blogify-foo *asynchronous*, to save waiting.
 
 ;; Experiment: set globally rather than just in markdown-mode, since I use mmm-mode.
 (global-set-key "\C-cv" 'blogify-foo)
@@ -1365,20 +1376,25 @@ module %s where
   "Tidy IRC output after copy&paste."
   (interactive "r")
   ;; (message "irc-trim: %d %d" start end)
+
   (narrow-to-region start end) ;; restore after testing
+
   ;; Usernames can be up to 21 characters long. They can contain lowercase
   ;; letters a to z (without accents), numbers 0 to 9, hyphens, periods, and
   ;; underscores.
   ;; https://get.slack.help/hc/en-us/articles/216360827-Change-your-username
   (save-excursion
-    (while (re-search-forward
-            ;; "^\n*\\[[:0-9 APM]*\\] *<\\([A-Za-z0-9._-]+\\)>"
-            "^\n*\\([A-Za-z0-9._-]+\\) *\\[[:0-9 APM]*\\]"
-            nil t)
-      (replace-match "\n*\\1:*" nil)))
+    (while (re-search-forward "^\\[[:0-9 APM]*\\] *<\\([^ ]+\\)>\t*\\(.*\\)" nil t)
+      (replace-match "*\\1:* \\2\n" nil)))
+
   (save-excursion
-    (while (search-forward "\t" nil t)
-      (replace-match " " nil)))
+    (while (re-search-forward "^.*) left IRC (.*\n" nil t)
+      (replace-match "" nil)))
+
+  (save-excursion
+    (while (re-search-forward "^.*) joined the channel\n" nil t)
+      (replace-match "" nil)))
+
   (widen))
 
 (defun amazon-track-rename (&optional arg)
