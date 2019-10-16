@@ -973,6 +973,7 @@ module %s where
  '(markdown-command "pandoc --toc --standalone --to html+smart")
  '(markdown-enable-html nil)
  '(markdown-enable-math t)
+ '(markdown-header-scaling t)
  '(markdown-hr-strings
    (quote
     ("* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------" "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------")))
@@ -1037,6 +1038,7 @@ module %s where
  ;; If there is more than one, they won't work right.
  '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "tomato4"))))
  '(markdown-code-face ((t (:inherit default :foreground "DodgerBlue4"))))
+ '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "times"))))
  '(mmm-default-submode-face ((t (:background "lemon chiffon")))))
 
 
