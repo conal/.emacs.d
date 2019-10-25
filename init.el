@@ -1037,6 +1037,7 @@ module %s where
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(font-lock-doc-face ((t (:inherit font-lock-string-face :foreground "tomato4"))))
+ '(markdown-blockquote-face ((t (:inherit font-lock-doc-face :foreground "#262"))))
  '(markdown-code-face ((t (:inherit default :foreground "DodgerBlue4"))))
  '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "times"))))
  '(mmm-default-submode-face ((t (:background "lemon chiffon")))))
