@@ -1,4 +1,4 @@
-personal_ws-1.1 en 777 
+personal_ws-1.1 en 779 
 distributivity
 refactor
 intensional
@@ -343,6 +343,7 @@ canonicalize
 ng
 GHC's
 indirections
+Visscher
 bluetooth
 reifications
 interpolator
@@ -450,6 +451,7 @@ unhandled
 mentorship
 deconstructors
 monomial
+coinductive
 untyped
 notational
 StackOverflow
