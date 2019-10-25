@@ -891,17 +891,23 @@ consisting of repeated '-'. For an <h2>."
 (defun markdown-insert-gfm-code-block-maybe-yank (lang &optional arg)
   "'markdown-insert-gfm-code-block' with a yank if ARG"
   (interactive "P")
-  (markdown-insert-gfm-code-block lang)
-  (mmm-parse-block 1)
-  ;; Experiment: drop initial blank line. Needs work.
-  ;; (previous-line 1) (delete-char -1) (next-line 1)
-  (when arg
-    (let ((p (point)))
-      (yank)
-      (when (bolp) (delete-char 1))
-      (goto-char p)
-      (when (eolp) (delete-char 1))
-      (setq mmm-mode-buffer-dirty t))))
+  (let ((at-bol (bolp))
+        (point-was1 (point)))
+    (markdown-insert-gfm-code-block lang)
+    (mmm-parse-block 1)
+    (when arg
+      (let ((p (point)))
+        (yank)
+        (when (bolp) (delete-char 1))
+        (goto-char p)
+        (when (eolp) (delete-char 1))
+        (setq mmm-mode-buffer-dirty t)))
+    ;; Delete separator line unless we started at the beginning of a line
+    (unless at-bol
+      (let ((point-was2 (point)))
+        (goto-char point-was1)
+        (delete-forward-char 1)
+        (goto-char (- point-was2 1))))))
 
 (defun markdown-insert-haskell-code-block (&optional arg)
   "'markdown-insert-gfm-code-block' specialized for Haskell"
@@ -1252,6 +1258,15 @@ automatically in order to have the correct markup."
 (defun my-git-comment-hook () 
   (company-mode-on)
   (abbrev-mode 1))
+
+(defun copy-blockquote ()
+  "Copy text between previous <blockquote> and next </blockquote>."
+  (interactive)
+  (save-excursion
+    (search-backward "<blockquote>\n")
+    (let ((begin (match-end 0)))
+      (search-forward "</blockquote>")
+      (kill-ring-save begin (match-beginning 0)))))
 
 (add-hook 'git-comment-hook 'my-git-comment-hook)
 
