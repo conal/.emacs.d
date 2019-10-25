@@ -1262,11 +1262,13 @@ automatically in order to have the correct markup."
 (defun copy-blockquote ()
   "Copy text between previous <blockquote> and next </blockquote>."
   (interactive)
-  (search-backward-regexp "<blockquote>\n*")
-  (set-mark (match-end 0)) ; or push-mark?
-  (search-forward-regexp "\n*</blockquote>")
-  (goto-char (match-beginning 0))
-  (kill-ring-save (mark) (point))
+  (save-excursion
+    (search-backward-regexp "<blockquote>\n*")
+    (push-mark (match-end 0)) ;; or push-mark?
+    (search-forward-regexp "\n*</blockquote>")
+    (goto-char (match-beginning 0))
+    (kill-ring-save (mark) (point))
+    (pop-mark))
   )
 
 (add-hook 'git-comment-hook 'my-git-comment-hook)
