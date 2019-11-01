@@ -263,21 +263,8 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 
 (setq auto-mode-alist
       (append '(
-              ;;("\\.bib$"           . bibtex-mode)
-              ;;("Makefile"          . makefile-mode)
                 ("\\.bmp$"           . hexl-mode)
-                ("\\.hss$"           . haskell-mode) ; HERMIT script files
-;;                 ("\\.hs$"            . haskell-mode)
-;;                 ("\\.hsc$"           . haskell-mode)
-;;                 ("\\.hi$"            . haskell-mode)
-             ;; ("\\.lhs$"           . literate-haskell-mode)
                 ("\\.lhs$"           . markdown-mode) ; with mmm. happens in skel
-             ;; ("\\.lhs$"           . twee-mode)
-             ;; ("\\.lhs$"           . latex-mode)              ; rely on mmm-mode
-;;                 ("\\.ly$"            . literate-haskell-mode)
-             ;; ("itsalltext/.*"     . twee-mode) ;; before \\.txt
-;;                 ("mozex\\.textarea"  . twee-mode) ;; before \\.txt
-;;                 ("\\.tw$"            . twee-mode)
                 ("\\.css$"           . css-mode)
                 ("\\.js$"            . javascript-mode)
                 ("\\-make.inc"       . makefile-mode)
@@ -308,11 +295,6 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 ;; (require 'pretty-lambda)
 
 (global-set-key "\C-c#" 'what-line)
-
-;;(global-set-key "\C-c\t" 'dynamic-complete)
-;;(global-set-key "\C-c?" 'dynamic-list-completions)
-
-;;(global-set-key "\C-c%" 'query-replace-regexp)
 
 (global-set-key "\C-cg" 'goto-line)
 (global-set-key "\C-c\C-t" 'transpose-paragraphs)
@@ -614,15 +596,6 @@ logs, putting in a Last Modified in a new file, etc."
 ;; But I often hit that combo accidentally
 (global-unset-key "\C-x\C-z")
 
-;; Apparently, only the following setting is necessary and sufficient for
-;; color duplex printing.
-;; (setq ps-printer-name
-;;       ;; "//research/112c3cld"
-;;       ;; See email from Hugues Feb 6, 2002.
-;;       ;; "//conal01/112c3cld-emacs-duplex"
-;;       "980"
-;;       )
-
 (require 'avoid)
 (mouse-avoidance-mode 'none) ;; or 'banish. 'animate appears to spaz on my Mac.
 
@@ -651,29 +624,6 @@ logs, putting in a Last Modified in a new file, etc."
 (define-key darcs-mode-commands-map "r" 'darcs-simple-record)
 (define-key darcs-mode-commands-map "a" 'darcs-add)
 (define-key darcs-mode-commands-map "p" 'darcs-push)
-
-
-;; See http://emacs.wordpress.com/2007/09/10/smooth-scrolling/
-;; Hm.  breaks the next-line function
-;; (require 'smooth-scrolling)
-
-
-;; (require 'erc)
-;; (require 'erc-sound)
-;; (erc-sound-enable)                                      ; try it out
-
-;; (require 'status)
-;; (require 'erc-status)
-
-;; Does elisp have real lexical closures?
-;; 
-;; (defun scroll-cmd (n)
-;;   #'(lambda () (interactive) (scroll-up n)))
-;; 
-;; Apparently not,
-;; I get "Symbol's value as variable is void: n"
-;; Meanwhile, backquote/comma.  To-do: investigate "lexical-let"
-
 
 (defun scroll-cmd (n)
   `(lambda () (interactive) (scroll-up ,n)))
@@ -794,35 +744,10 @@ logs, putting in a Last Modified in a new file, etc."
   "Elminate the pattern throughout a buffer."
   (replace-regexp pattern "" nil (point-min) (point-max)))
 
-;; (defun core-clean ()
-;;   "Clean up ghc core output in a buffer."
-;;   (interactive)
-;;   (elim-re "
-;; ")
-;;   (elim-re "\\<[a-z]+\\.")
-;;   ;; strip variable name suffixes.  nope.
-;;   ;; (elim-re "_[a-z0-9]+\\>")
-;;   (haskell-mode))
-
 (defun core-clean ()
   "Clean up ghc core output."
   (interactive)
   (replace-regexp "[A-Z][A-za-z]+\\." "" t (region-beginning) (region-end)))
-
-;; (defun irc-clean-log ()
-;;   "Clean up an IRC log, removing join & leave messages etc"
-;;   (interactive)
-;;   ;; (longlines-mode 0)
-;;   (elim-re ".* --- .*: .*\n")
-;;   (elim-re "^\*\*\* .*\n")
-;;   (elim-re ".*dibblego conal .*\n")
-;;   ;; TODO: merge regexps for one elim-re call
-;;   (message "cleaned IRC log")
-;;   ;; clean before longlines.  otherwise, lose eols
-;;   (longlines-mode)
-;;   (goto-char 0)
-;;   )
-
 
 (defun open (file)
   "The system \"open\" command"
@@ -882,11 +807,6 @@ logs, putting in a Last Modified in a new file, etc."
       (lambda ()
         (invert-face 'mode-line)
         (run-with-timer 0.1 nil 'invert-face 'mode-line)))
-
-;; (setq preferred-frame-height
-;;       (if (string-equal (getenv "USERDOMAIN") "COMPY")
-;;           37
-;;         48))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -1042,16 +962,8 @@ module %s where
  '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "times"))))
  '(mmm-default-submode-face ((t (:background "lemon chiffon")))))
 
-
-;; (require 'desktop)
-;; (desktop-load-default)
-;; (desktop-read)
-;; (add-hook 'kill-emacs-hook 'desktop-save)
-
-
 ;; http://www.emacswiki.org/emacs/InteractiveSpell#toc1
 (setq ispell-process-directory (expand-file-name "~/"))
-
 
 ;;; Some Linux customizations:
 (setq x-select-enable-clipboard t)
@@ -1061,19 +973,6 @@ module %s where
 
 ;;; For carbon emacs
 (set-frame-parameter nil 'alpha 1.0)
-
-;; (set-frame-parameter nil 'fullscreen 'fullboth)
-
-;; (defun toggle-fullscreen ()
-;;   (interactive)
-;;   (set-frame-parameter nil 'fullscreen
-;;                        (if (is-fullscreen) nil 'fullboth)))
-
-;; (defun is-fullscreen ()
-;;   (frame-parameter nil 'fullscreen))
-
-;; (global-set-key [(meta return)] 'toggle-fullscreen)
-;; (global-set-key [(control meta return)] 'toggle-fullscreen)
 
 ;;; http://superuser.com/questions/256404/fullscreen-emacs-in-osx
 (global-set-key [(control meta return)] 'toggle-frame-fullscreen)
@@ -1093,12 +992,6 @@ module %s where
 (global-set-key [(super x)] 'execute-extended-command)
 
 (global-set-key [(meta F11)] 'blort)
-
-;;; git for emacs
-;;; Modified from http://www.michael-hammer.at/blog/emacs_git/
-;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/git")
-;;; already there
-;;; (add-to-list 'vc-handled-backends 'GIT)
 
 ;; (autoload 'git-status "git-status" "Entry point into git-status mode." t)
 (require 'git-status)  ; always
@@ -1163,11 +1056,6 @@ module %s where
 
 (add-to-list 'auto-mode-alist '("\\.wiki\\'" . wikipedia-mode))
 
-;;; From http://en.wikipedia.org/wiki/Wikipedia:Wikipedia-mode.el :
-;;; 
-;;;   wikimedia-mode.el is apparently no longer maintained and most of the
-;;;   code here has been incorporated into mediawiki.el.
-
 (require 'zoom-frm)
 (global-set-key (if (boundp 'mouse-wheel-down-event) ; Emacs 22+
                     (vector (list 'control mouse-wheel-down-event))
@@ -1185,7 +1073,6 @@ module %s where
 ;; Start with larger fonts
 (let ((frame-zoom-font-difference 10)) (zoom-frm-in))
 
-
 (global-set-key "\C-cR" 'rot13-region)
 
 ;; Get rid of `mouse-set-font' or `mouse-appearance-menu':
@@ -1194,15 +1081,6 @@ module %s where
 ;; On Linux, M-SPC is getting co-opted (for the window menu).
 (when (eq system-type 'gnu/linux)
   (global-set-key [?\s- ] 'just-one-space))
-
-;; ;;; Perforce
-;; (require 'p4)
-;; ;;; I have DIFF=vimdiff, which leads p4-submit to hang when
-;; ;;; p4-check-empty-diff is true.
-;; (setenv "DIFF" "diff")
-
-;;; Notification and erc
-;;; See http://www.emacswiki.org/emacs/ErcGrowl
 
 (defvar growlnotify-command (executable-find "growlnotify") "The path to growlnotify")
 
@@ -1240,31 +1118,6 @@ module %s where
     (maximize-frame)
     ))
 
-;;; Problematic in Mac El Capitan with a second monitor?
-;;; maximize-frame makes a frame as wide as the second monitor.
-;; (big)
-
-;; ;;; http://emacs.stackexchange.com/questions/2999/how-to-maximize-my-emacs-frame-on-start-up
-;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-
-;; ;;; For now
-;; (cd (concat tabula-dir "/swp4/prarch/arch/ABAX2/tdh/"))
-;; (shell)
-
-;; /swp4/t4/hwarchABAX2/tdh/Utils/
-
-;; (defun no-p4 ()
-;;   (interactive)
-;;   (setq find-file-hook (remove 'p4-find-file-hook find-file-hook)))
-
-;; (defun yes-p4 ()
-;;   (interactive)
-;;   (push 'p4-find-file-hook find-file-hook))
-
-;; ;; 2012-05-16: the p4 process is getting stuck when I'm disconnected. I don't know what's changed.
-;; (no-p4)
-
 (require 'linum) ; linum-mode
 
 ;; (journal)
@@ -1279,8 +1132,6 @@ module %s where
         (newline 2)
         (previous-line))
     (insert "\n"))
-  ;; (insert "\n## Exercise\n\nMini-elliptical:\n\n*   Distance: \n*   Count: \n*   Time: \n*   Calories: \n")
-  ;; (previous-line 4)
   (end-of-line)
   (insert "\n## Exercise\n\nMini-elliptical:  miles.\n")
   (backward-word 1) (backward-char 1))
@@ -1379,9 +1230,7 @@ module %s where
   "Tidy IRC output after copy&paste."
   (interactive "r")
   ;; (message "irc-trim: %d %d" start end)
-
   (narrow-to-region start end) ;; restore after testing
-
   ;; Usernames can be up to 21 characters long. They can contain lowercase
   ;; letters a to z (without accents), numbers 0 to 9, hyphens, periods, and
   ;; underscores.
@@ -1389,15 +1238,12 @@ module %s where
   (save-excursion
     (while (re-search-forward "^\\[[:0-9 APM]*\\] *<\\([^ ]+\\)>\t*\\(.*\\)" nil t)
       (replace-match "*\\1:* \\2\n" nil)))
-
   (save-excursion
     (while (re-search-forward "^.*) left IRC (.*\n" nil t)
       (replace-match "" nil)))
-
   (save-excursion
     (while (re-search-forward "^.*) joined the channel\n" nil t)
       (replace-match "" nil)))
-
   (widen))
 
 (defun amazon-track-rename (&optional arg)
@@ -1435,20 +1281,9 @@ module %s where
       (mapcar #'expand-file-name
               '("/usr/local/bin" "~/bin" "~/.cabal/bin")))
 
-;; ;;; Since Mac OS 10.11 (El Capitan), I don't know how to get interactive app
-;; ;;; launching to read my environment variables.
-;; (dolist (str my-extra-path)
-;;   (pushnew str exec-path :test #'string-equal)
-;;   (setenv "PATH" (concat str ":" (getenv "PATH"))))
-
-;; Alternatively,
-
 ;; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
-
-;; (pushnew "/usr/local/bin" exec-path)
-;; (pushnew (expand-file-name "~/bin") exec-path :test #'string-equal)
 
 (defun git-push () (interactive) (git-cmd "push"))
 (defun git-pull () (interactive) (git-cmd "pull"))
@@ -1464,7 +1299,7 @@ module %s where
 
 ;;; mmm-mode stuff
 
-;; (load "my-mmm") ; abandoning
+(load "my-mmm") ; abandoning
 
 ;;; Fenced code in Markdown, thanks to http://jblevins.org/log/mmm
 
