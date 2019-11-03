@@ -293,7 +293,7 @@
   (interactive)
   (unless (bolp) (newline))
   (unless (char-equal (char-before (- (point) 1)) ?\n) (newline))
-b  (insert "-------------------------------------------------------------------------------\n")
+  (insert "-------------------------------------------------------------------------------\n")
   (insert"-- | \n")
   (insert "-------------------------------------------------------------------------------\n")
   ;; (insert "{--------------------------------------------------------------------\n")
@@ -1270,6 +1270,20 @@ automatically in order to have the correct markup."
     (kill-ring-save (mark) (point))
     (pop-mark))
   )
+
+(defun gfm-blockquote ()
+  "Convert text between previous <blockquote> and next </blockquote> to GFM."
+  ;; TODO: hop over balanced begin/end blockquote pairs.
+  (interactive)
+  (save-window-excursion
+    (save-excursion
+      (search-backward-regexp "^<blockquote>\n*")
+      (let ((start (match-end 0)))
+        (search-forward-regexp "\n*</blockquote>$")
+        (let ((end (match-beginning 0)))
+          (shell-command-on-region start end "md2gfm")
+          (with-current-buffer "*Shell Command Output*"
+            (kill-ring-save (point-min) (point-max))))))))
 
 (add-hook 'git-comment-hook 'my-git-comment-hook)
 
