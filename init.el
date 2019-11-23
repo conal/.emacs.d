@@ -370,6 +370,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "􏰛" "fi")
   (save-replace "∀" "forall ")
   (save-replace "􏰡" "π")
+  (save-replace "􏰠" "=~")
   )
 
 (defun fix-pdf ()
