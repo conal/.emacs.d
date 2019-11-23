@@ -312,6 +312,7 @@
   ;; ?\' gets made a "quote" character, but I more often use it as a name
   ;; constituent.
   (modify-syntax-entry ?\' "w")
+  (modify-syntax-entry ?\_ "w")
   (define-abbrev-table 'haskell-mode-abbrev-table ())
   (setq local-abbrev-table haskell-mode-abbrev-table)
   (abbrev-mode 1)                       ; Use abbreviations
@@ -1271,8 +1272,8 @@ automatically in order to have the correct markup."
     (pop-mark))
   )
 
-(defun gfm-blockquote ()
-  "Convert text between previous <blockquote> and next </blockquote> to GFM."
+(defun gfm-copy-blockquote ()
+  "Convert text between previous <blockquote> and next </blockquote> to GFM, and stash in copy buffer."
   ;; TODO: hop over balanced begin/end blockquote pairs.
   (interactive)
   (save-window-excursion
@@ -1284,6 +1285,21 @@ automatically in order to have the correct markup."
           (shell-command-on-region start end "md2gfm")
           (with-current-buffer "*Shell Command Output*"
             (kill-ring-save (point-min) (point-max))))))))
+
+(defun gfm-paste-blockquote ()
+  "Convert  text in copy buffer and paste between <blockquote> and </blockquote>."
+  (interactive)
+  (save-window-excursion
+    (save-excursion
+      (unless (bolp) (insert "\n"))
+      (insert "<blockquote>\n")
+      (let ((start (point)))
+        (yank)
+        (shell-command-on-region start (point) "gfm2md"))
+      ;; (when (looking-back ""
+      (unless (bolp) (insert "\n"))
+      (insert "</blockquote>\n"))))
+
 
 (add-hook 'git-comment-hook 'my-git-comment-hook)
 
