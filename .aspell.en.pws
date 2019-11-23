@@ -1,4 +1,4 @@
-personal_ws-1.1 en 783 
+personal_ws-1.1 en 790 
 distributivity
 refactor
 intensional
@@ -68,10 +68,12 @@ scalings
 exponentiating
 unparse
 semiring
+Pandoc
 prepend
 generalizable
 Paritosh
 inline
+nonjudgmentally
 reboxing
 combinatorial
 clusterings
@@ -227,6 +229,7 @@ customizable
 McIlroy's
 adjunctions
 entropies
+noncomputability
 numerics
 SMT
 endofunction
@@ -365,6 +368,7 @@ subintervals
 formalizations
 hackery
 subexpressions
+decidability
 homomorphically
 computable
 finitary
@@ -462,8 +466,8 @@ bijective
 supergraphs
 foldable
 Haskell's
-shiftings
 nonscalar
+shiftings
 sequentiality
 bicyling
 funders
@@ -506,6 +510,7 @@ algorithmics
 associativity
 jekyll
 reconnection
+bulleted
 FaceTime
 iirc
 convolutional
@@ -516,6 +521,7 @@ macrostates
 computability
 trie
 definedness
+renderers
 nonmonotonic
 Baidu
 GUIs
@@ -693,6 +699,7 @@ biproducts
 DSELs
 ifThenElse
 maxima
+congruences
 photonic
 equationally
 codomain
