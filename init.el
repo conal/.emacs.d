@@ -360,6 +360,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "◦" ".")
   (save-replace "…" "...")
   (save-replace "🙂" ":)")
+  (save-replace "😄" ":)")
   (save-replace "😞" ":disappointed:")
   (save-replace "😊" ":smiley:")
   (save-replace "😉" ":wink:")
@@ -1331,6 +1332,9 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 (my-mmm-markdown-auto-class "bash" 'shell-script-mode)
 (my-mmm-markdown-auto-class "json" 'javascript-mode)
 
+;; Leads to "Agda is busy with something in the buffer #<killed buffer>"
+;;; (my-mmm-markdown-auto-class "agda" 'agda2-mode)
+
 ;; Slows down scrolling quite a lot when point is in a dot region
 (my-mmm-markdown-auto-class "dot" 'graphviz-dot-mode)
 ;; (my-mmm-markdown-auto-class "dot" 'text-mode)
@@ -1426,6 +1430,17 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 
 ;; (require 'popwin)
 ;; (popwin-mode 1)
+
+(load-file 
+ (let ((coding-system-for-read 'utf-8))
+   (shell-command-to-string "agda-mode locate")))
+
+;; ;;; https://plfa.github.io/GettingStarted/
+;; (set-face-attribute 'default nil
+;; 		    :family "mononoki"
+;; 		    :height 120
+;; 		    :weight 'normal
+;; 		    :width  'normal)
 
 ;;; End of customizations
 
