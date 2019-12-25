@@ -1,4 +1,4 @@
-personal_ws-1.1 en 790 
+personal_ws-1.1 en 799 
 distributivity
 refactor
 intensional
@@ -67,8 +67,8 @@ radix
 scalings
 exponentiating
 unparse
-semiring
 Pandoc
+semiring
 prepend
 generalizable
 Paritosh
@@ -162,17 +162,19 @@ functorial
 approximators
 renamings
 bafflingly
+linearizing
 Financials
 unforgeable
 implicits
 blockchain
 empathic
 msd
-PDF
 NLP
+PDF
 refactoring
 Croydon
 sequenceA
+threadedness
 Minkowski
 univariate
 catamorphism
@@ -353,6 +355,7 @@ reifications
 interpolator
 monotype
 reflexivity
+quantifications
 SIMD
 Paddington
 explainability
@@ -364,6 +367,7 @@ newtype
 denoising
 adjunction
 comparator
+tensoring
 subintervals
 formalizations
 hackery
@@ -381,6 +385,7 @@ ux
 semirings
 denotatively
 lexicographically
+coinductively
 computably
 Paritosh's
 summand
@@ -424,6 +429,7 @@ manageably
 dimensionality
 reindexing
 antisymmetric
+nonredundant
 ICFP
 Overlake
 subgraphs
@@ -438,6 +444,7 @@ OpenCL
 Hellige's
 endofunctions
 pointw
+pointfree
 differentiations
 polymorphism
 GLSL
@@ -566,6 +573,7 @@ reifying
 foldMap
 deconstructor
 supergraph
+tomatable
 linearize
 bifunctor
 polytypic
@@ -615,6 +623,7 @@ subspaces
 cofounders
 Fréchet
 semigroup
+nonlinearly
 synchrony
 parametrically
 toList
@@ -636,8 +645,8 @@ morphically
 diagonalization
 wikidata
 covector
-pointwise
 additively
+pointwise
 Kolmogorov
 automata
 optimizations
