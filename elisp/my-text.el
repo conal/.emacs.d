@@ -376,16 +376,16 @@ prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
 (setq sentence-end "[.?!][]\"')}]*\\($\\|\t\\| \\)[ \t\n]*")
 
 (defun markdown-mmmify-lines (&optional whole-buffer)
-  "mmm-ify 1000 lines above & below the point, or the whole buffer if argument given"
+  "mmm-ify 200 lines above & below the point, or the whole buffer if argument given"
   (interactive "P")
   ;; I was doing *either* buffer or block, but oddly, buffer leaves junk behind,
   ;; in the area of the block.
   ;;   (when whole-buffer (mmm-parse-buffer))
-  ;;   (save-excursion (mmm-parse-block 100))  ; save-excursion needed in cocoa emacs
+  ;;   (save-excursion (mmm-parse-block 200))  ; save-excursion needed in cocoa emacs
   (if whole-buffer
       ;; Still not right. Sometimes I want LaTeX mode.
       (markdown-mode)
-    (save-excursion (mmm-parse-block 1000))) ; save-excursion needed in cocoa emacs
+    (save-excursion (mmm-parse-block 200))) ; save-excursion needed in cocoa emacs
   )
 
 ;;; Handy everywhere
