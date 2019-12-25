@@ -955,6 +955,7 @@ consisting of repeated '-'. For an <h2>."
   (modify-syntax-entry ?\` "$")  ; code fragment: self-matching 
   (modify-syntax-entry ?$ "$")  ; code fragment: self-matching 
   (modify-syntax-entry ?\\ "w")  ; for LaTex
+  (modify-syntax-entry ?_ "w")
   (modify-syntax-entry ?/ ".")  ; punctuation. was "_"/symbol
   ;; (modify-syntax-entry ?: "_")  ; symbol. was "."/punctuation
   (when t
