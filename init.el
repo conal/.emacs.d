@@ -239,6 +239,14 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 
 ;; (load "~/darcs-repos/haskellmode-emacs/haskell-site-file")
 
+;; https://github.com/purcell/exec-path-from-shell
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+;; (setq my-extra-path
+;;       (mapcar #'expand-file-name
+;;               '("/usr/local/bin" "~/bin" "~/.cabal/bin")))
+
 (load "my-abbrev")
 (load "my-text")
 (load "my-tex")
@@ -1279,14 +1287,6 @@ module %s where
 
 ;; (global-set-key "\C-cv" 'view-mode)
 
-(setq my-extra-path
-      (mapcar #'expand-file-name
-              '("/usr/local/bin" "~/bin" "~/.cabal/bin")))
-
-;; https://github.com/purcell/exec-path-from-shell
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
-
 (defun git-push () (interactive) (git-cmd "push"))
 (defun git-pull () (interactive) (git-cmd "pull"))
 
@@ -1430,17 +1430,6 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 
 ;; (require 'popwin)
 ;; (popwin-mode 1)
-
-(load-file 
- (let ((coding-system-for-read 'utf-8))
-   (shell-command-to-string "agda-mode locate")))
-
-;; ;;; https://plfa.github.io/GettingStarted/
-;; (set-face-attribute 'default nil
-;; 		    :family "mononoki"
-;; 		    :height 120
-;; 		    :weight 'normal
-;; 		    :width  'normal)
 
 ;;; End of customizations
 

@@ -924,6 +924,22 @@ consisting of repeated '-'. For an <h2>."
   (interactive)
   (markdown-insert-gfm-code-block-yank "lisp"))
 
+;;; Agda
+(load-file 
+ (let ((coding-system-for-read 'utf-8))
+   (shell-command-to-string "agda-mode locate")))
+
+;;; I like to use the Agda input method in markdown-mode as well.
+;;; Load it here.
+(require 'agda-input)
+
+;; ;;; https://plfa.github.io/GettingStarted/
+;; (set-face-attribute 'default nil
+;; 		    :family "mononoki"
+;; 		    :height 120
+;; 		    :weight 'normal
+;; 		    :width  'normal)
+
 (defun my-markdown-mode-hook ()
   (visual-line-mode t)
   (auto-fill-mode 0)
@@ -973,6 +989,7 @@ consisting of repeated '-'. For an <h2>."
   ;;; (setq markdown-enable-math nil)
   ;; Link insertion sub-keymap. They're not very useful, so recover the global align-regexp
   (local-unset-key "\C-c\C-a")
+  (set-input-method "Agda")
 )
 
 (add-hook 'markdown-mode-hook 'my-markdown-mode-hook)
@@ -1232,7 +1249,6 @@ automatically in order to have the correct markup."
         (cons lang (remove lang markdown-gfm-used-languages)))
   )
 
-
 ;;; • Expected kind ‘* -> * -> *’,
 ;;;     but ‘(|-)’ has kind ‘Constraint -> Constraint -> *’
 ;;; • In the first argument of ‘ProductCat’, namely ‘(|-)’
@@ -1346,3 +1362,9 @@ automatically in order to have the correct markup."
 (add-hook 'dante-mode-hook
    '(lambda () (flycheck-add-next-checker 'haskell-dante
                 '(warning . haskell-hlint))))
+
+(add-hook 'agda2-mode-hook 'my-agda2-mode-hook)
+
+(defun my-agda2-mode-hook ()
+  (abbrev-mode 1)                       ; Use abbreviations
+  )
