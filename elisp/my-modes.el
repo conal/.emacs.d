@@ -910,6 +910,11 @@ consisting of repeated '-'. For an <h2>."
         (delete-forward-char 1)
         (goto-char (- point-was2 1))))))
 
+(defun markdown-insert-agda-code-block (&optional arg)
+  "'markdown-insert-gfm-code-block' specialized for Agda"
+  (interactive "P")
+  (markdown-insert-gfm-code-block-maybe-yank "agda" arg))
+
 (defun markdown-insert-haskell-code-block (&optional arg)
   "'markdown-insert-gfm-code-block' specialized for Haskell"
   (interactive "P")
@@ -955,7 +960,7 @@ consisting of repeated '-'. For an <h2>."
   ;; (local-set-key [?\M-\C-,] 'markdown-mmmify-lines)  -- global
   ;; (local-set-key (kbd "M-q") 'dont-fill-paragraph)
   (local-set-key (kbd "M-q") 'fill-paragraph-maybe-infinitely)
-  (setq markdown-enable-math t)
+  ;; (setq markdown-enable-math t) ; chokes on embedded Haskell "$"
   (local-unset-key "\C-c\C-j")
   (setq indent-line-function 'indent-relative)
   (setq tab-always-indent t)
@@ -964,9 +969,9 @@ consisting of repeated '-'. For an <h2>."
   ;; Experiment: set globally, considering mmm
   ;; (local-set-key "\C-cv" 'blogify-foo)
   ;; (local-set-key "\C-c\C-v" 'blogify-view-foo)
-  (local-set-key "\C-c\C-sh" 'markdown-insert-haskell-code-block)
+  (local-set-key (kbd "C-s-a") 'markdown-insert-agda-code-block)
   (local-set-key (kbd "C-s-h") 'markdown-insert-haskell-code-block)
-  (local-set-key "\C-c\C-sl" 'markdown-insert-lisp-code-block)
+  (local-set-key (kbd "C-s-l") 'markdown-insert-lisp-code-block)
   ;; (modify-syntax-entry ?\* "$")  ; italics" self-matching
   (modify-syntax-entry ?\` "$")  ; code fragment: self-matching 
   (modify-syntax-entry ?$ "$")  ; code fragment: self-matching 
@@ -1290,7 +1295,7 @@ automatically in order to have the correct markup."
   )
 
 (defun gfm-copy-blockquote ()
-  "Convert text between previous <blockquote> and next </blockquote> to GFM, and stash in copy buffer."
+  "Convert Markdown between previous <blockquote> and next </blockquote> to GFM, and stash in copy buffer."
   ;; TODO: hop over balanced begin/end blockquote pairs.
   (interactive)
   (save-window-excursion
@@ -1304,7 +1309,7 @@ automatically in order to have the correct markup."
             (kill-ring-save (point-min) (point-max))))))))
 
 (defun gfm-paste-blockquote ()
-  "Convert  text in copy buffer and paste between <blockquote> and </blockquote>."
+  "Convert GFM text in copy buffer and paste between <blockquote> and </blockquote>."
   (interactive)
   (save-window-excursion
     (save-excursion
@@ -1316,6 +1321,20 @@ automatically in order to have the correct markup."
       ;; (when (looking-back ""
       (unless (bolp) (insert "\n"))
       (insert "</blockquote>\n"))))
+
+(defun markdown-copy-blockquote ()
+  "Convert Markdown between previous <blockquote> and next </blockquote> to Markdown without mid-paragraph newlines, and stash in copy buffer."
+  ;; TODO: hop over balanced begin/end blockquote pairs.
+  (interactive)
+  (save-window-excursion
+    (save-excursion
+      (search-backward-regexp "^<blockquote>\n*")
+      (let ((start (match-end 0)))
+        (search-forward-regexp "\n*</blockquote>$")
+        (let ((end (match-beginning 0)))
+          (shell-command-on-region start end "pandoc --from=markdown+smart --to=markdown+smart --wrap=none")
+          (with-current-buffer "*Shell Command Output*"
+            (kill-ring-save (point-min) (point-max))))))))
 
 
 (add-hook 'git-comment-hook 'my-git-comment-hook)

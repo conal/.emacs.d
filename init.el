@@ -184,20 +184,21 @@ Spotlight binding from command-space to option-space."
       (rename-buffer journal-name)))
   )
 
-
-(defun google (string)
-  "Run a Google search in a browser."
+(defun web-search (string)
+  "Run a web-search search in a browser."
   (interactive "sSearch for: ")
-  (browse-url (concat "http://www.google.com/search?q=" string)))
+  (browse-url (concat ;; "http://www.google.com/search?q="
+                      "http://duckduckgo.com/?q="
+                      string)))
 
-(defun google-region (from to &optional quoted)
-  "Run a Google search on the contents of the region FROM/TO"
+(defun web-search-region (from to &optional quoted)
+  "Run a web-search search on the contents of the region FROM/TO"
   (interactive "r\nP")
-  ;; (message "google-region %d %d %s" from to quoted)
+  ;; (message "web-search-region %d %d %s" from to quoted)
   (let ((str (buffer-substring from to)))
-    (google (if quoted (concat "\"" str "\"") str))
+    (web-search (if quoted (concat "\"" str "\"") str))
     ))
-(global-set-key "\C-cG" 'google-region)
+(global-set-key "\C-cG" 'web-search-region)
 
 (defun disqus-fix (start end)
   "Convert region markdown to HTML and fix up for use in a disqus comment.
@@ -333,7 +334,6 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (end-of-buffer)
   )
 
-
 (defun was-new-day ()
   "Insert a new day header for my what-did file"
   (interactive)
@@ -358,20 +358,23 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "[‘’′]" "'")
   (save-replace "[“”]" "\"")
   (save-replace " " " ")
-  (save-replace "–" "-")
-  (save-replace "" "--")
   (save-replace " – " "---")
+  (save-replace "" "--")
   (save-replace "½" "1/2")
   (save-replace "×" ":*")
   (save-replace "[—―]" "---")
   (save-replace "→" "->")
   (save-replace "◦" ".")
   (save-replace "…" "...")
-  (save-replace "🙂" ":)")
-  (save-replace "😄" ":)")
+  (save-replace "🙂" ":smiley:")
+  (save-replace "😄" ":smiley:")
   (save-replace "😞" ":disappointed:")
   (save-replace "😊" ":smiley:")
+  (save-replace "😃" ":smiley:")
   (save-replace "😉" ":wink:")
+  (save-replace "😎" ":sunglasses:")
+  (save-replace "🔥" ":fire:")
+  (save-replace "👍" ":thumbsup:")
   (save-replace "⇒" "=>")
   (save-replace "∃" "exists ")
   (save-replace "ﬀ" "ff")
@@ -380,6 +383,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "∀" "forall ")
   (save-replace "􏰡" "π")
   (save-replace "􏰠" "=~")
+  (save-replace "\n\n \n\n" "\n\n")
   )
 
 (defun fix-pdf ()
@@ -589,7 +593,10 @@ logs, putting in a Last Modified in a new file, etc."
         (if (eq system-type 'darwin)
             (expand-file-name "~/bin/emacsclient-osx")
           "emacsclient"))
-(server-start)
+
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;; (setq haskell-font-lock-symbols nil)
 
@@ -902,7 +909,7 @@ module %s where
  '(markdown-asymmetric-header t)
  '(markdown-command "pandoc --toc --standalone --to html+smart")
  '(markdown-enable-html nil)
- '(markdown-enable-math t)
+ '(markdown-enable-math nil)
  '(markdown-header-scaling t)
  '(markdown-hr-strings
    (quote
@@ -1081,7 +1088,8 @@ module %s where
 ;; TODO: unify zoom bindings
 
 ;; Start with larger fonts
-(let ((frame-zoom-font-difference 10)) (zoom-frm-in))
+(when window-system
+  (let ((frame-zoom-font-difference 10)) (zoom-frm-in)))
 
 (global-set-key "\C-cR" 'rot13-region)
 
@@ -1172,23 +1180,32 @@ module %s where
     (goto-char start)
     (save-excursion
       (while (re-search-forward
-              "^\n*\\([a-z0-9. _é-]+\\) [:0-9 APM]*$"
+              "^\n*\\([a-z0-9. _é-]+\\)  [:0-9 APM]*$"
               nil t)
         (replace-match "\n*\\1:*" nil)))
     ;; Same speaker continuing looks like blank lines and a bracketed date line.
     (save-excursion
-      (while (re-search-forward "\n+\\[[:0-9 APM]+\\] *\n" nil t)
+      (while (re-search-forward "\n+[:0-9 APM]+ *\n" nil t)
         (replace-match "  \n" nil)))
     (save-excursion
       (while (search-forward ":slightly_smiling_face:" nil t)
         (replace-match ":smile:" nil)))
     (save-excursion
-      (while (re-search-forward "\\(.\\)\n" nil t)
+      (while (re-search-forward "\\(.\\) *\n" nil t)
         (replace-match "\\1  \n" nil)))
     (save-excursion
       (while (search-forward ":*  \n" nil t)
         (replace-match ":*\n" nil)))
-    (fix-quotes))
+    (save-excursion
+      (while (re-search-forward "white_check_mark *\neyes *\nraised_hands *\n" nil t)
+        (replace-match "" nil)))
+    (save-excursion
+      (while (re-search-forward "  +\n\n" nil t)
+        (replace-match "\n\n" nil))))
+    (save-excursion
+      (while (re-search-forward "\n\n\n\n\nNew *\n\n" nil t)
+        (replace-match "\n" nil)))
+    (fix-quotes)
   (widen))
 
 (defun messages-trim (start end)
@@ -1319,7 +1336,7 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 ;; Mode names that derive directly from the language name
 (mapc 'my-mmm-markdown-auto-class
       '(
-        "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
+        "agda" "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
         "markdown" "python" "r" "ruby" "sql" "stata" "xml"
         "javascript" "haskell" "glsl" "verilog"
         "yaml"
@@ -1431,6 +1448,8 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 ;; (require 'popwin)
 ;; (popwin-mode 1)
 
-;;; End of customizations
+;;; https://github.com/nitros12/discord-emacs.el
+(load-file "~/git-repos/discord-emacs.el/discord-emacs.el")
 
+;;; End of customizations
 (setq debug-on-error nil)
