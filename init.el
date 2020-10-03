@@ -1273,6 +1273,70 @@ module %s where
       (replace-match "" nil)))
   (widen))
 
+(defun discord-trim (start end)
+  "Tidy Discord Markdown after copy&paste."
+  (interactive "r")
+  (narrow-to-region start end) ;; restore after testing
+  (save-excursion
+    (goto-char start)
+    (save-excursion
+      (while (re-search-forward
+              "^\\(.*\\)\\(To\\|Yester\\)day at [0-9]+:[0-9]+ [AP]M\n-+\n"
+              nil t)
+        (replace-match "*\\1:*" nil)))
+    (save-excursion
+      (while (search-forward "(edited)" nil t)
+        (replace-match "" nil)))
+    (save-excursion
+      (while (search-forward "\\[" nil t) (replace-match "" nil)))
+    (save-excursion
+      (while (search-forward "\\]" nil t) (replace-match "" nil)))
+    (save-excursion
+      (while (re-search-forward "\n1\n" nil t) (replace-match "" nil)))
+    (save-excursion
+      (while (re-search-forward "\n__[0-9]+:[0-9]+ [AP]M__\n" nil t)
+        (replace-match "" nil)))
+    )
+  (fix-quotes)
+  (widen))
+
+(defun slack-markdown-trim (start end)
+  "Tidy Slack Markdown after copy&paste."
+  (interactive "r")
+  (narrow-to-region start end) ;; restore after testing
+  (save-excursion
+    (goto-char start)
+    (save-excursion
+      ;; [1:10 PM](https://agda-categories.slack.com/archives/CQ547CJTG/p1601669447011700)  
+      (while (re-search-forward
+              "^\\[[0-9]+:[0-9]+\\](.*)\n"
+              nil t)
+        (replace-match "" nil)))
+    (save-excursion
+      ;; [Conal Elliott](/team/U01B8U851MG)[1:10 PM](https://agda-categories.slack.com/archives/CQ547CJTG/p1601669447011700)  
+      (while (re-search-forward
+              "^\\[\\(.*?\\)\\](/team/[A-Z0-9]*)\\(\\[[0-9]+:[0-9]+ [AP]M\\]\\)\\((.*?)\\)  \n"
+              nil t)
+        (replace-match
+         ;; "*\\1* \\2\\3:"
+         ;; "[\\1]\\3:"
+         "*\\1*:"
+         nil)))
+    (save-excursion
+      (while (re-search-forward "\n[0-9]+\n" nil t) (replace-match "" nil)))
+    (save-excursion
+      (while (search-forward "\n\n\n" nil t) (replace-match "\n\n" nil)))
+    (save-excursion
+      (while (re-search-forward "\\[\\(@.*?\\)\\](.*?)" nil t) (replace-match "*\\1*" nil)))
+    (save-excursion
+      (while (re-search-forward "\nGitHub\n\n\\[.*\\](.*)\n\n.*\n" nil t) (replace-match "" nil)))
+    ;; If I decide to keep time stamps above, then drop the next rewrite.
+    (save-excursion
+      (while (re-search-forward "\nToday\n\n\\* \\* \\*\n" nil t) (replace-match "" nil)))
+    )
+  (fix-quotes)
+  (widen))
+
 (defun amazon-track-rename (&optional arg)
   "Keyboard macro."
   (interactive "p")
