@@ -1386,4 +1386,7 @@ automatically in order to have the correct markup."
 
 (defun my-agda2-mode-hook ()
   (abbrev-mode 1)                       ; Use abbreviations
+  (local-set-key "\C-cs" 'haskell-insert-section-header)
+  (setq case-fold-search nil)  ; unsure about this choice
+  (setq case-replace nil)
   )
