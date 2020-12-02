@@ -384,6 +384,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "􏰡" "π")
   (save-replace "􏰠" "=~")
   (save-replace "\n\n \n\n" "\n\n")
+  (save-replace "\n\n  \n\n" "\n\n")
   )
 
 (defun fix-pdf ()
@@ -1271,6 +1272,7 @@ module %s where
   (save-excursion
     (while (re-search-forward "^.*) joined the channel\n" nil t)
       (replace-match "" nil)))
+  (fix-quotes)
   (widen))
 
 (defun discord-trim (start end)
@@ -1281,21 +1283,27 @@ module %s where
     (goto-char start)
     (save-excursion
       (while (re-search-forward
-              "^\\(.*\\)\\(To\\|Yester\\)day at [0-9]+:[0-9]+ [AP]M\n-+\n"
+              "^\\(.*\\)\\(To\\|Yester\\)day at [0-9]+:[0-9]+ [AP]M\n"
               nil t)
-        (replace-match "*\\1:*" nil)))
+        (replace-match "\n*\\1:* " nil)))
+    (save-excursion
+      (while (re-search-forward "\\(.+\\)" nil t)
+        (replace-match "\\1  " nil)))
     (save-excursion
       (while (search-forward "(edited)" nil t)
         (replace-match "" nil)))
-    (save-excursion
-      (while (search-forward "\\[" nil t) (replace-match "" nil)))
-    (save-excursion
-      (while (search-forward "\\]" nil t) (replace-match "" nil)))
+    ;; (save-excursion
+    ;;   (while (search-forward "\\[" nil t) (replace-match "" nil)))
+    ;; (save-excursion
+    ;;   (while (search-forward "\\]" nil t) (replace-match "" nil)))
     (save-excursion
       (while (re-search-forward "\n1\n" nil t) (replace-match "" nil)))
     (save-excursion
       (while (re-search-forward "\n__[0-9]+:[0-9]+ [AP]M__\n" nil t)
         (replace-match "" nil)))
+    (save-excursion
+      (while (re-search-forward " +\n\n" nil t)
+        (replace-match "\n\n" nil)))
     )
   (fix-quotes)
   (widen))
@@ -1400,7 +1408,7 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 ;; Mode names that derive directly from the language name
 (mapc 'my-mmm-markdown-auto-class
       '(
-        "agda" "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
+        "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
         "markdown" "python" "r" "ruby" "sql" "stata" "xml"
         "javascript" "haskell" "glsl" "verilog"
         "yaml"
@@ -1413,8 +1421,12 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 (my-mmm-markdown-auto-class "bash" 'shell-script-mode)
 (my-mmm-markdown-auto-class "json" 'javascript-mode)
 
-;; Leads to "Agda is busy with something in the buffer #<killed buffer>"
-;;; (my-mmm-markdown-auto-class "agda" 'agda2-mode)
+;;; Careful with this one. I can lead to "Agda is busy with something in the
+;;; buffer #<killed buffer>" or just slowing down Emacs quite a lot.
+;; (my-mmm-markdown-auto-class "agda" 'agda2-mode)
+
+;; ;; Experimental alternative
+;; (my-mmm-markdown-auto-class "agda" 'fundamental-mode)
 
 ;; Slows down scrolling quite a lot when point is in a dot region
 (my-mmm-markdown-auto-class "dot" 'graphviz-dot-mode)
@@ -1514,6 +1526,9 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 
 ;;; https://github.com/nitros12/discord-emacs.el
 (load-file "~/git-repos/discord-emacs.el/discord-emacs.el")
+
+;;; https://wiki.portal.chalmers.se/agda/Docs/HowToSeeUnicode
+;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono")
 
 ;;; End of customizations
 (setq debug-on-error nil)
