@@ -1389,4 +1389,5 @@ automatically in order to have the correct markup."
   (local-set-key "\C-cs" 'haskell-insert-section-header)
   (setq case-fold-search nil)  ; unsure about this choice
   (setq case-replace nil)
+  (local-set-key [?\C-'] 'markdown-inline-code)
   )
