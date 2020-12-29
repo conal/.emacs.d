@@ -1,4 +1,4 @@
-personal_ws-1.1 en 869 
+personal_ws-1.1 en 871 
 distributivity
 refactor
 intensional
@@ -68,6 +68,7 @@ desugared
 radix
 scalings
 exponentiating
+Spivak
 unparse
 Pandoc
 semiring
@@ -126,8 +127,8 @@ codensity
 catamorphisms
 uncurries
 understandability
-iso
 implementor
+iso
 synthesizable
 multiset
 nondeterministically
@@ -179,8 +180,8 @@ implicits
 blockchain
 empathic
 msd
-PDF
 NLP
+PDF
 refactoring
 Croydon
 sequenceA
@@ -267,6 +268,7 @@ desugar
 Conor
 embeddings
 colocate
+decidably
 Tikhon's
 adjoints
 STM
@@ -472,6 +474,7 @@ commutativity
 desugaring
 monomorphic
 OpenCL
+differentially
 Hellige's
 endofunctions
 pointw
@@ -599,8 +602,8 @@ untrusted
 startups
 extralinguistic
 homset
-monomorphizing
 infinitary
+monomorphizing
 extensibility
 scrutinees
 booleans
@@ -699,8 +702,8 @@ morphically
 diagonalization
 wikidata
 covector
-pointwise
 additively
+pointwise
 Kolmogorov
 automata
 optimizations
@@ -747,9 +750,9 @@ contractivity
 quantizes
 reifies
 tupling
+associators
 optimality
 supremum
-associators
 disjuncts
 nonsequential
 echinacea
