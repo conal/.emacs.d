@@ -330,7 +330,7 @@ being punctuation"
   (local-set-key [?\C-,] 'markdown-mmmify-lines)
   (local-set-key [?\C-'] 'add-code)
   (local-set-key [?\C-|] 'add-spec)
-  (local-set-key [?\C-\\] 'add-spec) ; was toggle-input-method
+  ;; (local-set-key [?\C-\\] 'add-spec) ; was toggle-input-method
   (local-set-key "\C-cv" 'do-make-noninteractive)
   ;; (local-set-key "\C-c\C-v" 'do-make-see-noninteractive)
   ;; There's also save-make-go ("\C-c\C-r")
@@ -413,6 +413,7 @@ being punctuation"
   ;; 
   ;; (local-set-key "\C-c\C-r" 'my-tex-region)
   (local-set-key "\C-c\C-r" 'save-make-go)
+  (local-set-key "\C-c\C-l" 'save-make-go)  ; was tex-recenter-output-buffer
   (local-unset-key "\C-c\C-j")  ; i want save-junk, not LaTeX-insert-item
 ;;   (unless (string-equal (buffer-name) "Junk.lhs")
 ;;     (longlines-mode))
