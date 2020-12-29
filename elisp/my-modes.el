@@ -428,7 +428,7 @@
   (local-set-key [f11] 'cabal-do)
   ;; new (2014-05-30). Overrides delete-horizontal-space
   (local-set-key [M-return] 'cabal-do)
-  (local-set-key [?\C-|] 'add-spec)
+  ;; (local-set-key [?\C-|] 'add-spec)
   ;; (local-set-key [?\C-\\] 'add-spec)  ;; restore if i want toggle-input-method back
   ;; haskell-mode binds \C-c\C-g, but I like it to stay undefined
   (local-unset-key "\C-c\C-g")
@@ -898,9 +898,10 @@ consisting of repeated '-'. For an <h2>."
     (mmm-parse-block 1)
     (when arg
       (let ((p (point)))
+        (next-line 1)
         (yank)
-        (when (bolp) (delete-char 1))
         (goto-char p)
+        (when (bolp) (delete-char 1))
         (when (eolp) (delete-char 1))
         (setq mmm-mode-buffer-dirty t)))
     ;; Delete separator line unless we started at the beginning of a line
