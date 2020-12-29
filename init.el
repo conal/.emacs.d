@@ -493,6 +493,7 @@ doesn't error out when the process is not running."
 ;; (push "._.DS_Store" PC-ignored-extensions)
 
 (add-to-list 'completion-ignored-extensions ".pdf")
+(add-to-list 'completion-ignored-extensions ".agdai")
 
 ;; A Mac OS system file
 (add-to-list 'completion-ignored-extensions ".DS_Store")
@@ -832,6 +833,31 @@ logs, putting in a Last Modified in a new file, etc."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(PC-meta-flag nil)
+ '(agda-input-user-translations
+   (quote
+    (("r--|" "⟼")
+     ("r|" "⤇")
+     ("^-1" "⁻¹")
+     ("u^" "˘")
+     ("bij" "⤖")
+     ("<x>" "⟨×⟩")
+     ("map1" "map₁")
+     ("map2" "map₂")
+     ("mapi" "mapⁱ")
+     ("mapi2" "mapⁱ₂")
+     ("~<" "≈⟨ ? ⟩")
+     ("purei" "pureⁱ")
+     ("=?" "≟")
+     ("=<" "≡⟨⟩")
+     ("r]" "↦")
+     ("~^" "≈˘⟨ ? ⟩")
+     ("ex1" "∃¹")
+     ("ex2" "∃²")
+     ("ust" "꙳")
+     ("la" "λ")
+     ("del" "δ")
+     ("begin" "\\begin")
+     ("end" "\\end"))))
  '(auto-save-interval 30)
  '(backup-by-copying t)
  '(c-style-variables-are-local-p nil)
@@ -1408,6 +1434,7 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 ;; Mode names that derive directly from the language name
 (mapc 'my-mmm-markdown-auto-class
       '(
+        "agda"
         "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
         "markdown" "python" "r" "ruby" "sql" "stata" "xml"
         "javascript" "haskell" "glsl" "verilog"
