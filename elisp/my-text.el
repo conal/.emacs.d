@@ -283,7 +283,7 @@ sexp.  Useful for markdown."
 prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
   (interactive "p")
   (surround-sexp n ?\|)
-  (mmm-parse-block 1)
+  ;; (mmm-parse-block 1)
   )
 
 (defun parenthesize-sexp (n)
@@ -291,7 +291,7 @@ prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
 prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
   (interactive "p")
   (surround-sexp n ?\(  ?\))
-  (mmm-parse-block 1)
+  ;; (mmm-parse-block 1)
   )
 
 (global-set-key "\C-c*" 'starify-sexp)
@@ -375,21 +375,21 @@ prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
 ;;; Took out one space, because some folks won't put in two!!
 (setq sentence-end "[.?!][]\"')}]*\\($\\|\t\\| \\)[ \t\n]*")
 
-(defun markdown-mmmify-lines (&optional whole-buffer)
-  "mmm-ify 200 lines above & below the point, or the whole buffer if argument given"
-  (interactive "P")
-  ;; I was doing *either* buffer or block, but oddly, buffer leaves junk behind,
-  ;; in the area of the block.
-  ;;   (when whole-buffer (mmm-parse-buffer))
-  ;;   (save-excursion (mmm-parse-block 200))  ; save-excursion needed in cocoa emacs
-  (if whole-buffer
-      ;; Still not right. Sometimes I want LaTeX mode.
-      (markdown-mode)
-    (save-excursion (mmm-parse-block 200))) ; save-excursion needed in cocoa emacs
-  )
+;; (defun markdown-mmmify-lines (&optional whole-buffer)
+;;   "mmm-ify 200 lines above & below the point, or the whole buffer if argument given"
+;;   (interactive "P")
+;;   ;; I was doing *either* buffer or block, but oddly, buffer leaves junk behind,
+;;   ;; in the area of the block.
+;;   ;;   (when whole-buffer (mmm-parse-buffer))
+;;   ;;   (save-excursion (mmm-parse-block 200))  ; save-excursion needed in cocoa emacs
+;;   (if whole-buffer
+;;       ;; Still not right. Sometimes I want LaTeX mode.
+;;       (markdown-mode)
+;;     (save-excursion (mmm-parse-block 200))) ; save-excursion needed in cocoa emacs
+;;   )
 
-;;; Handy everywhere
-(global-set-key [?\M-\C-,] 'markdown-mmmify-lines)
+;; ;;; Handy everywhere
+;; (global-set-key [?\M-\C-,] 'markdown-mmmify-lines)
 
 (defun current-line-as-region ()
   (save-excursion

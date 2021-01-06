@@ -26,7 +26,7 @@
 
 ;;; Code:
 
-(require 'my-mmm)
+;; (require 'my-mmm)
 (require 'common-skel)
 
 ;;; Auxiliar
@@ -154,7 +154,7 @@
   (jao-read-haskell-module)
   _
   (newline) "\\end{code}" (newline) "%endif" (newline)
-  '(mmm-parse-buffer)
+  ;; '(mmm-parse-buffer)
   '(set-buffer-modified-p t) ; doesn't work.  why?
   )
 

@@ -5,7 +5,7 @@
 ;; (require 'twee)
 ;; (require 'hs-lint)
 (require 'find-file)  ;; for cc-other-file-alist
-(require 'mmm-mode)
+;; (require 'mmm-mode)
 
 (require 'haskell-interactive-mode)
 (require 'haskell-process)
@@ -264,29 +264,29 @@
 
 ;; (require 'hoogle)
 
-;;; Experimental hack: redefine mmm-mode-idle-reparse from mmm-vars.el to
-;;; mmm-apply-all to a smaller region than the whole buffer.
-(defun mmm-mode-idle-reparse (buffer)
-  (when (buffer-live-p buffer)
-    (with-current-buffer buffer
-      (when mmm-mode-buffer-dirty
-          ;; Conal: only reparse in submodes
-          ;; (and mmm-mode-buffer-dirty (not (eql major-mode 'markdown-mode)))
-        ;; (mmm-apply-all)
-        ;; Conal: replaced previous sexp by following
-        (let* ((point-was (point))
-               ;; (n 6)                                    ; TODO: replace with a defvar
-               ;; (start (progn (markdown-backward-paragraph (* 1 n)) (point)))
-               ;; (stop  (progn (markdown-forward-paragraph  (* 2 n)) (point)))
-               (n 100)
-               (start (max (point-min) (- point-was n)))
-               (stop  (min (point-max) (- point-was n)))
-               )
-          (goto-char point-was)
-          ;; (message "reparsing mmm region")
-          (mmm-apply-all :start start :stop  stop))
-        (setq mmm-mode-buffer-dirty nil)
-        (setq mmm-mode-parse-timer nil)))))
+;; ;;; Experimental hack: redefine mmm-mode-idle-reparse from mmm-vars.el to
+;; ;;; mmm-apply-all to a smaller region than the whole buffer.
+;; (defun mmm-mode-idle-reparse (buffer)
+;;   (when (buffer-live-p buffer)
+;;     (with-current-buffer buffer
+;;       (when mmm-mode-buffer-dirty
+;;           ;; Conal: only reparse in submodes
+;;           ;; (and mmm-mode-buffer-dirty (not (eql major-mode 'markdown-mode)))
+;;         ;; (mmm-apply-all)
+;;         ;; Conal: replaced previous sexp by following
+;;         (let* ((point-was (point))
+;;                ;; (n 6)                                    ; TODO: replace with a defvar
+;;                ;; (start (progn (markdown-backward-paragraph (* 1 n)) (point)))
+;;                ;; (stop  (progn (markdown-forward-paragraph  (* 2 n)) (point)))
+;;                (n 100)
+;;                (start (max (point-min) (- point-was n)))
+;;                (stop  (min (point-max) (- point-was n)))
+;;                )
+;;           (goto-char point-was)
+;;           ;; (message "reparsing mmm region")
+;;           (mmm-apply-all :start start :stop  stop))
+;;         (setq mmm-mode-buffer-dirty nil)
+;;         (setq mmm-mode-parse-timer nil)))))
 
 (defun haskell-insert-section-header ()
   "Insert a pretty section header."
@@ -699,7 +699,7 @@ start of comment.  TODO: handle {- ... -} comments."
   (unless (looking-at "\n\n")
     (insert "\n\n")
     (backward-char 2))
-  (markdown-mmmify-lines)
+  ;; (markdown-mmmify-lines)
   )
 
 ;; (setq markdown-mode-hook
@@ -711,7 +711,8 @@ start of comment.  TODO: handle {- ... -} comments."
   (interactive "p")
   ;; Don't (expand-abbrev), since abbrevs can differ in embedded code
   (surround-punct "`" "`" arg)
-  (when mmm-mode (mmm-parse-block 2)))
+  ;; (when mmm-mode (mmm-parse-block 2))
+  )
 
 (defun markdown-emphasize (arg)
   "Surround previous ARG sexps with underscores."
@@ -732,7 +733,8 @@ start of comment.  TODO: handle {- ... -} comments."
     (newline)
     (previous-line 2)
     (end-of-line))
-  (when mmm-mode (mmm-parse-block 2)))
+  ;; (when mmm-mode (mmm-parse-block 2))
+  )
 
 (defun markdown-invert-birdtracks (from to)
   "Invert birdtracks (literate Haskell indicators) between FROM and TO,
@@ -895,7 +897,7 @@ consisting of repeated '-'. For an <h2>."
   (let ((at-bol (bolp))
         (point-was1 (point)))
     (markdown-insert-gfm-code-block lang)
-    (mmm-parse-block 1)
+    ;; (mmm-parse-block 1)
     (when arg
       (let ((p (point)))
         (next-line 1)
@@ -903,7 +905,9 @@ consisting of repeated '-'. For an <h2>."
         (goto-char p)
         (when (bolp) (delete-char 1))
         (when (eolp) (delete-char 1))
-        (setq mmm-mode-buffer-dirty t)))
+        ;; (setq mmm-mode-buffer-dirty t)
+        )
+      )
     ;; Delete separator line unless we started at the beginning of a line
     (unless at-bol
       (let ((point-was2 (point)))
@@ -1090,7 +1094,7 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
   (surround-atsign arg)
   (expand-abbrev)
   ;; (insert " ") ; experiment
-  (when mmm-mode (mmm-parse-block 1))
+  ;; (when mmm-mode (mmm-parse-block 1))
   )
 
 
@@ -1099,7 +1103,7 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
   (unless (bolp) (newline))                             ; start on new line
   (insert "\\begin{" env "}\n\n\\end{" env "}")
   (previous-line 1)
-  (when mmm-mode (mmm-parse-block 1))
+  ;; (when mmm-mode (mmm-parse-block 1))
   )
 
 (defun add-code-env ()
@@ -1157,7 +1161,8 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
   (interactive)
   (insert "<haskell>\n\n</haskell>")
   (previous-line 1)
-  (when mmm-mode (mmm-parse-block 1)))
+  ;; (when mmm-mode (mmm-parse-block 1))
+  )
 
 (defun my-diff-mode-hook ()
   ;; (local-set-key "\M-o" 'diff-goto-source) ; default

@@ -138,6 +138,12 @@ prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
   (interactive "p")
   (surround-sexp n "$" "$"))
 
+(defun tex-AB-sexp (n)
+  "Wrap \"\\AB{}\" (for Agda function) around the previous N sexps, defaulting to 1, where N is the
+prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
+  (interactive "p")
+  (surround-sexp n "\\AB{" "}"))
+
 (defun tex-tt ()
   "Insert \"{\\tt }\""
   (interactive)
@@ -305,7 +311,7 @@ being punctuation"
   (expand-abbrev)
   ;; (insert " ") ; experiment
   ;; starting in emacs 22.3.1, i need a save-excursion
-  (when mmm-mode (save-excursion (mmm-parse-block 1)))
+  ;; (when mmm-mode (save-excursion (mmm-parse-block 1)))
   )
 
 (defun shared-tex-lhs-init ()
@@ -327,9 +333,9 @@ being punctuation"
   ;; (local-unset-key "\C-c\C-n")
   (local-set-key "\C-cn" 'tex-note)
   (local-set-key "\e\"" 'my-tex-insert-quotes)
-  (local-set-key [?\C-,] 'markdown-mmmify-lines)
+  ;; (local-set-key [?\C-,] 'markdown-mmmify-lines)
   (local-set-key [?\C-'] 'add-code)
-  (local-set-key [?\C-|] 'add-spec)
+  ;; (local-set-key [?\C-|] 'add-spec)
   ;; (local-set-key [?\C-\\] 'add-spec) ; was toggle-input-method
   (local-set-key "\C-cv" 'do-make-noninteractive)
   ;; (local-set-key "\C-c\C-v" 'do-make-see-noninteractive)
@@ -343,6 +349,7 @@ being punctuation"
 (defun tex-mode-hook-function ()
   ;;(setup-TeX-mode)
   (shared-tex-lhs-init)
+  (local-set-key [?\C-&] 'tex-AB-sexp)
   (local-set-key "\"" 'my-tex-insert-quote)
   ;;(local-set-key "\eq" 'my-tex-fill-paragraph)
   (local-set-key "\C-j" 'my-tex-newline-and-indent)
@@ -368,8 +375,12 @@ being punctuation"
   (local-set-key "\C-c\"" 'my-tex-quotify-sexp)
   (local-set-key [?\C-\"] 'my-tex-quotify-sexp)
   ;; override some lhs-isms
-  (local-set-key "\C-c@" 'add-code)
-  (local-set-key [?\C-'] 'add-spec)
+  ;; (local-set-key "\C-c@" 'add-code)
+  ;; (local-set-key [?\C-'] 'add-spec)
+  (local-set-key [?\C-']
+   (case (intern (file-name-extension (buffer-file-name)))
+     ('lhs   'add-spec)
+     ('lagda 'tex-AB-sexp)))
   ;;(local-set-key "\C-c<" 'my-tex-insert-haskell-brackets)
   ;;(local-set-key "\eV" 'my-tex-insert-vbsize-verbatim)
   ;; Sometimes I globally rebind these to the vi versions.

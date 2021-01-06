@@ -2,6 +2,10 @@
 
 (setq debug-on-error t)
 
+;;; https://blog.vifortech.com/posts/emacs-tls-fix/
+(require 'gnutls)
+(add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem")
+
 (require 'package)
 (add-to-list
   'package-archives
@@ -19,10 +23,12 @@
          dante define-word elisp-slime-nav exec-path-from-shell f 
          flycheck-haskell frame-cmds idris-mode intero haskell-mode
          company flycheck lcr dash
-         markdown-mode mmm-mode nlinum pkg-info epl popwin s seq
+         markdown-mode nlinum pkg-info epl popwin s seq
          use-package bind-key w3m yaml-mode zoom-frm
          pos-tip popup button-lock flycheck-color-mode-line
          ;; frame-functions
+         ;; mmm-mode
+         polymode poly-markdown
          )))
   (dolist (package package-list)
     (unless (package-installed-p package)
@@ -46,7 +52,7 @@
       (append (mapcar #'expand-file-name my-extra-load-path)
               load-path))
 
-(require 'mmm-mode)
+;; (require 'mmm-mode)
 
 ;;; Common Lisp conveniences
 (load-library "cl")
@@ -142,7 +148,7 @@ Spotlight binding from command-space to option-space."
        "format: markdown\n"
        "autolink_bare_uris: true\n"
        "substMap: []\n"
-       "...\n\n"
+       "---\n\n"
        )
       ;; See Journal 2016-07-07. Seems a bad idea, since the non-displayed
       ;; content is likely to get carried along when pasting HTML.
@@ -168,7 +174,7 @@ Spotlight binding from command-space to option-space."
         (insert entry-header "\n")
         ;;        (insert "## Hours\n\nxx hours: \n\n## ")
         ;;        (previous-line 2) (end-of-line)
-        (markdown-mode)                        ; cleans up lhs mode spill-over
+        ;; (markdown-mode)                        ; cleans up lhs mode spill-over
         ))
     )
   ;; For convenience, rename the buffer. If there's already a different
@@ -857,7 +863,8 @@ logs, putting in a Last Modified in a new file, etc."
      ("la" "λ")
      ("del" "δ")
      ("begin" "\\begin")
-     ("end" "\\end"))))
+     ("end" "\\end")
+     ("<o>" "⥈"))))
  '(auto-save-interval 30)
  '(backup-by-copying t)
  '(c-style-variables-are-local-p nil)
@@ -945,13 +952,10 @@ module %s where
  '(markdown-unordered-list-item-prefix "
 *   ")
  '(message-log-max 500)
- '(mmm-global-mode (quote maybe) nil (mmm-mode))
- '(mmm-idle-timer-delay 0.2)
- '(mmm-parse-when-idle nil)
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
-    (idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
+    (polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size (quote (8 . 10)))
@@ -971,6 +975,11 @@ module %s where
  '(user-mail-address nil)
  '(vc-make-backup-files t)
  '(warning-suppress-types (quote ((undo discard-info)))))
+
+ ;; '(mmm-global-mode (quote maybe) nil (mmm-mode))
+ ;; '(mmm-idle-timer-delay 0.2)
+ ;; '(mmm-parse-when-idle nil)
+
 
 ;;  '(user-mail-address "conal@conal.net")
 
@@ -1416,112 +1425,112 @@ module %s where
 
 ;;; mmm-mode stuff
 
-(load "my-mmm") ; abandoning
+;; (load "my-mmm") ; abandoning
 
 ;;; Fenced code in Markdown, thanks to http://jblevins.org/log/mmm
 
-(defun my-mmm-markdown-auto-class (lang &optional submode)
-  "Define a mmm-mode class for LANG in `markdown-mode' using SUBMODE.
-If SUBMODE is not provided, use `LANG-mode' by default."
-  (let ((class (intern (concat "markdown-" lang)))
-        (submode (or submode (intern (concat lang "-mode"))))
-        ;; (front (concat "^``` *" lang "[\n\r]+"))
-        (front (concat "^ *``` *" lang "$"))
-        (back "^ *```"))
-    (mmm-add-classes (list (list class :submode submode :front front :back back :front-offset 1)))
-    (mmm-add-mode-ext-class 'markdown-mode nil class)))
+;; (defun my-mmm-markdown-auto-class (lang &optional submode)
+;;   "Define a mmm-mode class for LANG in `markdown-mode' using SUBMODE.
+;; If SUBMODE is not provided, use `LANG-mode' by default."
+;;   (let ((class (intern (concat "markdown-" lang)))
+;;         (submode (or submode (intern (concat lang "-mode"))))
+;;         ;; (front (concat "^``` *" lang "[\n\r]+"))
+;;         (front (concat "^ *``` *" lang "$"))
+;;         (back "^ *```"))
+;;     (mmm-add-classes (list (list class :submode submode :front front :back back :front-offset 1)))
+;;     (mmm-add-mode-ext-class 'markdown-mode nil class)))
 
-;; Mode names that derive directly from the language name
-(mapc 'my-mmm-markdown-auto-class
-      '(
-        "agda"
-        "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
-        "markdown" "python" "r" "ruby" "sql" "stata" "xml"
-        "javascript" "haskell" "glsl" "verilog"
-        "yaml"
-        ))
+;; ;; Mode names that derive directly from the language name
+;; (mapc 'my-mmm-markdown-auto-class
+;;       '(
+;;         "agda"
+;;         "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
+;;         "markdown" "python" "r" "ruby" "sql" "stata" "xml"
+;;         "javascript" "haskell" "glsl" "verilog"
+;;         "yaml"
+;;         ))
 
-;; Mode names that differ from the language name
-(my-mmm-markdown-auto-class "fortran" 'f90-mode)
-(my-mmm-markdown-auto-class "perl" 'cperl-mode)
-(my-mmm-markdown-auto-class "shell" 'shell-script-mode)
-(my-mmm-markdown-auto-class "bash" 'shell-script-mode)
-(my-mmm-markdown-auto-class "json" 'javascript-mode)
+;; ;; Mode names that differ from the language name
+;; (my-mmm-markdown-auto-class "fortran" 'f90-mode)
+;; (my-mmm-markdown-auto-class "perl" 'cperl-mode)
+;; (my-mmm-markdown-auto-class "shell" 'shell-script-mode)
+;; (my-mmm-markdown-auto-class "bash" 'shell-script-mode)
+;; (my-mmm-markdown-auto-class "json" 'javascript-mode)
 
-;;; Careful with this one. I can lead to "Agda is busy with something in the
-;;; buffer #<killed buffer>" or just slowing down Emacs quite a lot.
-;; (my-mmm-markdown-auto-class "agda" 'agda2-mode)
+;; ;;; Careful with this one. I can lead to "Agda is busy with something in the
+;; ;;; buffer #<killed buffer>" or just slowing down Emacs quite a lot.
+;; ;; (my-mmm-markdown-auto-class "agda" 'agda2-mode)
 
-;; ;; Experimental alternative
-;; (my-mmm-markdown-auto-class "agda" 'fundamental-mode)
+;; ;; ;; Experimental alternative
+;; ;; (my-mmm-markdown-auto-class "agda" 'fundamental-mode)
 
-;; Slows down scrolling quite a lot when point is in a dot region
-(my-mmm-markdown-auto-class "dot" 'graphviz-dot-mode)
-;; (my-mmm-markdown-auto-class "dot" 'text-mode)
+;; ;; Slows down scrolling quite a lot when point is in a dot region
+;; (my-mmm-markdown-auto-class "dot" 'graphviz-dot-mode)
+;; ;; (my-mmm-markdown-auto-class "dot" 'text-mode)
 
-;; (mmm-add-classes
-;;  '((markdown-haskell-birdtracks
-;;     :submode haskell-mode
-;;     :front "^> "
-;;     ;; :back "^$"
-;;     ;; :back "\n[^>]"
-;;     ;; :back "^\\($\\|[^>]\\)"
-;;     :back "$"         ; experiment
-;;     :include-front nil
-;;     :include-back  t  ; experiment
-;;     )))
+;; ;; (mmm-add-classes
+;; ;;  '((markdown-haskell-birdtracks
+;; ;;     :submode haskell-mode
+;; ;;     :front "^> "
+;; ;;     ;; :back "^$"
+;; ;;     ;; :back "\n[^>]"
+;; ;;     ;; :back "^\\($\\|[^>]\\)"
+;; ;;     :back "$"         ; experiment
+;; ;;     :include-front nil
+;; ;;     :include-back  t  ; experiment
+;; ;;     )))
 
-;; (mmm-add-classes
-;;  '((markdown-haskell-birdtracks
-;;     :submode haskell-mode
-;;     :front "^> "
-;;     ;; :back "^$" :back-offset -1
-;;     :back "$"
-;;     :include-front nil
-;;     )))
-;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-birdtracks)
+;; ;; (mmm-add-classes
+;; ;;  '((markdown-haskell-birdtracks
+;; ;;     :submode haskell-mode
+;; ;;     :front "^> "
+;; ;;     ;; :back "^$" :back-offset -1
+;; ;;     :back "$"
+;; ;;     :include-front nil
+;; ;;     )))
+;; ;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-birdtracks)
 
-;; Alternatively,
+;; ;; Alternatively,
 
-;; (mmm-add-classes
-;;  '((markdown-haskell-birdtracks
-;;     :submode literate-haskell-mode
-;;     :front "^> "
-;;     ;; :back "^$" :back-offset -1
-;;     :back "$"
-;;     :include-front nil
-;;     )))
+;; ;; (mmm-add-classes
+;; ;;  '((markdown-haskell-birdtracks
+;; ;;     :submode literate-haskell-mode
+;; ;;     :front "^> "
+;; ;;     ;; :back "^$" :back-offset -1
+;; ;;     :back "$"
+;; ;;     :include-front nil
+;; ;;     )))
 
-;; ;; Experiment
-;; (mmm-add-classes
-;;  '((markdown-haskell-inline
-;;     :submode haskell-mode
-;;     :front "\\( \\|^\\)`+"
-;;     :back "`+[ ,.\n]"
-;;     ;; :include-front t
-;;     )))
-;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-inline)
+;; ;; ;; Experiment
+;; ;; (mmm-add-classes
+;; ;;  '((markdown-haskell-inline
+;; ;;     :submode haskell-mode
+;; ;;     :front "\\( \\|^\\)`+"
+;; ;;     :back "`+[ ,.\n]"
+;; ;;     ;; :include-front t
+;; ;;     )))
+;; ;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-inline)
 
-;; (mmm-add-classes
-;;  '((markdown-fenced-plain
-;;     :submode fundamental-mode
-;;     ;; :front "^```[\n\r]+"
-;;     :front "^[\r\n]```[\r\n]+"
-;;     :back "[^\r\n][\r\n]```$"
-;;     :back-offset 1
-;;     ;; :include-front true
-;;     )))
-;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-fenced-plain)
+;; ;; (mmm-add-classes
+;; ;;  '((markdown-fenced-plain
+;; ;;     :submode fundamental-mode
+;; ;;     ;; :front "^```[\n\r]+"
+;; ;;     :front "^[\r\n]```[\r\n]+"
+;; ;;     :back "[^\r\n][\r\n]```$"
+;; ;;     :back-offset 1
+;; ;;     ;; :include-front true
+;; ;;     )))
+;; ;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-fenced-plain)
 
-;;; I finally got the regexps right, but I think font-locking doesn't work in
-;;; fundamental-mode.
+;; ;;; I finally got the regexps right, but I think font-locking doesn't work in
+;; ;;; fundamental-mode.
 
-;; (search-forward-regexp "[\r\n]```[\r\n]+")
+;; ;; (search-forward-regexp "[\r\n]```[\r\n]+")
 
-;; ;; Still experimenting with this one. When I decide, move it to customize
-;; (setq mmm-parse-when-idle t)
+;; ;; ;; Still experimenting with this one. When I decide, move it to customize
+;; ;; (setq mmm-parse-when-idle t)
 
-;; markdown-mode binds mmm-parse-buffer to C-M-,
+;; ;; markdown-mode binds mmm-parse-buffer to C-M-,
 
 (require 'company)
 
@@ -1556,6 +1565,25 @@ If SUBMODE is not provided, use `LANG-mode' by default."
 
 ;;; https://wiki.portal.chalmers.se/agda/Docs/HowToSeeUnicode
 ;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono")
+;;; Probably move the next few forms elsewhere
+
+(define-hostmode poly-latex-hostmode
+    :mode 'latex-mode)
+
+(define-innermode poly-agda-innermode
+  :mode 'agda2-mode
+  :head-matcher "\\\\begin{code}"
+  :tail-matcher "\\\\end{code}"
+  :head-mode 'host
+  :tail-mode 'host)
+
+(define-polymode poly-latex-mode
+  :hostmode 'pm-host/latex
+  :innermodes '(poly-agda-innermode))
+
+(add-to-list 'auto-mode-alist '("\\.lagda\\'" . poly-latex-mode))
+(add-to-list 'auto-mode-alist '("\\.md"       . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.page"     . poly-markdown-mode))
 
 ;;; End of customizations
 (setq debug-on-error nil)
