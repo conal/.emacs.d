@@ -864,7 +864,9 @@ logs, putting in a Last Modified in a new file, etc."
      ("del" "δ")
      ("begin" "\\begin")
      ("end" "\\end")
-     ("<o>" "⥈"))))
+     ("<o>" "⟨∘⟩")
+     ("dg" "°")
+     ("*l" "✲ₗ"))))
  '(auto-save-interval 30)
  '(backup-by-copying t)
  '(c-style-variables-are-local-p nil)
@@ -1572,7 +1574,7 @@ module %s where
 
 (define-innermode poly-agda-innermode
   :mode 'agda2-mode
-  :head-matcher "\\\\begin{code}"
+  :head-matcher "\\\\begin{code}.*"
   :tail-matcher "\\\\end{code}"
   :head-mode 'host
   :tail-mode 'host)
