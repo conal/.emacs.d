@@ -102,9 +102,9 @@
   (my-common-mode-stuff)
   (auto-fill-mode 1)
   ;; Paragraphs start and are separated by a blank line
-;;   (setq paragraph-start "\\(\\+ +\\)\\|$"                  ; "^$"
-;;         paragraph-separate "^$"               ; "^$"
-;;         )
+  ;;   (setq paragraph-start "\\(\\+ +\\)\\|$"                  ; "^$"
+  ;;         paragraph-separate "^$"               ; "^$"
+  ;;         )
   (setq adaptive-fill-regexp nil)
   (setq adaptive-fill-function 'my-text-adaptive-fill-function)
   ;; In Emacs 20, indented-text-mode is an alias for text-mode.  (I
@@ -1100,9 +1100,10 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
 
 (defun add-env (env)
   "Insert \"\\begin{<ENV>} .... \\end{<ENV>}\"."
-  (unless (bolp) (newline))                             ; start on new line
+  (unless (eolp) (open-line 1))
+  (unless (bolp) (newline))
   (insert "\\begin{" env "}\n\n\\end{" env "}")
-  (previous-line 1)
+  (previous-line)
   ;; (when mmm-mode (mmm-parse-block 1))
   )
 

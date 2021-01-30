@@ -144,6 +144,12 @@ prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
   (interactive "p")
   (surround-sexp n "\\AB{" "}"))
 
+(defun tex-AF-sexp (n)
+  "Wrap \"\\AF{}\" (for Agda function) around the previous N sexps, defaulting to 1, where N is the
+prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
+  (interactive "p")
+  (surround-sexp n "\\AF{" "}"))
+
 (defun tex-tt ()
   "Insert \"{\\tt }\""
   (interactive)
@@ -349,7 +355,6 @@ being punctuation"
 (defun tex-mode-hook-function ()
   ;;(setup-TeX-mode)
   (shared-tex-lhs-init)
-  (local-set-key [?\C-&] 'tex-AB-sexp)
   (local-set-key "\"" 'my-tex-insert-quote)
   ;;(local-set-key "\eq" 'my-tex-fill-paragraph)
   (local-set-key "\C-j" 'my-tex-newline-and-indent)
@@ -377,21 +382,17 @@ being punctuation"
   ;; override some lhs-isms
   ;; (local-set-key "\C-c@" 'add-code)
   ;; (local-set-key [?\C-'] 'add-spec)
-  (local-set-key [?\C-']
-   (case (intern (file-name-extension (buffer-file-name)))
-     ('lhs   'add-spec)
-     ('lagda 'tex-AB-sexp)))
   ;;(local-set-key "\C-c<" 'my-tex-insert-haskell-brackets)
   ;;(local-set-key "\eV" 'my-tex-insert-vbsize-verbatim)
   ;; Sometimes I globally rebind these to the vi versions.
   (local-set-key "\e." 'find-tag)
   (local-set-key "\e," 'tags-loop-continue)
   ;;(modify-syntax-entry ?\\ "w")         ; word constituent
-  (modify-syntax-entry ?_ "w")          ; for abbreviations
+  (modify-syntax-entry ?_ "w")        ; for abbreviations
   ;; enable the $-hack (see dollar-toggle)
   (modify-syntax-entry ?\$ "$")
-  (modify-syntax-entry ?\| "$")  ; lhs2tex code fragment: self-matching 
-  (no-match-angle)                      ; make angle brackets not match
+  (modify-syntax-entry ?\| "$")        ; lhs2tex code fragment: self-matching 
+  (no-match-angle)                     ; make angle brackets not match
   ;; Punt specialized versions of these.
   ;;(local-set-key "\C-c\C-f" nil)
   ;;(setq indent-line-function 'indent-to-left-margin)
@@ -405,15 +406,15 @@ being punctuation"
   (setq paragraph-start "^$")
   (setq paragraph-separate paragraph-start)
   (setq already-tex-hooked t)
-  (setq comment-column 40)              ; comments at column 40
+  (setq comment-column 40)                             ; comments at column 40
   (setq comment-start "%"
         comment-end ""
         comment-start-skip "^%* *")
   (local-set-key "\C-c>" 'literate-haskell-mode)
-;;   (setq standard-latex-block-names
-;;         (union standard-latex-block-names
-;;                '("haskell" "haskell*")  ;; oops none for now
-;;                :test 'string-equal))
+  ;; (setq standard-latex-block-names
+  ;;       (union standard-latex-block-names
+  ;;              '("haskell" "haskell*")  ;; oops none for now
+  ;;              :test 'string-equal))
   (setq tex-command "latex")
   (ispell-minor-mode)
   (setq local-abbrev-table tex-mode-abbrev-table)
@@ -424,11 +425,19 @@ being punctuation"
   ;; 
   ;; (local-set-key "\C-c\C-r" 'my-tex-region)
   (local-set-key "\C-c\C-r" 'save-make-go)
-  (local-set-key "\C-c\C-l" 'save-make-go)  ; was tex-recenter-output-buffer
-  (local-unset-key "\C-c\C-j")  ; i want save-junk, not LaTeX-insert-item
-;;   (unless (string-equal (buffer-name) "Junk.lhs")
-;;     (longlines-mode))
+  (local-set-key "\C-c\C-l" 'save-make-go)    ; was tex-recenter-output-buffer
+  (local-unset-key "\C-c\C-j")       ; i want save-junk, not LaTeX-insert-item
+  ;; (unless (string-equal (buffer-name) "Junk.lhs")
+  ;;   (longlines-mode))
   ;; (TeX-fold-mode 1) ; present in carbon emacs
+
+  (case (intern (file-name-extension (buffer-file-name)))
+    ('lagda 
+     (local-set-key (kbd "C-'")   'tex-AB-sexp)
+     (local-set-key (kbd "C-M-'") 'tex-AF-sexp)
+     (toggle-input-method))
+    ('lhs
+     (local-set-key [?\C-'] 'add-spec)))
   )
 
 ;; (defun my-tex-region (start end)
