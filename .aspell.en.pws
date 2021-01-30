@@ -1,4 +1,4 @@
-personal_ws-1.1 en 876 
+personal_ws-1.1 en 885 
 distributivity
 refactor
 intensional
@@ -20,6 +20,7 @@ foundational
 CCCs
 monadic
 unsized
+copatterns
 semigroups
 microstates
 DFT
@@ -47,6 +48,7 @@ semimodule
 stateful
 Elliotts
 lossy
+bisumulation
 precompose
 prototyped
 FFT
@@ -346,6 +348,7 @@ Markovian
 microstate
 bilinear
 Calaveras
+filamental
 darwin
 primals
 parallelize
@@ -398,6 +401,7 @@ adjunction
 UC
 comparator
 tensoring
+Paolo
 subintervals
 formalizations
 hackery
@@ -528,8 +532,10 @@ isomorphism
 parametrized
 learnable
 monads
+effectful
 injectivity
 entailments
+multiplicatively
 Salim
 sustainably
 acceptor
@@ -552,8 +558,8 @@ homomorphisms
 earbuds
 unlifted
 reindexings
-quadratically
 nullable
+quadratically
 expensing
 memoize
 shaders
@@ -637,6 +643,7 @@ morphism
 Banas
 ByteString
 Jacobian
+Wouter
 inferable
 cartesian
 stressor
@@ -666,6 +673,7 @@ surjections
 noncomputably
 irreflexive
 liftings
+operationalization
 PageRank
 Yondeda
 parameterizing
@@ -757,6 +765,7 @@ tupling
 associators
 optimality
 supremum
+disprovability
 disjuncts
 nonsequential
 echinacea
@@ -868,6 +877,7 @@ OnTrac
 discretize
 discretized
 CCC
+copattern
 denotational
 autoencoding
 redexes
