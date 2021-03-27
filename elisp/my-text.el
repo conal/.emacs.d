@@ -318,7 +318,15 @@ prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
   (insert "[]")
   (backward-char 1))
 
-(global-set-key "\C-c[" 'insert-square-brackets)
+;; (global-set-key "\C-c[" 'insert-square-brackets)
+
+(defun insert-semantic-brackets ()
+  "Insert a pair of semantic brackets and place point between them."
+  (interactive)
+  (insert "⟦  ⟧")
+  (backward-char 2))
+
+(global-set-key "\C-c[" 'insert-semantic-brackets)
 
 (defun insert-quotes ()
   "Insert a pair of double quotes and place point between them."

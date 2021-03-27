@@ -340,7 +340,7 @@ being punctuation"
   (local-set-key "\C-cn" 'tex-note)
   (local-set-key "\e\"" 'my-tex-insert-quotes)
   ;; (local-set-key [?\C-,] 'markdown-mmmify-lines)
-  (local-set-key [?\C-'] 'add-code)
+  ;; (local-set-key [?\C-'] 'add-code)
   ;; (local-set-key [?\C-|] 'add-spec)
   ;; (local-set-key [?\C-\\] 'add-spec) ; was toggle-input-method
   (local-set-key "\C-cv" 'do-make-noninteractive)
@@ -431,13 +431,16 @@ being punctuation"
   ;;   (longlines-mode))
   ;; (TeX-fold-mode 1) ; present in carbon emacs
 
-  (case (intern (file-name-extension (buffer-file-name)))
-    ('lagda 
+  ;; (case (intern (file-name-extension (buffer-file-name)))
+  ;;   ('lagda
      (local-set-key (kbd "C-'")   'tex-AB-sexp)
      (local-set-key (kbd "C-M-'") 'tex-AF-sexp)
-     (toggle-input-method))
-    ('lhs
-     (local-set-key [?\C-'] 'add-spec)))
+     (toggle-input-method)
+     ;; (set-input-method 'Agda)  ; now default
+     ;; )
+    ;; ('lhs
+    ;;  (local-set-key [?\C-'] 'add-spec))
+    ;; )
   )
 
 ;; (defun my-tex-region (start end)
