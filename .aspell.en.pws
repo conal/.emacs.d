@@ -1,4 +1,4 @@
-personal_ws-1.1 en 885 
+personal_ws-1.1 en 894 
 distributivity
 refactor
 intensional
@@ -19,8 +19,8 @@ impredicativity
 foundational
 CCCs
 monadic
-unsized
 copatterns
+unsized
 semigroups
 microstates
 DFT
@@ -32,6 +32,7 @@ bivariate
 bicartesian
 Ashland
 isomorphisms
+superceded
 parallelized
 componentwise
 CPP
@@ -170,6 +171,7 @@ subtrees
 outliers
 projective
 lub
+supercede
 functorial
 approximators
 renamings
@@ -304,6 +306,7 @@ Hackage
 backpropagation
 ZipList
 traversable
+pipelined
 equational
 netlist
 unparsers
@@ -374,6 +377,7 @@ fmap
 surjectivity
 microcontrollers
 zippable
+metastability
 biotech
 canonicalize
 ng
@@ -445,6 +449,7 @@ microinverter
 Quora
 abelian
 unsatisfiable
+bisimilarity
 exponentiations
 inlines
 anamorphism
@@ -452,6 +457,7 @@ reconfigurable
 linux
 Hashtables
 extremum
+idempotence
 combinational
 involutive
 invariance
@@ -654,6 +660,7 @@ duplications
 uniprocessor
 functor
 deterministically
+covariantly
 monomorphism
 Cayley
 noninductive
@@ -669,6 +676,7 @@ Tarryn
 transpiler
 isomorphically
 ametricity
+netlists
 surjections
 noncomputably
 irreflexive
@@ -766,6 +774,7 @@ associators
 optimality
 supremum
 disprovability
+Hanrahan
 disjuncts
 nonsequential
 echinacea
