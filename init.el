@@ -883,7 +883,7 @@ logs, putting in a Last Modified in a new file, etc."
 New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
       (tool-bar-lines . 0)
       (menu-bar-lines . 1))))
- '(default-input-method "TeX")
+ '(default-input-method "Agda")
  '(delete-old-versions t)
  '(display-buffer-reuse-frames t)
  '(erc-autojoin-channels-alist
@@ -1583,6 +1583,7 @@ module %s where
   :hostmode 'pm-host/latex
   :innermodes '(poly-agda-innermode))
 
+(add-to-list 'auto-mode-alist '("\\.tex\\'"   . poly-latex-mode))
 (add-to-list 'auto-mode-alist '("\\.lagda\\'" . poly-latex-mode))
 (add-to-list 'auto-mode-alist '("\\.md"       . poly-markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.page"     . poly-markdown-mode))
