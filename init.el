@@ -867,6 +867,7 @@ logs, putting in a Last Modified in a new file, etc."
      ("<o>" "⟨∘⟩")
      ("dg" "°")
      ("*l" "✲ₗ"))))
+ '(agda2-backend "MAlonzo")
  '(auto-save-interval 30)
  '(backup-by-copying t)
  '(c-style-variables-are-local-p nil)
@@ -1180,7 +1181,8 @@ module %s where
 
 (defun exercise-journal ()
   (interactive "")
-  (switch-to-buffer "journal")
+  ;; (switch-to-buffer "journal")
+  (journal)
   (goto-char (point-max))
   (if (looking-back "\n+" nil t)
       (progn
@@ -1590,3 +1592,6 @@ module %s where
 
 ;;; End of customizations
 (setq debug-on-error nil)
+
+(load-file (let ((coding-system-for-read 'utf-8))
+                (shell-command-to-string "agda-mode locate")))
