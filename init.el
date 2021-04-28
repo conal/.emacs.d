@@ -1567,10 +1567,6 @@ module %s where
 ;;; https://github.com/nitros12/discord-emacs.el
 (load-file "~/git-repos/discord-emacs.el/discord-emacs.el")
 
-;;; https://wiki.portal.chalmers.se/agda/Docs/HowToSeeUnicode
-;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono")
-;;; Probably move the next few forms elsewhere
-
 (define-hostmode poly-latex-hostmode
     :mode 'latex-mode)
 
@@ -1595,3 +1591,10 @@ module %s where
 
 (load-file (let ((coding-system-for-read 'utf-8))
                 (shell-command-to-string "agda-mode locate")))
+
+;;; I like to use the Agda input method in markdown-mode as well.
+;;; Load it here.
+(require 'agda-input)
+
+;; ;;; https://wiki.portal.chalmers.se/agda/Docs/HowToSeeUnicode
+;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono")

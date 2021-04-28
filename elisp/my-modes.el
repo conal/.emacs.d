@@ -934,15 +934,6 @@ consisting of repeated '-'. For an <h2>."
   (interactive)
   (markdown-insert-gfm-code-block-yank "lisp"))
 
-;;; Agda
-(load-file 
- (let ((coding-system-for-read 'utf-8))
-   (shell-command-to-string "agda-mode locate")))
-
-;;; I like to use the Agda input method in markdown-mode as well.
-;;; Load it here.
-(require 'agda-input)
-
 ;; ;;; https://plfa.github.io/GettingStarted/
 ;; (set-face-attribute 'default nil
 ;; 		    :family "mononoki"
@@ -1357,12 +1348,12 @@ automatically in order to have the correct markup."
 ;; (add-hook 'literate-haskell-mode-hook
 ;;           '(lambda () (flycheck-select-checker 'haskell-stack-liquid))) ; or 'haskell-liquid
 
-(require 'liquid-types)
-;; ;; Toggle minor mode on entering Haskell mode.
-;; (add-hook 'haskell-mode-hook
-;;           '(lambda () (liquid-types-mode)))
-;; (add-hook 'literate-haskell-mode-hook
-;; 	  '(lambda () (liquid-types-mode)))
+;; (require 'liquid-types)
+;; ;; ;; Toggle minor mode on entering Haskell mode.
+;; ;; (add-hook 'haskell-mode-hook
+;; ;;           '(lambda () (liquid-types-mode)))
+;; ;; (add-hook 'literate-haskell-mode-hook
+;; ;; 	  '(lambda () (liquid-types-mode)))
 
 ;;; https://github.com/jyp/dante
 (use-package dante
