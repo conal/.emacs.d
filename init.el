@@ -144,7 +144,7 @@ Spotlight binding from command-space to option-space."
       ;; instead of zero-padded.
       ;; Or use %-e or %-d for no padding.
       (insert
-       (format-time-string "---\ntitle: Notes for week of %B %e, %Y\n" sunday)
+       (format-time-string "---\ntitle: Notes for week of %B %-e, %Y\n" sunday)
        "format: markdown\n"
        "autolink_bare_uris: true\n"
        "substMap: []\n"
