@@ -135,7 +135,7 @@ Spotlight binding from command-space to option-space."
          (sunday (apply #'encode-time (replace-nth 3 (- day dow) (replace-nth 6 0 dec-now))))
          (file-name (concat dir (format-time-string "/wikidata/%Y/%m-%d.page" sunday)))
          ;; e.g. "# Monday, September 13, "
-         (entry-header (format-time-string "# %A, %B %d\n" now)))
+         (entry-header (format-time-string "# %A, %B %-e\n" now)))
     (make-directory (file-name-directory file-name) t) ;; make if doesn't exist
     (find-file file-name)
     (when (= (buffer-size) 0)
@@ -597,10 +597,12 @@ logs, putting in a Last Modified in a new file, etc."
 ;; (gnuserv-start)
 
 (setenv "PAGER" "/bin/cat")
+;; (setenv "EDITOR" "emacsclient")
+
 (setenv "EDITOR"
         (if (eq system-type 'darwin)
             (expand-file-name "~/bin/emacsclient-osx")
-          "emacsclient"))
+          "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"))
 
 (require 'server)
 (unless (server-running-p)
