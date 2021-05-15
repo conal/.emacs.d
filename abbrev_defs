@@ -10,7 +10,7 @@
       ?
     ≡⟨⟩
       ?
-    ∎" nil :count 6)
+    ∎" nil :count 15)
    ))
 
 (define-abbrev-table 'c++-mode-abbrev-table
@@ -535,7 +535,7 @@
     ("di'ps" "disagreement pairs" nil :count 168)
     ("di'sq" "disagreement sequence" nil :count 8)
     ("di'sqs" "disagreement sequences" nil :count 0)
-    ("didnt" "didn't" nil :count 55)
+    ("didnt" "didn't" nil :count 56)
     ("djn" "disjunction" nil :count 35)
     ("djns" "disjunctions" nil :count 9)
     ("djv" "disjunctive" nil :count 6)
@@ -2111,7 +2111,7 @@
     ("wdfd" "well-defined" nil :count 20)
     ("werent" "weren't" nil :count 6)
     ("weve" "we've" nil :count 12)
-    ("wh" "with" nil :count 15647)
+    ("wh" "with" nil :count 15648)
     ("whehter" "whether" nil :count 15)
     ("whn" "within" nil :count 7)
     ("wiht" "with" nil :count 2)
@@ -2184,8 +2184,9 @@
     ("xrzn" "externalization" nil :count 8)
     ("xrzs" "externalizes" nil :count 0)
     ("xsl" "extensional" nil :count 18)
-    ("xslty" "extensionality" nil :count 0)
+    ("xslty" "extensionality" nil :count 3)
     ("xsly" "extensionally" nil :count 2)
+    ("xsty" "extensionality" nil :count 1)
     ("xtbl" "extensible" nil :count 49)
     ("xtby" "extensibility" nil :count 24)
     ("xtc" "existence" nil :count 26)
