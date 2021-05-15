@@ -597,12 +597,12 @@ logs, putting in a Last Modified in a new file, etc."
 ;; (gnuserv-start)
 
 (setenv "PAGER" "/bin/cat")
-;; (setenv "EDITOR" "emacsclient")
+(setenv "EDITOR" "emacsclient")
 
-(setenv "EDITOR"
-        (if (eq system-type 'darwin)
-            (expand-file-name "~/bin/emacsclient-osx")
-          "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"))
+;; (setenv "EDITOR"
+;;         (if (eq system-type 'darwin)
+;;             (expand-file-name "~/bin/emacsclient-osx")
+;;           "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"))
 
 (require 'server)
 (unless (server-running-p)
