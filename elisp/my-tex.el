@@ -29,13 +29,13 @@
 (defun tex-math-display ()
   "Insert \" \[  \]\" and set point inside the brackets"
   (interactive)
-  (insert-string " \\[  \\]")
+  (insert " \\[  \\]")
   (backward-char 3))
 
 (defun tex-math-inline ()
   "Insert \"$$\" and set point between the $'s"
   (interactive)
-  (insert-string "$$")
+  (insert "$$")
   (backward-char 1))
 
 (defvar tex-generic-section-newpage t
@@ -46,8 +46,8 @@
 tex-generic-section-newpage is true (the default), start with a ^L."
   (interactive)
   (if tex-generic-section-newpage
-      (insert-string "\C-l"))
- (insert-string "\\" section "{}")
+      (insert "\C-l"))
+ (insert "\\" section "{}")
   (backward-char 1)
   (expand-abbrev))
 
@@ -77,7 +77,7 @@ tex-generic-section-newpage is true (the default), start with a ^L."
                  (list (if (string-equal decl "")
                            default-tex-declaration-name
                            decl))))
-  (insert-string "{\\" decl " }")
+  (insert "{\\" decl " }")
   (backward-char 1)
   (setq default-tex-declaration-name decl))
 
@@ -99,8 +99,8 @@ tex-generic-section-newpage is true (the default), start with a ^L."
                            default-tex-environment-name
                          env))))
   (unless (bolp) (newline))
-  (insert-string "\\begin{" env "}")(newline)(newline)
-  (insert-string "\\end{" env "}")(newline)
+  (insert "\\begin{" env "}")(newline)(newline)
+  (insert "\\end{" env "}")(newline)
   (previous-line 2)
   (setq default-tex-environment-name env))
 
@@ -170,7 +170,7 @@ prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
 (defun tex-verb ()
   "Insert \"\\verb||\""
   (interactive)
-  (insert-string "\\verb||")
+  (insert "\\verb||")
   (backward-char 1))
 
 (defun tex-insert-item ()
@@ -180,27 +180,27 @@ prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
   (expand-abbrev)
   ;; (newline)
   ;; (my-tex-newline-and-indent)
-  ;; (insert-string "\\item ")
+  ;; (insert "\\item ")
   (newline 2)
-  (insert-string "  \\item ")
+  (insert "  \\item ")
   )
 
 (defun tex-footnote ()
   "Insert \"\\footnote{}"
   (interactive)
-  (insert-string "\\footnote{}")
+  (insert "\\footnote{}")
   (backward-char 1))
 
 (defun tex-notefoot ()
   "Insert \"\\notefoot{}"
   (interactive)
-  (insert-string "\\notefoot{}")
+  (insert "\\notefoot{}")
   (backward-char 1))
 
 (defun tex-note ()
   "Insert \"\\note{}"
   (interactive)
-  (insert-string "\\note{}")
+  (insert "\\note{}")
   (backward-char 1))
 
 
