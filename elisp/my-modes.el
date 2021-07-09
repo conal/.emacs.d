@@ -111,6 +111,7 @@
   ;; don't know why.)  But I want indented mode, so:
   (setq indent-line-function 'indent-relative-maybe)
   (modify-syntax-entry ?\_ "w")     ; word constituent
+  (modify-syntax-entry ?⇉ "w")     ; word constituent
   ;; (modify-syntax-entry ?\' ".")  ; punctuation
   (modify-syntax-entry ?\| ".")     ; punctuation
   (modify-syntax-entry ?\" "\"")    ; string char 
@@ -902,6 +903,7 @@ consisting of repeated '-'. For an <h2>."
       (let ((p (point)))
         (next-line 1)
         (yank)
+        (when (eolp) (insert "\n"))
         (goto-char p)
         (when (bolp) (delete-char 1))
         (when (eolp) (delete-char 1))
@@ -1221,7 +1223,8 @@ automatically in order to have the correct markup."
            ;;  (quit ""))
            )))
   (unless (string= lang "") (markdown-gfm-add-used-language lang))
-  (when (> (length lang) 0) (setq lang (concat " " lang)))
+  ;; Agda doesn't want a space between "```" and "agda"
+  ;; (when (> (length lang) 0) (setq lang (concat " " lang)))
   (if (markdown-use-region-p)
       (let ((b (region-beginning)) (e (region-end)))
         (goto-char e)
