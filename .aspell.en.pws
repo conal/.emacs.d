@@ -1,4 +1,4 @@
-personal_ws-1.1 en 909 
+personal_ws-1.1 en 926 
 ACM
 API
 Agda
@@ -90,6 +90,7 @@ MacOS
 Maclaurin
 Markovian
 McIlroy's
+Meijer
 Minkowski
 Murphys
 MyAccess
@@ -129,6 +130,7 @@ Salim
 Scott's
 SecureConnect
 Sheard
+Sheeran
 Spivak
 StackOverflow
 TCM
@@ -173,6 +175,7 @@ ametricity
 amino
 analytics
 anamorphism
+anamorphisms
 anonymize
 antisymmetric
 antisymmetry
@@ -186,6 +189,7 @@ associativity
 associator
 associators
 astroenterologist
+asychrony
 asynchrony
 autoencoder
 autoencoders
@@ -249,6 +253,7 @@ colocated
 colonoscopies
 colonoscopy
 combinational
+combinationally
 combinator
 combinatorial
 combinators
@@ -295,6 +300,7 @@ customizable
 customizations
 cyclicity
 darwin
+dataflow
 datatype
 deallocation
 decidability
@@ -348,6 +354,7 @@ dualized
 dually
 duals
 duplications
+durations
 earbud
 earbuds
 echinacea
@@ -398,6 +405,7 @@ filamental
 financials
 finitary
 finiteness
+fixities
 fmap
 foldMap
 foldable
@@ -520,6 +528,7 @@ manageably
 manzanita
 matcher
 maxima
+mbinationally
 meetup
 memoization
 memoize
@@ -636,11 +645,14 @@ parenthesization
 parsers
 parsings
 partitionings
+paywalled
+pendantry
 pentatonic
 photonic
 photonics
 piecewise
 pipelined
+pipelining
 plugin
 pointfree
 pointful
@@ -651,6 +663,8 @@ polymorphism
 polytypic
 polytypically
 positivity
+powerwall
+powerwalls
 pragma
 pragmas
 pre
@@ -673,6 +687,7 @@ projective
 prototyped
 prover
 pseudocode
+psychonaut
 quadratically
 quadraticity
 quadtree
@@ -743,6 +758,7 @@ reprogrammability
 reprogrammable
 reschedulable
 reshaper
+resistive
 retransmission
 revelatory
 rewatching
@@ -882,6 +898,7 @@ unfoldings
 unforgeable
 unhandled
 uniprocessor
+unitor
 univariate
 unlifted
 unoptimized
