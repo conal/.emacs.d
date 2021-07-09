@@ -110,9 +110,8 @@
   ;; In Emacs 20, indented-text-mode is an alias for text-mode.  (I
   ;; don't know why.)  But I want indented mode, so:
   (setq indent-line-function 'indent-relative-maybe)
-  (modify-syntax-entry ?\_ "w")     ; word constituent
-  (modify-syntax-entry ?⇉ "w")     ; word constituent
-  ;; (modify-syntax-entry ?\' ".")  ; punctuation
+  (dolist (c (string-to-list "_⇉⊤⊥⊹′∅☆"))
+    (modify-syntax-entry c "w"))
   (modify-syntax-entry ?\| ".")     ; punctuation
   (modify-syntax-entry ?\" "\"")    ; string char 
   ;; (modify-syntax-entry ?\$ "\.")    ; string char
