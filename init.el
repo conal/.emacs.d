@@ -842,8 +842,7 @@ logs, putting in a Last Modified in a new file, etc."
  ;; If there is more than one, they won't work right.
  '(PC-meta-flag nil)
  '(agda-input-user-translations
-   (quote
-    (("r--|" "⟼")
+   '(("r--|" "⟼")
      ("r|" "⤇")
      ("^-1" "⁻¹")
      ("u^" "˘")
@@ -868,42 +867,40 @@ logs, putting in a Last Modified in a new file, etc."
      ("end" "\\end")
      ("<o>" "⟨∘⟩")
      ("dg" "°")
-     ("*l" "✲ₗ"))))
+     ("*l" "✲ₗ")))
  '(agda2-backend "MAlonzo")
+ '(agda2-fontset-name nil)
+ '(agda2-highlight-level 'interactive)
  '(auto-save-interval 30)
  '(backup-by-copying t)
  '(c-style-variables-are-local-p nil)
  '(c-tab-always-indent t)
  '(column-number-mode t)
- '(comment-style (quote indent))
- '(dabbrev-case-fold-search (quote case-fold-search))
- '(dabbrev-case-replace (quote case-replace))
+ '(comment-style 'indent)
+ '(dabbrev-case-fold-search 'case-fold-search)
+ '(dabbrev-case-replace 'case-replace)
  '(default-frame-alist-qqq
-    (quote
-     ((height . 37)
+    '((height . 37)
       (width . 126)
       (font . "-outline-Courier
 New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
       (tool-bar-lines . 0)
-      (menu-bar-lines . 1))))
+      (menu-bar-lines . 1)))
  '(default-input-method "Agda")
  '(delete-old-versions t)
  '(display-buffer-reuse-frames t)
  '(erc-autojoin-channels-alist
-   (quote
-    (("freenode.net" "#haskell-blah" "#haskell-iphone" "#haskell-ops" "#haskell-in-depth" "#ghc" "#haskell")
-     (".*\\.freenode\\.net" "#haskell" "#ghc" "#haskell-in-depth" "#haskell-ops" "#haskell-blah" "#haskell-iphone"))))
+   '(("freenode.net" "#haskell-blah" "#haskell-iphone" "#haskell-ops" "#haskell-in-depth" "#ghc" "#haskell")
+     (".*\\.freenode\\.net" "#haskell" "#ghc" "#haskell-in-depth" "#haskell-ops" "#haskell-blah" "#haskell-iphone")))
  '(erc-away-nickname nil)
  '(erc-fill-column 100)
  '(erc-fill-mode nil)
  '(erc-mode-hook
-   (quote
-    (erc-munge-invisibility-spec pcomplete-erc-setup erc-button-add-keys
+   '(erc-munge-invisibility-spec pcomplete-erc-setup erc-button-add-keys
                                  (lambda nil
-                                   (setq imenu-create-index-function
-                                         (quote erc-create-imenu-index)))
+                                   (setq imenu-create-index-function 'erc-create-imenu-index))
                                  (lambda nil
-                                   (abbrev-mode 1)))))
+                                   (abbrev-mode 1))))
  '(erc-nick "conal")
  '(erc-nick-uniquifier "+")
  '(erc-prompt-for-password t)
@@ -912,11 +909,11 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(eval-expression-print-length 200)
  '(eval-expression-print-level 12)
  '(fill-column 80)
- '(flycheck-disabled-checkers (quote (haskell-stack-ghc)))
+ '(flycheck-disabled-checkers '(haskell-stack-ghc))
  '(flymake-no-changes-timeout 0.5)
- '(fringe-mode (quote (1 . 1)) nil (fringe))
+ '(fringe-mode '(1 . 1) nil (fringe))
  '(git-branch-buffer-closes-after-action nil)
- '(git-working-dir-change-behaviour (quote git-refresh-all-saved))
+ '(git-working-dir-change-behaviour 'git-refresh-all-saved)
  '(graphviz-dot-preview-extension "pdf")
  '(graphviz-dot-view-command "view-dot %s")
  '(haskell-auto-insert-module-format-string
@@ -931,7 +928,7 @@ module %s where
 " t)
  '(haskell-hoogle-command nil)
  '(haskell-indent-offset 2)
- '(haskell-process-args-cabal-repl (quote ("--ghc-option=-ferror-spans")))
+ '(haskell-process-args-cabal-repl '("--ghc-option=-ferror-spans"))
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-haskell-docs-imports nil)
@@ -951,26 +948,23 @@ module %s where
  '(markdown-enable-math nil)
  '(markdown-header-scaling t)
  '(markdown-hr-strings
-   (quote
-    ("* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------" "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------")))
+   '("* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------" "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------"))
  '(markdown-indent-on-enter t)
  '(markdown-unordered-list-item-prefix "
 *   ")
  '(message-log-max 500)
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
-   (quote
-    (polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word)))
+   '(polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
- '(ps-font-size (quote (8 . 10)))
+ '(ps-font-size '(8 . 10))
  '(read-buffer-completion-ignore-case t)
  '(safe-local-variable-values
-   (quote
-    ((flycheck-disabled-checkers quote
+   '((flycheck-disabled-checkers quote
                                  (haskell-ghc haskell-stack-ghc))
      (flycheck-disabled-checkers quote
-                                 (haskell-stack-ghc)))))
+                                 (haskell-stack-ghc))))
  '(scroll-conservatively 1000)
  '(scroll-margin 3)
  '(sentence-end-double-space nil)
@@ -979,7 +973,7 @@ module %s where
  '(tool-bar-mode nil)
  '(user-mail-address nil)
  '(vc-make-backup-files t)
- '(warning-suppress-types (quote ((undo discard-info)))))
+ '(warning-suppress-types '((undo discard-info))))
 
  ;; '(mmm-global-mode (quote maybe) nil (mmm-mode))
  ;; '(mmm-idle-timer-delay 0.2)
@@ -1115,14 +1109,6 @@ module %s where
 (add-to-list 'auto-mode-alist '("\\.wiki\\'" . wikipedia-mode))
 
 (require 'zoom-frm)
-(global-set-key (if (boundp 'mouse-wheel-down-event) ; Emacs 22+
-                    (vector (list 'control mouse-wheel-down-event))
-                  [C-mouse-wheel])    ; Emacs 20, 21
-                'zoom-in)
-(when (boundp 'mouse-wheel-up-event) ; Emacs 22+
-  (global-set-key (vector (list 'control mouse-wheel-up-event))
-                  'zoom-out))
-
 (global-set-key [s-up]   'zoom-in)
 (global-set-key [s-down] 'zoom-out)
 
@@ -1600,3 +1586,4 @@ module %s where
 
 ;; ;;; https://wiki.portal.chalmers.se/agda/Docs/HowToSeeUnicode
 ;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono")
+;; (set-fontset-font "fontset-default" 'unicode "JetBrains Mono NL Medium")
