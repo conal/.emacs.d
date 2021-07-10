@@ -844,7 +844,7 @@ logs, putting in a Last Modified in a new file, etc."
  '(agda-input-user-translations
    '(("r--|" "⟼")
      ("r|" "⤇")
-     ("^-1" "⁻¹")
+     ("-1" "⁻¹")
      ("u^" "˘")
      ("bij" "⤖")
      ("<x>" "⟨×⟩")
