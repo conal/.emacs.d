@@ -1,4 +1,4 @@
-personal_ws-1.1 en 926 
+personal_ws-1.1 en 941 
 ACM
 API
 Agda
@@ -72,6 +72,7 @@ Holger
 Horner's
 ICFP
 Iavor
+Idris
 JSON
 Jacobian
 Jaynes
@@ -211,6 +212,7 @@ bijective
 bijectivity
 bilinear
 bilinearity
+binging
 biometric
 biotech
 biproduct
@@ -273,6 +275,7 @@ computably
 conal
 concat
 congruences
+connectedness
 connectionist
 contractivity
 contrapositive
@@ -289,6 +292,9 @@ copattern
 copatterns
 coproduct
 coproducts
+corecursion
+corecursive
+corecursively
 covariance
 covariant
 covariantly
@@ -336,9 +342,14 @@ differentiably
 differentially
 differentiations
 dimensionality
+dimensionally
+disambiguated
+disconnectness
+discretization
 discretize
 discretized
 discretizing
+disjoin
 disjointness
 disjunct
 disjunction
@@ -398,6 +409,7 @@ extensionally
 extralinguistic
 extrema
 extremum
+falsifiability
 fetishize
 filamental
 financials
@@ -412,6 +424,7 @@ foldr
 forall
 formalizations
 foundational
+foundedness
 fromInteger
 functionals
 functor
@@ -678,6 +691,7 @@ productization
 programmability
 programmatically
 projective
+propositionally
 prototyped
 prover
 pseudocode
@@ -696,6 +710,8 @@ radix
 reactivity
 readme
 reassociation
+rebalance
+rebalanced
 rebalancing
 rebindable
 reboxed
@@ -735,6 +751,7 @@ reindexings
 reinstall
 reinstalled
 relatable
+relationally
 renamings
 renderer
 renderers
@@ -879,6 +896,7 @@ typings
 unary
 unboxed
 unboxing
+unclocked
 uncountably
 uncurried
 uncurries
@@ -901,6 +919,7 @@ unparse
 unparser
 unparsers
 unparsing
+unrealizable
 unreduced
 unreified
 unsatisfiable
@@ -909,6 +928,8 @@ untrusted
 untyped
 unwrappings
 ux
+validator
+validators
 vanishingly
 variational
 versa
