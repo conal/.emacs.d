@@ -134,7 +134,7 @@
 ;;   '(mmm-parse-buffer)
 ;;   )
 
-(require 'last-modified)
+;; (require 'last-modified)
 
 ;; I use "newline" rather than "\n" in case of longlines mode.
 
@@ -145,7 +145,7 @@
   (jao-copyright-line "%% ") (newline)
   (jao-read-copyright-file "%% " "")
   "%% Created: " (format-time-string "%a %b %d, %Y %H:%M") (newline)
-  "%% " (insert-last-modified) (newline)
+  ;; "%% " (insert-last-modified) (newline)
   (newline) "\\section{" str "} \\label{sec:" 
   (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))
   "}" (newline) (newline)

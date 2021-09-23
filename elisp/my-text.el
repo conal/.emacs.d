@@ -312,11 +312,11 @@ prefix arg.  But if N is negative, instead surround the (-N)th previous sexp."
 
 (global-set-key "\C-c<" 'insert-angles)
 
-(defun insert-square-brackets ()
-  "Insert a pair of square brackets and place point between them."
-  (interactive)
-  (insert "[]")
-  (backward-char 1))
+;; (defun insert-square-brackets ()
+;;   "Insert a pair of square brackets and place point between them."
+;;   (interactive)
+;;   (insert "[]")
+;;   (backward-char 1))
 
 ;; (global-set-key "\C-c[" 'insert-square-brackets)
 

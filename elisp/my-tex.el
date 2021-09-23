@@ -149,6 +149,18 @@ prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
 prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
   (interactive "p")
   (surround-sexp n "\\AF{" "}"))
+ 
+(defun tex-AD-sexp (n)
+  "Wrap \"\\AD{}\" (for Agda function) around the previous N sexps, defaulting to 1, where N is the
+prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
+  (interactive "p")
+  (surround-sexp n "\\AD{" "}"))
+
+(defun tex-AIC-sexp (n)
+  "Wrap \"\\AIC{}\" (for Agda function) around the previous N sexps, defaulting to 1, where N is the
+prefix arg.  But if N is negative, instead starify the (-N)th previous sexp."
+  (interactive "p")
+  (surround-sexp n "\\AIC{" "}"))
 
 (defun tex-tt ()
   "Insert \"{\\tt }\""
@@ -389,6 +401,7 @@ being punctuation"
   (local-set-key "\e," 'tags-loop-continue)
   ;;(modify-syntax-entry ?\\ "w")         ; word constituent
   (modify-syntax-entry ?_ "w")        ; for abbreviations
+  (modify-syntax-entry ?\\ "w")        ; for avoiding abbreviations
   ;; enable the $-hack (see dollar-toggle)
   (modify-syntax-entry ?\$ "$")
   (modify-syntax-entry ?\| "$")        ; lhs2tex code fragment: self-matching 
@@ -431,16 +444,11 @@ being punctuation"
   ;;   (longlines-mode))
   ;; (TeX-fold-mode 1) ; present in carbon emacs
 
-  ;; (case (intern (file-name-extension (buffer-file-name)))
-  ;;   ('lagda
-     (local-set-key (kbd "C-'")   'tex-AB-sexp)
-     (local-set-key (kbd "C-M-'") 'tex-AF-sexp)
-     (toggle-input-method)
-     ;; (set-input-method 'Agda)  ; now default
-     ;; )
-    ;; ('lhs
-    ;;  (local-set-key [?\C-'] 'add-spec))
-    ;; )
+  (local-set-key (kbd "C-'")   'tex-AB-sexp)
+  (local-set-key (kbd "C-M-'") 'tex-AF-sexp)
+  (local-set-key (kbd "C-s-'") 'tex-AD-sexp)
+  (local-set-key (kbd "C-M-s-'") 'tex-AIC-sexp)
+  (toggle-input-method)
   )
 
 ;; (defun my-tex-region (start end)

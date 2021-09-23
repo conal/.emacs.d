@@ -110,7 +110,7 @@
   ;; In Emacs 20, indented-text-mode is an alias for text-mode.  (I
   ;; don't know why.)  But I want indented mode, so:
   (setq indent-line-function 'indent-relative-maybe)
-  (dolist (c (string-to-list "_⇉⊤⊥⊹′∅☆"))
+  (dolist (c (string-to-list "₀₁₂₃₄₅₆₇₈₉²³⁴ᵢₒₘₙᶜᵗⱽ_⇉⊤⊥⊹′∅☆≈≡≢≗⊑⊇⊗⊕⊎×∀∃+→∘•◦◦∙■□◼◻◾▢✯､⇉⇔↔⊨ℕ𝔽^↑⊣∼∪∩∈∧∨¬"))
     (modify-syntax-entry c "w"))
   (modify-syntax-entry ?\| ".")     ; punctuation
   (modify-syntax-entry ?\" "\"")    ; string char 
@@ -1389,5 +1389,12 @@ automatically in order to have the correct markup."
   (local-set-key "\C-cs" 'haskell-insert-section-header)
   (setq case-fold-search nil)  ; unsure about this choice
   (setq case-replace nil)
+  (local-set-key "\C-c{" 'insert-instance-argument)
   (local-set-key [?\C-'] 'markdown-inline-code)
   )
+
+(defun insert-instance-argument ()
+  "Insert a pair of Agda-style unicode braces and place point between them."
+  (interactive)
+  (insert "⦃  ⦄")
+  (backward-char 2))
