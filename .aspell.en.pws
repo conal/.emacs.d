@@ -1,4 +1,4 @@
-personal_ws-1.1 en 941 
+personal_ws-1.1 en 945 
 ACM
 API
 Agda
@@ -300,6 +300,7 @@ covariant
 covariantly
 covector
 covectors
+cryptocurrency
 cryptographic
 customizable
 customizations
@@ -492,6 +493,7 @@ instantiation
 instantiations
 integrable
 intensional
+intensionally
 interpolator
 interpolators
 interpretable
@@ -568,6 +570,7 @@ monoid
 monoidal
 monoidally
 monoids
+monolithically
 monomial
 monomials
 monomorphic
@@ -882,6 +885,7 @@ threadedness
 timeline
 toList
 tomatable
+transactional
 transcendentals
 transformative
 translational
