@@ -900,7 +900,9 @@ logs, putting in a Last Modified in a new file, etc."
      ("oaL" "∘-assocˡ")
      ("oxR" "⊗≈ʳ")
      ("oxL" "⊗≈ˡ")
-     ("o~" "∘≈")))
+     ("o~" "∘≈")
+     ("..." "…")
+     ("1" "𝟙")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
@@ -1264,6 +1266,9 @@ module %s where
         (replace-match "" nil)))
     (save-excursion
       (while (re-search-forward "  +\n\n" nil t)
+        (replace-match "\n\n" nil))))
+    (save-excursion
+      (while (re-search-forward " (edited)  \n\n" nil t)
         (replace-match "\n\n" nil))))
     (save-excursion
       (while (re-search-forward "\n\n\n\n\nNew *\n\n" nil t)
