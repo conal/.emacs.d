@@ -902,7 +902,8 @@ logs, putting in a Last Modified in a new file, etc."
      ("oxL" "⊗≈ˡ")
      ("o~" "∘≈")
      ("..." "…")
-     ("1" "𝟙")))
+     ("1" "𝟙")
+     ("+" "⊎")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
@@ -1266,7 +1267,7 @@ module %s where
         (replace-match "" nil)))
     (save-excursion
       (while (re-search-forward "  +\n\n" nil t)
-        (replace-match "\n\n" nil))))
+        (replace-match "\n\n" nil)))
     (save-excursion
       (while (re-search-forward " (edited)  \n\n" nil t)
         (replace-match "\n\n" nil))))
@@ -1411,11 +1412,6 @@ module %s where
     )
   (fix-quotes)
   (widen))
-
-(defun amazon-track-rename (&optional arg)
-  "Keyboard macro."
-  (interactive "p")
-  (kmacro-exec-ring-item (quote ("\355mv \"\" \242\202\213 " 0 "%d")) arg))
 
 (let ((tags-add-tables t))
   (mapc #'visit-tags-table
