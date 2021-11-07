@@ -1,4 +1,4 @@
-personal_ws-1.1 en 945 
+personal_ws-1.1 en 949 
 ACM
 API
 Agda
@@ -263,6 +263,7 @@ comonad
 comonadic
 comonads
 comparator
+comparators
 componentwise
 composability
 composable
@@ -402,6 +403,7 @@ explainability
 exponentials
 exponentiate
 exponentiated
+exponentiates
 exponentiating
 exponentiations
 extensibility
@@ -476,6 +478,8 @@ incrementing
 indexable
 indices
 indirections
+inequivalence
+inessentially
 inferable
 infimum
 infinitary
