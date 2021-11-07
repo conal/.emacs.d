@@ -842,6 +842,13 @@ logs, putting in a Last Modified in a new file, etc."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(PC-meta-flag nil)
+ '(agda-input-tweak-all
+   '(agda-input-compose
+     (agda-input-prepend "\\")
+     (agda-input-compose
+      (agda-input-drop
+       '("+ "))
+      (agda-input-nonempty))))
  '(agda-input-user-translations
    '(("n" "ℕ")
      ("f" "𝔽")
@@ -872,6 +879,7 @@ logs, putting in a Last Modified in a new file, etc."
      ("purei" "pureⁱ")
      ("=?" "≟")
      ("=<" "≡⟨⟩")
+     ("=<?" "≡⟨ ? ⟩")
      ("r]" "↦")
      ("~^" "≈˘⟨ ? ⟩")
      ("ex1" "∃¹")
@@ -903,7 +911,8 @@ logs, putting in a Last Modified in a new file, etc."
      ("o~" "∘≈")
      ("..." "…")
      ("1" "𝟙")
-     ("+" "⊎")))
+     ("+" "⊎" "⊹")
+     ("u" "⊎")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
