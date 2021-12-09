@@ -1,4 +1,4 @@
-personal_ws-1.1 en 949 
+personal_ws-1.1 en 957 
 ACM
 API
 Agda
@@ -31,6 +31,7 @@ CSE
 CUDA
 Calaveras
 Carette
+Carette's
 CartesianClosed
 Cayley
 Chalmers
@@ -91,6 +92,7 @@ MacOS
 Maclaurin
 Markovian
 McIlroy's
+McKenna
 Meijer
 Minkowski
 Murphys
@@ -605,6 +607,7 @@ newtype
 noncomputability
 noncomputable
 noncomputably
+noncomputational
 nondeterminacy
 nondeterminism
 nondeterministic
@@ -743,6 +746,7 @@ reflexivity
 reframe
 reframes
 reframing
+reframings
 reharmonize
 reharmonizing
 reification
@@ -810,6 +814,7 @@ sequentialize
 sequentialized
 sequentializes
 setoid
+setoids
 shader
 shader's
 shaders
@@ -822,6 +827,7 @@ slashdot
 solvability
 spacetime
 specialiser
+specifiability
 spendy
 splittable
 squirrelly
@@ -929,9 +935,11 @@ unparsers
 unparsing
 unrealizable
 unreduced
+unrefuted
 unreified
 unsatisfiable
 unsized
+untenured
 untrusted
 untyped
 unwrappings

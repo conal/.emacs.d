@@ -899,7 +899,6 @@ logs, putting in a Last Modified in a new file, etc."
      ("f3" "𝔽³")
      ("f4" "𝔽⁴")
      ("fi2" "𝔽ⁱ²")
-     ("fo" "𝔽ᵒ")
      ("oR" "∘≈ʳ")
      ("oL" "∘≈ˡ")
      ("tR" "▵≈ʳ")
@@ -912,7 +911,10 @@ logs, putting in a Last Modified in a new file, etc."
      ("..." "…")
      ("1" "𝟙")
      ("+" "⊎" "⊹")
-     ("u" "⊎")))
+     ("u" "⊎")
+     ("fo" "Fₒ")
+     ("fm" "Fₘ")
+     ("rc" "⟴")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
@@ -1022,11 +1024,6 @@ module %s where
  '(vc-make-backup-files t)
  '(warning-suppress-types '((undo discard-info))))
 
- ;; '(mmm-global-mode (quote maybe) nil (mmm-mode))
- ;; '(mmm-idle-timer-delay 0.2)
- ;; '(mmm-parse-when-idle nil)
-
-
 ;;  '(user-mail-address "conal@conal.net")
 
 ;;; For git--config-get-email, overriding user-mail-address variable.
@@ -1114,6 +1111,11 @@ module %s where
       ;; To fix, we can remove the annotation or make it invisible with "display:none" CSS.
       (while (re-search-forward "<annotation .*?</annotation>" nil t)
         (replace-match "" nil nil))
+      ;; Hack: Replace the MathJax JS location. I'm unable to fix my blogify
+      ;; program without converting all of the string manipulation to Text.
+      (beginning-of-buffer)
+      (while (search-forward "Downloads/MathJax-master/MathJax.js?config=TeX-AMS-MML_HTMLorMML" nil t)
+        (replace-match "git-repos/MathJax/es5/tex-mml-chtml.js" nil nil))
       (kill-ring-save (point-min) (point-max))
       ;; (x-select-text (buffer-string))
       )))
@@ -1431,17 +1433,6 @@ module %s where
 
           ;; "~/git-repos/ghc/compiler/TAGS"
 
-;;           "~/Haskell/circat/src/TAGS"
-;;           "~/Haskell/shaped-types/src/TAGS"
-;;           "~/Haskell/reification-rules/src/TAGS"
-
-
-;;           "~/git-repos/kure/TAGS"
-;;           "~/git-repos/ku-latest/hermit/src/TAGS"
-;;           "~/Haskell/hermit-extras/src/TAGS"
-;;           "~/Haskell/monomorph/src/TAGS"
-;;           "~/Haskell/lambda-ccc/src/TAGS"
-
 ;;; I keep hitting this on accidentally (ns-print-buffer), when
 ;;; I've been interacting with terminal programs.
 (global-unset-key [?\s-p])
@@ -1459,115 +1450,6 @@ module %s where
 ;; (package-install 'define-word)
 (global-set-key (kbd "C-c d") 'define-word-at-point)
 (global-set-key (kbd "C-c D") 'define-word)
-
-;;; mmm-mode stuff
-
-;; (load "my-mmm") ; abandoning
-
-;;; Fenced code in Markdown, thanks to http://jblevins.org/log/mmm
-
-;; (defun my-mmm-markdown-auto-class (lang &optional submode)
-;;   "Define a mmm-mode class for LANG in `markdown-mode' using SUBMODE.
-;; If SUBMODE is not provided, use `LANG-mode' by default."
-;;   (let ((class (intern (concat "markdown-" lang)))
-;;         (submode (or submode (intern (concat lang "-mode"))))
-;;         ;; (front (concat "^``` *" lang "[\n\r]+"))
-;;         (front (concat "^ *``` *" lang "$"))
-;;         (back "^ *```"))
-;;     (mmm-add-classes (list (list class :submode submode :front front :back back :front-offset 1)))
-;;     (mmm-add-mode-ext-class 'markdown-mode nil class)))
-
-;; ;; Mode names that derive directly from the language name
-;; (mapc 'my-mmm-markdown-auto-class
-;;       '(
-;;         "agda"
-;;         "awk" "bibtex" "c" "cpp" "css" "html" "latex" "lisp" "makefile"
-;;         "markdown" "python" "r" "ruby" "sql" "stata" "xml"
-;;         "javascript" "haskell" "glsl" "verilog"
-;;         "yaml"
-;;         ))
-
-;; ;; Mode names that differ from the language name
-;; (my-mmm-markdown-auto-class "fortran" 'f90-mode)
-;; (my-mmm-markdown-auto-class "perl" 'cperl-mode)
-;; (my-mmm-markdown-auto-class "shell" 'shell-script-mode)
-;; (my-mmm-markdown-auto-class "bash" 'shell-script-mode)
-;; (my-mmm-markdown-auto-class "json" 'javascript-mode)
-
-;; ;;; Careful with this one. I can lead to "Agda is busy with something in the
-;; ;;; buffer #<killed buffer>" or just slowing down Emacs quite a lot.
-;; ;; (my-mmm-markdown-auto-class "agda" 'agda2-mode)
-
-;; ;; ;; Experimental alternative
-;; ;; (my-mmm-markdown-auto-class "agda" 'fundamental-mode)
-
-;; ;; Slows down scrolling quite a lot when point is in a dot region
-;; (my-mmm-markdown-auto-class "dot" 'graphviz-dot-mode)
-;; ;; (my-mmm-markdown-auto-class "dot" 'text-mode)
-
-;; ;; (mmm-add-classes
-;; ;;  '((markdown-haskell-birdtracks
-;; ;;     :submode haskell-mode
-;; ;;     :front "^> "
-;; ;;     ;; :back "^$"
-;; ;;     ;; :back "\n[^>]"
-;; ;;     ;; :back "^\\($\\|[^>]\\)"
-;; ;;     :back "$"         ; experiment
-;; ;;     :include-front nil
-;; ;;     :include-back  t  ; experiment
-;; ;;     )))
-
-;; ;; (mmm-add-classes
-;; ;;  '((markdown-haskell-birdtracks
-;; ;;     :submode haskell-mode
-;; ;;     :front "^> "
-;; ;;     ;; :back "^$" :back-offset -1
-;; ;;     :back "$"
-;; ;;     :include-front nil
-;; ;;     )))
-;; ;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-birdtracks)
-
-;; ;; Alternatively,
-
-;; ;; (mmm-add-classes
-;; ;;  '((markdown-haskell-birdtracks
-;; ;;     :submode literate-haskell-mode
-;; ;;     :front "^> "
-;; ;;     ;; :back "^$" :back-offset -1
-;; ;;     :back "$"
-;; ;;     :include-front nil
-;; ;;     )))
-
-;; ;; ;; Experiment
-;; ;; (mmm-add-classes
-;; ;;  '((markdown-haskell-inline
-;; ;;     :submode haskell-mode
-;; ;;     :front "\\( \\|^\\)`+"
-;; ;;     :back "`+[ ,.\n]"
-;; ;;     ;; :include-front t
-;; ;;     )))
-;; ;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-haskell-inline)
-
-;; ;; (mmm-add-classes
-;; ;;  '((markdown-fenced-plain
-;; ;;     :submode fundamental-mode
-;; ;;     ;; :front "^```[\n\r]+"
-;; ;;     :front "^[\r\n]```[\r\n]+"
-;; ;;     :back "[^\r\n][\r\n]```$"
-;; ;;     :back-offset 1
-;; ;;     ;; :include-front true
-;; ;;     )))
-;; ;; (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-fenced-plain)
-
-;; ;;; I finally got the regexps right, but I think font-locking doesn't work in
-;; ;;; fundamental-mode.
-
-;; ;; (search-forward-regexp "[\r\n]```[\r\n]+")
-
-;; ;; ;; Still experimenting with this one. When I decide, move it to customize
-;; ;; (setq mmm-parse-when-idle t)
-
-;; ;; markdown-mode binds mmm-parse-buffer to C-M-,
 
 (require 'company)
 
