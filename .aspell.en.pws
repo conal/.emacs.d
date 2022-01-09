@@ -1,4 +1,4 @@
-personal_ws-1.1 en 957 
+personal_ws-1.1 en 965 
 ACM
 API
 Agda
@@ -99,6 +99,7 @@ Murphys
 MyAccess
 NLP
 NVIDIA
+Naperian
 Niki
 ODEs
 Okasaki
@@ -311,6 +312,7 @@ cyclicity
 darwin
 dataflow
 datatype
+deallocate
 deallocation
 decidability
 decidably
@@ -414,6 +416,7 @@ extensionally
 extralinguistic
 extrema
 extremum
+factorings
 falsifiability
 fetishize
 filamental
@@ -500,6 +503,7 @@ instantiations
 integrable
 intensional
 intensionally
+interleavings
 interpolator
 interpolators
 interpretable
@@ -646,6 +650,7 @@ overfit
 overfitting
 overloadings
 parallelizable
+parallelization
 parallelize
 parallelized
 parameterize
@@ -662,6 +667,7 @@ parenthesization
 parsers
 parsings
 partitionings
+patentable
 paywalled
 pendantry
 pentatonic
@@ -719,6 +725,7 @@ radices
 radix
 reactivity
 readme
+reassociate
 reassociation
 rebalance
 rebalanced
@@ -895,6 +902,7 @@ threadedness
 timeline
 toList
 tomatable
+topologies
 transactional
 transcendentals
 transformative

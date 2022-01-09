@@ -568,11 +568,21 @@ logs, putting in a Last Modified in a new file, etc."
 (global-set-key "\C-c%" 'query-replace-regexp)
 
 ;; instead of other-window-any-screen
-(global-set-key "\M-o" 'my-other-window-or-frame)
+;; (global-set-key "\M-o" 'my-other-window-or-frame)
+;; (global-set-key "\M-o" 'my-other-window)
+(global-set-key "\M-o" 'next-window-any-frame) ; already on s-'
 
-(defun my-other-window-or-frame ()
-  (interactive)
-  (other-window-or-frame 1))
+;; (defun my-other-window ()
+;;   (interactive)
+;;   (other-window-or-frame 1))
+
+;; (defun my-other-window (arg)
+;;   (interactive "p")
+;;   (other-window arg t))
+
+;; (defun my-other-window ()
+;;   (interactive)
+;;   (select-window (next-window (selected-window) nil t)))
 
 (global-set-key [home] 'beginning-of-line)
 (global-set-key [end] 'end-of-line)
@@ -914,7 +924,12 @@ logs, putting in a Last Modified in a new file, etc."
      ("u" "⊎")
      ("fo" "Fₒ")
      ("fm" "Fₘ")
-     ("rc" "⟴")))
+     ("rc" "⟴")
+     ("<.>" "⟨∙⟩")
+     ("<i>" "⟨ι⟩")
+     ("=*" "≛")
+     ("^l" "ˡ")
+     ("^r" "ʳ")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
@@ -1501,9 +1516,6 @@ module %s where
 (add-to-list 'auto-mode-alist '("\\.md"       . poly-markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.page"     . poly-markdown-mode))
 
-;;; End of customizations
-(setq debug-on-error nil)
-
 (load-file (let ((coding-system-for-read 'utf-8))
                 (shell-command-to-string "agda-mode locate")))
 
@@ -1514,3 +1526,12 @@ module %s where
 ;; ;;; https://wiki.portal.chalmers.se/agda/Docs/HowToSeeUnicode
 ;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono")
 ;; (set-fontset-font "fontset-default" 'unicode "JetBrains Mono NL Medium")
+
+;;; Was ns-open-file-using-panel
+(global-set-key (kbd "s-o") 'other-frame)
+;;; Was next-window-any-frame
+(global-set-key (kbd "s-'") 'abbrev-prefix-mark)
+
+
+;;; End of customizations
+(setq debug-on-error nil)
