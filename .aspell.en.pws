@@ -1,4 +1,4 @@
-personal_ws-1.1 en 965 
+personal_ws-1.1 en 973 
 ACM
 API
 Agda
@@ -51,6 +51,7 @@ FRP
 FaceTime
 FieldTrip
 Fortran
+Fortran's
 Fréchet
 GADT
 GHC's
@@ -265,6 +266,9 @@ commutativity
 comonad
 comonadic
 comonads
+comonoid
+comonoidal
+comonoids
 comparator
 comparators
 componentwise
@@ -462,6 +466,7 @@ homset
 homsets
 hylomorphic
 hylomorphism
+hylomorphisms
 hypersurface
 iOS
 iPhone
@@ -653,6 +658,7 @@ parallelizable
 parallelization
 parallelize
 parallelized
+parallelizing
 parameterize
 parameterized
 parameterizing
@@ -691,6 +697,7 @@ powerwalls
 pragma
 pragmas
 pre
+preallocated
 precompose
 predictively
 preimage
@@ -733,6 +740,7 @@ rebalancing
 rebindable
 reboxed
 reboxing
+rebranded
 recognizers
 recompilations
 recompiles
