@@ -85,17 +85,6 @@ Spotlight binding from command-space to option-space."
 (when (eq system-type 'darwin)
   (swap-option-command))
 
-;; (defun anygma ()
-;;   "Insert a new Anygma journal entry."
-;;   (interactive)
-;;   (find-file "~/Journal/anygma.md")
-;;   (goto-char (point-max))
-;;   (unless (bolp) (newline)) ; start on fresh line
-;;   (insert (format-time-string "### %A %d %B, %Y"))
-;;   (newline 2)
-;;   (open-line 1)
-;;   ))
-
 (defun replace-nth (n x l)
   "Replace the Nth element of L with X"
   (let ((copy (copy-list l)))
@@ -362,8 +351,8 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (interactive)
   ;; I guess there are a lot of unicode variations of quotation marks.
   ;; TODO: trade in these non-regexp replacements with regexp versions so that there's only one per result.
-  (save-replace "[‘’′]" "'")
-  (save-replace "[“”]" "\"")
+  (save-replace "[´‘’′]" "'")
+  (save-replace "[¨“”]" "\"")
   (save-replace " " " ")
   (save-replace " – " "---")
   (save-replace "" "--")
@@ -1526,6 +1515,14 @@ module %s where
 ;; ;;; https://wiki.portal.chalmers.se/agda/Docs/HowToSeeUnicode
 ;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono")
 ;; (set-fontset-font "fontset-default" 'unicode "JetBrains Mono NL Medium")
+
+;; ;;; https://plfa.github.io/GettingStarted/
+;; ;; default font
+;; (set-face-attribute 'default nil
+;;                     :family "JetBrains Mono" ;; x*y
+;;                     :height 200
+;;                     :weight 'normal
+;;                     :width  'normal)
 
 ;;; Was ns-open-file-using-panel
 (global-set-key (kbd "s-o") 'other-frame)
