@@ -1,4 +1,4 @@
-personal_ws-1.1 en 973 
+personal_ws-1.1 en 975 
 ACM
 API
 Agda
@@ -238,6 +238,7 @@ cardinality
 cartesian
 catamorphism
 catamorphisms
+clockless
 clusterings
 coalgebra
 cobordism
@@ -871,6 +872,7 @@ subinterval
 subintervals
 subregion
 subregions
+subscans
 subscripting
 subspaces
 substMap
