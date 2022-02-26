@@ -86,11 +86,11 @@
 (defun my-python-mode-hook ()
   (my-common-mode-stuff))
 
-;; (defun my-fundamental-mode-hook ()
-;;   (modify-syntax-entry ?\' "w"))
+(defun my-git-comment-hook ()
+  (set-input-method "Agda")
+  )
 
-;; ;;; There doesn't seem to be a fundamental-mode-hook. Hm.
-;; (add-hook 'fundamental-mode-hook 'my-fundamental-mode-hook)
+(add-hook 'git-comment-hook 'my-git-comment-hook)
 
 ;; Try this instead:
 (modify-syntax-entry ?\' "w" (standard-syntax-table))
@@ -110,7 +110,7 @@
   ;; In Emacs 20, indented-text-mode is an alias for text-mode.  (I
   ;; don't know why.)  But I want indented mode, so:
   (setq indent-line-function 'indent-relative-maybe)
-  (dolist (c (string-to-list "₀₁₂₃₄₅₆₇₈₉²³⁴ᵢₒₘₙᶜᵗⱽ_⇉⇶⊤⊥⊹′∅☆≡≢≈≋≗∾⊑⊇⊗⊕⊎⨄⨁⨂×∀∃+→∘•◦◦∙■□◼◻◾▢⊞✯､⇉⇔↔⊨ℕ𝔽^↑⇑⇨→↠⊣∼∪∩⊔⊓∈∧∨¬≤≥↻#<>|♯"))
+  (dolist (c (string-to-list "₀₁₂₃₄₅₆₇₈₉²³⁴ᵢₒₘₙᶜᵗⱽ_⇉⇶⊤⊥⊹′∅☆≡≢≈≋≗∾⊑⊇⊗⊕⊎⨄⨁⨂×∀∃+→∘•◦◦∙■□◼◻◾▢⊞✯､⇉⇔↔⊨ℕ𝔽^↑⇑↓⇓⇨→←↠⊣∼∪∩⊔⊓∈∧∨¬≤≥↻#<>|♯!∞"))
     (modify-syntax-entry c "w"))
   (modify-syntax-entry ?\| ".")     ; punctuation
   (modify-syntax-entry ?\" "\"")    ; string char 
