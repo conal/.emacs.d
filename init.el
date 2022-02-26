@@ -1512,17 +1512,14 @@ module %s where
 ;;; Load it here.
 (require 'agda-input)
 
-;; ;;; https://wiki.portal.chalmers.se/agda/Docs/HowToSeeUnicode
-;; (set-fontset-font "fontset-default" 'unicode "DejaVu Sans Mono")
-;; (set-fontset-font "fontset-default" 'unicode "JetBrains Mono NL Medium")
-
-;; ;;; https://plfa.github.io/GettingStarted/
-;; ;; default font
-;; (set-face-attribute 'default nil
-;;                     :family "JetBrains Mono" ;; x*y
-;;                     :height 200
-;;                     :weight 'normal
-;;                     :width  'normal)
+;;; https://plfa.github.io/GettingStarted/
+;;; default font
+;;; "Menlo", "JetBrains Mono", "DejaVu Sans Mono"
+(set-face-attribute 'default nil
+                    :family "Menlo" ;; x*y a*b
+                    :height 200
+                    :weight 'normal
+                    :width  'normal)
 
 ;;; Was ns-open-file-using-panel
 (global-set-key (kbd "s-o") 'other-frame)
