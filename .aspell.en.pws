@@ -1,4 +1,4 @@
-personal_ws-1.1 en 975 
+personal_ws-1.1 en 985 
 ACM
 API
 Agda
@@ -79,16 +79,19 @@ JSON
 Jacobian
 Jaynes
 Joachim
+Kleene
 Kleisli
 Koen
 Kolmogorov
 LambdaPix
 Landin
 Launchbury
+Lipschitz
 LiquidHaskell
 Lodi
 MDP
 MDPs
+MLTT
 MacOS
 Maclaurin
 Markovian
@@ -241,6 +244,8 @@ catamorphisms
 clockless
 clusterings
 coalgebra
+coalgebraic
+coalgebraically
 cobordism
 cobordisms
 cocartesian
@@ -286,6 +291,7 @@ concat
 congruences
 connectedness
 connectionist
+contractive
 contractivity
 contrapositive
 contrapositively
@@ -380,6 +386,7 @@ earbud
 earbuds
 echinacea
 effectful
+egoic
 embeddings
 empathetically
 empathic
@@ -577,6 +584,7 @@ microstate
 microstates
 minima
 modularity
+modularization
 modularize
 monad
 monadic
@@ -797,6 +805,7 @@ reprogrammable
 reschedulable
 reshaper
 resistive
+retiming
 retransmission
 revelatory
 rewatching
@@ -847,6 +856,7 @@ specifiability
 spendy
 splittable
 squirrelly
+stabilities
 startup
 startups
 stateful
