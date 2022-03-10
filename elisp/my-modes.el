@@ -69,7 +69,7 @@
   ;; (auto-fill-mode 1)                    ; Do auto-fill
   (setq fill-column 78)
   (setq comment-column 56)
-  (setq indent-tabs-mode nil)	        ; No tabs on indent
+  ;; (setq indent-tabs-mode nil)                ; No tabs on indent
   (column-number-mode 1)
   ;;(local-set-key 'tab indent-line-function)
   ;;(local-set-key '(meta backspace) nil)
@@ -88,6 +88,7 @@
 
 (defun my-git-comment-hook ()
   (set-input-method "Agda")
+  (abbrev-mode 1)
   )
 
 (add-hook 'git-comment-hook 'my-git-comment-hook)
@@ -124,9 +125,9 @@
 
 (setq c++-mode-hook
       '(lambda ()
-	 (my-common-mode-stuff)
+         (my-common-mode-stuff)
          (modify-syntax-entry ?\_ "w")                  ; word constituent
-	 (c-set-style "stroustrup")
+         (c-set-style "stroustrup")
          ))
 
 (autoload 'csharp-mode "cc-mode")
@@ -135,7 +136,7 @@
 (defun my-c-mode-common-hook ()
   (c-set-style "stroustrup")                            ; indent 4 etc
   (auto-revert-mode t)  ; since i usually edit in xcode also
-  (setq indent-tabs-mode nil)
+  ;; (setq indent-tabs-mode nil)
   ;; (c-toggle-auto-newline t)
   ;; (local-unset-key [C-c C-a])  ; wrong key syntax?
   (local-unset-key "\C-c\C-a")   ; drop c-toggle-auto-newline for align-regexp
@@ -161,16 +162,16 @@
   (c-comment-only-line-offset . (0 . 0))
   (c-offsets-alist . (
     (c                     . c-lineup-C-comments)
-    (inclass		   . 0)
-    (namespace-open	   . 0)
-    (namespace-close	   . 0)
-    (innamespace	   . 0)
-    (class-open		   . +) ;; was +
-    (class-close	   . 0)
-    (inclass		   . 0)
-    (defun-open		   . 0) ;; was +
+    (inclass               . 0)
+    (namespace-open        . 0)
+    (namespace-close       . 0)
+    (innamespace           . 0)
+    (class-open            . +) ;; was +
+    (class-close           . 0)
+    (inclass               . 0)
+    (defun-open            . 0) ;; was +
     (defun-block-intro     . +) ;; was 0
-    (inline-open	   . 0) ;; was ++, didn't help
+    (inline-open           . 0) ;; was ++, didn't help
     (statement-block-intro . +)
     (brace-list-intro      . +)
     ))
@@ -178,13 +179,13 @@
 
 (defun my-csharp-mode-hook ()
   (cond (window-system
-	 (turn-on-font-lock)
+         (turn-on-font-lock)
          (abbrev-mode 1)
          (auto-fill-mode 1)
          (modify-syntax-entry ?\. ".")
          (modify-syntax-entry ?\_ "w")
-	 (c-set-style "myC#Style")
-	 )))
+         (c-set-style "myC#Style")
+         )))
 (add-hook 'csharp-mode-hook 'my-csharp-mode-hook)
 
 (defun my-vsh-mode-hook ()
@@ -223,7 +224,7 @@
 
 (defun ispell-expand (str)
   (concat ;; (expand-file-name "~/gnu/ispell4/")
-	  str))
+          str))
 
 (setq ;; ispell-command (ispell-expand "exe/ispell.exe")
       ;; ispell-look-dictionary (ispell-expand "ispell.words")
@@ -631,9 +632,9 @@ start of comment.  TODO: handle {- ... -} comments."
   (my-common-mode-stuff)
   (local-unset-key "\C-c\C-j")  ; drop html-line for save-junk
   (setq comment-start "<!--"
-	comment-end " -->"
-	comment-start-skip "--[ \t]*"
-	comment-indent-function 'sgml-comment-indent))
+        comment-end " -->"
+        comment-start-skip "--[ \t]*"
+        comment-indent-function 'sgml-comment-indent))
   
 (add-hook 'html-mode-hook 'my-html-mode-hook)
 
@@ -647,7 +648,7 @@ start of comment.  TODO: handle {- ... -} comments."
 
 (defun my-java-mode-hook ()
   (interactive)
-  (setq indent-tabs-mode nil)	        ; No tabs on indent
+  ;; (setq indent-tabs-mode nil)           ; No tabs on indent
   (modify-syntax-entry ?\_ "w")
   (abbrev-mode 1)                       ; Use abbreviations
   (auto-fill-mode 1)                    ; Do auto-fill
@@ -926,6 +927,11 @@ consisting of repeated '-'. For an <h2>."
   (interactive "P")
   (markdown-insert-gfm-code-block-maybe-yank "haskell" arg))
 
+(defun markdown-insert-picture-code-block (&optional arg)
+  "'markdown-insert-gfm-code-block' specialized for picture mode"
+  (interactive "P")
+  (markdown-insert-gfm-code-block-maybe-yank "artist" arg))  ;; picture
+
 ;;; TODO: generalize markdown-insert-haskell-code-block-yank to
 ;;; markdown-insert-gfm-code-block-yank, and specialize to
 ;;; markdown-insert-haskell-code-block-yank.
@@ -937,10 +943,10 @@ consisting of repeated '-'. For an <h2>."
 
 ;; ;;; https://plfa.github.io/GettingStarted/
 ;; (set-face-attribute 'default nil
-;; 		    :family "mononoki"
-;; 		    :height 120
-;; 		    :weight 'normal
-;; 		    :width  'normal)
+;;                  :family "mononoki"
+;;                  :height 120
+;;                  :weight 'normal
+;;                  :width  'normal)
 
 (defun my-markdown-mode-hook ()
   (visual-line-mode t)
@@ -966,6 +972,7 @@ consisting of repeated '-'. For an <h2>."
   ;; Experiment: set globally, considering mmm
   ;; (local-set-key "\C-cv" 'blogify-foo)
   ;; (local-set-key "\C-c\C-v" 'blogify-view-foo)
+  (local-set-key (kbd "C-s-p") 'markdown-insert-picture-code-block)
   (local-set-key (kbd "C-s-a") 'markdown-insert-agda-code-block)
   (local-set-key (kbd "C-s-h") 'markdown-insert-haskell-code-block)
   (local-set-key (kbd "C-s-l") 'markdown-insert-lisp-code-block)
@@ -1166,17 +1173,17 @@ apply for wanting to leave behind unconscious and unproductive behaviors."
 
 (defun my-haskell-cabal-mode-hook ()
   ;; Cabal doesn't like tabs.  Maybe Stefan will change the default.  Requested on 2009-07-09.
-  (setq indent-tabs-mode nil)
+  ;; (setq indent-tabs-mode nil)
   (abbrev-mode t))
 
 (add-hook 'haskell-cabal-mode-hook 'my-haskell-cabal-mode-hook)
 
 (defun my-bibtex-mode-hook ()
-  (setq indent-tabs-mode nil)
+  ;; (setq indent-tabs-mode nil)
   (abbrev-mode t)
   ;; I don't know why paragraph boundaries aren't recognized.
   ;; Every line is treated as a paragraph.
-  (setq paragraph-start "[ \f	]*$")
+  (setq paragraph-start "[ \f   ]*$")
   )
 
 (add-hook 'bibtex-mode-hook 'my-bibtex-mode-hook)
@@ -1355,7 +1362,7 @@ automatically in order to have the correct markup."
 ;; ;; (add-hook 'haskell-mode-hook
 ;; ;;           '(lambda () (liquid-types-mode)))
 ;; ;; (add-hook 'literate-haskell-mode-hook
-;; ;; 	  '(lambda () (liquid-types-mode)))
+;; ;;     '(lambda () (liquid-types-mode)))
 
 ;;; https://github.com/jyp/dante
 (use-package dante
@@ -1398,3 +1405,7 @@ automatically in order to have the correct markup."
   (interactive)
   (insert "⦃  ⦄")
   (backward-char 2))
+
+;; ;;; Changed global default instead
+;; (defun my-artist-mode-hook () (setq indent-tabs-mode nil))
+;; (add-hook 'artist-mode-hook 'my-artist-mode-hook)
