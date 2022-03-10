@@ -988,6 +988,7 @@ module %s where
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-process-use-presentation-mode t)
  '(haskell-tags-on-save t)
+ '(indent-tabs-mode nil)
  '(inferior-haskell-wait-and-jump t)
  '(ispell-program-name "aspell")
  '(ispell-silently-savep t)
@@ -1007,7 +1008,7 @@ module %s where
  '(message-log-max 500)
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
-   '(polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
+   '(ascii-art-to-unicode polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size '(8 . 10))
