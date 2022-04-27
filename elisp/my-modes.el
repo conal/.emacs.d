@@ -111,7 +111,7 @@
   ;; In Emacs 20, indented-text-mode is an alias for text-mode.  (I
   ;; don't know why.)  But I want indented mode, so:
   (setq indent-line-function 'indent-relative-maybe)
-  (dolist (c (string-to-list "₀₁₂₃₄₅₆₇₈₉²³⁴ᵢₒₘₙᶜᵗⱽ_⇉⇶⊤⊥⊹′∅☆≡≢≈≋≗∾⊑⊇⊗⊕⊎⨄⨁⨂×∀∃+→∘•◦◦∙■□◼◻◾▢⊞✯､⇉⇔↔⊨ℕ𝔽^↑⇑↓⇓⇨→←↠⊣∼∪∩⊔⊓∈∧∨¬≤≥↻#<>|♯!∞"))
+  (dolist (c (string-to-list "ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤₓᵇᶜᵈᵉᶠⁱᵏᵐⁿᵖᵗˣⱽ₀₁₂₃₄₅₆₇₈₉²³⁴_⇉⇶⊤⊥⊹′∅☆≡≢≈≋≗≅∾⊑⊇⊗⊕⊎⨄⨁⨂×∀∃+→∘•◦◦∙·■□◼◻◾▢⊞✯､⇉⇔↔⊨ℕ𝔽^↑⇑↓⇓⇨→←↠⊣∼∪∩⊔⊓∈∧∨¬≤≥↻#<>|♯∞"))
     (modify-syntax-entry c "w"))
   (modify-syntax-entry ?\| ".")     ; punctuation
   (modify-syntax-entry ?\" "\"")    ; string char 
@@ -917,6 +917,11 @@ consisting of repeated '-'. For an <h2>."
         (delete-forward-char 1)
         (goto-char (- point-was2 1))))))
 
+(defun markdown-insert-plain-code-block (&optional arg)
+  "'markdown-insert-gfm-code-block' specialized for Agda"
+  (interactive "P")
+  (markdown-insert-gfm-code-block-maybe-yank "" arg))
+
 (defun markdown-insert-agda-code-block (&optional arg)
   "'markdown-insert-gfm-code-block' specialized for Agda"
   (interactive "P")
@@ -972,6 +977,7 @@ consisting of repeated '-'. For an <h2>."
   ;; Experiment: set globally, considering mmm
   ;; (local-set-key "\C-cv" 'blogify-foo)
   ;; (local-set-key "\C-c\C-v" 'blogify-view-foo)
+  (local-set-key (kbd "C-s-c") 'markdown-insert-plain-code-block)
   (local-set-key (kbd "C-s-p") 'markdown-insert-picture-code-block)
   (local-set-key (kbd "C-s-a") 'markdown-insert-agda-code-block)
   (local-set-key (kbd "C-s-h") 'markdown-insert-haskell-code-block)
