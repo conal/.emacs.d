@@ -853,6 +853,7 @@ logs, putting in a Last Modified in a new file, etc."
      ("f" "𝔽")
      ("z" "ℤ")
      ("b" "𝔹")
+     ("s" "𝕊")
      ("0" "₀")
      ("1" "₁")
      ("2" "₂")
@@ -909,7 +910,7 @@ logs, putting in a Last Modified in a new file, etc."
      ("o~" "∘≈")
      ("..." "…")
      ("1" "𝟙")
-     ("+" "⊎" "⊹")
+     ("+" "⊎" "⊹" "✢")
      ("u" "⊎")
      ("fo" "Fₒ")
      ("fm" "Fₘ")
@@ -1233,8 +1234,8 @@ module %s where
         (previous-line))
     (insert "\n"))
   (end-of-line)
-  (insert "\n## Exercise\n\nMini-elliptical:  miles.\n")
-  (backward-word 1) (backward-char 1))
+  (insert "\n## Exercise\n\nMini-elliptical:  miles.  \nSquats: .")
+  (backward-char 1))
 
 (defun hipchat-trim (start end)
   "Tidy HipChat output after copy&paste."
@@ -1526,7 +1527,6 @@ module %s where
 (global-set-key (kbd "s-o") 'other-frame)
 ;;; Was next-window-any-frame
 (global-set-key (kbd "s-'") 'abbrev-prefix-mark)
-
 
 ;;; End of customizations
 (setq debug-on-error nil)
