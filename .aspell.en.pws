@@ -1,8 +1,10 @@
-personal_ws-1.1 en 994 
+personal_ws-1.1 en 1045 
 ACM
 API
 Agda
+Agda's
 Alameda
+Allyn
 Andreas
 Anygma
 ArrowChoice
@@ -15,6 +17,7 @@ Baidu
 Banas
 Blelloch
 Blelloch's
+Blomgren
 Bool
 Breitner
 Brzozowski
@@ -22,11 +25,13 @@ Brzozowski's
 ByteString
 CCC
 CCCs
+CMOS
 CNF
 CNNs
 COVID
 CPOs
 CPP
+CPUs
 CSE
 CUDA
 Calaveras
@@ -36,11 +41,13 @@ CartesianClosed
 Cayley
 Chalmers
 ClosedCat
+Colmerauer
 Conor
 Croydon
 DFT
 DSEL
 DSELs
+Deutsch's
 Elliotts
 Enphase
 Everyware
@@ -87,6 +94,8 @@ Kolmogorov
 LambdaPix
 Landin
 Launchbury
+Lemurian
+Lemurians
 Lipschitz
 LiquidHaskell
 Lodi
@@ -128,6 +137,7 @@ Quora
 RSA
 Ralf
 Rebecca
+Reinstallation
 SDF
 SDFs
 SGD
@@ -140,13 +150,16 @@ Scott's
 SecureConnect
 Sheard
 Sheeran
+Sperber
 Spivak
 StackOverflow
 TCM
 TDH
 Tabula
+Tabula's
 Tarryn
 Teig
+Teig's
 TensorFlow
 Tikhon
 Tikhon's
@@ -162,7 +175,10 @@ WriterT
 Yampa
 Yondeda
 Yoneda
+ZKP
+ZKPs
 ZipList
+Zulip
 abelian
 acceptor
 accessor
@@ -201,6 +217,7 @@ associator
 associators
 asychrony
 asynchrony
+atemporal
 autoencoder
 autoencoders
 autoencoding
@@ -211,6 +228,8 @@ automorphisms
 axiomatized
 backprop
 backpropagation
+backquote
+backquotes
 bafflingly
 benchmarking
 bicartesian
@@ -294,6 +313,7 @@ computably
 conal
 concat
 congruences
+conjecturally
 connectedness
 connectionist
 contractive
@@ -303,6 +323,7 @@ contrapositive
 contrapositively
 contravariance
 contravariant
+contravariantly
 convolutional
 convolutionally
 convolve
@@ -345,7 +366,9 @@ definitional
 definitionally
 defunctionalization
 defunctionalize
+defunctionalized
 defunctionalizes
+defunctionalizing
 deliverables
 denoising
 denotational
@@ -373,6 +396,7 @@ discretize
 discretized
 discretizing
 disjoin
+disjoins
 disjointness
 disjunct
 disjunction
@@ -438,6 +462,8 @@ factorings
 falsifiability
 fetishize
 filamental
+finalizer
+finalizers
 financials
 finitary
 finiteness
@@ -589,6 +615,10 @@ microinverters
 microstate
 microstates
 minima
+miseducate
+miseducated
+misframe
+misframed
 modularity
 modularization
 modularize
@@ -597,6 +627,7 @@ monadic
 monadically
 monads
 monoid
+monoid's
 monoidal
 monoidally
 monoids
@@ -627,6 +658,7 @@ natively
 naturality
 netlist
 netlists
+newish
 newtype
 noncomputability
 noncomputable
@@ -644,6 +676,7 @@ nonlinearities
 nonlinearity
 nonlinearly
 nonmonotonic
+nonnegative
 nonrectangular
 nonredundant
 nonscalar
@@ -656,6 +689,7 @@ notational
 notationally
 nullability
 nullable
+nullary
 numerics
 operationalization
 optimality
@@ -714,6 +748,7 @@ pragma
 pragmas
 pre
 preallocated
+precisions
 precompose
 predictively
 preimage
@@ -761,6 +796,7 @@ rebranded
 recognizers
 recompilations
 recompiles
+recomposition
 recomputation
 reconfigurability
 reconfigurable
@@ -805,6 +841,7 @@ reparametrization
 reparametrize
 reparse
 repartition
+rephrasings
 repo
 representability
 representable
@@ -816,6 +853,7 @@ reshaper
 resistive
 retiming
 retransmission
+reusability
 revelatory
 rewatching
 rewrap
@@ -847,19 +885,27 @@ sequentiality
 sequentialize
 sequentialized
 sequentializes
+sequentializing
 setoid
 setoids
 shader
 shader's
 shaders
 sharable
+shifter
 shiftings
+shorthands
 sigmoid
 simplifier
 simplifier's
 slashdot
 solvability
 spacetime
+spacetimed
+spacetiming
+spacetimings
+spatiotemporal
+spatiotemporally
 specialiser
 specifiability
 spendy
@@ -925,6 +971,7 @@ synchrony
 synthesizable
 tagless
 targ
+temporospatial
 tensoring
 texted
 threadedness
@@ -957,11 +1004,14 @@ understandability
 undirected
 undiscounted
 unentangled
+unevaluated
 unfoldings
 unforgeable
 unhandled
+unicode
 uniprocessor
 unitor
+unitors
 univariate
 unlifted
 unoptimized
@@ -977,6 +1027,7 @@ unreified
 unsatisfiable
 unsized
 untenured
+untimed
 untrusted
 untyped
 unwrappings
