@@ -136,7 +136,7 @@ Spotlight binding from command-space to option-space."
        (format-time-string "---\ntitle: Notes for week of %B %-e, %Y\n" sunday)
        "format: markdown\n"
        "autolink_bare_uris: true\n"
-       "substMap: []\n"
+       ;; "substMap: []\n"
        "---\n\n"
        )
       ;; See Journal 2016-07-07. Seems a bad idea, since the non-displayed
@@ -854,9 +854,9 @@ logs, putting in a Last Modified in a new file, etc."
      ("z" "ℤ")
      ("b" "𝔹")
      ("s" "𝕊")
-     ("0" "₀")
-     ("1" "₁")
-     ("2" "₂")
+     ("0" "₀" "𝟎")
+     ("1" "₁" "𝟏")
+     ("2" "₂" "𝟐")
      ("3" "₃")
      ("4" "₄")
      ("5" "₅")
