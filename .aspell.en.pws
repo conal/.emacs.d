@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1045 
+personal_ws-1.1 en 1061 
 ACM
 API
 Agda
@@ -45,6 +45,7 @@ Colmerauer
 Conor
 Croydon
 DFT
+DOF
 DSEL
 DSELs
 Deutsch's
@@ -67,6 +68,7 @@ GPU
 GPUs
 GUIs
 Geoff
+Groq
 Hackage
 Hanrahan
 Hashtables
@@ -91,6 +93,7 @@ Kleene
 Kleisli
 Koen
 Kolmogorov
+LFSR
 LambdaPix
 Landin
 Launchbury
@@ -153,6 +156,7 @@ Sheeran
 Sperber
 Spivak
 StackOverflow
+Swierstra
 TCM
 TDH
 Tabula
@@ -210,6 +214,7 @@ applicative
 applicatives
 approximator
 approximators
+arithmetization
 arity
 arpeggiating
 associativity
@@ -390,6 +395,7 @@ differentiations
 dimensionality
 dimensionally
 disambiguated
+disambiguating
 disconnectness
 discretization
 discretize
@@ -418,6 +424,7 @@ echinacea
 effectful
 egoic
 embeddings
+embodiments
 empathetically
 empathic
 encodable
@@ -542,6 +549,7 @@ inlined
 inlines
 inlining
 inlinings
+insightfully
 inspectable
 instantiation
 instantiations
@@ -691,6 +699,8 @@ nullability
 nullable
 nullary
 numerics
+operad
+operads
 operationalization
 optimality
 optimizability
@@ -769,6 +779,7 @@ projective
 propositionally
 prototyped
 prover
+prover's
 pseudocode
 psychonaut
 quadratically
@@ -800,6 +811,7 @@ recomposition
 recomputation
 reconfigurability
 reconfigurable
+reconfigures
 reconfiguring
 reconnection
 rectangularity
@@ -828,6 +840,7 @@ reifying
 reiindexing
 reindexing
 reindexings
+reinflation
 reinstall
 reinstalled
 relatable
@@ -874,6 +887,7 @@ scrutinees
 semigroup
 semigroups
 semilattice
+semilattices
 semimodule
 semimodules
 semiring
@@ -992,6 +1006,7 @@ tuples
 tupling
 typings
 unary
+unboundedly
 unboxed
 unboxing
 unclocked
@@ -1036,6 +1051,7 @@ validator
 validators
 vanishingly
 variational
+verifier
 versa
 voicings
 vulnerablity
