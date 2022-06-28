@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1061 
+personal_ws-1.1 en 1065 
 ACM
 API
 Agda
@@ -655,6 +655,7 @@ morphically
 morphism
 morphisms
 multi
+multibit
 multilinear
 multinomial
 multiphysics
@@ -664,6 +665,7 @@ multisets
 mux
 natively
 naturality
+naïve
 netlist
 netlists
 newish
@@ -1039,6 +1041,7 @@ unrealizable
 unreduced
 unrefuted
 unreified
+unsatisfiability
 unsatisfiable
 unsized
 untenured
@@ -1051,6 +1054,7 @@ validator
 validators
 vanishingly
 variational
+verifiably
 verifier
 versa
 voicings
