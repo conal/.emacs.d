@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1065 
+personal_ws-1.1 en 1093 
 ACM
 API
 Agda
@@ -44,6 +44,7 @@ ClosedCat
 Colmerauer
 Conor
 Croydon
+DAGs
 DFT
 DOF
 DSEL
@@ -55,8 +56,11 @@ Everyware
 FFT
 FP
 FPGA
+FPU
+FPUs
 FRP
 FaceTime
+Faez
 FieldTrip
 Fortran
 Fortran's
@@ -165,11 +169,14 @@ Tarryn
 Teig
 Teig's
 TensorFlow
+Theobald
+Theobald's
 Tikhon
 Tikhon's
 UC
 Ubuntu
 VPN
+Vec
 Verilog
 Visscher
 Walid
@@ -195,10 +202,13 @@ adjoints
 adjunction
 adjunctions
 adversarially
+advisee
+advisees
 advisor
 affine
 algorithmically
 algorithmics
+allowability
 aluator
 ametricity
 amino
@@ -215,6 +225,8 @@ applicatives
 approximator
 approximators
 arithmetization
+arithmetize
+arithmetized
 arity
 arpeggiating
 associativity
@@ -268,6 +280,7 @@ cardinality
 cartesian
 catamorphism
 catamorphisms
+checkable
 clockless
 clusterings
 coalgebra
@@ -342,6 +355,8 @@ coproducts
 corecursion
 corecursive
 corecursively
+coroutine
+coroutines
 covariance
 covariant
 covariantly
@@ -349,6 +364,7 @@ covector
 covectors
 cryptocurrency
 cryptographic
+cryptographically
 customizable
 customizations
 cyclicity
@@ -481,6 +497,7 @@ foldable
 foldings
 foldr
 forall
+forgeably
 formalizations
 foundational
 foundedness
@@ -521,6 +538,7 @@ idempotence
 ifThenElse
 iirc
 impactful
+implementability
 implementers
 implementor
 implementors
@@ -774,6 +792,8 @@ prepending
 prepends
 presheaves
 primals
+probabilisitic
+probabilistically
 productization
 programmability
 programmatically
@@ -827,6 +847,7 @@ refactorings
 referentially
 reflexivity
 reframe
+reframed
 reframes
 reframing
 reframings
@@ -864,6 +885,7 @@ representationally
 reprogrammability
 reprogrammable
 reschedulable
+resettable
 reshaper
 resistive
 retiming
@@ -964,6 +986,7 @@ subtree
 subtrees
 subtrie
 subtries
+suc
 summand
 summands
 supercede
@@ -995,6 +1018,7 @@ timeline
 toList
 tomatable
 topologies
+topos
 transactional
 transcendentals
 transformative
@@ -1003,6 +1027,8 @@ transpiler
 traversable
 trie
 tritone
+trustless
+tt
 tuple
 tuples
 tupling
@@ -1024,6 +1050,7 @@ unentangled
 unevaluated
 unfoldings
 unforgeable
+unforgeably
 unhandled
 unicode
 uniprocessor
@@ -1056,6 +1083,7 @@ vanishingly
 variational
 verifiably
 verifier
+verifiers
 versa
 voicings
 vulnerablity
