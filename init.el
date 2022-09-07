@@ -919,7 +919,8 @@ logs, putting in a Last Modified in a new file, etc."
      ("<i>" "⟨ι⟩")
      ("=*" "≛")
      ("^l" "ˡ")
-     ("^r" "ʳ")))
+     ("^r" "ʳ")
+     ("xor" "⊕")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
@@ -1009,7 +1010,7 @@ module %s where
  '(message-log-max 500)
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
-   '(ascii-art-to-unicode polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
+   '(dired-narrow ascii-art-to-unicode polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size '(8 . 10))
@@ -1028,6 +1029,7 @@ module %s where
  '(tool-bar-mode nil)
  '(user-mail-address nil)
  '(vc-make-backup-files t)
+ '(verilog-auto-newline nil)
  '(warning-suppress-types '((undo discard-info))))
 
 ;;  '(user-mail-address "conal@conal.net")
@@ -1234,8 +1236,12 @@ module %s where
         (previous-line))
     (insert "\n"))
   (end-of-line)
-  (insert "\n## Exercise\n\nMini-elliptical:  miles.  \nSquats: .")
-  (backward-char 1))
+  (insert "\n## Exercise\n\nMini-elliptical:  miles.")
+  (backward-word 1)
+  (backward-char 1)
+  ;; (insert "\n## Exercise\n\nMini-elliptical:  miles.  \nSquats: .")
+  ;; (backward-char 1)
+  )
 
 (defun hipchat-trim (start end)
   "Tidy HipChat output after copy&paste."
@@ -1373,7 +1379,7 @@ module %s where
         (replace-match "\n*\\1:* " nil)))
     (save-excursion
       (while (re-search-forward "\\(.+\\)" nil t)
-        (replace-match "\\1  " nil)))
+        (replace-match "\\1\n" nil)))
     (save-excursion
       (while (search-forward "(edited)" nil t)
         (replace-match "" nil)))
@@ -1387,7 +1393,7 @@ module %s where
       (while (re-search-forward "\n__[0-9]+:[0-9]+ [AP]M__\n" nil t)
         (replace-match "" nil)))
     (save-excursion
-      (while (re-search-forward " +\n\n" nil t)
+      (while (re-search-forward " *\n\n+" nil t)
         (replace-match "\n\n" nil)))
     )
   (fix-quotes)

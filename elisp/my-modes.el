@@ -111,7 +111,7 @@
   ;; In Emacs 20, indented-text-mode is an alias for text-mode.  (I
   ;; don't know why.)  But I want indented mode, so:
   (setq indent-line-function 'indent-relative-maybe)
-  (dolist (c (string-to-list "ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤₓᵇᶜᵈᵉᶠⁱᵏᵐⁿᵖᵗˣⱽ₀₁₂₃₄₅₆₇₈₉²³⁴_⇉⇶⊤⊥⊹′″‴⁗∅☆≡≢≈≋≗≅∾⊑⊇⊗⊕⊎⨄⨁⨂×∀∃+→∘•◦◦∙·■□◼◻◾▢⊞✯､⇉⇔↔⊨ℕ𝔽^↑⇑↓⇓⇨→←↠⊣∼∪∩⊔⊓∈∧∨¬≤≥↻#<>|♯∞~∼"))
+  (dolist (c (string-to-list "ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤₓᵇᶜᵈᵉᶠⁱᵏᵐⁿᵖᵗˣⱽ₀₁₂₃₄₅₆₇₈₉¹²³⁴⁵⁶⁷⁸⁹_⇉⇶⊤⊥⊹′″‴⁗∅☆≡≢≈≋≗≅∾⊑⊇⊗⊕⊎⨄⨁⨂×∀∃+→∷∘•◦◦∙·■□◼◻◾▢⊞✯､⇉⇔↔⊨ℕ𝔽^↑⇧⇑↓⇓⇃⇨→←↠⊣∼∪∩⊔⊓⊏⊑∈∧∨¬≤≥↻#<>|♯∞~∼"))
     (modify-syntax-entry c "w"))
   ;; (modify-syntax-entry ?\⌞ "(⌟") -- doesn't work
   (modify-syntax-entry ?\| ".")     ; punctuation
@@ -933,6 +933,11 @@ consisting of repeated '-'. For an <h2>."
   (interactive "P")
   (markdown-insert-gfm-code-block-maybe-yank "haskell" arg))
 
+(defun markdown-insert-verilog-code-block (&optional arg)
+  "'markdown-insert-gfm-code-block' specialized for Verilog"
+  (interactive "P")
+  (markdown-insert-gfm-code-block-maybe-yank "verilog" arg))
+
 (defun markdown-insert-picture-code-block (&optional arg)
   "'markdown-insert-gfm-code-block' specialized for picture mode"
   (interactive "P")
@@ -982,6 +987,7 @@ consisting of repeated '-'. For an <h2>."
   (local-set-key (kbd "C-s-p") 'markdown-insert-picture-code-block)
   (local-set-key (kbd "C-s-a") 'markdown-insert-agda-code-block)
   (local-set-key (kbd "C-s-h") 'markdown-insert-haskell-code-block)
+  (local-set-key (kbd "C-s-v") 'markdown-insert-verilog-code-block)
   (local-set-key (kbd "C-s-l") 'markdown-insert-lisp-code-block)
   ;; (modify-syntax-entry ?\* "$")  ; italics" self-matching
   (modify-syntax-entry ?\` "$")  ; code fragment: self-matching 

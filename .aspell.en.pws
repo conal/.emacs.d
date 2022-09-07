@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1093 
+personal_ws-1.1 en 1117 
 ACM
 API
 Agda
@@ -49,6 +49,7 @@ DFT
 DOF
 DSEL
 DSELs
+Demultiplexer
 Deutsch's
 Elliotts
 Enphase
@@ -93,6 +94,7 @@ JSON
 Jacobian
 Jaynes
 Joachim
+João
 Kleene
 Kleisli
 Koen
@@ -357,6 +359,7 @@ corecursive
 corecursively
 coroutine
 coroutines
+counterproposal
 covariance
 covariant
 covariantly
@@ -382,6 +385,7 @@ decomposers
 decompositions
 deconstructor
 deconstructors
+definability
 definedness
 definitional
 definitionally
@@ -455,6 +459,7 @@ endomorphisms
 entailments
 entropic
 entropies
+ephemerality
 epimorphism
 equalities
 equational
@@ -483,8 +488,10 @@ extrema
 extremum
 factorings
 falsifiability
+feedforward
 fetishize
 filamental
+finability
 finalizer
 finalizers
 financials
@@ -501,6 +508,7 @@ forgeably
 formalizations
 foundational
 foundedness
+framings
 fromInteger
 functionals
 functor
@@ -536,6 +544,7 @@ iOS
 iPhone
 idempotence
 ifThenElse
+iff
 iirc
 impactful
 implementability
@@ -546,6 +555,7 @@ implicits
 impredicativity
 incentivize
 incentivizes
+incentivizing
 incrementality
 incrementalization
 incrementalize
@@ -567,6 +577,7 @@ inlined
 inlines
 inlining
 inlinings
+insensitivities
 insightfully
 inspectable
 instantiation
@@ -607,12 +618,14 @@ liftings
 linearization
 linearize
 linearized
+linearizes
 linearizing
 linux
 liveness
 logarithmically
 lookahead
 lossiness
+losslessly
 lossy
 lub
 macrostate
@@ -680,6 +693,7 @@ multiphysics
 multiplicatively
 multiset
 multisets
+multiway
 mux
 natively
 naturality
@@ -688,6 +702,7 @@ netlist
 netlists
 newish
 newtype
+noncausal
 noncomputability
 noncomputable
 noncomputably
@@ -710,7 +725,9 @@ nonredundant
 nonscalar
 nonsequential
 nonstrict
+nonstrictness
 nonterminating
+nontermination
 nonuniformity
 noodlings
 notational
@@ -765,10 +782,12 @@ pipelining
 plugin
 pointfree
 pointful
+pointfully
 pointw
 pointwise
 polymorphically
 polymorphism
+polynomiality
 polytypic
 polytypically
 positivity
@@ -864,6 +883,7 @@ reiindexing
 reindexing
 reindexings
 reinflation
+reinform
 reinstall
 reinstalled
 relatable
@@ -931,6 +951,7 @@ shader's
 shaders
 sharable
 shifter
+shifters
 shiftings
 shorthands
 sigmoid
@@ -959,6 +980,7 @@ stochastically
 stochasticity
 stressor
 stressors
+subcircuit
 subclasses
 subdifferential
 subdifferentials
@@ -1010,6 +1032,7 @@ synchrony
 synthesizable
 tagless
 targ
+temporality
 temporospatial
 tensoring
 texted
@@ -1086,6 +1109,7 @@ verifier
 verifiers
 versa
 voicings
+von
 vulnerablity
 webmail
 wikidata
