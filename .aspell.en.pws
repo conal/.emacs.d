@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1117 
+personal_ws-1.1 en 1135 
 ACM
 API
 Agda
@@ -49,6 +49,7 @@ DFT
 DOF
 DSEL
 DSELs
+Daniele
 Demultiplexer
 Deutsch's
 Elliotts
@@ -100,6 +101,7 @@ Kleisli
 Koen
 Kolmogorov
 LFSR
+LUT
 LambdaPix
 Landin
 Launchbury
@@ -113,6 +115,7 @@ MDPs
 MLTT
 MacOS
 Maclaurin
+Maguire
 Markovian
 McIlroy's
 McKenna
@@ -145,6 +148,7 @@ Prolog
 Quora
 RSA
 Ralf
+Rashad
 Rebecca
 Reinstallation
 SDF
@@ -175,6 +179,7 @@ Theobald
 Theobald's
 Tikhon
 Tikhon's
+Tweag
 UC
 Ubuntu
 VPN
@@ -193,6 +198,7 @@ ZKPs
 ZipList
 Zulip
 abelian
+accelerando
 acceptor
 accessor
 accessors
@@ -267,6 +273,7 @@ biproduct
 biproducts
 bisimilarity
 bisumulation
+bitonic
 bitwise
 bivariate
 blockchain
@@ -359,6 +366,7 @@ corecursive
 corecursively
 coroutine
 coroutines
+counterfactuals
 counterproposal
 covariance
 covariant
@@ -400,6 +408,7 @@ denotational
 denotationally
 denotatively
 deriv
+deskewing
 desugar
 desugared
 desugaring
@@ -443,6 +452,7 @@ earbuds
 echinacea
 effectful
 egoic
+else's
 embeddings
 embodiments
 empathetically
@@ -505,6 +515,7 @@ foldings
 foldr
 forall
 forgeably
+formalisms
 formalizations
 foundational
 foundedness
@@ -691,10 +702,12 @@ multilinear
 multinomial
 multiphysics
 multiplicatively
+multiported
 multiset
 multisets
 multiway
 mux
+muxes
 natively
 naturality
 naïve
@@ -745,6 +758,7 @@ optimizable
 optimizations
 optimizers
 orderable
+orthonormal
 other's
 outlier
 outliers
@@ -880,6 +894,7 @@ reifies
 reify
 reifying
 reiindexing
+reimagine
 reindexing
 reindexings
 reinflation
@@ -957,6 +972,7 @@ shorthands
 sigmoid
 simplifier
 simplifier's
+simplifiers
 slashdot
 solvability
 spacetime
@@ -1048,6 +1064,7 @@ transformative
 translational
 transpiler
 traversable
+trichotomy
 trie
 tritone
 trustless
@@ -1112,6 +1129,7 @@ voicings
 von
 vulnerablity
 webmail
+weighings
 wikidata
 workflow
 zeroness

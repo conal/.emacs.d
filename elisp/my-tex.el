@@ -345,7 +345,7 @@ being punctuation"
   (local-set-key "\C-ch" 'tex-hs)
   ;; (local-set-key "\C-c\C-v" 'tex-verb)
   (local-set-key "\C-cf" 'tex-footnote)
-  (local-set-key "\C-c\C-f" 'tex-footnote) ;; was tex-file
+  (local-set-key "\C-c\C-f" 'tex-notefoot) ;; was tex-file
   (local-set-key "\C-c\C-n" 'tex-notefoot)
   ;; (local-unset-key "\C-c\C-p") ;; was tex-print
   ;; (local-unset-key "\C-c\C-n")
