@@ -1000,7 +1000,7 @@ module %s where
  '(markdown-asymmetric-header t)
  '(markdown-command "pandoc --toc --standalone --to html+smart")
  '(markdown-enable-html nil)
- '(markdown-enable-math nil)
+ '(markdown-enable-math t)
  '(markdown-header-scaling t)
  '(markdown-hr-strings
    '("* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------" "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------"))
@@ -1065,6 +1065,10 @@ module %s where
  '(markdown-code-face ((t (:inherit default :foreground "DodgerBlue4"))))
  '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "times"))))
  '(mmm-default-submode-face ((t (:background "lemon chiffon")))))
+
+;; (custom-set-faces
+;;  '(default ((t (:family "DejaVu Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 98 :width normal)))))
+;; (set-fontset-font "fontset-default" '(#x1D400 . #x1D7FF) "DejaVu Math TeX Gyre")
 
 ;; http://www.emacswiki.org/emacs/InteractiveSpell#toc1
 (setq ispell-process-directory (expand-file-name "~/"))

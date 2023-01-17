@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1135 
+personal_ws-1.1 en 1159 
 ACM
 API
 Agda
@@ -42,6 +42,7 @@ Cayley
 Chalmers
 ClosedCat
 Colmerauer
+Conal's
 Conor
 Croydon
 DAGs
@@ -100,6 +101,7 @@ Kleene
 Kleisli
 Koen
 Kolmogorov
+Kolmogorov's
 LFSR
 LUT
 LambdaPix
@@ -143,6 +145,7 @@ Paolo
 Paritosh
 Paritosh's
 Peano
+Perlis
 Peyton
 Prolog
 Quora
@@ -159,6 +162,7 @@ SIMD
 SMT
 STM
 Salim
+Schrödinger
 Scott's
 SecureConnect
 Sheard
@@ -197,6 +201,7 @@ ZKP
 ZKPs
 ZipList
 Zulip
+Zürich
 abelian
 accelerando
 acceptor
@@ -250,12 +255,15 @@ automata
 automatable
 automorphism
 automorphisms
+axiomatization
+axiomatize
 axiomatized
 backprop
 backpropagation
 backquote
 backquotes
 bafflingly
+behavedness
 benchmarking
 bicartesian
 bicyling
@@ -281,6 +289,7 @@ blockquote
 bluetooth
 boolean
 booleans
+boundedness
 bulleted
 calculational
 canonicalize
@@ -391,6 +400,7 @@ decomposable
 decomposer
 decomposers
 decompositions
+decompressor
 deconstructor
 deconstructors
 definability
@@ -622,6 +632,7 @@ jekyll
 journaling
 kinded
 kindedness
+learnability
 learnable
 lexicographically
 liftA
@@ -646,6 +657,7 @@ manageably
 manzanita
 matcher
 maxima
+measurability
 meetup
 memoization
 memoize
@@ -656,12 +668,14 @@ mempty
 mentee
 mentees
 mentorship
+mentorships
 metadata
 metastability
 microcontroller
 microcontrollers
 microinverter
 microinverters
+microservices
 microstate
 microstates
 minima
@@ -739,6 +753,7 @@ nonscalar
 nonsequential
 nonstrict
 nonstrictness
+nontemporal
 nonterminating
 nontermination
 nonuniformity
@@ -758,6 +773,7 @@ optimizable
 optimizations
 optimizers
 orderable
+orthogonally
 orthonormal
 other's
 outlier
@@ -790,6 +806,8 @@ pendantry
 pentatonic
 photonic
 photonics
+picosecond
+picoseconds
 piecewise
 pipelined
 pipelining
@@ -939,6 +957,7 @@ satisfiable
 satisfier
 scalability
 scalable
+scalably
 scalings
 scannable
 scrutinee
@@ -994,6 +1013,8 @@ statefully
 statefulness
 stochastically
 stochasticity
+strategize
+streamable
 stressor
 stressors
 subcircuit
@@ -1078,11 +1099,13 @@ unboundedly
 unboxed
 unboxing
 unclocked
+uncountability
 uncountably
 uncurried
 uncurries
 uncurry
 uncurrying
+undecidability
 understandability
 undirected
 undiscounted
@@ -1092,6 +1115,7 @@ unfoldings
 unforgeable
 unforgeably
 unhandled
+unibit
 unicode
 uniprocessor
 unitor
