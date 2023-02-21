@@ -445,8 +445,8 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (kill-compilation-or-not)
   (sleep-for 0.1)
   (save-window-excursion
-    (when clean-first (call-process "make" nil nil t "clean"))
-    (compile "make" t)))
+    (when clean-first (call-process compile-command nil nil t "clean"))
+    (compile compile-command t)))
 
 ;; Can I use catch instead?  How does one catch an error in e-lisp?
 (defun kill-compilation-or-not ()
@@ -854,7 +854,7 @@ logs, putting in a Last Modified in a new file, etc."
      ("z" "ℤ")
      ("b" "𝔹")
      ("s" "𝕊")
-     ("0" "₀" "𝟎")
+     ("0" "₀" "𝟎" "𝟘")
      ("1" "₁" "𝟏")
      ("2" "₂" "𝟐")
      ("3" "₃")
@@ -929,10 +929,11 @@ logs, putting in a Last Modified in a new file, etc."
  '(backup-by-copying t)
  '(c-style-variables-are-local-p nil)
  '(c-tab-always-indent t)
+ '(case-replace t)
  '(column-number-mode t)
  '(comment-style 'indent)
  '(dabbrev-case-fold-search 'case-fold-search)
- '(dabbrev-case-replace 'case-replace)
+ '(dabbrev-case-replace t)
  '(default-frame-alist-qqq
     '((height . 37)
       (width . 126)
@@ -1537,6 +1538,10 @@ module %s where
 (global-set-key (kbd "s-o") 'other-frame)
 ;;; Was next-window-any-frame
 (global-set-key (kbd "s-'") 'abbrev-prefix-mark)
+
+;;; Train myself to rely on autosave.
+(global-set-key (kbd "C-s-s") 'save-buffer)
+(global-unset-key (kbd "C-x C-s"))
 
 ;;; End of customizations
 (setq debug-on-error nil)

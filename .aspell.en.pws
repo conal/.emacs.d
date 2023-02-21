@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1159 
+personal_ws-1.1 en 1174 
 ACM
 API
 Agda
@@ -52,6 +52,7 @@ DSEL
 DSELs
 Daniele
 Demultiplexer
+Deutsch
 Deutsch's
 Elliotts
 Enphase
@@ -87,6 +88,7 @@ Henglein
 Hinze
 HipChat
 Hm
+Hoare
 Holger
 Horner's
 ICFP
@@ -136,6 +138,7 @@ OpenCL
 Overlake
 PDF
 PDFs
+PLFA
 POV
 Pacifica
 Paddington
@@ -148,6 +151,7 @@ Peano
 Perlis
 Peyton
 Prolog
+Purescript
 Quora
 RSA
 Ralf
@@ -375,6 +379,7 @@ corecursive
 corecursively
 coroutine
 coroutines
+countability
 counterfactuals
 counterproposal
 covariance
@@ -385,6 +390,7 @@ covectors
 cryptocurrency
 cryptographic
 cryptographically
+customizability
 customizable
 customizations
 cyclicity
@@ -448,6 +454,7 @@ disjunction
 disjunctions
 disjuncts
 disprovability
+dissatisfactions
 distributivity
 diverticulosis
 dualities
@@ -526,6 +533,7 @@ foldr
 forall
 forgeably
 formalisms
+formalizable
 formalizations
 foundational
 foundedness
@@ -632,6 +640,7 @@ jekyll
 journaling
 kinded
 kindedness
+latencies
 learnability
 learnable
 lexicographically
@@ -719,12 +728,15 @@ multiplicatively
 multiported
 multiset
 multisets
+multistability
+multistable
 multiway
 mux
 muxes
 natively
 naturality
 naïve
+nestings
 netlist
 netlists
 newish
@@ -937,6 +949,8 @@ representable
 representationally
 reprogrammability
 reprogrammable
+repurpose
+repurposes
 reschedulable
 resettable
 reshaper
@@ -1057,6 +1071,7 @@ supergraphs
 superscripted
 superset
 supersets
+supportively
 supremum
 surjection
 surjections
