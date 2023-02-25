@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1174 
+personal_ws-1.1 en 1180 
 ACM
 API
 Agda
@@ -131,6 +131,7 @@ NLP
 NVIDIA
 Naperian
 Niki
+Nikos
 ODEs
 Okasaki
 OnTrac
@@ -150,6 +151,7 @@ Paritosh's
 Peano
 Perlis
 Peyton
+Pfenning
 Prolog
 Purescript
 Quora
@@ -211,6 +213,8 @@ accelerando
 acceptor
 accessor
 accessors
+accrete
+accreted
 acyclic
 additively
 additivity
@@ -223,6 +227,7 @@ advisee
 advisees
 advisor
 affine
+agda
 algorithmically
 algorithmics
 allowability
@@ -684,6 +689,7 @@ microcontroller
 microcontrollers
 microinverter
 microinverters
+microservice
 microservices
 microstate
 microstates
