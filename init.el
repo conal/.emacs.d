@@ -1539,9 +1539,9 @@ module %s where
 ;;; Was next-window-any-frame
 (global-set-key (kbd "s-'") 'abbrev-prefix-mark)
 
-;;; Train myself to rely on autosave.
-(global-set-key (kbd "C-s-s") 'save-buffer)
-(global-unset-key (kbd "C-x C-s"))
+;; ;;; Train myself to rely on autosave.
+;; (global-set-key (kbd "C-s-s") 'save-buffer)
+;; (global-unset-key (kbd "C-x C-s"))
 
 ;;; End of customizations
 (setq debug-on-error nil)
