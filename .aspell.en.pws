@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1180 
+personal_ws-1.1 en 1196 
 ACM
 API
 Agda
@@ -15,6 +15,7 @@ Asilomar
 Ayreanna
 Baidu
 Banas
+Bhat
 Blelloch
 Blelloch's
 Blomgren
@@ -44,6 +45,7 @@ ClosedCat
 Colmerauer
 Conal's
 Conor
+Coq
 Croydon
 DAGs
 DFT
@@ -130,6 +132,7 @@ MyAccess
 NLP
 NVIDIA
 Naperian
+Neumann
 Niki
 Nikos
 ODEs
@@ -173,6 +176,7 @@ Scott's
 SecureConnect
 Sheard
 Sheeran
+Sooraj
 Sperber
 Spivak
 StackOverflow
@@ -299,6 +303,7 @@ bluetooth
 boolean
 booleans
 boundedness
+bsize
 bulleted
 calculational
 canonicalize
@@ -361,6 +366,7 @@ congruences
 conjecturally
 connectedness
 connectionist
+constructivity
 contractive
 contractively
 contractivity
@@ -496,8 +502,10 @@ epimorphism
 equalities
 equational
 equationally
+equiprobable
 equivariance
 equivariant
+ergodicity
 evaluator
 evaluator's
 executability
@@ -573,6 +581,7 @@ homsets
 hylomorphic
 hylomorphism
 hylomorphisms
+hyperstrict
 hypersurface
 iOS
 iPhone
@@ -1056,6 +1065,7 @@ subregion
 subregions
 subscans
 subscripting
+subsingleton
 subspaces
 substMap
 substitutivity
@@ -1100,6 +1110,9 @@ toList
 tomatable
 topologies
 topos
+toroid
+toroidal
+toroidally
 transactional
 transcendentals
 transformative
@@ -1108,6 +1121,7 @@ transpiler
 traversable
 trichotomy
 trie
+trie's
 tritone
 trustless
 tt
@@ -1149,12 +1163,14 @@ unparse
 unparser
 unparsers
 unparsing
+unprovable
 unrealizable
 unreduced
 unrefuted
 unreified
 unsatisfiability
 unsatisfiable
+unshifted
 unsized
 untenured
 untimed
