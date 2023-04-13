@@ -111,7 +111,7 @@
   ;; In Emacs 20, indented-text-mode is an alias for text-mode.  (I
   ;; don't know why.)  But I want indented mode, so:
   (setq indent-line-function 'indent-relative-maybe)
-  (dolist (c (string-to-list "αβγδεζηθικλμνξοπρςστυφχψωₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤₓᵇᶜᵈᵉᶠⁱᵏˡᵐⁿᵖʳᵗˣⱽ₀₁₂₃₄₅₆₇₈₉¹²³⁴⁵⁶⁷⁸⁹_⇾↝⇉↓⇊⇶⊤⊥⊹′″‴⁗∅☆≡≢≈≋≗≅∾⊑⊆⊇⊗⊕⊎⨄⨁⨂×∀⋀⋁∃+→∷∘•◦◦∙·■□◼◻◾▢⊞✯､⇔↔⊨ℕ𝔽^↑⇧⇑↓⇓⇃⇨⇒→←↠↤⊸⊣∼∪∩⊔⊓⊏⊑∈∧∨¬≤≥↻#<>|♯∞~∼⏲§"))
+  (dolist (c (string-to-list "αβγδεζηθικλμνξοπρςστυφχψωₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤₓᵇᶜᵈᵉᶠⁱᵏˡᵐⁿᵖʳᵗˣⱽ₀₁₂₃₄₅₆₇₈₉¹²³⁴⁵⁶⁷⁸⁹_⇾↝⇉↓⇊⇶⊤⊥⊹′″‴⁗∅☆≡≢≈≋≗≅∾⊑⊆⊇⊗⊕⊎⨄⨁⨂×∀⋀⋁∃+→∷∘•◦◦∙·■□◼◻◾▢⊞✯､⇔↔⊨ℕ𝔽^↑⇧⇑↓⇓⇃⇨⇒→←↠↤⊸⊣∼∪∩⊔⊓⊏⊑∈∧∨¬≤≥↻#<>|♯∞~∼⏲§ℕ"))
     (modify-syntax-entry c "w"))
   ;; (modify-syntax-entry ?\⌞ "(⌟") -- doesn't work
   (modify-syntax-entry ?\| ".")     ; punctuation
@@ -1315,6 +1315,19 @@ automatically in order to have the correct markup."
     (kill-ring-save (mark) (point))
     (pop-mark))
   )
+
+(defun copy-blockquote-to-note ()
+  "Copy text between previous <blockquote> and next </blockquote>."
+  (interactive)
+  (save-excursion
+    (search-backward-regexp "<blockquote>\n*")
+    (push-mark (match-end 0)) ;; or push-mark?
+    (search-forward-regexp "\n*</blockquote>")
+    (goto-char (match-beginning 0))
+    (write-region (mark) (point) "~/Downloads/note.md")
+    (pop-mark))  
+  )
+;;; TODO: refactor
 
 (defun gfm-copy-blockquote ()
   "Convert Markdown between previous <blockquote> and next </blockquote> to GFM, and stash in copy buffer."
