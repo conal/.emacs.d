@@ -1543,5 +1543,7 @@ module %s where
 ;; (global-set-key (kbd "C-s-s") 'save-buffer)
 ;; (global-unset-key (kbd "C-x C-s"))
 
+;; (setq require-final-newline nil)  ; for now
+
 ;;; End of customizations
 (setq debug-on-error nil)
