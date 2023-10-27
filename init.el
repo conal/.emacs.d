@@ -354,6 +354,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-replace "[´‘’′]" "'")
   (save-replace "[¨“”]" "\"")
   (save-replace " " " ")
+  (save-replace " " " ")
   (save-replace " – " "---")
   (save-replace "" "--")
   (save-replace "½" "1/2")
@@ -1510,7 +1511,7 @@ module %s where
   :tail-mode 'host)
 
 (define-polymode poly-latex-mode
-  :hostmode 'pm-host/latex
+  :hostmode 'poly-latex-hostmode
   :innermodes '(poly-agda-innermode))
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'"   . poly-latex-mode))

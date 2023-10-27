@@ -1,17 +1,20 @@
-personal_ws-1.1 en 1216 
+personal_ws-1.1 en 1246 
 ACM
 API
 Agda
 Agda's
 Alameda
 Allyn
+Anaximander
 Andreas
 Anygma
 ArrowChoice
+Arvind
 Ashland
 Ashwin
 Ashwin's
 Asilomar
+Atticus
 Ayreanna
 Baidu
 Banas
@@ -54,6 +57,7 @@ DFT
 DOF
 DSEL
 DSELs
+Daan
 Daniele
 Demultiplexer
 Deutsch
@@ -72,6 +76,7 @@ Faez
 FieldTrip
 Fortran
 Fortran's
+Frege
 Fréchet
 GADT
 GHC's
@@ -83,6 +88,7 @@ Geoff
 Groq
 Hackage
 Hanrahan
+Hanrahan's
 Hashtables
 Haskell's
 Haskellers
@@ -98,6 +104,7 @@ Horner's
 ICFP
 Iavor
 Idris
+Iuliu
 JSON
 Jacobian
 Jaynes
@@ -129,6 +136,7 @@ Markovian
 McIlroy's
 McKenna
 Meijer
+Minimax
 Minkowski
 Murphys
 MyAccess
@@ -183,6 +191,7 @@ SecureConnect
 Seefried
 Sheard
 Sheeran
+Siddharth
 Sooraj
 Sperber
 Spivak
@@ -200,6 +209,7 @@ Theobald
 Theobald's
 Tikhon
 Tikhon's
+Tversky
 Tweag
 UC
 Ubuntu
@@ -221,6 +231,7 @@ ZKP
 ZKPs
 ZipList
 Zulip
+ZuriHac
 Zürich
 abelian
 accelerando
@@ -256,6 +267,7 @@ answerer
 answerers
 antisymmetric
 antisymmetry
+apophatic
 applicative
 applicatives
 approximator
@@ -264,6 +276,7 @@ arXiv
 arithmetization
 arithmetize
 arithmetized
+arities
 arity
 arpeggiating
 associativity
@@ -324,6 +337,7 @@ cardinality
 cartesian
 catamorphism
 catamorphisms
+cataphatic
 checkable
 clockless
 clusterings
@@ -481,6 +495,7 @@ disprovability
 dissatisfactions
 distributivity
 diverticulosis
+dodecahedron
 dualities
 dualize
 dualized
@@ -534,6 +549,7 @@ exponentiated
 exponentiates
 exponentiating
 exponentiations
+expressibility
 extensibility
 extensionality
 extensionally
@@ -600,6 +616,7 @@ hyperstrict
 hypersurface
 iOS
 iPhone
+icosahedron
 idempotence
 ifThenElse
 iff
@@ -646,6 +663,7 @@ integrable
 intensional
 intensionally
 interleavings
+interoperate
 interpolator
 interpolators
 interpretable
@@ -685,6 +703,9 @@ linearizing
 linux
 liveness
 logarithmically
+logicism
+logicist
+logicists
 lookahead
 lossiness
 losslessly
@@ -711,6 +732,7 @@ mentorship
 mentorships
 metadata
 metastability
+metaverse
 microcontroller
 microcontrollers
 microinverter
@@ -749,6 +771,7 @@ monomorphizing
 monotonicity
 monotype
 monotypes
+moore
 morphically
 morphism
 morphisms
@@ -766,14 +789,17 @@ multistable
 multiway
 mux
 muxes
+nand
 natively
 naturality
 naïve
 nestings
 netlist
 netlists
+neuromorphic
 newish
 newtype
+nlightening
 noncausal
 noncomputability
 noncomputable
@@ -809,6 +835,7 @@ nullability
 nullable
 nullary
 numerics
+octohedron
 operad
 operads
 operationalization
@@ -1042,6 +1069,7 @@ simplifier
 simplifier's
 simplifiers
 slashdot
+socratically
 solvability
 spacetime
 spacetimed
@@ -1076,6 +1104,8 @@ subdividable
 subexpression
 subexpressions
 subformula
+subgoal
+subgoals
 subgradient
 subgraph
 subgraphs
