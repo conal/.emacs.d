@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1246 
+personal_ws-1.1 en 1251 
 ACM
 API
 Agda
@@ -139,6 +139,7 @@ Meijer
 Minimax
 Minkowski
 Murphys
+Murraydale
 MyAccess
 NLP
 NVIDIA
@@ -675,6 +676,7 @@ inverter
 inverters
 invertibility
 invertible
+invertibly
 involutions
 involutive
 iphone
@@ -1221,6 +1223,9 @@ unreified
 unsatisfiability
 unsatisfiable
 unshifted
+unshuffle
+unshuffles
+unshuffling
 unsized
 untenured
 untimed

@@ -22,7 +22,7 @@
        '(attrap
          dante define-word elisp-slime-nav exec-path-from-shell f 
          flycheck-haskell frame-cmds idris-mode intero haskell-mode
-         company flycheck lcr dash
+         company flycheck lcr dash emojify
          markdown-mode nlinum pkg-info epl popwin s seq
          use-package bind-key w3m yaml-mode zoom-frm
          pos-tip popup button-lock flycheck-color-mode-line
@@ -51,6 +51,8 @@
 (setq load-path
       (append (mapcar #'expand-file-name my-extra-load-path)
               load-path))
+
+(use-package emojify :hook (after-init . global-emojify-mode))
 
 ;; (require 'mmm-mode)
 
@@ -921,7 +923,8 @@ logs, putting in a Last Modified in a new file, etc."
      ("=*" "≛")
      ("^l" "ˡ")
      ("^r" "ʳ")
-     ("xor" "⊕")))
+     ("xor" "⊕")
+     ("q" "ℚ")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
@@ -1012,7 +1015,7 @@ module %s where
  '(message-log-max 500)
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
-   '(dired-narrow ascii-art-to-unicode polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
+   '(emojify dired-narrow ascii-art-to-unicode polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size '(8 . 10))
