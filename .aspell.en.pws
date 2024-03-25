@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1251 
+personal_ws-1.1 en 1284 
 ACM
 API
 Agda
@@ -18,6 +18,7 @@ Atticus
 Ayreanna
 Baidu
 Banas
+Bhaskar
 Bhat
 Blelloch
 Blelloch's
@@ -33,11 +34,13 @@ CCCs
 CMOS
 CNF
 CNNs
+CNVC
 COVID
 CPOs
 CPP
 CPUs
 CSE
+CTO
 CUDA
 Calaveras
 Carette
@@ -55,6 +58,7 @@ Croydon
 DAGs
 DFT
 DOF
+DOFs
 DSEL
 DSELs
 Daan
@@ -62,8 +66,10 @@ Daniele
 Demultiplexer
 Deutsch
 Deutsch's
+Eckhart
 Elliotts
 Enphase
+Ethereum
 Everyware
 FFT
 FP
@@ -84,8 +90,10 @@ GLSL
 GPU
 GPUs
 GUIs
+Galilei
 Geoff
 Groq
+Gurdjieff
 Hackage
 Hanrahan
 Hanrahan's
@@ -107,6 +115,7 @@ Idris
 Iuliu
 JSON
 Jacobian
+Jakub
 Jaynes
 Joachim
 João
@@ -142,10 +151,12 @@ Murphys
 Murraydale
 MyAccess
 NLP
+NVC
 NVIDIA
 Namaste
 Naperian
 Neumann
+Niels
 Niki
 Nikos
 ODEs
@@ -170,12 +181,14 @@ Peyton
 Pfenning
 Prolog
 Purescript
+Pólya
 Quora
 RSA
 Ralf
 Rashad
 Rebecca
 Reinstallation
+Rovelli
 SBIR
 SDF
 SDFs
@@ -193,6 +206,8 @@ Seefried
 Sheard
 Sheeran
 Siddharth
+Siskind
+Siskind's
 Sooraj
 Sperber
 Spivak
@@ -210,6 +225,7 @@ Theobald
 Theobald's
 Tikhon
 Tikhon's
+Tolle
 Tversky
 Tweag
 UC
@@ -220,6 +236,7 @@ Verilog
 Visscher
 Wadler
 Walid
+Werner
 Wiegley
 Wilczek
 Winograd
@@ -242,6 +259,7 @@ accessors
 accrete
 accreted
 acyclic
+acyclicity
 additively
 additivity
 adjoint
@@ -294,6 +312,7 @@ automata
 automatable
 automorphism
 automorphisms
+aversive
 axiomatization
 axiomatize
 axiomatized
@@ -367,6 +386,8 @@ combinational
 combinationally
 combinator
 combinatorial
+combinatoric
+combinatorics
 combinators
 commutativity
 comonad
@@ -425,6 +446,7 @@ covariant
 covariantly
 covector
 covectors
+crypto
 cryptocurrency
 cryptographic
 cryptographically
@@ -646,8 +668,11 @@ inessentially
 inferable
 infimum
 infinitary
+influencer
+influencers
 inhabitation
 injective
+injectively
 injectivity
 inlinable
 inline
@@ -773,6 +798,7 @@ monomorphizing
 monotonicity
 monotype
 monotypes
+monus
 moore
 morphically
 morphism
@@ -803,6 +829,7 @@ newish
 newtype
 nlightening
 noncausal
+noncompositional
 noncomputability
 noncomputable
 noncomputably
@@ -878,6 +905,7 @@ patentable
 paywalled
 pendantry
 pentatonic
+perspicuously
 photonic
 photonics
 picosecond
@@ -988,6 +1016,7 @@ reify
 reifying
 reiindexing
 reimagine
+reimplement
 reindexing
 reindexings
 reinflation
@@ -1136,6 +1165,7 @@ superclass
 superclasses
 supergraph
 supergraphs
+supersampling
 superscripted
 superset
 supersets
@@ -1181,6 +1211,7 @@ tuple
 tuples
 tupling
 typings
+unapologetically
 unary
 unboundedly
 unboxed
@@ -1209,6 +1240,7 @@ unitor
 unitors
 univariate
 unlifted
+unmoving
 unoptimized
 unordered
 unparse
@@ -1247,6 +1279,7 @@ vulnerablity
 webmail
 weighings
 wikidata
+wonderings
 workflow
 zeroness
 zippable
