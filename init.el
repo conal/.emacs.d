@@ -563,6 +563,7 @@ logs, putting in a Last Modified in a new file, etc."
 ;; (global-set-key "\M-o" 'my-other-window-or-frame)
 ;; (global-set-key "\M-o" 'my-other-window)
 (global-set-key "\M-o" 'next-window-any-frame) ; already on s-'
+(global-set-key "\M-O" 'previous-window-any-frame)
 
 ;; (defun my-other-window ()
 ;;   (interactive)
@@ -924,7 +925,9 @@ logs, putting in a Last Modified in a new file, etc."
      ("^l" "ˡ")
      ("^r" "ʳ")
      ("xor" "⊕")
-     ("q" "ℚ")))
+     ("q" "ℚ")
+     ("car" "↻")
+     ("~" "≈")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
@@ -1522,8 +1525,25 @@ module %s where
 (add-to-list 'auto-mode-alist '("\\.md"       . poly-markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.page"     . poly-markdown-mode))
 
+
+;; (load-file (let ((coding-system-for-read 'utf-8))
+;;                 (shell-command-to-string "agda-mode locate")))
+
+;;; Alternatively, while in transition:
+
+(defcustom agda2-version "2.6.4"
+  "The Agda version."
+  :type 'string
+  :group 'agda2)
+
+(defcustom agda2-mode-program-name (concat "agda-mode-" agda2-version)
+  "The name of the agda-mode executable."
+  :type 'string
+  :group 'agda2)
+
+(setq agda2-program-name (concat "agda-" agda2-version))
 (load-file (let ((coding-system-for-read 'utf-8))
-                (shell-command-to-string "agda-mode locate")))
+                (shell-command-to-string (concat agda2-mode-program-name " locate"))))
 
 ;;; I like to use the Agda input method in markdown-mode as well.
 ;;; Load it here.
@@ -1548,6 +1568,11 @@ module %s where
 ;; (global-unset-key (kbd "C-x C-s"))
 
 ;; (setq require-final-newline nil)  ; for now
+
+;;; Convenient window motion and resizing.
+(async-shell-command "/Applications/Zooom2.app/Contents/MacOS/Zooom2")
+;;; (journal)
+(delete-other-windows)
 
 ;;; End of customizations
 (setq debug-on-error nil)
