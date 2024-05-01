@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1284 
+personal_ws-1.1 en 1299 
 ACM
 API
 Agda
@@ -79,6 +79,7 @@ FPUs
 FRP
 FaceTime
 Faez
+Fairbairn
 FieldTrip
 Fortran
 Fortran's
@@ -116,6 +117,7 @@ Iuliu
 JSON
 Jacobian
 Jakub
+Jakub's
 Jaynes
 Joachim
 João
@@ -208,6 +210,7 @@ Sheeran
 Siddharth
 Siskind
 Siskind's
+Somani
 Sooraj
 Sperber
 Spivak
@@ -234,6 +237,7 @@ VPN
 Vec
 Verilog
 Visscher
+Vreuls
 Wadler
 Walid
 Werner
@@ -398,6 +402,7 @@ comonoidal
 comonoids
 comparator
 comparators
+compilability
 complementarity
 componentwise
 composability
@@ -545,6 +550,7 @@ endofunctor
 endofunctors
 endomorphism
 endomorphisms
+enharmonic
 entailments
 entropic
 entropies
@@ -645,6 +651,7 @@ ifThenElse
 iff
 iirc
 impactful
+imperspicuously
 implementability
 implementers
 implementor
@@ -803,6 +810,7 @@ moore
 morphically
 morphism
 morphisms
+mortem
 multi
 multibit
 multilinear
@@ -820,6 +828,7 @@ muxes
 nand
 natively
 naturality
+naturedly
 naïve
 nestings
 netlist
@@ -919,6 +928,7 @@ pointful
 pointfully
 pointw
 pointwise
+polyhedra
 polymorphically
 polymorphism
 polynomiality
@@ -1081,6 +1091,8 @@ sensorial
 sensorially
 sequenceA
 sequentiality
+sequentialization
+sequentializations
 sequentialize
 sequentialized
 sequentializes
@@ -1216,6 +1228,7 @@ unary
 unboundedly
 unboxed
 unboxing
+uncheck
 unclocked
 uncountability
 uncountably
@@ -1235,6 +1248,8 @@ unforgeably
 unhandled
 unibit
 unicode
+unifier
+unifiers
 uniprocessor
 unitor
 unitors
