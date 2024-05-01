@@ -181,6 +181,13 @@ Spotlight binding from command-space to option-space."
       (rename-buffer journal-name)))
   )
 
+;; Make journal figure directory if it doesn't exist.
+(defun figure-directory ()
+  (interactive)
+  (let ((dir (format-time-string "~/Journals/Current/wikidata/%Y/Figures/%m-%d" (current-time))))
+    (make-directory dir t)
+    (message "Made %s" dir)))
+
 (defun web-search (string)
   "Run a web-search search in a browser."
   (interactive "sSearch for: ")
