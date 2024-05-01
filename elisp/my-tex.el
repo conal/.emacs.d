@@ -321,7 +321,6 @@ being punctuation"
   (previous-line 1)
   (end-of-line 1))
 
-
 (defun my-tex-insert-haskell-brackets ()
   "Insert a \\< \\> pair and place point between them."
   (interactive)
@@ -337,6 +336,39 @@ being punctuation"
   ;; starting in emacs 22.3.1, i need a save-excursion
   ;; (when mmm-mode (save-excursion (mmm-parse-block 1)))
   )
+
+;;; https://github.com/varkor/quiver/wiki/Editor-integration
+;;; Move elsewhere.
+(defun replace-quiver-diagram ()
+  "Extracts the quiver URL from the diagram under cursor and runs it in browser. Selects the diagram."
+  (interactive)
+    (let ((start 0)
+	  (end 0)
+	  (url-start 0)
+	  (url-end 0)
+	  (url ""))
+      (save-excursion
+	(save-excursion
+	  (re-search-backward "% https://q.uiver.app" nil)
+	  (setq url-start (+ 2 (point)))
+	  (beginning-of-line)
+	  (setq start (point))
+	(save-excursion
+	  (re-search-forward "\\\\end{tikzcd}" nil)
+	  (setq end (point)))
+	(save-excursion
+	  (goto-char url-start)
+	  (re-search-forward "\n" nil)
+	  (setq url-end (- (point) 1))
+	  (skip-chars-forward " ")
+	  ;; If the next two symbols after new line, up to whitespace,
+	  ;; are "\[", modify the `end` value to be after \].
+	  (when (string= "[" (string (char-after (+ 1 (point)))))
+	      (setq end (+ 2 end))))
+	(setq url (buffer-substring-no-properties url-start url-end))
+	(start-process "" nil "open" url)))
+      (goto-char start)
+      (push-mark end t t)))
 
 (defun shared-tex-lhs-init ()
   (local-set-key "\C-cb" 'tex-environment)
@@ -406,6 +438,7 @@ being punctuation"
   ;; Sometimes I globally rebind these to the vi versions.
   (local-set-key "\e." 'find-tag)
   (local-set-key "\e," 'tags-loop-continue)
+  (local-set-key  (kbd "C-c q") 'replace-quiver-diagram)
   ;;(modify-syntax-entry ?\\ "w")         ; word constituent
   (modify-syntax-entry ?_ "w")        ; for abbreviations
   (modify-syntax-entry ?\\ "w")        ; for avoiding abbreviations
