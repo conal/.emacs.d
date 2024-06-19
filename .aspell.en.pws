@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1299 
+personal_ws-1.1 en 1319 
 ACM
 API
 Agda
@@ -129,8 +129,10 @@ Kolmogorov's
 LFSR
 LUT
 LambdaPix
+Lamport
 Landin
 Launchbury
+Leijen
 Lemurian
 Lemurians
 Lipschitz
@@ -175,6 +177,7 @@ Paddington
 PageRank
 Pandoc
 Paolo
+Paperwhite
 Paritosh
 Paritosh's
 Peano
@@ -215,6 +218,7 @@ Sooraj
 Sperber
 Spivak
 StackOverflow
+Strachey
 Swierstra
 TCM
 TDH
@@ -266,6 +270,7 @@ acyclic
 acyclicity
 additively
 additivity
+adiabaticity
 adjoint
 adjoints
 adjunction
@@ -286,6 +291,7 @@ analytics
 anamorphism
 anamorphisms
 anonymize
+another's
 answerer
 answerers
 antisymmetric
@@ -330,6 +336,7 @@ benchmarking
 bicartesian
 bicyling
 bifunctor
+bifunctors
 bijection
 bijections
 bijective
@@ -505,6 +512,7 @@ differentially
 differentiations
 dimensionality
 dimensionally
+directionality
 disambiguated
 disambiguating
 disconnectness
@@ -589,6 +597,8 @@ factorings
 falsifiability
 feedforward
 fetishize
+fibration
+fibrations
 filamental
 finability
 finalizer
@@ -613,6 +623,7 @@ framings
 fromInteger
 functionals
 functor
+functor's
 functorial
 functoriality
 functorially
@@ -678,6 +689,7 @@ infinitary
 influencer
 influencers
 inhabitation
+initiality
 injective
 injectively
 injectivity
@@ -865,6 +877,7 @@ nonstrictness
 nontemporal
 nonterminating
 nontermination
+nontrivially
 nonuniformity
 noodlings
 notational
@@ -906,7 +919,9 @@ parametrize
 parametrized
 parametrizes
 parametrizing
+paraphrasings
 parenthesization
+parsable
 parsers
 parsings
 partitionings
@@ -1197,6 +1212,7 @@ targ
 temporality
 temporospatial
 tensoring
+tensorings
 texted
 threadedness
 timeline
@@ -1220,6 +1236,7 @@ tritone
 trustless
 tt
 tuple
+tupled
 tuples
 tupling
 typings
@@ -1240,8 +1257,10 @@ undecidability
 understandability
 undirected
 undiscounted
+unenhanced
 unentangled
 unevaluated
+unfactored
 unfoldings
 unforgeable
 unforgeably
@@ -1262,6 +1281,7 @@ unparse
 unparser
 unparsers
 unparsing
+unprimed
 unprovable
 unrealizable
 unreduced
