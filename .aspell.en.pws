@@ -1,6 +1,7 @@
-personal_ws-1.1 en 1319 
+personal_ws-1.1 en 1326 
 ACM
 API
+AST
 Agda
 Agda's
 Alameda
@@ -151,6 +152,7 @@ McKenna
 Meijer
 Minimax
 Minkowski
+Miya
 Murphys
 Murraydale
 MyAccess
@@ -184,6 +186,8 @@ Peano
 Perlis
 Peyton
 Pfenning
+Polya
+Polya's
 Prolog
 Purescript
 Pólya
@@ -220,6 +224,7 @@ Spivak
 StackOverflow
 Strachey
 Swierstra
+Symbolica
 TCM
 TDH
 Tabula
@@ -1128,6 +1133,7 @@ simplifier's
 simplifiers
 slashdot
 socratically
+soffit
 solvability
 spacetime
 spacetimed
@@ -1169,6 +1175,7 @@ subgraph
 subgraphs
 subinterval
 subintervals
+subquiver
 subregion
 subregions
 subscans
@@ -1186,8 +1193,6 @@ subtries
 suc
 summand
 summands
-supercede
-superceded
 superclass
 superclasses
 supergraph

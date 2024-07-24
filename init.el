@@ -186,7 +186,9 @@ Spotlight binding from command-space to option-space."
   (interactive)
   (let ((dir (format-time-string "~/Journals/Current/wikidata/%Y/Figures/%m-%d" (current-time))))
     (make-directory dir t)
-    (message "Made %s" dir)))
+    ;; (message "Made %s" dir)
+    (find-file dir)
+    ))
 
 (defun web-search (string)
   "Run a web-search search in a browser."
@@ -1031,7 +1033,8 @@ module %s where
  '(ps-font-size '(8 . 10))
  '(read-buffer-completion-ignore-case t)
  '(safe-local-variable-values
-   '((flycheck-disabled-checkers quote
+   '((eval turn-off-auto-fill)
+     (flycheck-disabled-checkers quote
                                  (haskell-ghc haskell-stack-ghc))
      (flycheck-disabled-checkers quote
                                  (haskell-stack-ghc))))
@@ -1160,6 +1163,10 @@ module %s where
 
 (defun blogify-foo (&optional private)
   (interactive "P")
+  (when (string-prefix-p "/Users/conal/Journals" (buffer-file-name))
+    (save-window-excursion (shell-command "make-journal"))
+    ;; (call-process "/Users/conal/bin/make-journal")
+    )
   (blogify-buffer private)
   (let ((title (save-excursion
                  (beginning-of-buffer)
