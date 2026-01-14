@@ -100,8 +100,8 @@ tex-generic-section-newpage is true (the default), start with a ^L."
                          env))))
   (unless (bolp) (newline))
   (insert "\\begin{" env "}")(newline)(newline)
-  (insert "\\end{" env "}")(newline)
-  (previous-line 2)
+  (insert "\\end{" env "}")
+  (previous-line 1)
   (setq default-tex-environment-name env))
 
 (defun tex-specific-environment (env)
@@ -488,6 +488,7 @@ being punctuation"
   (local-set-key (kbd "C-M-'") 'tex-AF-sexp)
   (local-set-key (kbd "C-s-'") 'tex-AD-sexp)
   (local-set-key (kbd "C-M-s-'") 'tex-AIC-sexp)
+  (push `("frame" nil ?\{ (skeleton-read "Title: ") ?\}) latex-block-args-alist)
   (toggle-input-method)
   )
 

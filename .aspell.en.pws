@@ -1,4 +1,4 @@
-personal_ws-1.1 en 1326 
+personal_ws-1.1 en 1440 
 ACM
 API
 AST
@@ -17,8 +17,10 @@ Ashwin's
 Asilomar
 Atticus
 Ayreanna
+Baconian
 Baidu
 Banas
+Bennet
 Bhaskar
 Bhat
 Blelloch
@@ -33,6 +35,7 @@ ByteString
 CCC
 CCCs
 CMOS
+CMU
 CNF
 CNNs
 CNVC
@@ -52,6 +55,7 @@ Chalmers
 Chlipala
 ClosedCat
 Colmerauer
+Complementarily
 Conal's
 Conor
 Coq
@@ -64,10 +68,13 @@ DSEL
 DSELs
 Daan
 Daniele
+DeBrujn
 Demultiplexer
 Deutsch
 Deutsch's
+Earley
 Eckhart
+Edsger
 Elliotts
 Enphase
 Ethereum
@@ -79,11 +86,13 @@ FPU
 FPUs
 FRP
 FaceTime
+Factorio
 Faez
 Fairbairn
 FieldTrip
 Fortran
 Fortran's
+Fredkin
 Frege
 Fréchet
 GADT
@@ -129,8 +138,11 @@ Kolmogorov
 Kolmogorov's
 LFSR
 LUT
+LaTeX
 LambdaPix
 Lamport
+Lamport's
+Landauer
 Landin
 Launchbury
 Leijen
@@ -152,6 +164,7 @@ McKenna
 Meijer
 Minimax
 Minkowski
+Miraldo
 Miya
 Murphys
 Murraydale
@@ -162,6 +175,7 @@ NVIDIA
 Namaste
 Naperian
 Neumann
+Neumann's
 Niels
 Niki
 Nikos
@@ -174,6 +188,7 @@ PDF
 PDFs
 PLFA
 POV
+PRED
 Pacifica
 Paddington
 PageRank
@@ -184,10 +199,13 @@ Paritosh
 Paritosh's
 Peano
 Perlis
+Perlis's
 Peyton
 Pfenning
+Pleasanton
 Polya
 Polya's
+Popperian
 Prolog
 Purescript
 Pólya
@@ -198,6 +216,7 @@ Rashad
 Rebecca
 Reinstallation
 Rovelli
+Rustica
 SBIR
 SDF
 SDFs
@@ -237,12 +256,15 @@ Theobald
 Theobald's
 Tikhon
 Tikhon's
+Toffoli
+Toffoli's
 Tolle
 Tversky
 Tweag
 UC
 Ubuntu
 VPN
+Vaire
 Vec
 Verilog
 Visscher
@@ -251,6 +273,7 @@ Wadler
 Walid
 Werner
 Wiegley
+Wiegley's
 Wilczek
 Winograd
 Wouter
@@ -275,8 +298,10 @@ acyclic
 acyclicity
 additively
 additivity
+adiabatically
 adiabaticity
 adjoint
+adjointness
 adjoints
 adjunction
 adjunctions
@@ -286,6 +311,8 @@ advisees
 advisor
 affine
 agda
+algebraicize
+algebraicizing
 algorithmically
 algorithmics
 allowability
@@ -297,13 +324,17 @@ anamorphism
 anamorphisms
 anonymize
 another's
+ansatz
 answerer
 answerers
 antisymmetric
 antisymmetry
+apartness
 apophatic
 applicative
 applicatives
+approximable
+approximant
 approximator
 approximators
 arXiv
@@ -320,6 +351,7 @@ asychrony
 asynchrony
 atempopral
 atemporal
+atomicity
 autoencoder
 autoencoders
 autoencoding
@@ -345,6 +377,7 @@ bifunctors
 bijection
 bijections
 bijective
+bijectively
 bijectivity
 bilinear
 bilinearity
@@ -366,6 +399,7 @@ booleans
 boundedness
 bsize
 bulleted
+caddy
 calculational
 canonicalize
 cardinalities
@@ -381,6 +415,7 @@ coalgebra
 coalgebraic
 coalgebraically
 coalgebras
+coarsenings
 cobordism
 cobordisms
 cocartesian
@@ -390,10 +425,12 @@ codomains
 coercions
 cofounder
 cofounders
+cofounding
 cofree
 coinduction
 coinductive
 coinductively
+cokernel
 colocate
 colocated
 colonoscopies
@@ -431,10 +468,12 @@ congruences
 conjecturally
 connectedness
 connectionist
+constellate
 constructivity
 contractive
 contractively
 contractivity
+contraposition
 contrapositive
 contrapositively
 contravariance
@@ -448,6 +487,7 @@ convolves
 convolving
 copattern
 copatterns
+coprime
 coproduct
 coproducts
 corecursion
@@ -455,6 +495,9 @@ corecursive
 corecursively
 coroutine
 coroutines
+cospan
+cotransitive
+cotransitivity
 countability
 counterfactuals
 counterproposal
@@ -467,6 +510,7 @@ crypto
 cryptocurrency
 cryptographic
 cryptographically
+curation
 customizability
 customizable
 customizations
@@ -484,8 +528,12 @@ decomposer
 decomposers
 decompositions
 decompressor
+decompute
+decomputing
 deconstructor
 deconstructors
+deferent
+deferents
 definability
 definedness
 definitional
@@ -508,6 +556,8 @@ desugared
 desugaring
 determinacy
 deterministically
+diabatic
+diabaticity
 diagonalization
 diagonalize
 differentiability
@@ -534,6 +584,8 @@ disjunctions
 disjuncts
 disprovability
 dissatisfactions
+dissatisfyingly
+distinguishability
 distributivity
 diverticulosis
 dodecahedron
@@ -557,6 +609,7 @@ empathic
 encodable
 encodings
 endian
+endo
 endofunction
 endofunctions
 endofunctor
@@ -567,18 +620,28 @@ enharmonic
 entailments
 entropic
 entropies
+enumerability
 ephemerality
+epicycle
+epicycles
 epimorphism
+epimorphisms
 epiphenomenal
 equalities
 equational
 equationally
+equinumerous
+equipotence
+equipotent
 equiprobable
 equivariance
 equivariant
 ergodicity
 evaluator
 evaluator's
+evolvability
+evolvable
+evolvably
 executability
 executables
 executably
@@ -599,6 +662,7 @@ extralinguistic
 extrema
 extremum
 factorings
+factuality
 falsifiability
 feedforward
 fetishize
@@ -622,6 +686,8 @@ forgeably
 formalisms
 formalizable
 formalizations
+formers
+formulaically
 foundational
 foundedness
 framings
@@ -641,6 +707,7 @@ ghc
 github
 gitit
 glyphs
+granularities
 grayscale
 hackery
 haskell
@@ -654,6 +721,7 @@ homomorphisms
 homotopy
 homset
 homsets
+horizontality
 hylomorphic
 hylomorphism
 hylomorphisms
@@ -686,6 +754,8 @@ incrementing
 indexable
 indices
 indirections
+inductor
+inductors
 inequivalence
 inessentially
 inferable
@@ -712,11 +782,13 @@ instantiations
 integrable
 intensional
 intensionally
+intentionality
 interleavings
 interoperate
 interpolator
 interpolators
 interpretable
+intuitionism
 intuitionistic
 intuitionistically
 invariance
@@ -730,6 +802,7 @@ involutions
 involutive
 iphone
 irreflexive
+irreflexivity
 irreversibility
 iso
 isomorphically
@@ -743,6 +816,7 @@ kindedness
 latencies
 learnability
 learnable
+lexically
 lexicographically
 liftA
 liftings
@@ -758,6 +832,7 @@ logicism
 logicist
 logicists
 lookahead
+lossily
 lossiness
 losslessly
 lossy
@@ -793,6 +868,7 @@ microservices
 microstate
 microstates
 minima
+minimalities
 minimality
 miseducate
 miseducated
@@ -801,6 +877,7 @@ misframed
 modularity
 modularization
 modularize
+moduli
 monad
 monadic
 monadically
@@ -815,6 +892,7 @@ monomial
 monomials
 monomorphic
 monomorphism
+monomorphisms
 monomorphization
 monomorphize
 monomorphizes
@@ -826,6 +904,7 @@ monus
 moore
 morphically
 morphism
+morphism's
 morphisms
 mortem
 multi
@@ -855,6 +934,7 @@ newish
 newtype
 nlightening
 noncausal
+noncommutative
 noncompositional
 noncomputability
 noncomputable
@@ -865,6 +945,7 @@ nondeterminism
 nondeterministic
 nondeterministically
 nonemptiness
+nonequilibrium
 noninductive
 noninductively
 nonjudgmentally
@@ -891,10 +972,14 @@ nullability
 nullable
 nullary
 numerics
+observables
 octohedron
 operad
 operads
+operationality
 operationalization
+operationalize
+operationalizing
 optimality
 optimizability
 optimizable
@@ -931,6 +1016,7 @@ parsers
 parsings
 partitionings
 patentable
+pathologize
 paywalled
 pendantry
 pentatonic
@@ -954,6 +1040,8 @@ polymorphism
 polynomiality
 polytypic
 polytypically
+poset
+positionally
 positivity
 powerwall
 powerwalls
@@ -964,6 +1052,7 @@ preallocated
 precisions
 precompose
 predictively
+predictivity
 preimage
 preimages
 preorder
@@ -975,6 +1064,7 @@ prepending
 prepends
 presheaves
 primals
+priori
 probabilisitic
 probabilistically
 productization
@@ -994,10 +1084,12 @@ quantifications
 quantization
 quantizes
 quaternary
+qubits
 quicksort
 quicksort's
 radices
 radix
+reachability
 reactivity
 readme
 reassociate
@@ -1053,7 +1145,9 @@ reinflation
 reinform
 reinstall
 reinstalled
+relatability
 relatable
+relatably
 relationally
 renamings
 renderer
@@ -1069,6 +1163,7 @@ repo
 representability
 representable
 representationally
+reproducibility
 reprogrammability
 reprogrammable
 repurpose
@@ -1081,10 +1176,12 @@ retiming
 retransmission
 reusability
 revelatory
+rewatch
 rewatching
 rewrap
 rewriters
 rewritings
+ribosome
 roadmap
 routings
 samplings
@@ -1117,6 +1214,7 @@ sequentialize
 sequentialized
 sequentializes
 sequentializing
+serendipitously
 setoid
 setoids
 shader
@@ -1155,6 +1253,7 @@ statefulness
 stochastically
 stochasticity
 strategize
+strategizing
 streamable
 stressor
 stressors
@@ -1167,6 +1266,7 @@ subdirectory
 subdividable
 subexpression
 subexpressions
+subfield
 subformula
 subgoal
 subgoals
@@ -1175,9 +1275,13 @@ subgraph
 subgraphs
 subinterval
 subintervals
+subobject
+subobjects
 subquiver
 subregion
 subregions
+subring
+subrings
 subscans
 subscripting
 subsingleton
@@ -1202,6 +1306,7 @@ superscripted
 superset
 supersets
 supportively
+suprema
 supremum
 surjection
 surjections
@@ -1211,6 +1316,7 @@ surjectivity
 surprisingness
 sustainably
 synchrony
+synonymously
 synthesizable
 tagless
 targ
@@ -1219,8 +1325,11 @@ temporospatial
 tensoring
 tensorings
 texted
+there'd
+thermodynamically
 threadedness
 timeline
+tinkerings
 toList
 tomatable
 topologies
@@ -1230,6 +1339,9 @@ toroidal
 toroidally
 transactional
 transcendentals
+transcendently
+transferability
+transformational
 transformative
 translational
 transpiler
@@ -1240,6 +1352,7 @@ trie's
 tritone
 trustless
 tt
+tunable
 tuple
 tupled
 tuples
@@ -1263,6 +1376,7 @@ understandability
 undirected
 undiscounted
 unenhanced
+unenlightening
 unentangled
 unevaluated
 unfactored
@@ -1294,6 +1408,7 @@ unrefuted
 unreified
 unsatisfiability
 unsatisfiable
+unselfconscious
 unshifted
 unshuffle
 unshuffles
@@ -1309,6 +1424,7 @@ validator
 validators
 vanishingly
 variational
+verifiability
 verifiably
 verifier
 verifiers

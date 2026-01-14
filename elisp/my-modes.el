@@ -111,7 +111,7 @@
   ;; In Emacs 20, indented-text-mode is an alias for text-mode.  (I
   ;; don't know why.)  But I want indented mode, so:
   (setq indent-line-function 'indent-relative-maybe)
-  (dolist (c (string-to-list "αβγδεζηθικλμνξοπρςστυφχψωₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤₓᵇᶜᵈᵉᶠⁱᵏˡᵐⁿᵖʳᵗˣⱽ₀₁₂₃₄₅₆₇₈₉¹²³⁴⁵⁶⁷⁸⁹_⇒⇛⇾↝⇉⇶⊤⊥⊹′″‴⁗∅☆≡≢≈≋≗≅∾⊑⊆⊇⊗⊕⊎⨄⨁⨂×∀⋀⋁∃+→∷∘•◦◦∙·■□◼◻◾▢⊞✯､⇔↔⊨ℕ𝔽^↑⇧⇑↓⇓⇃⇊⇨⇒→↬←↠↤⊸⊣∼∪∩⊔⊓⊏⊑∈∧∨¬≤≥≼≽↻#<>|∣♯∞~∼⏲§ℕ"))
+  (dolist (c (string-to-list "αβγδεζηθικλμνξοπρςστυφχψωₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤₓᵇᶜᵈᵉᶠᵍʰⁱᵏˡᵐⁿᵖʳᵗˣⱽ₀₁₂₃₄₅₆₇₈₉⁻¹²³⁴⁵⁶⁷⁸⁹_⇒⇛⇾↝⇉⇶⊤⊥⊹′″‴⁗∅☆≡≢≈≋≗≅∾⊑⊆⊇⊗⊕⊎⨄⨁⨂×∀⋀⋁∃+→∷∘•◦◦∙·■□◼◻◾▢⊞✯､⇔↔⊨ℕ𝔽^↑⇧⇑↓⇓⇃⇊⇨⇒→↬↺←↠↤⊸⊣∼∪∩⊔⊓⊏⊑∈∧∨¬≤≥≼≽↻#<>|∣♯∞~∼⏲§ℕ⟶⋆"))
     (modify-syntax-entry c "w"))
   ;; (modify-syntax-entry ?\⌞ "(⌟") -- doesn't work
   (modify-syntax-entry ?\| ".")     ; punctuation
@@ -1013,6 +1013,7 @@ consisting of repeated '-'. For an <h2>."
   ;;; (setq markdown-enable-math nil)
   ;; Link insertion sub-keymap. They're not very useful, so recover the global align-regexp
   (local-unset-key "\C-c\C-a")
+  ;; (emojify-mode)
   (set-input-method "Agda")
 )
 
@@ -1424,6 +1425,7 @@ automatically in order to have the correct markup."
   (local-set-key "\C-cs" 'haskell-insert-section-header)
   (setq case-fold-search nil)  ; unsure about this choice
   (setq case-replace nil)
+  (setq show-trailing-whitespace t)
   (local-set-key "\C-c{" 'insert-instance-argument)
   (local-set-key [?\C-'] 'markdown-inline-code)
   )

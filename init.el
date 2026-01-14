@@ -2,6 +2,9 @@
 
 (setq debug-on-error t)
 
+;;; Temporary
+(setq package-check-signature 'allow-unsigned)
+
 ;;; https://blog.vifortech.com/posts/emacs-tls-fix/
 (require 'gnutls)
 (add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem")
@@ -20,9 +23,10 @@
 ;; https://stackoverflow.com/questions/10092322/how-to-automatically-install-emacs-packages-by-specifying-a-list-of-package-name
 (let ((package-list
        '(attrap
-         dante define-word elisp-slime-nav exec-path-from-shell f 
+         dante define-word elisp-slime-nav exec-path-from-shell f
          flycheck-haskell frame-cmds idris-mode intero haskell-mode
-         company flycheck lcr dash emojify
+         company flycheck lcr dash
+         emojify
          markdown-mode nlinum pkg-info epl popwin s seq
          use-package bind-key w3m yaml-mode zoom-frm
          pos-tip popup button-lock flycheck-color-mode-line
@@ -52,7 +56,8 @@
       (append (mapcar #'expand-file-name my-extra-load-path)
               load-path))
 
-(use-package emojify :hook (after-init . global-emojify-mode))
+;; (use-package emojify :hook (after-init . global-emojify-mode))
+(use-package emojify)  ; only local
 
 ;; (require 'mmm-mode)
 
@@ -213,7 +218,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
   (save-window-excursion
     (shell-command-on-region start end "pandoc --smart --no-wrap")
     (switch-to-buffer "*Shell Command Output*")
-    (cl-flet ((rr (from to) 
+    (cl-flet ((rr (from to)
                (replace-regexp from to nil (point-min) (point-max))))
       (rr "</p><p>" "</p><br><p>")
       (rr "<blockquote>\n<p>" "<blockquote>")
@@ -294,7 +299,7 @@ Stash the result to the kill ring for pasting into a disqus comment box."
               auto-mode-alist))
 
 ;; Doesn't work.  Hm.
-;; 
+;;
 ;; (push '("^Junk\\." auto-revert-tail-mode) auto-mode-alist)
 
 ;; ;; I like a big font.
@@ -555,7 +560,7 @@ logs, putting in a Last Modified in a new file, etc."
 ;;   (make-variable-buffer-local 'comint-completion-addsuffix))
 ;;
 ;; (setq shell-mode-hook 'my-shell-setup)
-;; 
+;;
 ;; (setq process-coding-system-alist (cons '("bash" . raw-text-unix)
 ;; 					process-coding-system-alist))
 
@@ -775,7 +780,7 @@ logs, putting in a Last Modified in a new file, etc."
   "Save the current buffer in my chat logs"
   (interactive)
   (let ((coding-system-for-write 'raw-text))
-    (write-region (point-min) (point-max) 
+    (write-region (point-min) (point-max)
                   (concat (format-time-string "~/chats/%Y/%m-%d ")
                           (buffer-name) ;; (remove ?# (buffer-name))
                           ".txt"))))
@@ -862,7 +867,8 @@ logs, putting in a Last Modified in a new file, etc."
        '("+ "))
       (agda-input-nonempty))))
  '(agda-input-user-translations
-   '(("n" "ℕ")
+   '(("ch" "✓")
+     ("n" "ℕ")
      ("f" "𝔽")
      ("z" "ℤ")
      ("b" "𝔹")
@@ -883,6 +889,7 @@ logs, putting in a Last Modified in a new file, etc."
      ("-1" "⁻¹")
      ("u^" "˘")
      ("bij" "⤖")
+     ("<u>" "⟨⊎⟩")
      ("<x>" "⟨×⟩")
      ("map1" "map₁")
      ("map2" "map₂")
@@ -936,7 +943,10 @@ logs, putting in a Last Modified in a new file, etc."
      ("xor" "⊕")
      ("q" "ℚ")
      ("car" "↻")
-     ("~" "≈")))
+     ("~" "≈")
+     ("<to>" "⟨→⟩")
+     ("<$>" "⟨$⟩")
+     ("p" "ℙ")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
@@ -960,6 +970,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(default-input-method "Agda")
  '(delete-old-versions t)
  '(display-buffer-reuse-frames t)
+ '(emojify-display-style 'unicode)
  '(erc-autojoin-channels-alist
    '(("freenode.net" "#haskell-blah" "#haskell-iphone" "#haskell-ops" "#haskell-in-depth" "#ghc" "#haskell")
      (".*\\.freenode\\.net" "#haskell" "#ghc" "#haskell-in-depth" "#haskell-ops" "#haskell-blah" "#haskell-iphone")))
@@ -992,7 +1003,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
 {-# OPTIONS_GHC -Wall #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-} -- TEMP
 
--- | 
+-- |
 
 module %s where
 
@@ -1027,7 +1038,7 @@ module %s where
  '(message-log-max 500)
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
-   '(emojify dired-narrow ascii-art-to-unicode polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
+   '(vterm emojify dired-narrow ascii-art-to-unicode polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
  '(parens-require-spaces nil)
  '(pcomplete-ignore-case t)
  '(ps-font-size '(8 . 10))
@@ -1055,7 +1066,7 @@ module %s where
 ;;; For git--config-get-email, overriding user-mail-address variable.
 ;;; Might not be the right thing for other uses of (user-mail-address).
 (defun user-mail-address ()
-  (let ((email (completing-read 
+  (let ((email (completing-read
                 "email: " '("Conal.Elliott@target.com")
                 nil nil "conal@conal.net")))
     (git--config "user.email" email)
@@ -1063,7 +1074,7 @@ module %s where
     email))
 
 ;;; See http://www.emacswiki.org/emacs/EmacsClient#toc21
-;;; 
+;;;
 ;;;  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
 ;;;  '(server-switch-hook (quote ((lambda nil (let (server-buf) (setq server-buf (current-buffer)) (bury-buffer) (switch-to-buffer-other-frame server-buf))))))
 
@@ -1164,9 +1175,7 @@ module %s where
 (defun blogify-foo (&optional private)
   (interactive "P")
   (when (string-prefix-p "/Users/conal/Journals" (buffer-file-name))
-    (save-window-excursion (shell-command "make-journal"))
-    ;; (call-process "/Users/conal/bin/make-journal")
-    )
+    (save-window-excursion (shell-command "make-journal")))
   (blogify-buffer private)
   (let ((title (save-excursion
                  (beginning-of-buffer)
@@ -1400,7 +1409,12 @@ module %s where
     (goto-char start)
     (save-excursion
       (while (re-search-forward
-              "^\\(.*\\) — \\(To\\|Yester\\)day at [0-9]+:[0-9]+ [AP]M\n"
+              "^\\(.*\\) — \\(\\(To\\|Yester\\)day at \\)?[0-9]+:[0-9]+[  ]+[AP]M\n"
+              nil t)
+        (replace-match "\n*\\1:* " nil)))
+    (save-excursion
+      (while (re-search-forward
+              "^\\(.*\\) — [0-9]+/[0-9]+/[0-9]+, [0-9]+:[0-9]+[  ]+[AP]M\n"
               nil t)
         (replace-match "\n*\\1:* " nil)))
     (save-excursion
@@ -1421,7 +1435,12 @@ module %s where
     (save-excursion
       (while (re-search-forward " *\n\n+" nil t)
         (replace-match "\n\n" nil)))
-    )
+    (save-excursion
+      (while (search-forward " (the other one)" nil t)
+        (replace-match "" nil)))
+    (save-excursion
+      (while (search-forward "*neverwork:*" nil t)
+        (replace-match "*Jake:*" nil)))    )
   (fix-quotes)
   (widen))
 
@@ -1432,13 +1451,13 @@ module %s where
   (save-excursion
     (goto-char start)
     (save-excursion
-      ;; [1:10 PM](https://agda-categories.slack.com/archives/CQ547CJTG/p1601669447011700)  
+      ;; [1:10 PM](https://agda-categories.slack.com/archives/CQ547CJTG/p1601669447011700)
       (while (re-search-forward
               "^\\[[0-9]+:[0-9]+\\](.*)\n"
               nil t)
         (replace-match "" nil)))
     (save-excursion
-      ;; [Conal Elliott](/team/U01B8U851MG)[1:10 PM](https://agda-categories.slack.com/archives/CQ547CJTG/p1601669447011700)  
+      ;; [Conal Elliott](/team/U01B8U851MG)[1:10 PM](https://agda-categories.slack.com/archives/CQ547CJTG/p1601669447011700)
       (while (re-search-forward
               "^\\[\\(.*?\\)\\](/team/[A-Z0-9]*)\\(\\[[0-9]+:[0-9]+ [AP]M\\]\\)\\((.*?)\\)  \n"
               nil t)
@@ -1545,19 +1564,22 @@ module %s where
 
 ;;; Alternatively, while in transition:
 
-(defcustom agda2-version "2.6.4"
-  "The Agda version."
-  :type 'string
-  :group 'agda2)
+;; (defcustom agda2-version "2.6.4"
+;;   "The Agda version."
+;;   :type 'string
+;;   :group 'agda2)
 
-(defcustom agda2-mode-program-name (concat "agda-mode-" agda2-version)
-  "The name of the agda-mode executable."
-  :type 'string
-  :group 'agda2)
+;; (defcustom agda2-mode-program-name (concat "agda-mode-" agda2-version)
+;;   "The name of the agda-mode executable."
+;;   :type 'string
+;;   :group 'agda2)
 
-(setq agda2-program-name (concat "agda-" agda2-version))
+;; (setq agda2-program-name (concat "agda-" agda2-version))
+;; (load-file (let ((coding-system-for-read 'utf-8))
+;;                 (shell-command-to-string (concat agda2-mode-program-name " locate"))))
+
 (load-file (let ((coding-system-for-read 'utf-8))
-                (shell-command-to-string (concat agda2-mode-program-name " locate"))))
+    (shell-command-to-string "agda-mode locate")))
 
 ;;; I like to use the Agda input method in markdown-mode as well.
 ;;; Load it here.
@@ -1582,6 +1604,15 @@ module %s where
 ;; (global-unset-key (kbd "C-x C-s"))
 
 ;; (setq require-final-newline nil)  ; for now
+
+;; Increase SSH connection timeout (useful for slow connections)
+(setq tramp-ssh-controlmaster-options
+      "-o ControlMaster=auto -o ControlPath='~/.ssh/tramp-%r@%h:%p' -o ControlPersist=no")
+
+;; Keep connections alive
+(setq tramp-connection-timeout 10)
+
+;;; Then C-x C-f /ssh:conal@conal.net:~/...
 
 ;;; Convenient window motion and resizing.
 (async-shell-command "/Applications/Zooom2.app/Contents/MacOS/Zooom2")
