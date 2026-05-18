@@ -21,3 +21,9 @@ no-longlines
 
 elpa/
 tramp
+
+# transient package state (magit/gptel/etc.)
+transient/
+
+# project.el's known-projects list
+projects

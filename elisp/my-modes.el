@@ -22,9 +22,9 @@
 ;;                    flyspell-prog-mode))
 ;;     (add-hook hook extra)))
 
-(eval-after-load "which-func"
-  '(add-to-list 'which-func-modes 'haskell-mode))
-;; (speedbar-add-supported-extension ".hs")
+;; (eval-after-load "which-func"
+;;   '(add-to-list 'which-func-modes 'haskell-mode))
+;; ;; (speedbar-add-supported-extension ".hs")
 
 (eval-after-load "haskell-mode"
     '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
@@ -1428,6 +1428,9 @@ automatically in order to have the correct markup."
   (setq show-trailing-whitespace t)
   (local-set-key "\C-c{" 'insert-instance-argument)
   (local-set-key [?\C-'] 'markdown-inline-code)
+  ;; The following two help with agda-stdlib and agda-categories
+  (modify-syntax-entry ?⟨ "w")
+  (modify-syntax-entry ?⟩ "w")
   )
 
 (defun insert-instance-argument ()

@@ -2,8 +2,13 @@
 
 (setq debug-on-error t)
 
-;;; Temporary
-(setq package-check-signature 'allow-unsigned)
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta))
+
+;;; default
+;; (setq mac-option-modifier 'meta)
+;; (setq mac-command-modifier 'super)
 
 ;;; https://blog.vifortech.com/posts/emacs-tls-fix/
 (require 'gnutls)
@@ -23,16 +28,23 @@
 ;; https://stackoverflow.com/questions/10092322/how-to-automatically-install-emacs-packages-by-specifying-a-list-of-package-name
 (let ((package-list
        '(attrap
+         consult
          dante define-word elisp-slime-nav exec-path-from-shell f
-         flycheck-haskell frame-cmds idris-mode intero haskell-mode
+         flycheck-haskell
+	 ;; frame-cmds
+	 idris-mode
+	 ;; intero
+	 haskell-mode
          company flycheck lcr dash
          emojify
+         gptel
+         magit
          markdown-mode nlinum pkg-info epl popwin s seq
-         use-package bind-key w3m yaml-mode zoom-frm
+         use-package bind-key w3m yaml-mode
+	 ;; zoom-frm
          pos-tip popup button-lock flycheck-color-mode-line
-         ;; frame-functions
-         ;; mmm-mode
          polymode poly-markdown
+         vterm
          )))
   (dolist (package package-list)
     (unless (package-installed-p package)
@@ -41,7 +53,7 @@
 (setq my-extra-load-path
       '(;;;"~/gnu"
         "~/.emacs.d/elisp"
-        "~/git-repos/git-emacs"
+        ;; "~/git-repos/git-emacs"
         "~/git-repos/markdown-mode"  ; for https://github.com/jrblevin/markdown-mode/commit/62d5b
         "~/git-repos/glsl-mode"
         "~/git-repos/graphviz-dot-mode"
@@ -72,25 +84,6 @@
 (require 'titlecase)
 
 (setq inhibit-startup-message t)
-
-(defun swap-option-command ()
-  "Swap option & command keys.  I also changed the binding of
-screen-shots in the OS from command-# and command-$ to
-command-option-3 and command-option-4, with control added for the
-clipboard versions.  In other words, I replaced shift with
-option, so as to avoid a clash with.  I also changed the
-Spotlight binding from command-space to option-space."
-  (interactive)
-  (let ((option-was mac-option-modifier))
-    (setq mac-option-modifier mac-command-modifier)
-    (setq mac-command-modifier option-was)))
-
-;;; default
-;; (setq mac-option-modifier 'meta)
-;; (setq mac-command-modifier 'super)
-
-(when (eq system-type 'darwin)
-  (swap-option-command))
 
 (defun replace-nth (n x l)
   "Replace the Nth element of L with X"
@@ -316,6 +309,15 @@ Stash the result to the kill ring for pasting into a disqus comment box."
 ;; (require 'pretty-lambda)
 
 (global-set-key "\C-c#" 'what-line)
+
+(defun server-edit-save ()
+  "Like `server-edit' (C-x #) but save the buffer without asking."
+  (interactive)
+  (when (and buffer-file-name (buffer-modified-p))
+    (save-buffer))
+  (server-edit))
+
+(global-set-key (kbd "M-#") 'server-edit-save)
 
 (global-set-key "\C-cg" 'goto-line)
 (global-set-key "\C-c\C-t" 'transpose-paragraphs)
@@ -860,93 +862,25 @@ logs, putting in a Last Modified in a new file, etc."
  ;; If there is more than one, they won't work right.
  '(PC-meta-flag nil)
  '(agda-input-tweak-all
-   '(agda-input-compose
-     (agda-input-prepend "\\")
-     (agda-input-compose
-      (agda-input-drop
-       '("+ "))
-      (agda-input-nonempty))))
+   '(agda-input-compose (agda-input-prepend "\\")
+                        (agda-input-compose (agda-input-drop '("+ "))
+                                            (agda-input-nonempty))))
  '(agda-input-user-translations
-   '(("ch" "✓")
-     ("n" "ℕ")
-     ("f" "𝔽")
-     ("z" "ℤ")
-     ("b" "𝔹")
-     ("s" "𝕊")
-     ("0" "₀" "𝟎" "𝟘")
-     ("1" "₁" "𝟏")
-     ("2" "₂" "𝟐")
-     ("3" "₃")
-     ("4" "₄")
-     ("5" "₅")
-     ("6" "₆")
-     ("7" "₇")
-     ("8" "₈")
-     ("9" "₉")
-     ("." "·")
-     ("r--|" "⟼")
-     ("r|" "⤇")
-     ("-1" "⁻¹")
-     ("u^" "˘")
-     ("bij" "⤖")
-     ("<u>" "⟨⊎⟩")
-     ("<x>" "⟨×⟩")
-     ("map1" "map₁")
-     ("map2" "map₂")
-     ("mapi" "mapⁱ")
-     ("mapi2" "mapⁱ₂")
-     ("~<" "≈⟨ ? ⟩")
-     ("purei" "pureⁱ")
-     ("=?" "≟")
-     ("=<" "≡⟨⟩")
-     ("=<?" "≡⟨ ? ⟩")
-     ("r]" "↦")
-     ("~^" "≈˘⟨ ? ⟩")
-     ("ex1" "∃¹")
-     ("ex2" "∃²")
-     ("ust" "꙳")
-     ("la" "λ")
-     ("del" "δ")
-     ("begin" "\\begin")
-     ("end" "\\end")
-     ("<o>" "⟨∘⟩")
-     ("dg" "°")
-     ("*l" "✲ₗ")
-     ("n2" "ℕ²")
-     ("n3" "ℕ³")
-     ("n4" "ℕ⁴")
-     ("f2" "𝔽²")
-     ("f3" "𝔽³")
-     ("f4" "𝔽⁴")
-     ("fi2" "𝔽ⁱ²")
-     ("oR" "∘≈ʳ")
-     ("oL" "∘≈ˡ")
-     ("tR" "▵≈ʳ")
-     ("tL" "▵≈ˡ")
-     ("oaR" "∘-assocʳ")
-     ("oaL" "∘-assocˡ")
-     ("oxR" "⊗≈ʳ")
-     ("oxL" "⊗≈ˡ")
-     ("o~" "∘≈")
-     ("..." "…")
-     ("1" "𝟙")
-     ("+" "⊎" "⊹" "✢")
-     ("u" "⊎")
-     ("fo" "Fₒ")
-     ("fm" "Fₘ")
-     ("rc" "⟴")
-     ("<.>" "⟨∙⟩")
-     ("<i>" "⟨ι⟩")
-     ("=*" "≛")
-     ("^l" "ˡ")
-     ("^r" "ʳ")
-     ("xor" "⊕")
-     ("q" "ℚ")
-     ("car" "↻")
-     ("~" "≈")
-     ("<to>" "⟨→⟩")
-     ("<$>" "⟨$⟩")
-     ("p" "ℙ")))
+   '(("ch" "✓") ("n" "ℕ") ("f" "𝔽") ("z" "ℤ") ("b" "𝔹") ("s" "𝕊")
+     ("0" "₀" "𝟎" "𝟘") ("1" "₁" "𝟏") ("2" "₂" "𝟐") ("3" "₃") ("4" "₄")
+     ("5" "₅") ("6" "₆") ("7" "₇") ("8" "₈") ("9" "₉") ("." "·") ("r--|" "⟼")
+     ("r|" "⤇") ("-1" "⁻¹") ("u^" "˘") ("bij" "⤖") ("<u>" "⟨⊎⟩") ("<x>" "⟨×⟩")
+     ("map1" "map₁") ("map2" "map₂") ("mapi" "mapⁱ") ("mapi2" "mapⁱ₂")
+     ("~<" "≈⟨ ? ⟩") ("purei" "pureⁱ") ("=?" "≟") ("=<" "≡⟨⟩")
+     ("=<?" "≡⟨ ? ⟩") ("r]" "↦") ("~^" "≈˘⟨ ? ⟩") ("ex1" "∃¹") ("ex2" "∃²")
+     ("ust" "꙳") ("la" "λ") ("del" "δ") ("begin" "\\begin") ("end" "\\end")
+     ("<o>" "⟨∘⟩") ("dg" "°") ("*l" "✲ₗ") ("n2" "ℕ²") ("n3" "ℕ³") ("n4" "ℕ⁴")
+     ("f2" "𝔽²") ("f3" "𝔽³") ("f4" "𝔽⁴") ("fi2" "𝔽ⁱ²") ("oR" "∘≈ʳ")
+     ("oL" "∘≈ˡ") ("tR" "▵≈ʳ") ("tL" "▵≈ˡ") ("oaR" "∘-assocʳ")
+     ("oaL" "∘-assocˡ") ("oxR" "⊗≈ʳ") ("oxL" "⊗≈ˡ") ("o~" "∘≈") ("..." "…")
+     ("1" "𝟙") ("+" "⊎" "⊹" "✢") ("u" "⊎") ("fo" "Fₒ") ("fm" "Fₘ") ("rc" "⟴")
+     ("<.>" "⟨∙⟩") ("<i>" "⟨ι⟩") ("=*" "≛") ("^l" "ˡ") ("^r" "ʳ") ("xor" "⊕")
+     ("q" "ℚ") ("car" "↻") ("~" "≈") ("<to>" "⟨→⟩") ("<$>" "⟨$⟩") ("p" "ℙ")))
  '(agda2-backend "MAlonzo")
  '(agda2-fontset-name nil)
  '(agda2-highlight-level 'non-interactive)
@@ -958,31 +892,33 @@ logs, putting in a Last Modified in a new file, etc."
  '(case-replace t)
  '(column-number-mode t)
  '(comment-style 'indent)
+ '(completion-ignore-case t t)
  '(dabbrev-case-fold-search 'case-fold-search)
  '(dabbrev-case-replace t)
  '(default-frame-alist-qqq
-    '((height . 37)
-      (width . 126)
-      (font . "-outline-Courier
-New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
-      (tool-bar-lines . 0)
-      (menu-bar-lines . 1)))
+   '((height . 37) (width . 126)
+     (font
+      . "-outline-Courier\12New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
+     (tool-bar-lines . 0) (menu-bar-lines . 1)))
  '(default-input-method "Agda")
  '(delete-old-versions t)
+ '(dired-auto-revert-buffer 'dired-directory-changed-p)
  '(display-buffer-reuse-frames t)
  '(emojify-display-style 'unicode)
  '(erc-autojoin-channels-alist
-   '(("freenode.net" "#haskell-blah" "#haskell-iphone" "#haskell-ops" "#haskell-in-depth" "#ghc" "#haskell")
-     (".*\\.freenode\\.net" "#haskell" "#ghc" "#haskell-in-depth" "#haskell-ops" "#haskell-blah" "#haskell-iphone")))
+   '(("freenode.net" "#haskell-blah" "#haskell-iphone" "#haskell-ops"
+      "#haskell-in-depth" "#ghc" "#haskell")
+     (".*\\.freenode\\.net" "#haskell" "#ghc" "#haskell-in-depth"
+      "#haskell-ops" "#haskell-blah" "#haskell-iphone")))
  '(erc-away-nickname nil)
  '(erc-fill-column 100)
  '(erc-fill-mode nil)
  '(erc-mode-hook
    '(erc-munge-invisibility-spec pcomplete-erc-setup erc-button-add-keys
                                  (lambda nil
-                                   (setq imenu-create-index-function 'erc-create-imenu-index))
-                                 (lambda nil
-                                   (abbrev-mode 1))))
+                                   (setq imenu-create-index-function
+                                         'erc-create-imenu-index))
+                                 (lambda nil (abbrev-mode 1))))
  '(erc-nick "conal")
  '(erc-nick-uniquifier "+")
  '(erc-prompt-for-password t)
@@ -999,15 +935,7 @@ New-bold-r-normal-normal-19-142-96-96-c-110-iso10646-1")
  '(graphviz-dot-preview-extension "pdf")
  '(graphviz-dot-view-command "view-dot %s")
  '(haskell-auto-insert-module-format-string
-   "
-{-# OPTIONS_GHC -Wall #-}
-{-# OPTIONS_GHC -Wno-unused-imports #-} -- TEMP
-
--- |
-
-module %s where
-
-" t)
+   "\12{-# OPTIONS_GHC -Wall #-}\12{-# OPTIONS_GHC -Wno-unused-imports #-} -- TEMP\12\12-- |\12\12module %s where\12\12" t)
  '(haskell-hoogle-command nil)
  '(haskell-indent-offset 2)
  '(haskell-process-args-cabal-repl '("--ghc-option=-ferror-spans"))
@@ -1031,24 +959,31 @@ module %s where
  '(markdown-enable-math t)
  '(markdown-header-scaling t)
  '(markdown-hr-strings
-   '("* * * * * * * * * * * * * * * * * * * *" "---------------------------------------" "* * * * *" "---------" "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" "-------------------------------------------------------------------------------"))
+   '("* * * * * * * * * * * * * * * * * * * *"
+     "---------------------------------------" "* * * * *" "---------"
+     "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *"
+     "-------------------------------------------------------------------------------"))
  '(markdown-indent-on-enter t)
- '(markdown-unordered-list-item-prefix "
-*   ")
+ '(markdown-unordered-list-item-prefix "\12*   ")
  '(message-log-max 500)
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
-   '(vterm emojify dired-narrow ascii-art-to-unicode polymode-markdown poly-markdown polymode idris-mode flycheck-color-mode-line button-lock popup pos-tip attrap popwin use-package dante haskell-mode nlinum image+ company zoom-frm yaml-mode w3m mmm-mode markdown-mode flycheck-haskell exec-path-from-shell elisp-slime-nav define-word))
+   '(ascii-art-to-unicode attrap button-lock company consult dante define-word
+                          dired-narrow elisp-slime-nav emojify
+                          exec-path-from-shell flycheck-color-mode-line
+                          flycheck-haskell gptel haskell-mode idris-mode
+                          image+ magit markdown-mode mmm-mode nlinum
+                          poly-markdown polymode polymode-markdown popup
+                          popwin pos-tip use-package vterm w3m yaml-mode
+                          zoom-frm))
  '(parens-require-spaces nil)
- '(pcomplete-ignore-case t)
+ '(pcomplete-ignore-case t t)
  '(ps-font-size '(8 . 10))
  '(read-buffer-completion-ignore-case t)
  '(safe-local-variable-values
    '((eval turn-off-auto-fill)
-     (flycheck-disabled-checkers quote
-                                 (haskell-ghc haskell-stack-ghc))
-     (flycheck-disabled-checkers quote
-                                 (haskell-stack-ghc))))
+     (flycheck-disabled-checkers quote (haskell-ghc haskell-stack-ghc))
+     (flycheck-disabled-checkers quote (haskell-stack-ghc))))
  '(scroll-conservatively 1000)
  '(scroll-margin 3)
  '(sentence-end-double-space nil)
@@ -1063,15 +998,15 @@ module %s where
 
 ;;  '(user-mail-address "conal@conal.net")
 
-;;; For git--config-get-email, overriding user-mail-address variable.
-;;; Might not be the right thing for other uses of (user-mail-address).
-(defun user-mail-address ()
-  (let ((email (completing-read
-                "email: " '("Conal.Elliott@target.com")
-                nil nil "conal@conal.net")))
-    (git--config "user.email" email)
-    (message "Repo user email set to %s" email)
-    email))
+;; ;;; For git--config-get-email, overriding user-mail-address variable.
+;; ;;; Might not be the right thing for other uses of (user-mail-address).
+;; (defun user-mail-address ()
+;;   (let ((email (completing-read
+;;                 "email: " '("Conal.Elliott@target.com")
+;;                 nil nil "conal@conal.net")))
+;;     (git--config "user.email" email)
+;;     (message "Repo user email set to %s" email)
+;;     email))
 
 ;;; See http://www.emacswiki.org/emacs/EmacsClient#toc21
 ;;;
@@ -1130,13 +1065,13 @@ module %s where
 
 (global-set-key [(meta F11)] 'blort)
 
-;; (autoload 'git-status "git-status" "Entry point into git-status mode." t)
-(require 'git-status)  ; always
-(autoload 'git-blame-mode "git-blame"
-  "Minor mode for incremental blame for Git." t)
+;; ;; (autoload 'git-status "git-status" "Entry point into git-status mode." t)
+;; (require 'git-status)  ; always
+;; (autoload 'git-blame-mode "git-blame"
+;;   "Minor mode for incremental blame for Git." t)
 
-;keybindindings for git
-(global-set-key [(meta super s)] 'git-status)
+;; ;keybindindings for git
+;; (global-set-key [(meta super s)] 'git-status)
 
 (defun blogify-region (from to &optional private)
   "Run blogify on the contents of the region bounded by FROM and TO and save the result in the inter-program copy buffer."
@@ -1200,15 +1135,15 @@ module %s where
 
 (add-to-list 'auto-mode-alist '("\\.wiki\\'" . wikipedia-mode))
 
-(require 'zoom-frm)
-(global-set-key [s-up]   'zoom-in)
-(global-set-key [s-down] 'zoom-out)
+;; (require 'zoom-frm)
+;; (global-set-key [s-up]   'zoom-in)
+;; (global-set-key [s-down] 'zoom-out)
 
 ;; TODO: unify zoom bindings
 
-;; Start with larger fonts
-(when window-system
-  (let ((frame-zoom-font-difference 10)) (zoom-frm-in)))
+;; ;; Start with larger fonts
+;; (when window-system
+;;   (let ((frame-zoom-font-difference 10)) (zoom-frm-in)))
 
 (global-set-key "\C-cR" 'rot13-region)
 
@@ -1496,11 +1431,11 @@ module %s where
 
 ;; (global-set-key "\C-cv" 'view-mode)
 
-(defun git-push () (interactive) (git-cmd "push"))
-(defun git-pull () (interactive) (git-cmd "pull"))
+;; (defun git-push () (interactive) (git-cmd "push"))
+;; (defun git-pull () (interactive) (git-cmd "pull"))
 
-(global-set-key "\C-xgp" 'git-pull)
-(global-set-key "\C-xgP" 'git-push)
+;; (global-set-key "\C-xgp" 'git-pull)
+;; (global-set-key "\C-xgP" 'git-push)
 
 
 ;;; http://oremacs.com/2015/05/22/define-word/
@@ -1509,6 +1444,7 @@ module %s where
 (global-set-key (kbd "C-c D") 'define-word)
 
 (require 'company)
+(setq company-files-minimum-prefix-length 3)
 
 (global-company-mode) ;; everywhere!
 ;; Enable dabbrev everywhere company-mode is on.
@@ -1614,10 +1550,63 @@ module %s where
 
 ;;; Then C-x C-f /ssh:conal@conal.net:~/...
 
+;;; Run Claude on JohnW's machine
+(use-package gptel
+  :config
+  ;; 1. Load the secrets into the Emacs environment
+  (let ((secrets-file (expand-file-name "~/.claude_secrets")))
+    (when (file-exists-p secrets-file)
+      (with-temp-buffer
+        (insert-file-contents secrets-file)
+        (while (re-search-forward "export \\([^=]+\\)=\"\\([^\"]+\\)\"" nil t)
+          (setenv (match-string 1) (match-string 2))))))
+
+  ;; 2. Configure the backend using the evaluated strings
+  (setq gptel-model "gpt-oss-120b"
+        gptel-backend
+        (gptel-make-openai "jw-machine"
+          :host (getenv "FRIEND_IP")            ; Evaluates to "10.7.0.1"
+          :key (getenv "ANTHROPIC_AUTH_TOKEN")  ; Evaluates to "sk-1234"
+          :stream t
+          :models '("gpt-oss-120b")))
+
+  ;; 3. Simply Correct System Prompt
+  (setq-default gptel-system-prompt 
+                "You are an expert in Agda and Denotational Design. 
+Follow the 'Simply Correct' principles: Meaning over Mechanism, 
+Homomorphic Synthesis, Unicode-heavy Agda syntax, leverage agda-stdlib."))
+
+;; Don't verify TLS for the local WireGuard tunnel IP
+(setq tls-checktrust nil) ; Global (less safe)
+;; OR use a more surgical approach for just your friend's IP:
+(add-to-list 'gnutls-trustfiles (expand-file-name "~/johnw_cert.pem"))
+
+
 ;;; Convenient window motion and resizing.
 (async-shell-command "/Applications/Zooom2.app/Contents/MacOS/Zooom2")
 ;;; (journal)
 (delete-other-windows)
+
+
+;;; Claude customization. To be moved elsewhere.
+(with-eval-after-load 'vterm
+  (define-key vterm-mode-map (kbd "S-<tab>") (lambda () (interactive) (vterm-send-key "<backtab>" t))))
+
+(defun paste-table-as-markdown ()
+  "Convert the macOS clipboard to a GFM markdown table and insert at point.
+Tries clipboard PNG (via the claude CLI vision pipeline), then HTML
+(via pandoc), then falls back to plain text. Implemented by the
+~/bin/clip-table-to-md shell script; that script blocks for several
+seconds when the clipboard holds an image."
+  (interactive)
+  (message "Converting clipboard to markdown table...")
+  (let* ((script (expand-file-name "~/bin/clip-table-to-md"))
+         (start  (point))
+         (exit   (call-process script nil t nil)))
+    (if (zerop exit)
+        (message "Inserted markdown table (%d chars)" (- (point) start))
+      (delete-region start (point))
+      (user-error "clip-table-to-md exited %d" exit))))
 
 ;;; End of customizations
 (setq debug-on-error nil)
