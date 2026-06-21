@@ -1439,6 +1439,61 @@ automatically in order to have the correct markup."
   (insert "⦃  ⦄")
   (backward-char 2))
 
+(require 'seq)
+(require 'subr-x)
+
+(defun agda--source-stem (file)
+  "Return FILE with its Agda source extension removed, or nil if FILE is
+not an Agda source file.  Handles plain `.agda' and the literate variants
+`.lagda', `.lagda.md', `.lagda.tex', `.lagda.rst', `.lagda.org', `.lagda.typ'
+\(the literate extension is stripped in full, so the result matches the base
+name Agda uses for the interface)."
+  (seq-some (lambda (ext)
+              (and (string-suffix-p ext file)
+                   (substring file 0 (- (length file) (length ext)))))
+            '(".lagda.md" ".lagda.rst" ".lagda.tex" ".lagda.org"
+              ".lagda.typ" ".lagda" ".agda")))
+
+(defun agda-delete-interface ()
+  "Delete the Agda interface file(s) (.agdai) for the current buffer.
+
+Removes both interface layouts: beside the source file and under the
+project's `_build/<version>/agda/' tree (the default).  With the interface
+gone, the next `C-c C-l' re-elaborates the module from source, so a spurious
+\"0 goals\" on a holey file — caused by Agda reusing an interface written when
+the module was compiled as a dependency — is restored to the real list of
+holes.  Deleting one module's interface only costs that module's own
+re-typecheck; dependencies stay cached.
+
+Works for plain and literate Agda buffers."
+  (interactive)
+  (let ((stem (and buffer-file-name (agda--source-stem buffer-file-name))))
+    (unless stem
+      (user-error "Buffer is not visiting an Agda source file"))
+    (let ((root    (locate-dominating-file buffer-file-name "_build"))
+          (deleted '()))
+      ;; (1) beside-source layout
+      (let ((local (concat stem ".agdai")))
+        (when (file-exists-p local)
+          (delete-file local)
+          (push local deleted)))
+      ;; (2) _build/<version>/agda/ tree: match the source's path tail, so a
+      ;; same-named module in another directory is not deleted by mistake.
+      (when root
+        (let ((suffix   (concat "/" (file-relative-name stem root) ".agdai"))
+              (builddir (expand-file-name "_build" root)))
+          (when (file-directory-p builddir)
+            (dolist (f (directory-files-recursively builddir "\\.agdai\\'"))
+              (when (string-suffix-p suffix f)
+                (delete-file f)
+                (push f deleted))))))
+      (if deleted
+          (message "Deleted %d interface(s): %s"
+                   (length deleted)
+                   (string-join (mapcar #'abbreviate-file-name deleted) ", "))
+        (message "No .agdai found for %s"
+                 (file-name-nondirectory buffer-file-name))))))
+
 ;; ;;; Changed global default instead
 ;; (defun my-artist-mode-hook () (setq indent-tabs-mode nil))
 ;; (add-hook 'artist-mode-hook 'my-artist-mode-hook)
