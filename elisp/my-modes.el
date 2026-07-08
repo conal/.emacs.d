@@ -1454,6 +1454,28 @@ name Agda uses for the interface)."
             '(".lagda.md" ".lagda.rst" ".lagda.tex" ".lagda.org"
               ".lagda.typ" ".lagda" ".agda")))
 
+(defun agda--interface-files (file)
+  "All existing interface files (.agdai) for the Agda source FILE.
+Covers both layouts: beside the source, and under the project's
+`_build/<version>/agda/' tree (the default).  The `_build' walk matches
+the source's path tail, so a same-named module in another directory is
+not included by mistake.  Nil if FILE is not an Agda source file."
+  (let ((stem (agda--source-stem file)))
+    (when stem
+      (append
+       ;; (1) beside-source layout
+       (let ((local (concat stem ".agdai")))
+         (and (file-exists-p local) (list local)))
+       ;; (2) _build/<version>/agda/ tree
+       (let ((root (locate-dominating-file file "_build")))
+         (when root
+           (let ((suffix   (concat "/" (file-relative-name stem root) ".agdai"))
+                 (builddir (expand-file-name "_build" root)))
+             (when (file-directory-p builddir)
+               (seq-filter (lambda (f) (string-suffix-p suffix f))
+                           (directory-files-recursively
+                            builddir "\\.agdai\\'"))))))))))
+
 (defun agda-delete-interface ()
   "Delete the Agda interface file(s) (.agdai) for the current buffer.
 
@@ -1467,32 +1489,55 @@ re-typecheck; dependencies stay cached.
 
 Works for plain and literate Agda buffers."
   (interactive)
-  (let ((stem (and buffer-file-name (agda--source-stem buffer-file-name))))
-    (unless stem
-      (user-error "Buffer is not visiting an Agda source file"))
-    (let ((root    (locate-dominating-file buffer-file-name "_build"))
-          (deleted '()))
-      ;; (1) beside-source layout
-      (let ((local (concat stem ".agdai")))
-        (when (file-exists-p local)
-          (delete-file local)
-          (push local deleted)))
-      ;; (2) _build/<version>/agda/ tree: match the source's path tail, so a
-      ;; same-named module in another directory is not deleted by mistake.
-      (when root
-        (let ((suffix   (concat "/" (file-relative-name stem root) ".agdai"))
-              (builddir (expand-file-name "_build" root)))
-          (when (file-directory-p builddir)
-            (dolist (f (directory-files-recursively builddir "\\.agdai\\'"))
-              (when (string-suffix-p suffix f)
-                (delete-file f)
-                (push f deleted))))))
-      (if deleted
-          (message "Deleted %d interface(s): %s"
-                   (length deleted)
-                   (string-join (mapcar #'abbreviate-file-name deleted) ", "))
-        (message "No .agdai found for %s"
-                 (file-name-nondirectory buffer-file-name))))))
+  (unless (and buffer-file-name (agda--source-stem buffer-file-name))
+    (user-error "Buffer is not visiting an Agda source file"))
+  (let ((files (agda--interface-files buffer-file-name)))
+    (mapc #'delete-file files)
+    (if files
+        (message "Deleted %d interface(s): %s"
+                 (length files)
+                 (string-join (mapcar #'abbreviate-file-name files) ", "))
+      (message "No .agdai found for %s"
+               (file-name-nondirectory buffer-file-name)))))
+
+;;; Automatic, scoped version of the above — works around agda/agda#2475
+;;; (acknowledged bug, Icebox since 2017; #3392 dup): `agda2-load' of a
+;;; module whose .agdai is current REUSES the interface and skips
+;;; elaboration, but interaction points exist only as elaboration side
+;;; effects, so every `?'/`{!!}' silently reports as "0 goals".  The
+;;; interface gets written whenever the module is batch-checked as a
+;;; DEPENDENCY (e.g. by `make' of an importer, under
+;;; --allow-unsolved-metas), so the trap arms itself on any
+;;; build-then-inspect workflow.  Scoped to holey buffers, so hole-free
+;;; modules keep instant interface reuse.
+
+(defun agda--buffer-has-holes-p ()
+  "Non-nil if the current buffer plausibly contains Agda holes.
+Matches `{!' anywhere, or `?' standing alone between delimiters.
+Overmatches a `?' in comments, strings, or literate prose; the only cost
+of a false positive is one re-typecheck of this module."
+  (save-excursion
+    (goto-char (point-min))
+    (or (search-forward "{!" nil t)
+        (re-search-forward
+         "\\(?:^\\|[][:space:](){};=,]\\)\\?\\(?:[][:space:](){};=,]\\|$\\)"
+         nil t))))
+
+(defun agda-fresh-holes-clear-interface (&rest _)
+  "Delete this buffer's own .agdai when the buffer contains holes.
+Installed as :before advice on `agda2-load', so a holey module is always
+freshly elaborated (making its goals interactive) while hole-free modules
+keep instant interface reuse."
+  (when (and buffer-file-name
+             (agda--source-stem buffer-file-name)
+             (agda--buffer-has-holes-p))
+    (dolist (agdai (agda--interface-files buffer-file-name))
+      (when (ignore-errors (delete-file agdai) t)
+        (message "agda-fresh-holes: deleted %s (buffer has holes)"
+                 (abbreviate-file-name agdai))))))
+
+(with-eval-after-load 'agda2-mode
+  (advice-add 'agda2-load :before #'agda-fresh-holes-clear-interface))
 
 ;; ;;; Changed global default instead
 ;; (defun my-artist-mode-hook () (setq indent-tabs-mode nil))
