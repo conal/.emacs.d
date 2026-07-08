@@ -1521,6 +1521,11 @@ logs, putting in a Last Modified in a new file, etc."
 ;;; Load it here.
 (require 'agda-input)
 
+;;; Work around agda/agda#2475 (stale .agdai suppresses holes on load):
+;;; before `agda2-load' of a buffer containing holes, delete that module's
+;;; own interface so it re-elaborates; hole-free modules keep interface reuse.
+(require 'agda-fresh-holes)
+
 ;;; https://plfa.github.io/GettingStarted/
 ;;; default font
 ;;; "Menlo", "JetBrains Mono", "DejaVu Sans Mono"
